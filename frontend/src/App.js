@@ -6,6 +6,7 @@ import Footer from "./components/GeneralComponents/Footer";
 import Container from "react-bootstrap/Container";
 import HomePage from "./components/HomePage/HomePage";
 import ScrollToTop from "react-scroll-to-top";
+import SignInPage from "./components/UserProfile/SignInPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<Categories />} />
           <Route path="/instructions" element={<Instructions />} />
+          <Route path="/signin" element={<SignInPage />} />
         </Routes>
       </Container>
       <Footer />
