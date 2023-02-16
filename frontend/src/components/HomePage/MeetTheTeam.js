@@ -39,7 +39,7 @@ export default function MeetTheTeam() {
             <TeamCard member={alex} />
           </div>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <Button variant="outline-secondary">
+          <Button variant="outline-secondary" href="/aboutus">
               Vibe with us!
             </Button>
           </div>

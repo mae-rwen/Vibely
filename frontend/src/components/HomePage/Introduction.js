@@ -34,7 +34,7 @@ export default function Introduction() {
                 laboris excepteur commodo et mollit cillum do est.
               </p>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
-              <Button variant="outline-secondary">Read more about it</Button>
+              <Button variant="outline-secondary" href="/instructions">Read more about it</Button>
               </div>
             </div>
           </Collapse>

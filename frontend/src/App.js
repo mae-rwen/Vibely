@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import HomePage from "./components/HomePage/HomePage";
 import ScrollToTop from "react-scroll-to-top";
 import SignInPage from "./components/UserProfile/SignInPage";
+import AboutUs from "./components/VibelyTeam/AboutUs";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/explore" element={<Categories />} />
           <Route path="/instructions" element={<Instructions />} />
           <Route path="/signin" element={<SignInPage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
       </Container>
       <Footer />
