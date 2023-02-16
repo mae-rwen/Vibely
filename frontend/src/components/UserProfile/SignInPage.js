@@ -6,17 +6,19 @@ import image from "./Vibely.png";
 export default function SignInPage() {
   return (
     <>
-      <Card style={{ width: "70vw", margin: "auto" }}>
+      <Card className="text-center" style={{ width: "45vw", margin: "auto" }}>
         <Card.Body>
-          <img src={image} alt="Logo" style={{ width: "100px" }} />
-          <Card.Title className="my-4">Please login in to your account</Card.Title>
-          <Form>
+          <img src={image} alt="Logo" style={{ width: "100px", marginTop: "1.5em" }} />
+          <Card.Title className="my-4">
+            Please login in to your account
+          </Card.Title>
+          <Form className="mx-5 my-4">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               {/* <Form.Label>User name / Email address</Form.Label> */}
-              <Form.Control type="email" placeholder="Enter your user name or email" />
-                {/* <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text> */}
+              <Form.Control
+                type="email"
+                placeholder="Enter your user name or email"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -24,11 +26,21 @@ export default function SignInPage() {
               <Form.Control type="password" placeholder="Enter your password" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Remember me" />
+              <Form.Check
+                type="checkbox"
+                label="Remember me"
+                className="text-start"
+              />
             </Form.Group>
+
             <Button variant="outline-secondary" type="submit">
-              Submit
+              Login
             </Button>
+            <Card.Text className="mt-3">
+              <Form.Text className="text-muted">
+                No account yet? Register <a href="#" style={{color: "inherit"}}>here</a>
+              </Form.Text>
+            </Card.Text>
           </Form>
         </Card.Body>
       </Card>
