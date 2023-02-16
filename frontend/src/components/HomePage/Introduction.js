@@ -35,7 +35,7 @@ export default function Introduction() {
               </p>
             </div>
           </Collapse>
-          <p className="text-end"
+          <p className="text-end showMoreP"
             onClick={() => setOpen(!open)}
             aria-controls="example-collapse-text"
             aria-expanded={open}
