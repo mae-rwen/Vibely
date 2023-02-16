@@ -1,3 +1,22 @@
+import { NavLink } from "react-router-dom";
 export default function Footer() {
-  return <div style={{position: "fixed", bottom: "0"}}>Footer</div>;
+  return (
+    <div className="d-flex flex-column bg-light">
+      <div className=" p-2 d-flex gap-2 justify-content-center ">
+        <NavLink to="/" className="text-decoration-none text-dark">
+          About us
+        </NavLink>
+        <NavLink to="/" className="text-decoration-none text-dark">
+          About us
+        </NavLink>
+        <NavLink to="/" className="text-decoration-none text-dark">
+          About us
+        </NavLink>
+        <NavLink to="/" className="text-decoration-none text-dark">
+          About us
+        </NavLink>
+      </div>
+      <div className="text-center">&copy; 2023 Vibely</div>
+    </div>
+  );
 }
