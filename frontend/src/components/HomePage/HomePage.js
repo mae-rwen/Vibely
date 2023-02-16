@@ -8,9 +8,9 @@ export default function HomePage() {
     <div>
       <HeroSection />
       <hr class="featurette-divider" />
-      <CategoriesOverview />
-      <hr class="featurette-divider" />
       <Introduction />
+      <hr class="featurette-divider" />
+      <CategoriesOverview />
       <hr class="featurette-divider" />
       <MeetTheTeam />
     </div>

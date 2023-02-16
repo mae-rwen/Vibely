@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Header from "./components/Header";
@@ -14,7 +13,7 @@ function App() {
     <div className="App ">
       <Header />
       <Container>
-        <Routes>       
+        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/instructions" element={<Instructions />} />

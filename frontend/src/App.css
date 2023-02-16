@@ -26,6 +26,6 @@
 }
 
 .showMoreP:hover {
-cursor: pointer;
-color: rgba(128, 128, 128, 0.434);
+  cursor: pointer;
+  color: rgba(128, 128, 128, 0.434);
 }

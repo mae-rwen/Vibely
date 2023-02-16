@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 // className="fixed-top"
 export default function Header() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="fixed-top">
       <Container>
         <Navbar.Brand href="/">Vibely</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
