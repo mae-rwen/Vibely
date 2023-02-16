@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <Navbar className="fixed-top" bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Vibely</Navbar.Brand>
+        <Navbar.Brand href="/" className="fw-bold">Vibely</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto gap-2">

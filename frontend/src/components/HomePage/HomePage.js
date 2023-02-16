@@ -13,6 +13,7 @@ export default function HomePage() {
       <CategoriesOverview />     
       <hr className="featurette-divider" />
       <MeetTheTeam />
+      <hr className="featurette-divider" />
     </div>
   );
 }
