@@ -84,7 +84,7 @@ const updateEvent = async (req, res, next) => {
 const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = Event.findByIdAndDelete(id);
+    const event = await Event.findByIdAndDelete(id);
     res.json(event);
   } catch (error) {
     next(error);
