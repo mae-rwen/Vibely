@@ -7,8 +7,8 @@ export default function Introduction() {
 
   return (
     <>
-      <div class="px-4 py-5 my-5 text-start">
-        <div class="col-lg-6 mx-auto">
+      <div class="p-4 my-3 text-start">
+        <div class="col-lg-10 mx-auto">
             <p>What is this about?</p>
           <p>
             Tempor cupidatat est Lorem aliquip cillum deserunt proident aliquip

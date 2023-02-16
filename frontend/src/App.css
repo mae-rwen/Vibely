@@ -1,3 +1,8 @@
 .App {
   text-align: center;
 }
+
+hr {
+  width: 50em;
+  margin: auto;
+}

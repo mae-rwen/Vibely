@@ -1,14 +1,19 @@
-import './App.css';
-import HeroSection from './components/HeroSection';
-import Introduction from './components/Introduction';
+import "./App.css";
+import HeroSection from "./components/HomePage/HeroSection";
+import Introduction from "./components/HomePage/Introduction";
+import MeetTheTeam from "./components/HomePage/MeetTheTeam";
+import Container from "react-bootstrap/Container";
 
 function App() {
   return (
     <div className="App">
-  
-      <HeroSection />
-      <Introduction />
-      
+      <Container>
+        <HeroSection />
+        <hr />
+        <Introduction />
+        <hr />
+        <MeetTheTeam />
+      </Container>
     </div>
   );
 }
