@@ -12,6 +12,7 @@ const eventSchema = new Schema(
     is_active: { type: Boolean, default: true },
     date: { type: Date },
     eventPic: { type: String },
+    participants: { type: Number },
     author: { type: Types.ObjectId, ref: "User", required: true },
   },
   {
