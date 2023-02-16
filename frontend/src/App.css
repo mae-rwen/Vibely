@@ -24,3 +24,8 @@
   list-style: none;
   padding: 0;
 }
+
+.showMoreP:hover {
+cursor: pointer;
+color: rgba(128, 128, 128, 0.434);
+}
