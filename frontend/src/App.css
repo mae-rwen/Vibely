@@ -13,8 +13,12 @@
 
 .activeClass,
 .activeClass:hover {
-  color: rgb(3, 102, 36);
-  text-decoration: underline;
+  background-color: rgba(128, 128, 128, 0.181);
+  color: black;
+  opacity: 1;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .nonActive {
@@ -24,10 +28,11 @@
 }
 
 .nonActive:hover {
-  background-color: rgb(164, 219, 164);
+  background-color: rgba(128, 128, 128, 0.181);
   color: black;
   opacity: 1;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 .card-events-list {
