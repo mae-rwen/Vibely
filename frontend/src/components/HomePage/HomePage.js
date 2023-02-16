@@ -7,12 +7,13 @@ export default function HomePage() {
   return (
     <div>
       <HeroSection />
-      <hr class="featurette-divider" />      
+      <hr id="introduction" className="featurette-divider" />      
       <Introduction />
-      <hr class="featurette-divider" />
+      <hr className="featurette-divider" />
       <CategoriesOverview />     
-      <hr class="featurette-divider" />
+      <hr className="featurette-divider" />
       <MeetTheTeam />
+      <hr className="featurette-divider" />
     </div>
   );
 }

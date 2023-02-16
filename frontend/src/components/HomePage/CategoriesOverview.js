@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 export default function HomePage() {
   return (
     <>
-      <div className="container ">
+      <div className="container hpSection ">
         <div className="activities d-flex flex-column align-items-center ">
           <h3>Check out the activities!</h3>
           <div className="d-flex flex-column flex-md-wrap flex-md-row gap-3 ">

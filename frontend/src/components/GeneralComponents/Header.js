@@ -2,12 +2,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { NavLink } from "react-router-dom";
-// className="fixed-top"
+import Button from 'react-bootstrap/Button';
+
 export default function Header() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="fixed-top" bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Vibely</Navbar.Brand>
+        <Navbar.Brand href="/" className="fw-bold">Vibely</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto gap-2">
@@ -38,15 +39,9 @@ export default function Header() {
             >
               Instructions
             </NavLink>
-            <NavLink
-              style={{ padding: "10px" }}
-              to="/login "
-              className={({ isActive }) =>
-                isActive ? "activeClass " : "nonActive"
-              }
-            >
-              Login/Register
-            </NavLink>
+           <Button href="/signin" variant="outline-secondary">
+              Sign In
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

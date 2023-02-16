@@ -1,3 +1,8 @@
+import React from 'react';
+import UnderConstruction from '../GeneralComponents/UnderConstruction';
+
 export default function Instructions() {
-  return <div>Instructions</div>;
+  return (
+    <div><UnderConstruction /></div>
+  )
 }
