@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 export default function Footer() {
   return (
     <div className="d-flex flex-column bg-light">
