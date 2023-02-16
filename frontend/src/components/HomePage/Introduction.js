@@ -7,9 +7,9 @@ export default function Introduction() {
 
   return (
     <>
-      <div class="p-4 my-3 text-start">
-        <div class="col-lg-10 mx-auto">
-            <p>What is this about?</p>
+      <div className="p-4 text-start hpSection">
+        <div className="col-lg-10 mx-auto">
+        <h5 className=" fw-bold">What is this about?</h5>
           <p>
             Tempor cupidatat est Lorem aliquip cillum deserunt proident aliquip
             sit ad nisi laboris excepteur. Lorem in qui reprehenderit consequat
@@ -33,6 +33,9 @@ export default function Introduction() {
                 enim ex officia enim anim do eu laborum non ad et velit. Laborum
                 laboris excepteur commodo et mollit cillum do est.
               </p>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
+              <Button variant="outline-secondary">Read more about it</Button>
+              </div>
             </div>
           </Collapse>
           <p className="text-end showMoreP"
