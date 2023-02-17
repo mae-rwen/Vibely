@@ -1,5 +1,6 @@
 .mainContainer {
   margin: 6em auto !important;
+  min-height: 72vh;
 }
 
 #heroSection,
@@ -44,3 +45,34 @@
 cursor: pointer;
 color: rgba(128, 128, 128, 0.434);
 }
+
+.signupCard {
+   width: 30vw;
+   margin: auto;
+}
+
+.signupForm {
+  margin: 3em 5em;
+}
+
+@media (max-width: 1300px) {
+  .signupForm {
+    margin: 2em 1em;
+  }
+}
+
+@media (max-width: 1000px) {
+    .signupCard {
+    width: 70vw;
+    margin: auto;
+ }
+  .signupForm {
+    margin: 2em 1em;
+  }
+}
+
+/* .footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+} */

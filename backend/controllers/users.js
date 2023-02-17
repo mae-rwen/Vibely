@@ -62,7 +62,7 @@ const logout = async (req, res, next) => {
       httpOnly: true,
       maxAge: 0,
     })
-    .send("ok");
+    .send("See you later, aligater");
 };
 
 const getProfile = async (req, res, next) => {
@@ -70,6 +70,15 @@ const getProfile = async (req, res, next) => {
     const { email, id } = req.user;
     const user = await User.findById(id);
     res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.json([users]);
   } catch (error) {
     next(error);
   }
@@ -84,15 +93,6 @@ const updateUser = async (req, res, next) => {
       { email, description, name, location, profilePic },
       { new: true }
     );
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({});
-    res.json([users]);
   } catch (error) {
     next(error);
   }

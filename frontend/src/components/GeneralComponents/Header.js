@@ -10,6 +10,7 @@ export default function Header() {
       <Container>
         <Navbar.Brand href="/" className="fw-bold">Vibely</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Offcanvas placement="bottom">
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto gap-2">
             <NavLink
@@ -23,7 +24,7 @@ export default function Header() {
             </NavLink>
             <NavLink
               style={{ padding: "10px" }}
-              to="/explore"
+              to="/categories"
               className={({ isActive }) =>
                 isActive ? "activeClass " : "nonActive"
               }
@@ -44,6 +45,7 @@ export default function Header() {
             </Button>
           </Nav>
         </Navbar.Collapse>
+        </Navbar.Offcanvas>
       </Container>
     </Navbar>
   );
