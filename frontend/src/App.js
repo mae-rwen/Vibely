@@ -18,7 +18,7 @@ function App() {
       <Container className="mainContainer">
         <Routes>       
           <Route path="/" element={<HomePage />} />
-          <Route path="/explore" element={<Categories />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/instructions" element={<Instructions />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/aboutus" element={<AboutUs />} />

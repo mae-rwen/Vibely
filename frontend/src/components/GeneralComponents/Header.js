@@ -23,7 +23,7 @@ export default function Header() {
             </NavLink>
             <NavLink
               style={{ padding: "10px" }}
-              to="/explore"
+              to="/categories"
               className={({ isActive }) =>
                 isActive ? "activeClass " : "nonActive"
               }
