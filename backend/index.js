@@ -1,4 +1,5 @@
 require("dotenv/config");
+require("./db");
 const express = require('express');
 const cors = require("cors");
 const cookieParser = require("cookie-parser")
@@ -6,12 +7,13 @@ const cookieParser = require("cookie-parser")
 const { authRouter } = require("./routes/auth")
 const { userRouter } = require("./routes/users")
 const { eventRouter } = require("./routes/events")
-const { errorHandler } = require("./middlewares/errorHandler");
 
-require("./db");
+const { errorHandler } = require("./middlewares/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+// console.log(process.env.CONNECTION_STRING);
 
 app.use(cors({
   // origin: ["http://localhost:300"],
@@ -26,11 +28,10 @@ app.use("/events", eventRouter)
 
 app.use(errorHandler);
 
-
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
 // })
 
 app.listen(port, () => {
-  console.log(`http://localhost:${port}`)
+  console.log(`Server is running on http://localhost:${port}`)
 });

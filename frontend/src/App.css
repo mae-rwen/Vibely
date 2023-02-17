@@ -44,3 +44,15 @@
 cursor: pointer;
 color: rgba(128, 128, 128, 0.434);
 }
+
+.signupCard {
+   width: 45vw;
+   margin: auto;
+}
+
+@media (max-width: 700px) {
+  .signupCard {
+    width: 95vw;
+    margin: auto;
+ }
+}

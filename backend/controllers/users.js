@@ -75,6 +75,15 @@ const getProfile = async (req, res, next) => {
   }
 };
 
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.json([users]);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -84,15 +93,6 @@ const updateUser = async (req, res, next) => {
       { email, description, name, location, profilePic },
       { new: true }
     );
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({});
-    res.json([users]);
   } catch (error) {
     next(error);
   }
