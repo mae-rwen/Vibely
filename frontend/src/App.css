@@ -71,8 +71,6 @@ color: rgba(128, 128, 128, 0.434);
   }
 }
 
-/* .footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-} */
+.footer {
+  margin-top: auto;
+}

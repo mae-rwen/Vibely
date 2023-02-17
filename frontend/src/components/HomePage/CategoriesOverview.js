@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/esm/Button";
 export default function HomePage() {
   return (
     <>
@@ -17,9 +18,7 @@ export default function HomePage() {
                   <li>Learn german in Dortmund</li>
                 </ul>
 
-                <button className="btn btn-outline-secondary btn-md px-2">
-                  Show more
-                </button>
+                <Button variant="outline-secondary">Show more</Button>
               </Card.Body>
             </Card>
             <Card style={{ width: "18rem" }}>
@@ -32,9 +31,7 @@ export default function HomePage() {
                   <li>Learn german in Dortmund</li>
                   <li>Learn german in Dortmund</li>
                 </ul>
-                <button className="btn btn-outline-secondary btn-md px-2">
-                  Show more
-                </button>
+                <Button variant="outline-secondary">Show more</Button>
                 {/* <Card.Link href="#">Show more</Card.Link> */}
               </Card.Body>
             </Card>
@@ -49,15 +46,14 @@ export default function HomePage() {
                   <li>Learn german in Dortmund</li>
                 </ul>
 
-                <button className="btn btn-outline-secondary btn-md px-2">
-                  Show more
-                </button>
+                <Button variant="outline-secondary">Show more</Button>
               </Card.Body>
             </Card>
           </div>
-          <button className="btn btn-outline-secondary btn-md px-4">
+
+          <Button href="/categories" variant="outline-secondary">
             Explore All Activities
-          </button>
+          </Button>
         </div>
       </div>
     </>
