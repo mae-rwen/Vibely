@@ -6,7 +6,7 @@ export default function UnderConstruction() {
 
   return (
     <>
-        <div id="construction" className="p-4 my-5 text-center">
+        <div id="construction" className="text-center">
             <h4 className="display-8 fw-bold">This page is under construction</h4>
             <div className="col-lg-8 mx-auto">
                 <p className="lead mb-4">Please visit later</p>
