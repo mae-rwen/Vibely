@@ -40,7 +40,7 @@ const createEvent = async (req, res, next) => {
       eventPic,
       author,
     });
-    res, json(event);
+    res.json(event);
   } catch (error) {
     next(error);
   }

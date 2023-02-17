@@ -62,7 +62,7 @@ const logout = async (req, res, next) => {
       httpOnly: true,
       maxAge: 0,
     })
-    .send("ok");
+    .send("See you later, aligater");
 };
 
 const getProfile = async (req, res, next) => {

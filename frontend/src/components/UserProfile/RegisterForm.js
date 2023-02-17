@@ -19,16 +19,16 @@ export default function RegisterForm({setSetAccount}) {
           Create a new account
         </Card.Title>
         <Form className="signupForm">
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
             <Form.Control
               type="username"
               placeholder="Username"
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
-              placeholder="Username or email"
+              placeholder="Email"
             />
           </Form.Group>
 
