@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 export default function Footer() {
   return (
-    <div className="d-flex flex-column bg-light">
+    <div className="d-flex flex-column bg-light footer">
       <div className=" p-2 d-flex gap-3 justify-content-center ">
         <NavLink to="/" className="text-decoration-none text-dark">
           About us

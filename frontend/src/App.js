@@ -8,6 +8,7 @@ import HomePage from "./components/HomePage/HomePage";
 import ScrollToTop from "react-scroll-to-top";
 import SignInPage from "./components/UserProfile/SignInPage";
 import AboutUs from "./components/VibelyTeam/AboutUs";
+import Test from "./components/Test";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/instructions" element={<Instructions />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </Container>
       <Footer />
