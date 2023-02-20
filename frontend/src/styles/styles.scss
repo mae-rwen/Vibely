@@ -64,6 +64,29 @@ body {
   margin: 3em 5em;
 }
 
+.categoriesDiv {
+  margin: auto 10em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 5em;
+  column-gap: 7em;
+  .card {
+      flex: 40%;
+      // max-width: 350px;
+      .text-end {
+          margin-top: 1em;
+          font-size: smaller;
+      }  
+      img {
+          max-height: 200px;
+          object-fit: cover;
+          aspect-ratio: 1;
+      }
+  }
+}
+
 @media (max-width: 1300px) {
   .signupForm {
     margin: 2em 1em;
@@ -78,4 +101,12 @@ body {
   .signupForm {
     margin: 2em 1em;
   }
+
+  .categoriesDiv {
+    margin: auto 2em;
+  }
 }
+
+
+
+
