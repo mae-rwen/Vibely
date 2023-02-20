@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .mainContainer {
+    margin: 6em auto !important;
+    flex-grow: 1;
+  }
+}
+
+#heroSection,
+#construction {
+  margin: 30vh auto !important;
+}
+
+.hpSection {
+  margin: 8em auto;
+}
+
+.activeClass,
+.activeClass:hover {
+  background-color: $secondary;
+  color: rgb(255, 255, 255);
+  opacity: 1;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.nonActive {
+  text-decoration: none;
+  color: black;
+  opacity: 0.6;
+  &:hover {
+    background-color: $secondary;
+    color: rgb(255, 255, 255);
+    opacity: 1;
+    border-radius: 5px;
+  }
+}
+
+.card-events-list {
+  list-style: none;
+  padding: 0;
+}
+
+.showMoreP:hover {
+  cursor: pointer;
+  color: rgba(128, 128, 128, 0.434);
+}
+
+.signupCard {
+  width: 30vw;
+  margin: auto;
+}
+
+.signupForm {
+  margin: 3em 5em;
+}
+
+@media (max-width: 1300px) {
+  .signupForm {
+    margin: 2em 1em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .signupCard {
+    width: 70vw;
+    margin: auto;
+  }
+  .signupForm {
+    margin: 2em 1em;
+  }
+}
