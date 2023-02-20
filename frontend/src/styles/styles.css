@@ -10883,28 +10883,43 @@ body {
   margin: 3em 5em;
 }
 
-.categoriesDiv {
-  margin: auto 10em;
+.categoriesHeader {
+  margin-bottom: 6em;
+}
+.categoriesHeader p {
+  font-size: smaller;
+  margin: 0.5em auto;
+}
+.categoriesHeader a {
+  color: inherit;
+}
+
+.categoriesCards {
+  margin: auto 8em;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: space-around;
   row-gap: 5em;
-  -moz-column-gap: 7em;
-       column-gap: 7em;
+  -moz-column-gap: 5em;
+       column-gap: 5em;
 }
-.categoriesDiv .card {
-  flex: 40%;
+.categoriesCards .card {
+  flex: 33%;
 }
-.categoriesDiv .card .text-end {
+.categoriesCards .card .text-end {
   margin-top: 1em;
   font-size: smaller;
 }
-.categoriesDiv .card img {
+.categoriesCards .card img {
   max-height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
   aspect-ratio: 1;
+}
+.categoriesCards .card a {
+  text-decoration: none;
+  color: inherit;
 }
 
 @media (max-width: 1300px) {
@@ -10920,7 +10935,9 @@ body {
   .signupForm {
     margin: 2em 1em;
   }
-  .categoriesDiv {
+  .categoriesCards {
     margin: auto 2em;
+    -moz-column-gap: 7em;
+         column-gap: 7em;
   }
 }/*# sourceMappingURL=styles.css.map */
