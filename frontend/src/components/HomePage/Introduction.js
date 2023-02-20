@@ -6,9 +6,8 @@ export default function Introduction() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <div className="p-4 text-start hpSection">
-        <div className="col-lg-10 mx-auto">
+    <>      
+        <div className="col-lg-10 mx-auto hpSection">
         <h5 className=" fw-bold">What is this about?</h5>
           <p>
             Tempor cupidatat est Lorem aliquip cillum deserunt proident aliquip
@@ -44,8 +43,7 @@ export default function Introduction() {
             aria-expanded={open}
           >
             {open ? ("show less"):("show more")}
-          </p>
-        </div>
+          </p>        
       </div>
     </>
   );
