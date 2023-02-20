@@ -5,7 +5,7 @@ import CategoriesOverview from "./CategoriesOverview";
 
 export default function HomePage() {
   return (
-    <div>
+    <>
       <HeroSection />
       <hr id="introduction" className="featurette-divider" />      
       <Introduction />
@@ -14,6 +14,6 @@ export default function HomePage() {
       <hr className="featurette-divider" />
       <MeetTheTeam />
       <hr className="featurette-divider" />
-    </div>
+    </>
   );
 }

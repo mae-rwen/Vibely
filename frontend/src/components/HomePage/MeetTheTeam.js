@@ -32,9 +32,8 @@ export default function MeetTheTeam() {
     desc: "The one that likes Boostrap",
   };
   return (
-    <>
-      <div className="p-4 text-start hpSection">
-        <div className="col-lg-10 mx-auto">
+    <>      
+        <div className="col-lg-10 mx-auto hpSection">
           <h5 className="fw-bold">Meet the Vibely team</h5>
           <div className="row p-4 mt-4 text-center justify-content-center">
             <TeamCard member={agata} />
@@ -47,8 +46,7 @@ export default function MeetTheTeam() {
               Vibe with us!
             </Button>
           </div>
-        </div>
-      </div>
+        </div>   
     </>
   );
 }
