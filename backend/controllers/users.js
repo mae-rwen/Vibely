@@ -5,13 +5,13 @@ const { ErrorResponse } = require("../utils/ErrorResponse");
 
 const signup = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const user = await User.findOne({ email });
-    if (user) throw new ErrorResponse("User already exists", 400);
+    if (user) throw new ErrorResponse("User already exists", 409);
 
-    const hash = await bcrypt.hash(password, 6);
-    const newUser = await User.create({ email, password: hash });
-    const payload = { id: newUser, email: newUser.email };
+    const hash = await bcrypt.hash(password, 8);
+    const newUser = await User.create({ name, email, password: hash });
+    const payload = { id: newUser, email: newUser.email, name: newUser.name };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -29,8 +29,8 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email }).select("+password");
+    const { name, email, password } = req.body;
+    const user = await User.findOne({ email }).select("+password") || User.findOne({ name }).select("+password");
     if (!user)
       throw new ErrorResponse(
         "No account associated with the email address",
@@ -40,7 +40,7 @@ const login = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) throw new ErrorResponse("Invalid password", 401);
 
-    const payload = { id: user._id, email: user.email };
+    const payload = { id: user._id, email: user.email, name: user.name };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -62,7 +62,7 @@ const logout = async (req, res, next) => {
       httpOnly: true,
       maxAge: 0,
     })
-    .send("See you later, aligater");
+    .send("See you later, alligator");
 };
 
 const getProfile = async (req, res, next) => {

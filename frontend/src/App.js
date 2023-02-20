@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <ScrollToTop style={{borderRadius: "50%"}}/>
       <Header />
+
       <Container className="mainContainer">
         <Routes>       
           <Route path="/" element={<HomePage />} />
