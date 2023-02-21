@@ -88,7 +88,7 @@ body {
   margin: auto 8em;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   justify-content: space-around;
   row-gap: 5em;
   column-gap: 5em;
@@ -110,6 +110,33 @@ body {
   }
 }
 // <-- categories page styling
+
+// all events page styling -->
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  .eventsHeader {
+    margin-bottom: 4em;
+    p {
+      font-size: smaller;
+      margin: 0.5em auto;
+    }
+  }
+  button {
+    margin-right: 15em;
+    // align-self: flex-end;
+  }
+}
+
+.eventsLists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+// <-- all events page styling
+
 
 // media queries -->
 @media (max-width: 1300px) {
