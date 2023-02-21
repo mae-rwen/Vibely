@@ -33,55 +33,55 @@ const RegisterForm = ({ setSetAccount }) => {
   // const passwordRef = useRef();
   // const passwordConfirmRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState('');
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
 
-  const [matchPassword, setMatchPassword] = useState("");
+  const [matchPassword, setMatchPassword] = useState('');
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  // useEffect(() => {
-  //   useRef.current.focus();
-  // }, []);
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
 
   useEffect(() => {
     const result = USER_REGEX.test(user);
-    console.log(result);
-    console.log(user);
+    // console.log(result);
+    // console.log(user);
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    console.log(result);
-    console.log(email);
+    // console.log(result);
+    // console.log(email);
     setValidEmail(result);
   }, [email]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(password);
-    console.log(result);
-    console.log(password);
+    // console.log(result);
+    // console.log(password);
     setValidPassword(result);
     const match = password === matchPassword;
     setValidMatch(match);
   }, [password, matchPassword]);
 
   useEffect(() => {
-    setError("");
-  }, [user, password, matchPassword]);
+    setError('');
+  }, [user, email, password, matchPassword]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ const RegisterForm = ({ setSetAccount }) => {
     const v2 = EMAIL_REGEX.test(email);
     const v3 = PWD_REGEX.test(password);
     if (!v1 || !v2 || !v3) {
-      setError("Invalid Entry");
+      setError('Invalid Entry');
       return;
     }
     // console.log(user, email, password);
@@ -101,16 +101,16 @@ const RegisterForm = ({ setSetAccount }) => {
         withCredentials: true
       }
       );
-      console.log(response.data);
-      console.log(response.accessToken);
-      console.log(JSON.stringify(response))
+      // console.log(response.data);
+      // console.log(response.accessToken);
+      // console.log(JSON.stringify(response))
       setSuccess(true);
       // clear input fields
     } catch (err) {
         if (!err?.response) {
           setError('No Server Response');
         } else if (err.response?.status === 409) {
-          setError("Username or Email Taken")
+          setError('Username or Email Taken')
         } else {
           setError('Registration Failed')
         }
