@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import image from "./Vibely.png";
-import { FormLabel, FloatingLabel } from "react-bootstrap";
 import "./registerform.css";
 import {
   faCheck,
@@ -16,12 +15,12 @@ import {
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
 // import axiosClient from "../../api/axiosClient";
-import axios from "axios";
+import axios from "../../api/axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._!-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const SIGNUP_URL = 'http://localhost:3001/auth/signup'
+const SIGNUP_URL = '/auth/signup'
 
 const RegisterForm = ({ setSetAccount }) => {
   const changeState = () => setSetAccount(true);
