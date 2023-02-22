@@ -21,17 +21,15 @@ function App() {
     <div className="App">
       <ScrollToTop style={{borderRadius: "50%"}}/>
       <Header />
-
-
         <Routes>   
           <Route path="/" element={<Layout />}>
             {/* public routes */}
-            <Route path="/signin" element={<SignInPage />} />
+            {/* <Route path="/signin" element={<SignInPage />} /> */}
             <Route path="/login" element={<LogInForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/instructions" element={<Instructions />} />
             <Route path="/aboutus" element={<AboutUs />} />
-            {/* <Route path="/categories" element={<Categories />} /> */}
+            <Route path="/categories" element={<Categories />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/tc" element={<UnderConstruction />} />
             <Route path="/allevents" element={<AllEventsList />} />
@@ -39,7 +37,7 @@ function App() {
             {/* protected routes */}
             {/* profile, edit events, edit profile, join events, single event page? */}
             <Route element={<RequireAuth />}>
-              <Route path="/categories" element={<Categories />} />
+              {/* <Route path="/categories" element={<Categories />} /> */}
             </Route>
 
             {/* catch all - to create missing element */}
