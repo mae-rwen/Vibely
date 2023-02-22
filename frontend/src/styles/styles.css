@@ -10834,6 +10834,14 @@ body {
   flex-grow: 1;
 }
 
+.spinner {
+  margin: 25vh auto;
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  justify-content: center;
+}
+
 #heroSection,
 #construction {
   margin: 30vh auto !important;
@@ -10922,27 +10930,20 @@ body {
   color: inherit;
 }
 
-.flexbox {
+.eventsHeader {
+  margin-bottom: 4em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
+  justify-content: space-evenly;
 }
-.flexbox .eventsHeader {
-  margin-bottom: 4em;
-}
-.flexbox .eventsHeader p {
+.eventsHeader p {
   font-size: smaller;
   margin: 0.5em auto;
 }
-.flexbox button {
-  margin-right: 15em;
-}
 
-.eventsLists {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.eventsList {
+  margin: auto;
+  width: 60vw;
 }
 
 @media (max-width: 1300px) {
@@ -10962,5 +10963,14 @@ body {
     margin: auto 2em;
     -moz-column-gap: 7em;
          column-gap: 7em;
+  }
+  .eventsHeader {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+  }
+  .eventsList {
+    margin: auto;
+    width: 90vw;
   }
 }/*# sourceMappingURL=styles.css.map */
