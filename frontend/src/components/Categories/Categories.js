@@ -1,7 +1,26 @@
 
+import { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
+import axios from "axios";
+import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
+
+  const [categories, setCategories] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/categories/`)
+      .then((response) => {
+        setCategories(response.data);
+        setIsLoaded(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
 
   return (
     <>
@@ -12,7 +31,14 @@ export default function Categories() {
                 <p><a href="#">Click here</a> to change your location. *To change the time scope, browse category of your choice.</p>
             </div>
         </div>
-    <SingleCard />
+        {isLoaded 
+        ? (
+          <SingleCard categories={categories}/>
+        ) 
+        : (
+          <LoadingSpinner />
+        )}
+    
     </>
   )
 }

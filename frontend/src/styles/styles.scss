@@ -15,6 +15,14 @@ body {
     flex-grow: 1;
   }
 }
+
+.spinner {
+  margin: 25vh auto;
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  justify-content: center;
+}
 // <-- general styling
 
 // homepage styling -->
