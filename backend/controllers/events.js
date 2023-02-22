@@ -22,22 +22,28 @@ const getEvent = async (req, res, next) => {
 
 const createEvent = async (req, res, next) => {
   try {
+    // console.log(req.body);
     const {
       title,
-      description,
       general_location,
       type,
       date,
-      eventPic,
+      category,
+      participants,
+      description,
     } = req.body;
     const author = req.user.id;
+    console.log(author);
+    // console.log(`this is the user ${author} that created the event`);
     const event = await Event.create({
       title,
-      description,
+
       general_location,
       type,
       date,
-      eventPic,
+      category,
+      participants,
+      description,
       author,
     });
     res.json(event);

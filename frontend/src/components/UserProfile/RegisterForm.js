@@ -20,7 +20,7 @@ import axios from "../../api/axios";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._!-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const SIGNUP_URL = '/auth/signup'
+const SIGNUP_URL = "/auth/signup";
 
 const RegisterForm = ({ setSetAccount }) => {
   const changeState = () => setSetAccount(true);
@@ -33,23 +33,23 @@ const RegisterForm = ({ setSetAccount }) => {
   // const passwordRef = useRef();
   // const passwordConfirmRef = useRef();
 
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
 
-  const [matchPassword, setMatchPassword] = useState('');
+  const [matchPassword, setMatchPassword] = useState("");
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const RegisterForm = ({ setSetAccount }) => {
   }, [password, matchPassword]);
 
   useEffect(() => {
-    setError('');
+    setError("");
   }, [user, email, password, matchPassword]);
 
   const handleSubmit = async (e) => {
@@ -90,16 +90,19 @@ const RegisterForm = ({ setSetAccount }) => {
     const v2 = EMAIL_REGEX.test(email);
     const v3 = PWD_REGEX.test(password);
     if (!v1 || !v2 || !v3) {
-      setError('Invalid Entry');
+      setError("Invalid Entry");
       return;
     }
     // console.log(user, email, password);
+
     try {
-      const response = await axios.post(SIGNUP_URL, JSON.stringify({ name: user, email, password}),
-      {
-        headers: { 'Content-Type': 'application/json'},
-        withCredentials: true
-      }
+      const response = await axios.post(
+        SIGNUP_URL,
+        JSON.stringify({ name: user, email, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
       // console.log(response.data);
       // console.log(response.accessToken);
@@ -107,14 +110,14 @@ const RegisterForm = ({ setSetAccount }) => {
       setSuccess(true);
       // clear input fields
     } catch (err) {
-        if (!err?.response) {
-          setError('No Server Response');
-        } else if (err.response?.status === 409) {
-          setError('Username or Email Taken')
-        } else {
-          setError('Registration Failed')
-        }
-        errRef.current.focus();
+      if (!err?.response) {
+        setError("No Server Response");
+      } else if (err.response?.status === 409) {
+        setError("Username or Email Taken");
+      } else {
+        setError("Registration Failed");
+      }
+      errRef.current.focus();
     }
   };
 
@@ -247,14 +250,20 @@ const RegisterForm = ({ setSetAccount }) => {
                     <span className={validPassword ? "valid" : "hide"}>
                       <FontAwesomeIcon icon={faCheck} />
                     </span>
-                    <span className={validPassword || !password ? "hide" : "invalid"}>
+                    <span
+                      className={
+                        validPassword || !password ? "hide" : "invalid"
+                      }
+                    >
                       <FontAwesomeIcon icon={faTimes} />
                     </span>
                   </label>
                   <p
                     id="pwdnote"
                     className={
-                      passwordFocus && !validPassword ? "instructions" : "offscreen"
+                      passwordFocus && !validPassword
+                        ? "instructions"
+                        : "offscreen"
                     }
                   >
                     <FontAwesomeIcon icon={faInfoCircle} />
@@ -284,11 +293,15 @@ const RegisterForm = ({ setSetAccount }) => {
                   />
                   <label htmlFor="confirm_pwd">
                     Confirm Password:
-                    <span className={validMatch && matchPassword ? "valid" : "hide"}>
+                    <span
+                      className={validMatch && matchPassword ? "valid" : "hide"}
+                    >
                       <FontAwesomeIcon icon={faCheck} />
                     </span>
                     <span
-                      className={validMatch || !matchPassword ? "hide" : "invalid"}
+                      className={
+                        validMatch || !matchPassword ? "hide" : "invalid"
+                      }
                     >
                       <FontAwesomeIcon icon={faTimes} />
                     </span>

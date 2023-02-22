@@ -5,6 +5,7 @@ import image from "./Vibely.png";
 import { useRef, useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
 
@@ -17,25 +18,30 @@ export default function LogInForm({ setSetAccount }) {
   const errRef = useRef();
 
   // const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  //trying to navigate to a new url for creating event
+  const navigate = useNavigate();
 
   useEffect(() => {
     emailRef.current.focus();
   }, []);
 
   useEffect(() => {
-    setError('');
+    setError("");
   }, [email, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(LOGIN_URL, JSON.stringify({ email, password }),
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ email, password }),
         {
-          headers: { 'Content-Type': 'application/json'},
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
@@ -43,24 +49,24 @@ export default function LogInForm({ setSetAccount }) {
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       setAuth({ email, password, accessToken });
-      setEmail('');
-      setPassword('');
+      setEmail("");
+      setPassword("");
       setSuccess(true);
     } catch (err) {
-        if (!err?.response) {
-          setError('No Server Response');
-        } else if (err.response?.status === 400) {
-          setError('Missing Username/Email or Password');
-        } else if (err.response?.status === 401) {
-          setError('Unauthorized! check your email or password');
-        } else if (err.response.status === 404) {
-          setError('No account associated with the username/email address');
-        } else {
-          setError('Login Failed');
-        }
-        errRef.current.focus();
+      if (!err?.response) {
+        setError("No Server Response");
+      } else if (err.response?.status === 400) {
+        setError("Missing Username/Email or Password");
+      } else if (err.response?.status === 401) {
+        setError("Unauthorized! check your email or password");
+      } else if (err.response.status === 404) {
+        setError("No account associated with the username/email address");
+      } else {
+        setError("Login Failed");
       }
-  }
+      errRef.current.focus();
+    }
+  };
 
   return (
     <>
@@ -70,6 +76,8 @@ export default function LogInForm({ setSetAccount }) {
           <p>
             <a href="#">Go to Home</a>
           </p>
+          {/* adding a button to create event for testing purposes */}
+          {/* <button onClick={navigate("/create_event")}>Create event</button> */}
         </section>
       ) : (
         <section>

@@ -11,15 +11,15 @@ import AboutUs from "./components/VibelyTeam/AboutUs";
 import Test from "./components/Test";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import AllEventsList from "./components/Categories/EventPages/AllEventsList";
-
+import CreateEvent from "./components/Events/CreateEvent";
 function App() {
   return (
     <div className="App">
-      <ScrollToTop style={{borderRadius: "50%"}}/>
+      <ScrollToTop style={{ borderRadius: "50%" }} />
       <Header />
 
       <Container className="mainContainer">
-        <Routes>       
+        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/instructions" element={<Instructions />} />
@@ -28,6 +28,7 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/tc" element={<UnderConstruction />} />
           <Route path="/allevents" element={<AllEventsList />} />
+          <Route path="/create_event" element={<CreateEvent />} />
         </Routes>
       </Container>
       <Footer />
