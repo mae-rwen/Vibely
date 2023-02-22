@@ -10898,7 +10898,7 @@ body {
   margin: auto 8em;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   justify-content: space-around;
   row-gap: 5em;
   -moz-column-gap: 5em;
@@ -10920,6 +10920,29 @@ body {
 .categoriesCards .card a {
   text-decoration: none;
   color: inherit;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.flexbox .eventsHeader {
+  margin-bottom: 4em;
+}
+.flexbox .eventsHeader p {
+  font-size: smaller;
+  margin: 0.5em auto;
+}
+.flexbox button {
+  margin-right: 15em;
+}
+
+.eventsLists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media (max-width: 1300px) {
