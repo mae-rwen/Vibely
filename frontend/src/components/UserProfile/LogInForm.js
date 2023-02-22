@@ -12,6 +12,8 @@ const LOGIN_URL = "/auth/login";
 export default function LogInForm({ setSetAccount }) {
   const { setAuth } = useContext(AuthContext);
   const changeState = () => setSetAccount(false);
+  //trying to store info of the logged in user
+  const [user, setUser] = useState();
 
   // const userRef = useRef();
   const emailRef = useRef();
@@ -37,14 +39,16 @@ export default function LogInForm({ setSetAccount }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ email, password }),
-        {
+      const response = await axios
+        .post(LOGIN_URL, JSON.stringify({ email, password }), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      );
+        })
+        .then((response) => {
+          // setUser(response.data);
+          console.log(`try:${response.data}`);
+        });
+      console.log(user);
       console.log(JSON.stringify(response?.data));
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
