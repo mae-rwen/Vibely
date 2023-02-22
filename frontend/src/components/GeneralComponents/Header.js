@@ -47,9 +47,18 @@ export default function Header() {
             >
               Instructions
             </NavLink>
+            <NavLink
+              style={{ padding: "10px" }}
+              to="/register"
+              className={({ isActive }) =>
+                isActive ? "activeClass " : "nonActive"
+              }
+            >
+              Sign Up
+            </NavLink>
             <Form className="d-flex">
            <Button href="/signin" variant="outline-secondary">
-              Sign In
+              Login
             </Button>
             </Form>
           </Nav>  
