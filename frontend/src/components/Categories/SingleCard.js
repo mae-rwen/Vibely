@@ -12,7 +12,7 @@ export default function SingleCard() {
         <Card.Text className='text-end'>
         <a href="#top">XX events in your location*</a>
         </Card.Text>
-        <Button className="catBtn" variant="outline-secondary">Explore the activities</Button>
+        <Button className="catBtn" variant="outline-secondary" href="/allevents">Explore the activities</Button>
       </Card.Body>
     </Card>
 
@@ -23,7 +23,7 @@ export default function SingleCard() {
         <Card.Text className='text-end'>
         <a href="#top">XX events in your location*</a>
         </Card.Text>
-        <Button className="catBtn" variant="outline-secondary">Explore the activities</Button>
+        <Button className="catBtn" variant="outline-secondary" href="/allevents">Explore the activities</Button>
       </Card.Body>
     </Card>
 
@@ -34,7 +34,7 @@ export default function SingleCard() {
         <Card.Text className='text-end'>
         <a href="#top">XX events in your location*</a>
         </Card.Text>
-        <Button className="catBtn" variant="outline-secondary">Explore the activities</Button>
+        <Button className="catBtn" variant="outline-secondary" href="/allevents">Explore the activities</Button>
       </Card.Body>
     </Card>
 
@@ -45,7 +45,7 @@ export default function SingleCard() {
         <Card.Text className='text-end'>
         <a href="#top">XX events in your location*</a>
         </Card.Text>
-        <Button className="catBtn" variant="outline-secondary">Explore the activities</Button>
+        <Button className="catBtn" variant="outline-secondary" href="/allevents">Explore the activities</Button>
       </Card.Body>
     </Card>
 

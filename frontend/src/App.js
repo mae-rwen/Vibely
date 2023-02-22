@@ -12,12 +12,16 @@ import Layout from "./components/Layout";
 import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./components/RequireAuth";
+import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
+import AllEventsList from "./components/Categories/EventPages/AllEventsList";
+
 
 function App() {
   return (
     <div className="App">
       <ScrollToTop style={{borderRadius: "50%"}}/>
       <Header />
+
 
         <Routes>   
           <Route path="/" element={<Layout />}>
@@ -29,6 +33,8 @@ function App() {
             <Route path="/aboutus" element={<AboutUs />} />
             {/* <Route path="/categories" element={<Categories />} /> */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/tc" element={<UnderConstruction />} />
+            <Route path="/allevents" element={<AllEventsList />} />
             
             {/* protected routes */}
             {/* profile, edit events, edit profile, join events, single event page? */}

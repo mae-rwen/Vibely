@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser")
 const { authRouter } = require("./routes/auth")
 const { userRouter } = require("./routes/users")
 const { eventRouter } = require("./routes/events")
+const { categoriesRouter } = require("./routes/categories")
 
 const { errorHandler } = require("./middlewares/errorHandler");
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/events", eventRouter)
+app.use("/categories", categoriesRouter)
 
 app.use(errorHandler);
 
