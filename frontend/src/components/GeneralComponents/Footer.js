@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+
 export default function Footer() {
   return (
-    <div className="d-flex flex-column bg-light text-center footer">
-      <div className=" p-2 d-flex gap-3 justify-content-center ">
+    <div className="d-flex flex-column bg-light text-center headerContainer1">
+      <Container className="headerContainer">
+      <div className="p-2 d-flex gap-3 justify-content-center">
         <NavLink to="/aboutus" className="text-decoration-none text-dark">
           About us
         </NavLink>
@@ -17,6 +20,7 @@ export default function Footer() {
         </NavLink>
       </div>
       <div className="text-center">&copy; 2023 Vibely</div>
+      </Container>
     </div>
   );
 }

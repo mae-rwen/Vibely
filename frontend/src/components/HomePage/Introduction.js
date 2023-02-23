@@ -7,7 +7,7 @@ export default function Introduction() {
 
   return (
     <>      
-        <div className="col-lg-10 mx-auto hpSection">
+        <div className="hpSection">
         <h5 className=" fw-bold">What is this about?</h5>
           <p>
             Tempor cupidatat est Lorem aliquip cillum deserunt proident aliquip
@@ -16,7 +16,7 @@ export default function Introduction() {
             fugiat culpa id sit.
           </p>
           <Collapse in={open}>
-            <div id="example-collapse-text">
+            <div id="collapse-text">
               <p>
                 Dolore tempor velit laborum aliqua ipsum labore cupidatat
                 laborum officia mollit duis elit. Aute eu sunt et nisi excepteur
@@ -32,7 +32,7 @@ export default function Introduction() {
                 enim ex officia enim anim do eu laborum non ad et velit. Laborum
                 laboris excepteur commodo et mollit cillum do est.
               </p>
-              <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Button variant="outline-secondary" href="/instructions">Read more about it</Button>
               </div>
             </div>
