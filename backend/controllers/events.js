@@ -3,7 +3,11 @@ const { ErrorResponse } = require("../utils/ErrorResponse");
 
 const getEvents = async (req, res, next) => {
   try {
-    const events = await Event.find({});
+    const query = {};
+    if (req.query.location) {
+      query.general_location = req.query.location
+    }
+    const events = await Event.find(query);
     res.json(events);
   } catch (error) {
     next(error);

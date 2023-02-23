@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import axios from "../../../api/axios";
 import { Button } from "react-bootstrap";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-export default function EventListFilters({events, setEvents, location, filterByLocation}) {
+export default function EventListFilters({ location, locationQuery, setLocationQuery }) {
 
-  return (
+  // console.log(location); 
+  // console.log(locationQuery); 
+
+   return (
     <>
       <div className="eventsFilters">
 
@@ -20,10 +21,8 @@ export default function EventListFilters({events, setEvents, location, filterByL
               {location.map((value, id) => { 
                 return (
                   <div key={id}>
-                    <Dropdown.Divider />
-                  <Dropdown.Item 
-                  // onClick={() => filterByLocation(value)}
-                  >{value}</Dropdown.Item>                  
+                    <Dropdown.Divider onClick={() => setLocationQuery(value)}/>
+                  <Dropdown.Item>{value}</Dropdown.Item>                  
                   </div>
                 )})}                         
             </DropdownButton>

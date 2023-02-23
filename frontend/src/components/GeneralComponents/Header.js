@@ -18,7 +18,7 @@ export default function Header() {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title className="fw-bold">Vibely</Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body>
+          <Offcanvas.Body id="navbarOffcanvas">
             <Nav className="ms-auto gap-2">
               <NavLink
                 to="/"
