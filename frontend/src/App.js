@@ -20,8 +20,6 @@ function App() {
     <div className="App">
       <ScrollToTop style={{borderRadius: "50%"}}/>
       <Header />
-
-
         <Routes>   
           <Route path="/" element={<Layout />}>
             {/* public routes */}
