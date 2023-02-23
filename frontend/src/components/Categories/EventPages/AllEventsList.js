@@ -1,6 +1,5 @@
 import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
@@ -8,13 +7,14 @@ import EventListFilters from "./EventListFilters";
 export default function AllEventsList() {
   const [events, setEvents] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const [locationQuery, setLocationQuery] = useState("");
+    
   useEffect(() => {
     axios
-      .get(`/events/`)
-      .then((response) => {
-        setEvents(response.data);
-        setIsLoaded(true);
+      .get(`/events?location=${locationQuery}`)
+      .then((response) => {        
+        setEvents(response.data);        
+        setIsLoaded(true);           
       })
       .catch((error) => {
         console.log(error);
@@ -22,13 +22,8 @@ export default function AllEventsList() {
   }, []);
 
   const location = [...new Set(events.map((event) => event.general_location))];
-  // console.log(location);
-  const filterByLocation = (arg) => {
-    const newEvents = events.filter((value) => {
-      return value.general_location === arg;
-    });
-    setEvents(newEvents);
-  };
+  // console.log(location); 
+  // console.log(locationQuery);
 
   return (
     <>
@@ -43,11 +38,10 @@ export default function AllEventsList() {
           </p>
         </div>
       </div>
-
     
       {isLoaded ? (
         <div className="eventsDiv">
-          <EventListFilters events={events} setEvents={setEvents} location={location} filterByLocation={filterByLocation}/>
+          <EventListFilters location={location} locationQuery={locationQuery} setLocationQuery={setLocationQuery}/>
           <EventsList events={events} />          
         </div>
       ) : (
