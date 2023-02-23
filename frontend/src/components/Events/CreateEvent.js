@@ -1,18 +1,18 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import axios from "axios";
+import axios from "../../api/axios";
 import { useState, useEffect } from "react";
 import "./createEvents.css";
 
 export default function CreateEvent() {
-  //   const [event, setEvent] = useState({});
+  const [categories, setCategories] = useState([]);
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventType, setEventType] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventCategory, setEventCategory] = useState("");
-  const [eventParticipants, setEventParticipants] = useState(null);
+  const [eventParticipants, setEventParticipants] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
   const event = {
     title: eventName,
@@ -23,13 +23,27 @@ export default function CreateEvent() {
     participants: eventParticipants,
     description: eventDescription,
   };
+  useEffect(() => {
+    axios.get("http://localhost:3001/categories").then((response) => {
+      setCategories(response.data);
+    });
+  }, []);
+
+  // console.log(categories);
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(event);
     axios.post("http://localhost:3001/events", event).then((response) => {
       console.log(response.data);
     });
-    setEventName(" ");
+
+    setEventCategory("");
+    setEventDate("");
+    setEventDescription("");
+    setEventName("");
+    setEventLocation("");
+    setEventParticipants("");
+    setEventType("");
   };
   return (
     <div className="event-form d-flex flex-column gap-4">
@@ -40,7 +54,9 @@ export default function CreateEvent() {
           <Form.Control
             type="text"
             placeholder="Name"
+            value={eventName}
             onChange={(e) => setEventName(e.target.value)}
+            required
           />
         </Form.Group>
 
@@ -49,6 +65,8 @@ export default function CreateEvent() {
           <Form.Control
             type="text"
             placeholder="Location"
+            required
+            value={eventLocation}
             onChange={(e) => setEventLocation(e.target.value)}
           />
         </Form.Group>
@@ -93,7 +111,8 @@ export default function CreateEvent() {
           <input
             type="datetime-local"
             name="event-datetime"
-            // value={Date.now()}
+            required
+            value={eventDate}
             onChange={(e) => setEventDate(e.target.value)}
           />
         </Form.Group>
@@ -104,19 +123,25 @@ export default function CreateEvent() {
             onChange={(e) => {
               setEventCategory(e.target.value);
             }}
+            required
           >
             <option>Choose a category</option>
-            <option value="skill-sharing">Skill Sharing</option>
-            <option value="connect-socialize">Connect and Socialize</option>
-            <option value="play-games">Play Games</option>
+            {categories.map((category, index) => {
+              return (
+                <option key={index} value={category._id}>
+                  {category.name}
+                </option>
+              );
+            })}
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Number of participants </Form.Label>
+          <Form.Label>Number of participants (minimum: 4) </Form.Label>
           <Form.Control
             type="number"
             min="4"
             name="participants"
+            value={eventParticipants}
             onChange={(e) => setEventParticipants(e.target.value)}
           />
         </Form.Group>
@@ -127,6 +152,7 @@ export default function CreateEvent() {
               as="textarea"
               placeholder="Leave a comment here"
               style={{ height: "100px" }}
+              value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
             />
           </FloatingLabel>

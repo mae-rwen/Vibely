@@ -15,8 +15,8 @@ const eventSchema = new Schema(
     eventPic: { type: String },
     participants: { type: Number },
     author: { type: Types.ObjectId, ref: "User", required: true },
-    category: { type: String, required: true },
-    // category: { type: Types.ObjectId, ref: "Category", required: true },
+    // category: { type: String, required: true },
+    category: { type: Types.ObjectId, ref: "Category", required: true },
   },
   {
     timestamps: true,
