@@ -99,6 +99,7 @@ const RegisterForm = ({ setSetAccount }) => {
       return;
     }
     // console.log(user, email, password);
+
     try {
       const response = await axios.post(
         SIGNUP_URL,

@@ -1,182 +1,142 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+$border1: 2px solid rgb(0, 255, 94);
+$border2: 2px solid red;
+
 body {
   font-family: "Ubuntu", sans-serif;
 }
 
-// general styling -->
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  .mainContainer {
+  justify-content: space-between;
+  .layoutContainer {
     margin: 8em auto !important;
-    flex-grow: 1;
+    // border: $border2;
+    .spinner {
+      margin: 25vh auto;
+      display: flex;
+      gap: 1em;
+      flex-direction: row;
+      justify-content: center;
+      // border: $border1;
+    }
+    #construction {
+      margin: 20vh auto !important;
+      // border: $border1;
+    }
+    // // homepage styling -->>
+    #heroSection {
+      margin: 30vh auto !important;
+      // border: $border1;
+    }
+    .hpSection {
+      margin: 8em auto;
+      // border: $border1;
+      .showMoreP:hover {
+        cursor: pointer;
+        color: rgba(128, 128, 128, 0.434);
+      }
+      .card-events-list {
+        padding: 0;
+      }
+    }
+    // // <<-- homepage styling
+    .subpageHeader {
+      margin-bottom: 4em;
+      // border: $border1;
+      p {
+        font-size: smaller;
+        margin-top: 0.5em;
+        margin-bottom: 0;
+        a {
+          color: inherit;
+        }
+      }
+    }
+    // // categories page styling -->>
+    .categoriesCards {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      gap: 3em;
+      align-items: baseline;
+      // border: $border1;
+      .card {
+        // max-width: 300px;
+        flex: 30%;
+        .text-end {
+          font-size: smaller;
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+        }
+        img {
+          max-height: 200px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+      }
+    }
+    // // <<-- categories page styling
+    // -------
+    // // events lists styling -->>
+    .eventsDiv {
+      display: flex;
+      flex-direction: column;
+      gap: 3em;
+      .eventsFilters {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75em;
+        #createNew {
+          margin-left: auto;
+        }
+      }
+    }
+    // // <<-- events lists styling
   }
-}
-
-.spinner {
-  margin: 25vh auto;
-  display: flex;
-  gap: 1em;
-  flex-direction: row;
-  justify-content: center;
-}
-// <-- general styling
-
-// homepage styling -->
-#heroSection,
-#construction {
-  margin: 30vh auto !important;
-}
-
-.showMoreP:hover {
-  cursor: pointer;
-  color: rgba(128, 128, 128, 0.434);
-}
-
-.hpSection {
-  margin: 8em auto;
-}
-
-//categoriesOverview styles -->
-.activeClass,
-.activeClass:hover {
-  background-color: $secondary;
-  color: rgb(255, 255, 255);
-  opacity: 1;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.nonActive {
-  text-decoration: none;
-  color: black;
-  opacity: 0.6;
-  &:hover {
+  // // Navbar classes -->>
+  .activeClass,
+  .activeClass:hover {
     background-color: $secondary;
     color: rgb(255, 255, 255);
     opacity: 1;
     border-radius: 5px;
+    text-decoration: none;
   }
+  .nonActive {
+    text-decoration: none;
+    color: black;
+    opacity: 0.6;
+    &:hover {
+      background-color: $secondary;
+      color: rgb(255, 255, 255);
+      opacity: 1;
+      border-radius: 5px;
+    }
+  }
+  // // <<-- Navbar classes
 }
 
-.card-events-list {
-  list-style: none;
-  padding: 0;
-}
-// <-- categoriesOverview styles
-// <-- homepage styling
+// .headerContainer {
+//   border: $border1;
+// }
 
-//signup page styling -->
+// .headerContainer1 {
+//   border: $border2;
+// }
+
+// // signup page styling -->
 .signupCard {
   width: 30vw;
   margin: auto;
 }
-
 .signupForm {
   margin: 3em 5em;
 }
-// <-- signup page styling
-
-// categories page styling -->
-.categoriesHeader {
-  margin-bottom: 4em;
-  p {
-    font-size: smaller;
-    margin: 0.5em auto;
-  }
-  a {
-    color: inherit;
-  }
-}
-
-.categoriesCards {
-  margin: auto 8em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  row-gap: 5em;
-  column-gap: 5em;
-  .card {
-    flex: 40%;
-    .text-end {
-      margin-top: 1em;
-      font-size: smaller;
-    }
-    img {
-      max-height: 200px;
-      object-fit: cover;
-      aspect-ratio: 1;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  }
-}
-// <-- categories page styling
-
-// all events page styling -->
-.eventsHeader {
-  margin-bottom: 4em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  p {
-    font-size: smaller;
-    margin: 0.5em auto;
-  }
-}
-
-// .eventsLists {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 5em;
-// }
-
-.eventsList {
- margin: auto;
- width: 60vw;
-}
-
-.eventsFilters {
-  
-}
-// <-- all events page styling
-
-// media queries -->
-@media (max-width: 1300px) {
-  .signupForm {
-    margin: 2em 1em;
-  }
-}
-
-@media (max-width: 980px) {
-  .signupCard {
-    width: 70vw;
-    margin: auto;
-  }
-  .signupForm {
-    margin: 2em 1em;
-  }
-
-  .categoriesCards {
-    margin: auto 2em;
-    column-gap: 7em;
-  }
-
-  .eventsHeader {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-  }
-
-  .eventsList {
-    margin: auto;
-    width: 90vw;
-   }
-}
-// <-- media queries
+// // <-- signup page styling

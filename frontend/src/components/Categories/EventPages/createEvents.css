@@ -1,0 +1,14 @@
+.event-form {
+  border: 1px solid rgba(0, 0, 0, 0.282);
+  border-radius: 5px;
+  padding: 30px 60px;
+  width: 50vw;
+  margin: auto;
+}
+
+@media (max-width: 1000px) {
+  .event-form {
+    width: 70vw;
+    margin: auto;
+  }
+}

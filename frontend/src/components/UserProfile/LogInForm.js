@@ -37,6 +37,7 @@ export default function LogInForm({ setSetAccount }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -46,7 +47,11 @@ export default function LogInForm({ setSetAccount }) {
           withCredentials: true,
         }
       );
+      console.log(response.data);
+      setUser(JSON.stringify(response?.data));
+      console.log(user);
       console.log(JSON.stringify(response?.data));
+
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name: user, password, accessToken });
@@ -136,8 +141,7 @@ export default function LogInForm({ setSetAccount }) {
 
             <Card.Text className="mt-3">
               <Form.Text className="text-muted">
-                No account yet? Register{" "}
-                <Link to="/register">here</Link>
+                No account yet? Register <Link to="/register">here</Link>
               </Form.Text>
             </Card.Text>
           </Form>
