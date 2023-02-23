@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import image from "./Vibely.png";
 import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../../context/AuthProvider";
+import AuthContext from "../context/AuthProvider";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 

@@ -8,7 +8,7 @@ import HomePage from "./components/HomePage/HomePage";
 import ScrollToTop from "react-scroll-to-top";
 import SignInPage from "./components/UserProfile/SignInPage";
 import AboutUs from "./components/VibelyTeam/AboutUs";
-import Test from "./components/Test";
+import Test from "./components/GeneralComponents/Test";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import AllEventsList from "./components/Categories/EventPages/AllEventsList";
 import CreateEvent from "./components/Events/CreateEvent";
