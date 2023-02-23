@@ -18,11 +18,11 @@ export default function LogInForm({ setSetAccount }) {
 
   // const changeState = () => setSetAccount(false);
 
-  // const userRef = useRef();
+  const userRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
 
-  // const [user, setUser] = useState('');
+  const [user, setUser] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -40,7 +40,7 @@ export default function LogInForm({ setSetAccount }) {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        JSON.stringify({ email, password }),
+        JSON.stringify({ email, name: user, password }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -49,7 +49,8 @@ export default function LogInForm({ setSetAccount }) {
       console.log(JSON.stringify(response?.data));
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, password, accessToken });
+      setAuth({ email, name: user, password, accessToken });
+      setUser("");
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });

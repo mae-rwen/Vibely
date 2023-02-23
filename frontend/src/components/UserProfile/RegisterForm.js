@@ -6,7 +6,6 @@ import image from "./Vibely.png";
 import "./registerform.css";
 import {
   faCheck,
-  faTime,
   faInfoCircle,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";

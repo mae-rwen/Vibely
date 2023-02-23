@@ -1,8 +1,10 @@
 
 import { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
-import axios from "axios";
+import axios from "../../api/axios";
 import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
+
+const CAT_URL = "/categories"
 
 export default function Categories() {
 
@@ -11,7 +13,7 @@ export default function Categories() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/categories/`)
+      .get(CAT_URL)
       .then((response) => {
         setCategories(response.data);
         setIsLoaded(true);
