@@ -3,29 +3,34 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-export default function EventListFilters({ location, locationQuery, setLocationQuery }) {
+export default function EventListFilters({
+  location,
+  locationQuery,
+  setLocationQuery,
+}) {
+  // console.log(location);
+  // console.log(locationQuery);
 
-  // console.log(location); 
-  // console.log(locationQuery); 
-
-   return (
+  return (
     <>
       <div className="eventsFilters">
-
-      <DropdownButton
-              as={ButtonGroup}           
-              variant="outline-secondary"
-              title="Location"              
-            >
-              <Dropdown.Item style={{fontWeight: "bold"}}>All locations</Dropdown.Item>             
-              {location.map((value, id) => { 
-                return (
-                  <div key={id}>
-                    <Dropdown.Divider onClick={() => setLocationQuery(value)}/>
-                  <Dropdown.Item>{value}</Dropdown.Item>                  
-                  </div>
-                )})}                         
-            </DropdownButton>
+        <DropdownButton
+          as={ButtonGroup}
+          variant="outline-secondary"
+          title="Location"
+        >
+          <Dropdown.Item style={{ fontWeight: "bold" }}>
+            All locations
+          </Dropdown.Item>
+          {location.map((value, id) => {
+            return (
+              <div key={id}>
+                <Dropdown.Divider onClick={() => setLocationQuery(value)} />
+                <Dropdown.Item>{value}</Dropdown.Item>
+              </div>
+            );
+          })}
+        </DropdownButton>
 
         {/* {["Filter 1", "Filter 2", "Filter 3", "Filter 4"].map(
           (variant) => (
@@ -44,7 +49,9 @@ export default function EventListFilters({ location, locationQuery, setLocationQ
             </DropdownButton>
           )
         )} */}
-        <Button id="createNew" variant="secondary" href="#">Create new event</Button>
+        <Button id="createNew" variant="secondary" href="/create_event">
+          Create new event
+        </Button>
       </div>
     </>
   );

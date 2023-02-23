@@ -10,10 +10,10 @@ import Test from "./components/GeneralComponents/Test";
 import Layout from "./components/GeneralComponents/Layout";
 import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
-import RequireAuth from "./components/GeneralComponents/RequireAuth";
+import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import AllEventsList from "./components/Categories/EventPages/AllEventsList";
-import CreateEvent from "./components/Events/CreateEvent";
+import CreateEvent from "./components/Categories/EventPages/CreateEvent";
 
 function App() {
   return (
