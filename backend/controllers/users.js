@@ -30,7 +30,9 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const user = await User.findOne({ email }).select("+password") || User.findOne({ name }).select("+password");
+    const user =
+      (await User.findOne({ email }).select("+password")) ||
+      User.findOne({ name }).select("+password");
     if (!user)
       throw new ErrorResponse(
         "No account associated with the email address",
@@ -51,6 +53,7 @@ const login = async (req, res, next) => {
         maxAge: 1000 * 60 * 60,
       })
       .send(payload);
+    console.log(payload);
   } catch (error) {
     next(error);
   }

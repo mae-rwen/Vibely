@@ -13,36 +13,36 @@ import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./components/GeneralComponents/RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import AllEventsList from "./components/Categories/EventPages/AllEventsList";
-
+import CreateEvent from "./components/Events/CreateEvent";
 
 function App() {
   return (
     <div className="App">
-      <ScrollToTop style={{borderRadius: "50%"}}/>
+      <ScrollToTop style={{ borderRadius: "50%" }} />
       <Header />
-        <Routes>   
-          <Route path="/" element={<Layout />}>
-            {/* public routes */}
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/login" element={<LogInForm />} />
-            <Route path="/instructions" element={<Instructions />} />
-            <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="/tc" element={<UnderConstruction />} />
-            <Route path="/allevents" element={<AllEventsList />} />
-            
-            {/* protected routes */}
-            {/* profile, edit events, edit profile, join events, single event page? */}
-            <Route element={<RequireAuth />}>
-              {/* <Route path="/categories" element={<Categories />} /> */}
-            </Route>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* public routes */}
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LogInForm />} />
+          <Route path="/instructions" element={<Instructions />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tc" element={<UnderConstruction />} />
+          <Route path="/allevents" element={<AllEventsList />} />
+          <Route path="/create_event" element={<CreateEvent />} />
+          {/* protected routes */}
+          {/* profile, edit events, edit profile, join events, single event page? */}
+          <Route element={<RequireAuth />}>
+            {/* <Route path="/categories" element={<Categories />} /> */}
+          </Route>
 
-            {/* catch all - to create missing element */}
-            <Route path="*" element={<Test />} />            
-          </Route>    
-        </Routes>
-      
+          {/* catch all - to create missing element */}
+          <Route path="*" element={<Test />} />
+        </Route>
+      </Routes>
+
       <Footer />
     </div>
   );
