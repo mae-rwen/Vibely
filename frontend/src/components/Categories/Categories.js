@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
-import axios from "axios";
+import axios from '../../api/axios';
 import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
