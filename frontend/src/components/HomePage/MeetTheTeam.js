@@ -33,7 +33,7 @@ export default function MeetTheTeam() {
   };
   return (
     <>      
-        <div className="col-lg-10 mx-auto hpSection">
+        <div className="hpSection">
           <h5 className="fw-bold">Meet the Vibely team</h5>
           <div className="row p-4 mt-4 text-center justify-content-center">
             <TeamCard member={agata} />

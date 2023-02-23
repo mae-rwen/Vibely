@@ -10828,58 +10828,99 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
-.App .mainContainer {
+.App .layoutContainer {
   margin: 8em auto !important;
-  flex-grow: 1;
 }
-
-.spinner {
+.App .layoutContainer .spinner {
   margin: 25vh auto;
   display: flex;
   gap: 1em;
   flex-direction: row;
   justify-content: center;
 }
-
-#heroSection,
-#construction {
+.App .layoutContainer #construction {
+  margin: 20vh auto !important;
+}
+.App .layoutContainer #heroSection {
   margin: 30vh auto !important;
 }
-
-.showMoreP:hover {
+.App .layoutContainer .hpSection {
+  margin: 8em auto;
+}
+.App .layoutContainer .hpSection .showMoreP:hover {
   cursor: pointer;
   color: rgba(128, 128, 128, 0.434);
 }
-
-.hpSection {
-  margin: 8em auto;
+.App .layoutContainer .hpSection .card-events-list {
+  padding: 0;
 }
-
-.activeClass,
-.activeClass:hover {
+.App .layoutContainer .subpageHeader {
+  margin-bottom: 4em;
+}
+.App .layoutContainer .subpageHeader p {
+  font-size: smaller;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+.App .layoutContainer .subpageHeader p a {
+  color: inherit;
+}
+.App .layoutContainer .categoriesCards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: 3em;
+  align-items: baseline;
+}
+.App .layoutContainer .categoriesCards .card {
+  flex: 30%;
+}
+.App .layoutContainer .categoriesCards .card .text-end {
+  font-size: smaller;
+}
+.App .layoutContainer .categoriesCards .card .text-end a {
+  color: inherit;
+  text-decoration: none;
+}
+.App .layoutContainer .categoriesCards .card img {
+  max-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 1;
+}
+.App .layoutContainer .eventsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+.App .layoutContainer .eventsDiv .eventsFilters {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75em;
+}
+.App .layoutContainer .eventsDiv .eventsFilters #createNew {
+  margin-left: auto;
+}
+.App .activeClass,
+.App .activeClass:hover {
   background-color: #6c757d;
   color: rgb(255, 255, 255);
   opacity: 1;
   border-radius: 5px;
   text-decoration: none;
 }
-
-.nonActive {
+.App .nonActive {
   text-decoration: none;
   color: black;
   opacity: 0.6;
 }
-.nonActive:hover {
+.App .nonActive:hover {
   background-color: #6c757d;
   color: rgb(255, 255, 255);
   opacity: 1;
   border-radius: 5px;
-}
-
-.card-events-list {
-  list-style: none;
-  padding: 0;
 }
 
 .signupCard {
@@ -10889,88 +10930,4 @@ body {
 
 .signupForm {
   margin: 3em 5em;
-}
-
-.categoriesHeader {
-  margin-bottom: 4em;
-}
-.categoriesHeader p {
-  font-size: smaller;
-  margin: 0.5em auto;
-}
-.categoriesHeader a {
-  color: inherit;
-}
-
-.categoriesCards {
-  margin: auto 8em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  row-gap: 5em;
-  -moz-column-gap: 5em;
-       column-gap: 5em;
-}
-.categoriesCards .card {
-  flex: 40%;
-}
-.categoriesCards .card .text-end {
-  margin-top: 1em;
-  font-size: smaller;
-}
-.categoriesCards .card img {
-  max-height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  aspect-ratio: 1;
-}
-.categoriesCards .card a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.eventsHeader {
-  margin-bottom: 4em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-.eventsHeader p {
-  font-size: smaller;
-  margin: 0.5em auto;
-}
-
-.eventsList {
-  margin: auto;
-  width: 60vw;
-}
-
-@media (max-width: 1300px) {
-  .signupForm {
-    margin: 2em 1em;
-  }
-}
-@media (max-width: 980px) {
-  .signupCard {
-    width: 70vw;
-    margin: auto;
-  }
-  .signupForm {
-    margin: 2em 1em;
-  }
-  .categoriesCards {
-    margin: auto 2em;
-    -moz-column-gap: 7em;
-         column-gap: 7em;
-  }
-  .eventsHeader {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-  }
-  .eventsList {
-    margin: auto;
-    width: 90vw;
-  }
 }/*# sourceMappingURL=styles.css.map */

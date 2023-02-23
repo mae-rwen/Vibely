@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
-import Filtering from "./Filtering";
+import EventListFilters from "./EventListFilters";
 
 export default function AllEventsList() {
   const [events, setEvents] = useState([]);
@@ -11,7 +11,7 @@ export default function AllEventsList() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/events/`)
+      .get(`/events/`)
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -21,28 +21,39 @@ export default function AllEventsList() {
       });
   }, []);
 
+  const location = [...new Set(events.map((event) => event.general_location))];
+  // console.log(location);
+  const filterByLocation = (arg) => {
+    const newEvents = events.filter((value) => {
+      return value.general_location === arg;
+    });
+    setEvents(newEvents);
+  };
+
   return (
     <>
-      <div className="eventsHeader">
-        <div className="partOne">
-          <h3 className=" fw-bold text-start">{`Events around <<chosen category name>>`}</h3>
-          <p className="text-end">
-            Elit pariatur Lorem et cupidatat reprehenderit aliqua anim aliqua
+    <div className="subpageHeader">
+        <h2 className="fw-bold col-lg-8 mx-auto text-start">
+          All events... in the chosen category
+        </h2>
+        <div className="col-lg-8 mx-auto text-end">
+          <p>
+          Elit pariatur Lorem et cupidatat reprehenderit aliqua anim aliqua
             nisi.
           </p>
         </div>
-        <div className="partTwo">
-          <Button variant="secondary">Create new event</Button>
-        </div>
       </div>
+
+    
       {isLoaded ? (
-        <div className="eventsLists">
-          <EventsList events={events} />
-          <Filtering />
+        <div className="eventsDiv">
+          <EventListFilters events={events} setEvents={setEvents} location={location} filterByLocation={filterByLocation}/>
+          <EventsList events={events} />          
         </div>
       ) : (
         <LoadingSpinner />
       )}
+      
     </>
   );
 }

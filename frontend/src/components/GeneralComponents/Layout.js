@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 
 const Layout = () => {
     return (
-        <Container className="mainContainer">
+        <Container className="layoutContainer">
             <Outlet />
         </Container>
     )

@@ -3,8 +3,8 @@ import Button from "react-bootstrap/esm/Button";
 export default function HomePage() {
   return (
     <>
-      <div className="container hpSection ">
-        <div className=" d-flex flex-column align-items-center gap-4">
+      <div className="hpSection">
+        <div className="d-flex flex-column align-items-center gap-4">
           <h3 className="mb-0">Check out the activities!</h3>
           <div className="d-flex flex-column  flex-lg-row gap-3 ">
             <Card style={{ width: "18rem" }}>
@@ -50,10 +50,11 @@ export default function HomePage() {
               </Card.Body>
             </Card>
           </div>
-
+          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button href="/categories" variant="outline-secondary">
             Explore All Activities
           </Button>
+          </div>
         </div>
       </div>
     </>
