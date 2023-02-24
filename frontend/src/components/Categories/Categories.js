@@ -1,18 +1,31 @@
-
+import Button from "react-bootstrap/Button";
 import { useEffect, useState } from 'react';
 import SingleCard from './SingleCard';
 import axios from '../../api/axios';
 import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
+  const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     axios
+      .get("/events")
+      .then((response) => {        
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const eventsCount = events.length;
+ 
+  useEffect(() => {
+    axios
       .get("/categories")
       .then((response) => {
-        console.log(response.data);
         setCategories(response.data);
         setIsLoaded(true);
       })
@@ -29,16 +42,15 @@ export default function Categories() {
         </h2>
         <div className="col-lg-8 mx-auto text-end">
           <p>
-            There are XX events happening in your location during the next 2
-            weeks
+            There are <b>{eventsCount}</b> events waiting for you to join!
           </p>
-          <p>
+          {/* <p>
             You can change your location in <a href="#">your account</a>. *To
             change the time scope, browse category of your choice.
-          </p>
+          </p> */}
         </div>
       </div>
-      {isLoaded ? <SingleCard categories={categories} /> : <LoadingSpinner />}
+      {isLoaded ? <SingleCard categories={categories} events={events} /> : <LoadingSpinner />}
     </>
   );
 }

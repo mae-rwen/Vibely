@@ -13,6 +13,7 @@ const { verifyToken } = require("../middlewares/verifyToken");
 const eventRouter = express.Router();
 
 eventRouter.get("/", getEvents);
+
 eventRouter.post("/", verifyToken, createEvent);
 // eventRouter.post("/", createEvent);
 
