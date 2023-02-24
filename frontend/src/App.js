@@ -15,8 +15,7 @@ import UnderConstruction from "./components/GeneralComponents/UnderConstruction"
 import AllEventsList from "./components/Categories/EventPages/AllEventsList";
 import CreateEvent from "./components/Categories/EventPages/CreateEvent";
 import Event from "./components/Categories/EventPages/Event";
-
-
+import EventSuccess from "./components/Categories/EventPages/EventSuccess";
 function App() {
   return (
     <div className="App">
@@ -34,14 +33,16 @@ function App() {
           <Route path="/tc" element={<UnderConstruction />} />
           <Route path="/allevents" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
-          <Route path="/allevents/event" element={<Event />} /> {/* move to protected routes  after completed* and change path to: "/allevents/:event_id/}
+          <Route path="/event_success" element={<EventSuccess />} />
+          <Route path="/allevents/event" element={<Event />} />{" "}
+          {/* move to protected routes  after completed* and change path to: "/allevents/:event_id/}
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
           <Route element={<RequireAuth />}>
             {/* <Route path="/categories" element={<Categories />} /> */}
+            {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
-
           {/* catch all - to create missing element */}
           <Route path="*" element={<Test />} />
         </Route>
