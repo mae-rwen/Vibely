@@ -57,12 +57,12 @@ export default function Header() {
                 Instructions
               </NavLink>            
               <Form className="d-flex">
-                <Button href="/register" variant="outline-secondary">
+                <Button className="m-auto" href="/register" variant="outline-secondary">
                   Register
                 </Button>
               </Form>
               <Form className="d-flex">
-                <Button href="/login" variant="outline-secondary">
+                <Button className="m-auto" href="/login" variant="outline-secondary">
                   Login
                 </Button>
               </Form>

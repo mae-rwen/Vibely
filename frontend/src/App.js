@@ -6,7 +6,7 @@ import Footer from "./components/GeneralComponents/Footer";
 import HomePage from "./components/HomePage/HomePage";
 import ScrollToTop from "react-scroll-to-top";
 import AboutUs from "./components/VibelyTeam/AboutUs";
-import Test from "./components/GeneralComponents/Test";
+import WrongPath from "./components/GeneralComponents/WrongPath";
 import Layout from "./components/GeneralComponents/Layout";
 import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
@@ -44,7 +44,7 @@ function App() {
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
           {/* catch all - to create missing element */}
-          <Route path="*" element={<Test />} />
+          <Route path="*" element={<WrongPath />} />
         </Route>
       </Routes>
 

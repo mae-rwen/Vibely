@@ -6,44 +6,44 @@ export default function Introduction() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>      
-        <div className="hpSection">
+    <>
+      <div className="hpSection">
         <h5 className=" fw-bold">What is this about?</h5>
-          <p>
-            Tempor cupidatat est Lorem aliquip cillum deserunt proident aliquip
-            sit ad nisi laboris excepteur. Lorem in qui reprehenderit consequat
-            nisi aliqua. Excepteur sint exercitation elit non id fugiat fugiat
-            fugiat culpa id sit.
-          </p>
-          <Collapse in={open}>
-            <div id="collapse-text">
-              <p>
-                Dolore tempor velit laborum aliqua ipsum labore cupidatat
-                laborum officia mollit duis elit. Aute eu sunt et nisi excepteur
-                aliquip et quis dolore consectetur magna Lorem aliqua duis.
-              </p>
-              <p>
-                Magna dolore ullamco tempor incididunt id duis ut ut cillum
-                Lorem. Nostrud labore nostrud reprehenderit aliqua enim esse ea
-                enim do. Nulla eiusmod laborum eu eu aute ad quis eiusmod minim
-                sint nostrud fugiat veniam. Quis tempor aliquip amet tempor
-                deserunt nostrud quis do incididunt consequat ad pariatur elit
-                ullamco. Cillum esse laboris in culpa ex proident. Sit voluptate
-                enim ex officia enim anim do eu laborum non ad et velit. Laborum
-                laboris excepteur commodo et mollit cillum do est.
-              </p>
-              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Button variant="outline-secondary" href="/instructions">Read more about it</Button>
-              </div>
+        <p>
+          Vibely is a great way to meet new people, explore new interests, and
+          share your passions with others. Here's a quick guide on how to use
+          our platform to connect with like-minded people and explore events.
+        </p>
+        <Collapse in={open}>
+          <div id="collapse-text">
+            <ol>
+              <li>1. Create a user profile to get started.</li>
+              <li>
+                2. Browse through categories and events that interest you.
+              </li>
+              <li>3. Find an event of interest and RSVP to join.</li>
+              <li>
+                4. Connect with the event's organizer and other attendees.
+              </li>
+            </ol>
+            <p>You can also create your own events for others to join.</p>
+            <p>Happy vibing!</p>
+
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <Button variant="outline-secondary" href="/instructions">
+                Read more about it
+              </Button>
             </div>
-          </Collapse>
-          <p className="text-end showMoreP"
-            onClick={() => setOpen(!open)}
-            aria-controls="example-collapse-text"
-            aria-expanded={open}
-          >
-            {open ? ("show less"):("show more")}
-          </p>        
+          </div>
+        </Collapse>
+        <p
+          className="text-end showMoreP"
+          onClick={() => setOpen(!open)}
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+        >
+          {open ? "show less" : "show more"}
+        </p>
       </div>
     </>
   );

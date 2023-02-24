@@ -5,7 +5,7 @@ import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 
 export default function AllEventsList() {
-   const [allEvents, setAllEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState([]);
   const [getCategories, setGetCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,7 +34,7 @@ useEffect(() => {
       .catch((error) => {
         console.log(error);
       });
-  }, [events]);
+  }, []);
 
   const location = [
     ...new Set(allEvents.map((event) => event.general_location)),
