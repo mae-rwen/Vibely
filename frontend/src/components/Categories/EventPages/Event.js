@@ -144,7 +144,7 @@ const Event = () => {
             </Container>
           </Card.Body>
 
-          <Card.Footer className="justify-content-end">
+          <Card.Footer className="d-flex justify-content-end display-content-end gap-2">
             <OverlayTrigger
               placement="top-end"
               overlay={
