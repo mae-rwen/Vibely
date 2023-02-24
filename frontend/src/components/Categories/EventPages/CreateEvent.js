@@ -24,7 +24,7 @@ export default function CreateEvent() {
     description: eventDescription,
   };
   useEffect(() => {
-    axios.get("http://localhost:3001/categories").then((response) => {
+    axios.get("/categories").then((response) => {
       setCategories(response.data);
     });
   }, []);
@@ -33,7 +33,7 @@ export default function CreateEvent() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(event);
-    axios.post("http://localhost:3001/events", event).then((response) => {
+    axios.post("/events", event).then((response) => {
       console.log(response.data);
     });
 
