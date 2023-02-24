@@ -6,14 +6,11 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 export default function EventListFilters({
   location,
   types,
-  categories,
-  locationQuery,
+  getCategories,
   setLocationQuery,
   setTypeQuery,
+  setCategoryQuery,
 }) {
-  // console.log(location);
-  // console.log(locationQuery);
-
   return (
     <>
       <div className="eventsFilters">
@@ -56,21 +53,21 @@ export default function EventListFilters({
           <Dropdown.Item
             style={{ fontWeight: "bold" }}
             onClick={(e) => {
-              setLocationQuery("");
+              setCategoryQuery("");
             }}
           >
             All categories
           </Dropdown.Item>
-          {categories.map((value, id) => {
+          {getCategories.map((value, id) => {
             return (
               <div key={id}>
                 <Dropdown.Divider />
                 <Dropdown.Item
                   onClick={(e) => {
-                    setLocationQuery(value);
+                    setCategoryQuery(value._id);
                   }}
                 >
-                  {value}
+                  {value.name}
                 </Dropdown.Item>
               </div>
             );

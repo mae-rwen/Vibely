@@ -11,6 +11,7 @@ export default function AllEventsList() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
+  const [categoryQuery, setCategoryQuery] = useState("");
 
   useEffect(() => {
     axios
@@ -38,13 +39,12 @@ export default function AllEventsList() {
     ...new Set(allEvents.map((event) => event.general_location)),
   ];
   const types = [...new Set(allEvents.map((event) => event.type))];
-  const categories = [
-    ...new Set(getCategories.map((category) => category.name)),
-  ];
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}&type=${typeQuery}`)
+      .get(
+        `/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery}`
+      )
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -52,10 +52,7 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [locationQuery, typeQuery]);
-
-  // console.log(location);
-  // console.log(locationQuery);
+  }, [locationQuery, typeQuery, categoryQuery]);
 
   return (
     <>
@@ -76,11 +73,12 @@ export default function AllEventsList() {
           <EventListFilters
             location={location}
             types={types}
-            categories={categories}
+            getCategories={getCategories}
             setLocationQuery={setLocationQuery}
             setTypeQuery={setTypeQuery}
+            setCategoryQuery={setCategoryQuery}
           />
-          <EventsList events={events} />
+          <EventsList events={events} getCategories={getCategories} />
         </div>
       ) : (
         <LoadingSpinner />
