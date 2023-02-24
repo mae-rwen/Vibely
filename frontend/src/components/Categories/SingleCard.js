@@ -5,14 +5,14 @@ export default function SingleCard({ categories }) {
 
   return (
     <div className="categoriesCards">
-      {categories.map((category) => {
+      {categories.map((category) => {     
         return (
           <Card key={category._id} className="card text-center">
             <Card.Img variant="top" src={category.picture} />
             <Card.Body>
               <Card.Title className="fw-bold">{category.name}</Card.Title>
               <Card.Text className="text-end">
-                <a href="#top">XX events in your location*</a>
+                <a href="#top">XX events in this category</a>
               </Card.Text>
               <Button
                 className="catBtn"
