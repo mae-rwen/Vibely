@@ -5,13 +5,47 @@ import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 
 export default function AllEventsList() {
+   const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState([]);
+  const [getCategories, setGetCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
+  const [typeQuery, setTypeQuery] = useState("");
+  const [categoryQuery, setCategoryQuery] = useState("");
+
+
+useEffect(() => {
+    axios
+      .get(`/categories`)
+      .then((response) => {
+        setGetCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}`)
+      .get(`/events`)
+      .then((response) => {
+        setAllEvents(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [events]);
+
+  const location = [
+    ...new Set(allEvents.map((event) => event.general_location)),
+  ];
+  const types = [...new Set(allEvents.map((event) => event.type))];
+
+  useEffect(() => {
+    axios
+      .get(
+        `/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery}`
+      )
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -19,11 +53,7 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [events]);
-
-  const location = [...new Set(events.map((event) => event.general_location))];
-  // console.log(location);
-  // console.log(locationQuery);
+  }, [locationQuery, typeQuery, categoryQuery]);
 
   return (
     <>
@@ -43,14 +73,15 @@ export default function AllEventsList() {
         <div className="eventsDiv">
           <EventListFilters
             location={location}
-            locationQuery={locationQuery}
+            types={types}
+            getCategories={getCategories}
             setLocationQuery={setLocationQuery}
+            setTypeQuery={setTypeQuery}
+            setCategoryQuery={setCategoryQuery}
           />
-          <EventsList events={events} />
+          <EventsList events={events} getCategories={getCategories} />
         </div>
       ) : (
         <LoadingSpinner />
       )}
-    </>
-  );
-}
+      </>)}
