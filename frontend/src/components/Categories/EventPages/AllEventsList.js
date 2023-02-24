@@ -33,7 +33,7 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [events]);
 
   const location = [
     ...new Set(allEvents.map((event) => event.general_location)),
