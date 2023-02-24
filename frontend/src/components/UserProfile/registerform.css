@@ -34,3 +34,15 @@
     color: red;
     margin-left: 0.25rem;
 }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+  }
+
+  .form {
+    padding: 1rem;
+  } 

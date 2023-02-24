@@ -1,0 +1,57 @@
+.card {
+    box-shadow: 3em;
+
+}
+
+.absolute{
+    color: black;
+    width: 7rem; 
+    height: 5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(-38%, 28%)
+}
+
+.absolute_add{
+    color: black;
+    width: 10.75rem; 
+    height: 5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(-40%, 30%)
+}
+
+
+/* .pad {
+    padding-left: 3rem;
+    padding-right: 3rem;
+} */
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.text {
+    font-size: smaller;
+    margin-top: 0rem;
+    margin-bottom: 0%;
+}
+
+p::first-letter {
+    text-transform:capitalize;
+}
+
+span::first-letter {
+    text-transform:capitalize;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    justify-content: center;
+}

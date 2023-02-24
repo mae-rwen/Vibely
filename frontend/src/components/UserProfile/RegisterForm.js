@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
+import { Card, Container } from "react-bootstrap";
 import image from "./Vibely.png";
 import "./registerform.css";
 import {
@@ -127,8 +127,9 @@ const RegisterForm = ({ setSetAccount }) => {
   };
 
   return (
-    <section>
-      <Card className="signupCard">
+    <Container className="d-flex justify-content-center" style={{ minHeight: "100vh"}}>
+      <div className="w-100" style={{ maxWidth: "400px"}}>
+      <Card className="card">
         <Card.Body>
           <p
             ref={errRef}
@@ -146,7 +147,7 @@ const RegisterForm = ({ setSetAccount }) => {
             Create a new account
           </Card.Title>
 
-          <Form className="text-center signupForm" onSubmit={handleSubmit}>
+          <Form className="text-center form" onSubmit={handleSubmit}>
             {/* username */}
             <Form.Floating className="mb-3">
               <Form.Control
@@ -319,13 +320,13 @@ const RegisterForm = ({ setSetAccount }) => {
                   ? true
                   : false
               }
-              className="w-30"
+              className="w-100 my-3"
               variant="outline-secondary"
               type="submit"
             >
               Sign Up
             </Button>
-            <Card.Text className="mt-3">
+            <Card.Text>
               <Form.Text className="text-muted">
                 Already have an account? Login <Link to="/login">here</Link>
               </Form.Text>
@@ -333,7 +334,8 @@ const RegisterForm = ({ setSetAccount }) => {
           </Form>
         </Card.Body>
       </Card>
-    </section>
+      </div>
+    </Container>
   );
 };
 

@@ -1,7 +1,9 @@
+import { Button } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
+import { NavLink } from "react-router-dom";
 
-export default function EventsList({events}) {
+export default function EventsList({ events }) {
   return (
     <>
       <ListGroup className="eventsList" as="ul">
@@ -18,6 +20,10 @@ export default function EventsList({events}) {
               <Badge bg="secondary" pill>
                 already joined: 2
               </Badge>
+              <NavLink
+               to={`/event/${event._id}`} 
+               >see more </NavLink>
+
             </ListGroup.Item>
           );
         })}
