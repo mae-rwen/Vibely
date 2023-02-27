@@ -7,6 +7,12 @@ const getEvents = async (req, res, next) => {
     if (req.query.location) {
       query.general_location = req.query.location
     }
+    if (req.query.type) {
+      query.type = req.query.type
+    }
+    if (req.query.category) {
+      query.category = req.query.category
+    }
     const events = await Event.find(query);
     res.json(events);
   } catch (error) {

@@ -36,7 +36,16 @@ export default function Header() {
                   isActive ? "activeClass " : "nonActive"
                 }
               >
-                Explore
+                Categories
+              </NavLink>
+              <NavLink
+                style={{ padding: "10px" }}
+                to="/allevents"
+                className={({ isActive }) =>
+                  isActive ? "activeClass " : "nonActive"
+                }
+              >
+                All events
               </NavLink>
               <NavLink
                 style={{ padding: "10px" }}
@@ -46,14 +55,14 @@ export default function Header() {
                 }
               >
                 Instructions
-              </NavLink>
+              </NavLink>            
               <Form className="d-flex">
-                <Button href="/register" variant="outline-secondary">
+                <Button className="m-auto" href="/register" variant="outline-secondary">
                   Register
                 </Button>
               </Form>
               <Form className="d-flex">
-                <Button href="/login" variant="outline-secondary">
+                <Button className="m-auto" href="/login" variant="outline-secondary">
                   Login
                 </Button>
               </Form>

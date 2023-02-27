@@ -5,50 +5,105 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function EventListFilters({
   location,
-  locationQuery,
+  types,
+  getCategories,
   setLocationQuery,
+  setTypeQuery,
+  setCategoryQuery,
 }) {
-  // console.log(location);
-  // console.log(locationQuery);
-
   return (
     <>
       <div className="eventsFilters">
+        {/* Location filter */}
         <DropdownButton
           as={ButtonGroup}
           variant="outline-secondary"
           title="Location"
         >
-          <Dropdown.Item style={{ fontWeight: "bold" }}>
+          <Dropdown.Item
+            style={{ fontWeight: "bold" }}
+            onClick={(e) => {
+              setLocationQuery("");
+            }}
+          >
             All locations
           </Dropdown.Item>
           {location.map((value, id) => {
             return (
               <div key={id}>
-                <Dropdown.Divider onClick={() => setLocationQuery(value)} />
-                <Dropdown.Item>{value}</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setLocationQuery(value);
+                  }}
+                >
+                  {value}
+                </Dropdown.Item>
               </div>
             );
           })}
         </DropdownButton>
 
-        {/* {["Filter 1", "Filter 2", "Filter 3", "Filter 4"].map(
-          (variant) => (
-            <DropdownButton
-              as={ButtonGroup}
-              key={variant}
-              id={`dropdown-variants-${variant}`}
-              variant="outline-secondary"
-              title={variant}
-            >
-              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>            
-            </DropdownButton>
-          )
-        )} */}
+        {/* Categories filter */}
+        <DropdownButton
+          as={ButtonGroup}
+          variant="outline-secondary"
+          title="Category"
+        >
+          <Dropdown.Item
+            style={{ fontWeight: "bold" }}
+            onClick={(e) => {
+              setCategoryQuery("");
+            }}
+          >
+            All categories
+          </Dropdown.Item>
+          {getCategories.map((value, id) => {
+            return (
+              <div key={id}>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setCategoryQuery(value._id);
+                  }}
+                >
+                  {value.name}
+                </Dropdown.Item>
+              </div>
+            );
+          })}
+        </DropdownButton>
+
+        {/* Types filter */}
+        <DropdownButton
+          as={ButtonGroup}
+          variant="outline-secondary"
+          title="Type"
+        >
+          <Dropdown.Item
+            style={{ fontWeight: "bold" }}
+            onClick={(e) => {
+              setTypeQuery("");
+            }}
+          >
+            All events
+          </Dropdown.Item>
+          {types.map((value, id) => {
+            return (
+              <div key={id}>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setTypeQuery(value);
+                  }}
+                >
+                  {value}
+                </Dropdown.Item>
+              </div>
+            );
+          })}
+        </DropdownButton>
+
         <Button id="createNew" variant="secondary" href="/create_event">
           Create new event
         </Button>

@@ -2,10 +2,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./createEvents.css";
+import EventSuccess from "./EventSuccess";
 
 export default function CreateEvent() {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
@@ -24,16 +27,15 @@ export default function CreateEvent() {
     description: eventDescription,
   };
   useEffect(() => {
-    axios.get("http://localhost:3001/categories").then((response) => {
+    axios.get("/categories").then((response) => {
       setCategories(response.data);
     });
   }, []);
 
-  // console.log(categories);
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(event);
-    axios.post("http://localhost:3001/events", event).then((response) => {
+    axios.post("/events", event).then((response) => {
       console.log(response.data);
     });
 
@@ -44,6 +46,7 @@ export default function CreateEvent() {
     setEventLocation("");
     setEventParticipants("");
     setEventType("");
+    navigate("/event_success");
   };
   return (
     <div className="event-form d-flex flex-column gap-4">

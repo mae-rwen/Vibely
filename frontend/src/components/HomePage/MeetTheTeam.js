@@ -14,22 +14,22 @@ export default function MeetTheTeam() {
   const agata = {
     pic: Agata,
     name: "Agata",
-    desc: "The one that does Boostrap",
+    desc: "The affirmative one",
   };
   const alex = {
     pic: Alex,
     name: "Alex",
-    desc: "The one with clouds",
+    desc: "With his head in the clouds",
   };
   const simran = {
     pic: Simran,
     name: "Simran",
-    desc: "The one that knows things",
+    desc: "With the fresh ideas",
   };
   const ola = {
     pic: Ola,
-    name: "Ola",
-    desc: "The one that likes Boostrap",
+    name: "Aleksandra",
+    desc: "Always smiling",
   };
   return (
     <>      
@@ -42,7 +42,7 @@ export default function MeetTheTeam() {
             <TeamCard member={alex} />
           </div>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <Button variant="outline-secondary" href="/aboutus">
+          <Button variant="outline-secondary" href="/categories">
               Vibe with us!
             </Button>
           </div>
