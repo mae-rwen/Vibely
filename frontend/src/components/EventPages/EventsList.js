@@ -7,32 +7,27 @@ export default function EventsList({events, getCategories}) {
 
   return (
     <>
-      <ListGroup className="eventsList" as="ul">
+    {events.length !== 0 ? (<ListGroup className="eventsList" as="ul">
         {events.map((event) => {
           // let date = event.date;  
           // const dateTimeInParts = date.split( "T" ); 
           // const day = dateTimeInParts[ 0 ];
           // const time = dateTimeInParts[ 1 ];
-          // console.log(`${day} and ${time}`);
-
-          const category = getCategories.map((value) => {
-             if (value._id === event.category) {
-            return value.name}
-              } 
-            )
+          // console.log(`${day} and ${time}`);         
         
           return (
             <NavLink
             to={`/event/${event._id}`} style={{textDecoration: "none"}}
+            key={event._id}
             >
                <ListGroup.Item
               as="li"
-              className="d-flex justify-content-between align-items-start" key={event._id}>
+              className="d-flex justify-content-between align-items-start">
               <div className="ms-2 me-auto">
                 <div className="fw-bold">{event.title}</div>
-                {event.general_location} || Date || Time || Created by XX || searching for XX
-                people || Category: {category}
-                
+                {event.general_location} || Date || Time || Created by {event.author?.name ? (event.author?.name) : ("unknown")}{" "} 
+                || searching for {event.participants ? (event.participants) : ("not specified number of")} people{" "} 
+                || Category: {event.category?.name ? (event.category?.name) : ("undefined")}              
               </div>
               <Badge bg="secondary" pill>
                 already joined: 2
@@ -42,7 +37,8 @@ export default function EventsList({events, getCategories}) {
             </NavLink>
           );
         })}
-      </ListGroup>
+      </ListGroup>) : ("No matching events. Please try out with different filters.")}
+      
     </>
   );
 }

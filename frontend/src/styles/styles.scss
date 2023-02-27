@@ -88,7 +88,10 @@ body {
     .eventsDiv {
       display: flex;
       flex-direction: column;
-      gap: 3em;
+      gap: 1em;
+      p {
+        font-size: smaller;
+      }
       .eventsFilters {
         display: flex;
         flex-direction: row;

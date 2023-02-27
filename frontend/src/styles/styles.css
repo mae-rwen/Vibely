@@ -10893,7 +10893,10 @@ body {
 .App .layoutContainer .eventsDiv {
   display: flex;
   flex-direction: column;
-  gap: 3em;
+  gap: 1em;
+}
+.App .layoutContainer .eventsDiv p {
+  font-size: smaller;
 }
 .App .layoutContainer .eventsDiv .eventsFilters {
   display: flex;
