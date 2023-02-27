@@ -18,26 +18,28 @@ export default function EventsList({events, getCategories}) {
           const category = getCategories.map((value) => {
              if (value._id === event.category) {
             return value.name}
-              }
+              } 
             )
         
           return (
-            <ListGroup.Item
+            <NavLink
+            to={`/event/${event._id}`} style={{textDecoration: "none"}}
+            >
+               <ListGroup.Item
               as="li"
               className="d-flex justify-content-between align-items-start" key={event._id}>
               <div className="ms-2 me-auto">
                 <div className="fw-bold">{event.title}</div>
                 {event.general_location} || Date || Time || Created by XX || searching for XX
                 people || Category: {category}
+                
               </div>
               <Badge bg="secondary" pill>
                 already joined: 2
               </Badge>
-              <NavLink
-               to={`/event/${event._id}`} 
-               >see more </NavLink>
 
             </ListGroup.Item>
+            </NavLink>
           );
         })}
       </ListGroup>

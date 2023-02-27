@@ -12,10 +12,10 @@ import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
-import AllEventsList from "./components/Categories/EventPages/AllEventsList";
-import CreateEvent from "./components/Categories/EventPages/CreateEvent";
-import Event from "./components/Categories/EventPages/Event";
-import EventSuccess from "./components/Categories/EventPages/EventSuccess";
+import AllEventsList from "./components/EventPages/AllEventsList";
+import CreateEvent from "./components/EventPages/CreateEvent";
+import Event from "./components/EventPages/Event";
+import EventSuccess from "./components/EventPages/EventSuccess";
 function App() {
 
   return (

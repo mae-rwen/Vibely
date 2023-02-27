@@ -97,6 +97,18 @@ body {
           margin-left: auto;
         }
       }
+      .eventsList {
+        li {
+          margin: 0.5em auto;
+          >* {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;            
+          }
+          &:hover {
+            background-color: $light;
+          }
+        }        
+      }
     }
     // // <<-- events lists styling
   }

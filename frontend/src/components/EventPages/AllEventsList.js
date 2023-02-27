@@ -1,6 +1,6 @@
-import axios from "../../../api/axios";
+import axios from "../../api/axios";
 import { useEffect, useState } from "react";
-import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
+import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 
