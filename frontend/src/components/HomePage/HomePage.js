@@ -4,7 +4,6 @@ import MeetTheTeam from "./MeetTheTeam";
 import CategoriesOverview from "./CategoriesOverview";
 import { useEffect, useState } from 'react';
 import axios from '../../api/axios';
-import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -28,7 +27,7 @@ export default function HomePage() {
       <hr id="introduction" className="featurette-divider" />      
       <Introduction />
       <hr className="featurette-divider" />
-      <CategoriesOverview categories={categories}/>     
+      <CategoriesOverview categories={categories} isLoaded={isLoaded}/>     
       <hr className="featurette-divider" />
       <MeetTheTeam />
       <hr className="featurette-divider" />
