@@ -1,60 +1,36 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
-export default function HomePage() {
+import Carousel from "react-bootstrap/Carousel";
+
+export default function HomePage({ categories }) {
   return (
     <>
       <div className="hpSection">
-        <div className="d-flex flex-column align-items-center gap-4">
-          <h3 className="mb-0">Check out the activities!</h3>
-          <div className="d-flex flex-column  flex-lg-row gap-3 ">
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>Skill sharing</Card.Title>
+        <h5 className="fw-bold">Check out the activities!</h5>
+        <div className="row p-4 mt-4 text-center justify-content-center">
+          <Carousel>
+            {categories.map((category) => {
+              return (
+                <Carousel.Item style={{height: "20em"}} key={category._id}>
+                  <img
+                    className="d-block w-100"
+                    src={category.picture}
+                    alt={`Slide for ${category.name}`}
+                  />
+                  <Carousel.Caption className="carouselCaption">
+                    <h3>{category.name}</h3>
+                    <p>{category.description}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        </div>
 
-                <ul className="card-events-list">
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                </ul>
-
-                <Button variant="outline-secondary">Show more</Button>
-              </Card.Body>
-            </Card>
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>Connect and Socialize</Card.Title>
-
-                <ul className="card-events-list">
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                </ul>
-                <Button variant="outline-secondary">Show more</Button>
-                {/* <Card.Link href="#">Show more</Card.Link> */}
-              </Card.Body>
-            </Card>
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>Let's play</Card.Title>
-
-                <ul className="card-events-list">
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                  <li>Learn german in Dortmund</li>
-                </ul>
-
-                <Button variant="outline-secondary">Show more</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button href="/categories" variant="outline-secondary">
             Explore All Activities
           </Button>
-          </div>
         </div>
       </div>
     </>
