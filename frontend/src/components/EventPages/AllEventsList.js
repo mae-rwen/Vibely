@@ -6,7 +6,6 @@ import EventListFilters from "./EventListFilters";
 import { useParams } from "react-router-dom";
 
 export default function AllEventsList() {
-
   const { category } = useParams();
 
   const [allEvents, setAllEvents] = useState([]);
@@ -17,8 +16,8 @@ export default function AllEventsList() {
   const [typeQuery, setTypeQuery] = useState("");
   const [categoryQuery, setCategoryQuery] = useState(category);
 
-// get the categories
-useEffect(() => {
+  // get the categories
+  useEffect(() => {
     axios
       .get(`/categories`)
       .then((response) => {
@@ -29,7 +28,7 @@ useEffect(() => {
       });
   }, []);
 
-//get all events for displaying locations and types of events
+  //get all events for displaying locations and types of events
   useEffect(() => {
     axios
       .get(`/events`)
@@ -48,9 +47,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get(
-        `/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery?(categoryQuery):("")}`
-      )
+      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}`)
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -64,18 +61,16 @@ useEffect(() => {
     <>
       <div className="subpageHeader">
         <h2 className="fw-bold col-lg-8 mx-auto text-start">
-          {categoryQuery ? (
-            `Explore events for ${getCategories.map((value) => {
-              if (value._id === categoryQuery) {
-               return value.name          
-              }
-            })}` 
-          ):("Explore all events")}       
+          {categoryQuery
+            ? `Explore events for ${
+                getCategories.find((value) => {
+                  return value._id === categoryQuery;
+                })?.name
+              }`
+            : "Explore all events"}
         </h2>
         <div className="col-lg-8 mx-auto text-center">
-          <p>
-            Use the filters to select events of your interest.
-          </p>
+          <p>Use the filters to select events of your interest.</p>
         </div>
       </div>
 
@@ -91,11 +86,13 @@ useEffect(() => {
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
             setCategoryQuery={setCategoryQuery}
-          />       
-                
+          />
+
           <EventsList events={events} getCategories={getCategories} />
         </div>
       ) : (
         <LoadingSpinner />
       )}
-      </>)}
+    </>
+  );
+}

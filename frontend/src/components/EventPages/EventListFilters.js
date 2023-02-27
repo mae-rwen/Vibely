@@ -124,18 +124,18 @@ export default function EventListFilters({
           Create new event
         </Button>
       </div>
-      {locationQuery || categoryQuery || typeQuery  ? (
+      {locationQuery || categoryQuery || typeQuery ? (
         <p>
           Active filters:{" "}
           {locationQuery ? `location - ${locationQuery} || ` : ""}
-          {categoryQuery 
-            ? `category - ${getCategories.map((value) => {
-                if (value._id === categoryQuery) {
-                  return value.name;
-                }
-              })} || `
+          {categoryQuery
+            ? `category - ${
+                getCategories.find((value) => {
+                  return value._id === categoryQuery;
+                }).name
+              } || `
             : ""}
-          {typeQuery  ? `type - ${typeQuery} ||` : ""}
+          {typeQuery ? `type - ${typeQuery} ||` : ""}
         </p>
       ) : (
         ""

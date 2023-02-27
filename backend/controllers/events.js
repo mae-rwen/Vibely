@@ -13,7 +13,7 @@ const getEvents = async (req, res, next) => {
     if (req.query.category) {
       query.category = req.query.category
     }
-    const events = await Event.find(query);
+    const events = await Event.find(query).populate("author").populate("category");
     res.json(events);
   } catch (error) {
     next(error);
