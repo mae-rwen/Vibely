@@ -89,8 +89,9 @@ export default function EventListFilters({
             All events
           </Dropdown.Item>
           {types.map((value, id) => {
+            
             return (
-              <div key={id}>
+              value ? (<div key={id}>
                 <Dropdown.Divider />
                 <Dropdown.Item
                   onClick={(e) => {
@@ -99,10 +100,19 @@ export default function EventListFilters({
                 >
                   {value}
                 </Dropdown.Item>
-              </div>
+              </div>) : ("")
+              
             );
           })}
         </DropdownButton>
+
+        <Button variant="secondary" onClick={(e) => {
+                    setTypeQuery("");
+                    setCategoryQuery("");
+                    setLocationQuery("");
+                  }}>
+          Reset all filters
+        </Button>
 
         <Button id="createNew" variant="secondary" href="/create_event">
           Create new event
