@@ -17,6 +17,7 @@ import CreateEvent from "./components/Categories/EventPages/CreateEvent";
 import Event from "./components/Categories/EventPages/Event";
 import EventSuccess from "./components/Categories/EventPages/EventSuccess";
 function App() {
+
   return (
     <div className="App">
       <ScrollToTop style={{ borderRadius: "50%" }} />
@@ -33,9 +34,9 @@ function App() {
           <Route path="/tc" element={<UnderConstruction />} />
           <Route path="/allevents" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
+          <Route path="/event/:event_id" element={<Event />} /> {/* move to protected routes  after completed and to /:event_id */}
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/allevents/event" element={<Event />} />{" "}
-          {/* move to protected routes  after completed* and change path to: "/allevents/:event_id/}
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}

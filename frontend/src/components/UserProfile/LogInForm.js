@@ -1,11 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
+import { Card, Container }from "react-bootstrap";
 import image from "./Vibely.png";
 import { useRef, useState, useEffect } from "react";
 import axios from "../../api/axios";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import "./registerform.css"
 
 const LOGIN_URL = "/auth/login";
 
@@ -76,8 +77,9 @@ export default function LogInForm({ setSetAccount }) {
   };
 
   return (
-    <section>
-      <Card className="text-center signupCard">
+    <Container className="d-flex justify-content-center" style={{ minHeight: "100vh"}}>
+      <div className="w-100" style={{ maxWidth: "400px"}}>
+      <Card className="text-center card">
         <Card.Body>
           <p
             ref={errRef}
@@ -86,15 +88,15 @@ export default function LogInForm({ setSetAccount }) {
           >
             {error}
           </p>
-          <img
+          {/* <img
             src={image}
             alt="Logo"
             style={{ width: "100px", marginTop: "1.5em" }}
-          />
+          /> */}
           <Card.Title className="my-4">
-            Please login in to your account
+            <h2>Login in to your account</h2>
           </Card.Title>
-          <Form className="signupForm" onSubmit={handleSubmit}>
+          <Form className="form" onSubmit={handleSubmit}>
             <Form.Floating className="mb-3">
               <Form.Control
                 type="text"
@@ -135,11 +137,11 @@ export default function LogInForm({ setSetAccount }) {
               </Form.Text>
             </Card.Text>
 
-            <Button variant="outline-secondary" type="submit">
+            <Button className="w-100 my-3" variant="outline-secondary" type="submit">
               Login
             </Button>
 
-            <Card.Text className="mt-3">
+            <Card.Text className="mt-1">
               <Form.Text className="text-muted">
                 No account yet? Register <Link to="/register">here</Link>
               </Form.Text>
@@ -147,6 +149,7 @@ export default function LogInForm({ setSetAccount }) {
           </Form>
         </Card.Body>
       </Card>
-    </section>
+      </div>
+    </Container>
   );
 }
