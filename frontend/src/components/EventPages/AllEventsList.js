@@ -67,7 +67,7 @@ useEffect(() => {
           {categoryQuery ? (
             `Explore events for ${getCategories.map((value) => {
               if (value._id === categoryQuery) {
-                return value.name;
+               return value.name          
               }
             })}` 
           ):("Explore all events")}       
