@@ -20,7 +20,7 @@ export default function SingleCard({ categories }) {
               <Button
                 className="catBtn"
                 variant="outline-secondary"
-                href="/allevents"
+                href={`/allevents/${category._id}`}
               >
                 Explore the activities
               </Button>

@@ -32,7 +32,8 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/tc" element={<UnderConstruction />} />
-          <Route path="/allevents" element={<AllEventsList />} />
+          <Route path="/allevents/" element={<AllEventsList />} />
+          <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
           <Route path="/event/:event_id" element={<Event />} /> {/* move to protected routes  after completed and to /:event_id */}
           <Route path="/event_success" element={<EventSuccess />} />

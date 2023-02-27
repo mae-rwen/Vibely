@@ -7,8 +7,11 @@ export default function EventListFilters({
   location,
   types,
   getCategories,
+  locationQuery,
   setLocationQuery,
+  typeQuery,
   setTypeQuery,
+  categoryQuery,
   setCategoryQuery,
 }) {
   return (
@@ -89,9 +92,8 @@ export default function EventListFilters({
             All events
           </Dropdown.Item>
           {types.map((value, id) => {
-            
-            return (
-              value ? (<div key={id}>
+            return value ? (
+              <div key={id}>
                 <Dropdown.Divider />
                 <Dropdown.Item
                   onClick={(e) => {
@@ -100,17 +102,21 @@ export default function EventListFilters({
                 >
                   {value}
                 </Dropdown.Item>
-              </div>) : ("")
-              
+              </div>
+            ) : (
+              ""
             );
           })}
         </DropdownButton>
 
-        <Button variant="secondary" onClick={(e) => {
-                    setTypeQuery("");
-                    setCategoryQuery("");
-                    setLocationQuery("");
-                  }}>
+        <Button
+          variant="secondary"
+          onClick={(e) => {
+            setTypeQuery("");
+            setCategoryQuery("");
+            setLocationQuery("");
+          }}
+        >
           Reset all filters
         </Button>
 
@@ -118,6 +124,22 @@ export default function EventListFilters({
           Create new event
         </Button>
       </div>
+      {locationQuery || categoryQuery || typeQuery  ? (
+        <p>
+          Active filters:{" "}
+          {locationQuery ? `location - ${locationQuery} || ` : ""}
+          {categoryQuery 
+            ? `category - ${getCategories.map((value) => {
+                if (value._id === categoryQuery) {
+                  return value.name;
+                }
+              })} || `
+            : ""}
+          {typeQuery  ? `type - ${typeQuery} ||` : ""}
+        </p>
+      ) : (
+        ""
+      )}
     </>
   );
 }

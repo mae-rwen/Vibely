@@ -3,17 +3,21 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
+import { useParams } from "react-router-dom";
 
 export default function AllEventsList() {
+
+  const { category } = useParams();
+
   const [allEvents, setAllEvents] = useState([]);
   const [events, setEvents] = useState([]);
   const [getCategories, setGetCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState("");
+  const [categoryQuery, setCategoryQuery] = useState(category);
 
-
+// get the categories
 useEffect(() => {
     axios
       .get(`/categories`)
@@ -25,6 +29,7 @@ useEffect(() => {
       });
   }, []);
 
+//get all events for displaying locations and types of events
   useEffect(() => {
     axios
       .get(`/events`)
@@ -44,7 +49,7 @@ useEffect(() => {
   useEffect(() => {
     axios
       .get(
-        `/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery}`
+        `/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery?(categoryQuery):("")}`
       )
       .then((response) => {
         setEvents(response.data);
@@ -59,12 +64,17 @@ useEffect(() => {
     <>
       <div className="subpageHeader">
         <h2 className="fw-bold col-lg-8 mx-auto text-start">
-          All events... in the chosen category
+          {categoryQuery ? (
+            `Explore events for ${getCategories.map((value) => {
+              if (value._id === categoryQuery) {
+                return value.name;
+              }
+            })}` 
+          ):("Explore all events")}       
         </h2>
-        <div className="col-lg-8 mx-auto text-end">
+        <div className="col-lg-8 mx-auto text-center">
           <p>
-            Elit pariatur Lorem et cupidatat reprehenderit aliqua anim aliqua
-            nisi.
+            Use the filters to select events of your interest.
           </p>
         </div>
       </div>
@@ -75,10 +85,14 @@ useEffect(() => {
             location={location}
             types={types}
             getCategories={getCategories}
+            locationQuery={locationQuery}
             setLocationQuery={setLocationQuery}
+            typeQuery={typeQuery}
             setTypeQuery={setTypeQuery}
+            categoryQuery={categoryQuery}
             setCategoryQuery={setCategoryQuery}
-          />
+          />       
+                
           <EventsList events={events} getCategories={getCategories} />
         </div>
       ) : (

@@ -7,7 +7,7 @@ export default function EventsList({events, getCategories}) {
 
   return (
     <>
-      <ListGroup className="eventsList" as="ul">
+    {events.length !== 0 ? (<ListGroup className="eventsList" as="ul">
         {events.map((event) => {
           // let date = event.date;  
           // const dateTimeInParts = date.split( "T" ); 
@@ -24,10 +24,11 @@ export default function EventsList({events, getCategories}) {
           return (
             <NavLink
             to={`/event/${event._id}`} style={{textDecoration: "none"}}
+            key={event._id}
             >
                <ListGroup.Item
               as="li"
-              className="d-flex justify-content-between align-items-start" key={event._id}>
+              className="d-flex justify-content-between align-items-start">
               <div className="ms-2 me-auto">
                 <div className="fw-bold">{event.title}</div>
                 {event.general_location} || Date || Time || Created by XX || searching for XX
@@ -42,7 +43,8 @@ export default function EventsList({events, getCategories}) {
             </NavLink>
           );
         })}
-      </ListGroup>
+      </ListGroup>) : ("No matching events. Please try out with different filters.")}
+      
     </>
   );
 }
