@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function SingleCard({ categories }) { 
+export default function SingleCard({ categories, categoriesIDs}) { 
   // const [eventsCount, setEventsCount] = useState([]);
 
   // useEffect(() => {
+
   //   axios
   //     .get(`/events/countByCategory?category=${category._id}`)
   //     .then((response) => {        

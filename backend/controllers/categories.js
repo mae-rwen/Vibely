@@ -3,7 +3,7 @@ const { ErrorResponse } = require("../utils/ErrorResponse");
 
 const getCategories = async (req, res, next) => {
   try {
-    const categories = await Category.find({});
+    const categories = await Category.find({})
     res.json(categories);
   } catch (error) {
     next(error);

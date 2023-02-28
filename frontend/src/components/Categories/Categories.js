@@ -5,31 +5,42 @@ import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
   const [eventsCount, setEventsCount] = useState("");
+  const [eventsByCategoryCount, setEventsByCategoryCount] = useState("");
   const [categories, setCategories] = useState([]);
+  const [categoriesIDs, setCategoriesIDs] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     axios
-      .get("/events/countAll")
-      .then((response) => {        
-        setEventsCount(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
- 
-  useEffect(() => {
+    .get("/events/countAll")
+    .then((response) => {        
+      setEventsCount(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     axios
       .get("/categories")
       .then((response) => {
-        setCategories(response.data);
-        setIsLoaded(true);
-      })
+        setCategories(response.data);      
+        setCategoriesIDs(response.data.map((category) => category._id));            
+        setIsLoaded(true);        
+      })   
       .catch((error) => {
         console.log(error);
-      });
+      });      
   }, []);
+
+  
+  // axios
+  // .get(`/events/countByCategory?category=${category._id}`)
+  // .then((response) => {       
+  //   setEventsByCategoryCount(response.data);
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
+
 
   return (
     <>
@@ -47,7 +58,7 @@ export default function Categories() {
           </p> */}
         </div>
       </div>
-      {isLoaded ? <SingleCard categories={categories} /> : <LoadingSpinner />}
+      {isLoaded ? <SingleCard categories={categories} categoriesIDs={categoriesIDs}/> : <LoadingSpinner />}
     </>
   );
 }

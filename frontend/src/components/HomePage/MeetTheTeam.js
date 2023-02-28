@@ -35,7 +35,7 @@ export default function MeetTheTeam() {
     <>      
         <div className="hpSection">
           <h5 className="fw-bold">Meet the Vibely team</h5>
-          <div className="row p-4 mt-4 text-center justify-content-center">
+          <div className="row p-4 mt-4 text-center justify-content-center teamIntro">
             <TeamCard member={agata} />
             <TeamCard member={simran} />
             <TeamCard member={ola} />

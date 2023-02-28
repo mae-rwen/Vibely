@@ -10904,9 +10904,13 @@ body {
 .App .layoutContainer .eventsDiv .eventsFilters {
   display: flex;
   flex-direction: row;
+}
+.App .layoutContainer .eventsDiv .eventsFilters .filtersButtons {
+  display: flex;
+  flex-direction: row;
   gap: 0.75em;
 }
-.App .layoutContainer .eventsDiv .eventsFilters #createNew {
+.App .layoutContainer .eventsDiv .eventsFilters .createNewButton {
   margin-left: auto;
 }
 .App .layoutContainer .eventsDiv .eventsList li {
@@ -10946,4 +10950,10 @@ body {
 
 .signupForm {
   margin: 3em 5em;
+}
+
+@media only screen and (max-width: 998px) {
+  .teamIntro {
+    gap: 2em;
+  }
 }/*# sourceMappingURL=styles.css.map */

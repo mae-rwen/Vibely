@@ -1,5 +1,6 @@
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
+const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
   try {
@@ -65,11 +66,11 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
+    // const categoryDoc = await Category.findById(category) 
     console.log(author);
     // console.log(`this is the user ${author} that created the event`);
     const event = await Event.create({
       title,
-
       general_location,
       type,
       date,
@@ -78,6 +79,17 @@ const createEvent = async (req, res, next) => {
       description,
       author,
     });
+    // categoryDoc.events = [...categoryDoc.events, event._id]
+    // await categoryDoc.save();
+    // Category.findById(req.body.category).update({ $inc: { eventTotal: 1 } }, { new: true, upsert: true });  
+    //  Category.findOneAndUpdate({_id: category}, { $inc: { eventTotal: 1 } }, { new: true, upsert: true });  
+    // Category.findAndModify(
+    //   {
+    //     query: { category },
+    //     update: { $inc:{ eventTotal: 1 } },
+    //     upsert: true,
+    //   })
+   
     res.json(event);
   } catch (error) {
     next(error);

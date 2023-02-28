@@ -13,7 +13,7 @@ const signup = async (req, res, next) => {
     const newUser = await User.create({ name, email, password: hash });
     const payload = { id: newUser, email: newUser.email, name: newUser.name };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "8h",
     });
 
     res
