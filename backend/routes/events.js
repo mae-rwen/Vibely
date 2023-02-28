@@ -15,8 +15,6 @@ const eventRouter = express.Router();
 eventRouter.get("/", getEvents);
 
 eventRouter.post("/", verifyToken, createEvent);
-// eventRouter.post("/", createEvent);
-
 eventRouter.get("/:id", getEvent);
 eventRouter.put("/:id", verifyToken, updateEvent);
 eventRouter.delete("/:id", verifyToken, deleteEvent);

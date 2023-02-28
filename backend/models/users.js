@@ -8,7 +8,12 @@ const userSchema = new Schema({
     location: { type: String },
     profilePic: { type: String },
     active: { type: Boolean, default: true},
-})
+    rating: { type: Number, min: 0, max: 5},
+},
+{
+    timestamps: true,
+  }
+)
 
 const User = model("User", userSchema);
 

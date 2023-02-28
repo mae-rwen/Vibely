@@ -43,11 +43,10 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
-    console.log(author);
+    // console.log(author);
     // console.log(`this is the user ${author} that created the event`);
     const event = await Event.create({
       title,
-
       general_location,
       type,
       date,

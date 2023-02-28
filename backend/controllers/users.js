@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60,
+        maxAge: 1000 * 60 * 60 * 8,
       })
       .send(payload);
     console.log(payload);
@@ -71,7 +71,7 @@ const logout = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
   try {
     const { email, id } = req.user;
-    const user = await User.findById(id);
+    const user = await User.findById(id).populateBy("booking");
     res.json(user);
   } catch (error) {
     next(error);
