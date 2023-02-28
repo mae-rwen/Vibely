@@ -30,6 +30,28 @@ const getEvent = async (req, res, next) => {
   }
 };
 
+const coutAllEvents = async (req, res, next) => {
+  try {   
+    const count = await Event.estimatedDocumentCount()
+    res.json(count);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const countEventsByCategory = async (req, res, next) => {  
+  try { 
+    const query = {}; 
+    if (req.query.category) {
+      query.category = req.query.category
+    } 
+    const count = await Event.find(query).countDocuments({category: req.query.category})
+    res.json(count);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createEvent = async (req, res, next) => {
   try {
     // console.log(req.body);
@@ -122,4 +144,6 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  coutAllEvents,
+  countEventsByCategory,
 };

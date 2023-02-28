@@ -4,22 +4,20 @@ import axios from '../../api/axios';
 import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
-  const [events, setEvents] = useState([]);
+  const [eventsCount, setEventsCount] = useState("");
   const [categories, setCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     axios
-      .get("/events")
+      .get("/events/countAll")
       .then((response) => {        
-        setEvents(response.data);
+        setEventsCount(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  const eventsCount = events.length;
  
   useEffect(() => {
     axios
@@ -49,7 +47,7 @@ export default function Categories() {
           </p> */}
         </div>
       </div>
-      {isLoaded ? <SingleCard categories={categories} events={events} /> : <LoadingSpinner />}
+      {isLoaded ? <SingleCard categories={categories} /> : <LoadingSpinner />}
     </>
   );
 }
