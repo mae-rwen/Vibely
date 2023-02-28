@@ -19,7 +19,7 @@ const signup = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60,
+        maxAge: 1000 * 60 * 60 * 8,
       })
       .send(payload);
   } catch (error) {

@@ -4,13 +4,34 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 export default function SingleCard({ categories }) { 
-  // const [eventsCount, setEventsCount] = useState("");
+  // const [eventsCount, setEventsCount] = useState([]);
 
-
+  // useEffect(() => {
+  //   axios
+  //     .get(`/events/countByCategory?category=${category._id}`)
+  //     .then((response) => {        
+  //       setEventsCount(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="categoriesCards">
        {categories.map((category) => { 
+
+        
+            // axios
+            //   .get(`/events/countByCategory?category=${category._id}`)
+            //   .then((response) => {  
+            //     console.log(response.data)      
+            //     // setEventsCount(response.data);
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
+        
             
         return (
           <Card key={category._id} className="card text-center">
@@ -18,7 +39,7 @@ export default function SingleCard({ categories }) {
             <Card.Body>
               <Card.Title className="fw-bold">{category.name}</Card.Title>
               <Card.Text className="text-end">
-                <a href="#top">xx events in this category</a>
+                <a href="#top">XX events in this category</a>
               </Card.Text>
               <Button
                 className="catBtn"
