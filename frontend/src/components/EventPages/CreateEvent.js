@@ -1,11 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import axios from "../../../api/axios";
+import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./createEvents.css";
-import EventSuccess from "./EventSuccess";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ export default function CreateEvent() {
     console.log(event);
     axios.post("/events", event).then((response) => {
       console.log(response.data);
-    });
+    }).catch((error) => console.log(error));
 
     setEventCategory("");
     setEventDate("");

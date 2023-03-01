@@ -1,8 +1,10 @@
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
+const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
   try {
+    // for filters
     const query = {};
 
     if (req.query.location) {
@@ -13,12 +15,37 @@ const getEvents = async (req, res, next) => {
       query.type = req.query.type;
     }
     if (req.query.category) {
+
       query.category = req.query.category;
     }
     if (req.query.user) {
       query.author = req.query.user;
     }
     const events = await Event.find(query);
+
+
+    
+     
+    
+    // for sorting
+    const { sortBy } = req.query;
+    let sortOptions = {};
+    if (sortBy === 'createdAt') {
+      sortOptions.createdAt = -1; 
+    } else if (sortBy === 'dateAsc') {
+      sortOptions.date = 1 
+    } else if (sortBy === 'dateDesc') {
+      sortOptions.date = -1 
+    } else if (sortBy === 'locationAsc') {
+      sortOptions.general_location = 1 
+    } else if (sortBy === 'locationDesc') {
+      sortOptions.general_location = -1 
+    } else if (sortBy === 'organizer') {
+      sortOptions.author = 1 
+    }
+    const events = await Event.find(query)
+    .populate("author").populate("category")
+    .sort(sortOptions);
 
     res.json(events);
   } catch (error) {
@@ -38,9 +65,17 @@ const getEvent = async (req, res, next) => {
   }
 };
 
+const coutAllEvents = async (req, res, next) => {
+  try {   
+    const count = await Event.estimatedDocumentCount()
+    res.json(count);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createEvent = async (req, res, next) => {
   try {
-    // console.log(req.body);
     const {
       title,
       general_location,
@@ -51,11 +86,10 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
-    console.log(author);
-    // console.log(`this is the user ${author} that created the event`);
+    // const categoryDoc = await Category.findById(category) 
+    console.log(author);    
     const event = await Event.create({
       title,
-
       general_location,
       type,
       date,
@@ -64,11 +98,15 @@ const createEvent = async (req, res, next) => {
       description,
       author,
     });
+    // categoryDoc.events = [...categoryDoc.events, event._id]
+    // await categoryDoc.save();  
+    const categoryDoc = await Category.findByIdAndUpdate( category, { $inc: { eventTotal: 1 } }, { new : true });    
     res.json(event);
   } catch (error) {
     next(error);
   }
 };
+
 
 const updateEvent = async (req, res, next) => {
   try {
@@ -109,20 +147,12 @@ const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
     const event = await Event.findByIdAndDelete(id);
+    const categoryDoc = await Category.findByIdAndUpdate( event.category, { $inc: { eventTotal: -1 } }, { new : true });
     res.json(event);
   } catch (error) {
     next(error);
   }
 };
-
-// const getEvents = async (req, res, next) => {
-//   try {
-//     const events = await Event.find({});
-//     res.json(events);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 module.exports = {
   getEvent,
@@ -130,4 +160,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  coutAllEvents,
 };

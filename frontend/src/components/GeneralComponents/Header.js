@@ -8,8 +8,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function Header() {
   return (
-    <Navbar className="fixed-top headerContainer1" bg="light" expand="lg">
-      <Container className="headerContainer">
+    <Navbar className="fixed-top" bg="light" expand="lg">
+      <Container>
         <Navbar.Brand href="/" className="fw-bold">
           Vibely
         </Navbar.Brand>
@@ -55,7 +55,16 @@ export default function Header() {
                 }
               >
                 Instructions
-              </NavLink>            
+              </NavLink>   
+              <NavLink
+                style={{ padding: "10px" }}
+                to="/profile/joined"
+                className={({ isActive }) =>
+                  isActive ? "activeClass " : "nonActive"
+                }
+              >
+                Joined
+              </NavLink>           
               <Form className="d-flex">
                 <Button className="m-auto" href="/register" variant="outline-secondary">
                   Register

@@ -10856,6 +10856,9 @@ body {
 .App .layoutContainer .hpSection .card-events-list {
   padding: 0;
 }
+.App .layoutContainer .hpSection .carouselCaption {
+  background-color: rgba(128, 128, 128, 0.763);
+}
 .App .layoutContainer .subpageHeader {
   margin-bottom: 4em;
 }
@@ -10893,15 +10896,32 @@ body {
 .App .layoutContainer .eventsDiv {
   display: flex;
   flex-direction: column;
-  gap: 3em;
+  gap: 1em;
+}
+.App .layoutContainer .eventsDiv p {
+  font-size: smaller;
 }
 .App .layoutContainer .eventsDiv .eventsFilters {
   display: flex;
   flex-direction: row;
+}
+.App .layoutContainer .eventsDiv .eventsFilters .filtersButtons {
+  display: flex;
+  flex-direction: row;
   gap: 0.75em;
 }
-.App .layoutContainer .eventsDiv .eventsFilters #createNew {
+.App .layoutContainer .eventsDiv .eventsFilters .createNewButton {
   margin-left: auto;
+}
+.App .layoutContainer .eventsDiv .eventsList li {
+  margin: 0.5em auto;
+}
+.App .layoutContainer .eventsDiv .eventsList li > * {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.App .layoutContainer .eventsDiv .eventsList li:hover {
+  background-color: #f8f9fa;
 }
 .App .activeClass,
 .App .activeClass:hover {
@@ -10930,4 +10950,10 @@ body {
 
 .signupForm {
   margin: 3em 5em;
+}
+
+@media only screen and (max-width: 998px) {
+  .teamIntro {
+    gap: 2em;
+  }
 }/*# sourceMappingURL=styles.css.map */

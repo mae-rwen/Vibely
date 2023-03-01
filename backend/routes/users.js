@@ -6,8 +6,11 @@ const { verifyToken } = require("../middlewares/verifyToken");
 const userRouter = express.Router();
 
 userRouter.get("/", getUsers);
+
 userRouter.get("/profile", verifyToken, getProfile);
 userRouter.get("/:id", verifyToken, getProfile);
+
+
 
 userRouter.put("/:id", verifyToken, updateUser);
 

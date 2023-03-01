@@ -5,10 +5,14 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
 
-const { authRouter } = require("./routes/auth");
-const { userRouter } = require("./routes/users");
-const { eventRouter } = require("./routes/events");
-const { categoriesRouter } = require("./routes/categories");
+
+
+const { authRouter } = require("./routes/auth")
+const { userRouter } = require("./routes/users")
+const { eventRouter } = require("./routes/events")
+const { categoriesRouter } = require("./routes/categories")
+const { bookingRouter } = require("./routes/booking")
+
 
 const { errorHandler } = require("./middlewares/errorHandler");
 
@@ -26,8 +30,11 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
-app.use("/events", eventRouter);
-app.use("/categories", categoriesRouter);
+
+app.use("/events", eventRouter)
+app.use("/categories", categoriesRouter)
+app.use("/booking", bookingRouter)
+
 
 app.use(errorHandler);
 

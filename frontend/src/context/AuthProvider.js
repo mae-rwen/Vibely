@@ -5,10 +5,14 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-  const [user, setUser] = useState();
+
+  const [user, setUser] = useState({});
+  const [bookings, setBookings] = useState({});
+
   const [eventCat, setEventCat] = useState([]);
   const [allUsers, setAllUsers] = useState({});
   const [allEvents, setAllEvents] = useState({});
+
 
   useEffect(() => {
     axios
@@ -22,6 +26,8 @@ export const AuthProvider = ({ children }) => {
       });
   }, []);
 
+  
+
   useEffect(() => {
     axios
       .get("/categories")
@@ -29,6 +35,7 @@ export const AuthProvider = ({ children }) => {
         setEventCat(response.data);
       })
       .catch((err) => {
+        console.log(err)
         setEventCat(null);
       });
   }, []);
@@ -44,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         setAllUsers(response.data);
       })
       .catch((err) => {
+        console.log(err)
         setAllUsers(null);
       });
   }, []);
@@ -55,25 +63,40 @@ export const AuthProvider = ({ children }) => {
         setAllEvents(response.data);
       })
       .catch((err) => {
+        console.log(err)
         setAllEvents(null);
       });
   }, []);
 
-  //   do I need it if I have it in login form?
-  const login = (email, name, password) => {
+
+  useEffect(() => {
     axios
-      .post("/auth/login", {
-        email,
-        name,
-        password,
-      })
+      .get("/booking")
+
       .then((response) => {
-        setUser(response.data);
+        setBookings(response.data);
       })
       .catch((err) => {
-        setUser(null);
+        console.log(err)
+        setBookings(null);
       });
-  };
+  }, []);
+
+  // const login = (email, name, password) => {
+  //   axios
+  //     .post("/auth/login", {
+  //       email,
+  //       name,
+  //       password
+  //     })
+  //     .then((response) => {
+  //       setUser(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       setUser(null);
+  //     });
+  // };
 
   const logout = () => {
     axios.get("/auth/logout").then((response) => {
@@ -82,18 +105,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        auth,
-        setAuth,
-        user,
-        allEvents,
-        logout,
-        login,
-        allUsers,
-        eventCat,
-      }}
-    >
+
+    <AuthContext.Provider value={{ auth, setAuth, user, allEvents, logout, allUsers, eventCat, bookings}}>
+
       {children}
     </AuthContext.Provider>
   );

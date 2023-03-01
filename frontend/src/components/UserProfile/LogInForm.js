@@ -1,25 +1,25 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Card, Container } from "react-bootstrap";
-import image from "./Vibely.png";
-import { useRef, useState, useEffect } from "react";
+
+import { Card, Container }from "react-bootstrap";
+import { useRef, useState, useEffect, useContext } from "react";
+
 import axios from "../../api/axios";
-import useAuth from "../hooks/useAuth";
+import AuthContext from "../../context/AuthProvider";
+// import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./registerform.css";
 
 const LOGIN_URL = "/auth/login";
 
-export default function LogInForm({ setSetAccount }) {
-  const { setAuth } = useAuth();
-
+export default function LogInForm() {
+  const { setAuth } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  // const changeState = () => setSetAccount(false);
-
-  const userRef = useRef();
+  // const userRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
 
@@ -56,9 +56,9 @@ export default function LogInForm({ setSetAccount }) {
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name: user, password, accessToken });
-      setUser("");
-      setEmail("");
-      setPassword("");
+      // setOperator("");
+      // setEmail("");
+      // setPassword("");
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
@@ -77,54 +77,48 @@ export default function LogInForm({ setSetAccount }) {
   };
 
   return (
-    <Container
-      className="d-flex justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Card className="text-center card">
-          <Card.Body>
-            <p
-              ref={errRef}
-              className={error ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {error}
-            </p>
-            {/* <img
-            src={image}
-            alt="Logo"
-            style={{ width: "100px", marginTop: "1.5em" }}
-          /> */}
-            <Card.Title className="my-4">
-              <h2>Login in to your account</h2>
-            </Card.Title>
-            <Form className="form" onSubmit={handleSubmit}>
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="email"
-                  ref={emailRef}
-                  autoComplete="off"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  required
-                />
-                <label htmlFor="email">Email:</label>
-              </Form.Floating>
 
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="password"
-                  id="pwd"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required
-                />
-                <label htmlFor="pwd">Password:</label>
-              </Form.Floating>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh"}}>
+      <div className="w-100" style={{ maxWidth: "400px"}}>
+      <Card className="text-center card">
+        <Card.Body>
+          <p
+            ref={errRef}
+            className={error ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {error}
+          </p>
+          <Card.Title className="my-4">
+            <h2>Login in to your account</h2>
+          </Card.Title>
+          <Form className="form" onSubmit={handleSubmit}>
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="text"
+                id="email"
+                ref={emailRef}
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+              <label htmlFor="email">Email:</label>
+            </Form.Floating>
 
-              {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="password"
+                id="pwd"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+              <label htmlFor="pwd">Password:</label>
+            </Form.Floating>
+
+            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
                   <Form.Check
                     type="checkbox"
                     label="Remember me"
@@ -132,30 +126,27 @@ export default function LogInForm({ setSetAccount }) {
                   />
                 </Form.Group> */}
 
-              <Card.Text className="mt-3 text-end">
-                <Form.Text className="text-muted">
-                  <a href="#" style={{ color: "inherit" }}>
-                    Forgot password?
-                  </a>
-                </Form.Text>
-              </Card.Text>
+            <Card.Text className="mt-3 text-end">
+              <Form.Text className="text-muted">
+                <a href ="/resetpassword" style={{ color: "inherit" }}>
+                  Forgot password?
+                </a>
+              </Form.Text>
+            </Card.Text>
 
-              <Button
-                className="w-100 my-3"
-                variant="outline-secondary"
-                type="submit"
-              >
-                Login
-              </Button>
+            <Button className="w-100 my-3" variant="outline-secondary" type="submit">
+              Login
+            </Button>
 
-              <Card.Text className="mt-1">
-                <Form.Text className="text-muted">
-                  No account yet? Register <Link to="/register">here</Link>
-                </Form.Text>
-              </Card.Text>
-            </Form>
-          </Card.Body>
-        </Card>
+            <Card.Text className="mt-1">
+              <Form.Text className="text-muted">
+                No account yet? Register <Link to="/register">here</Link>
+              </Form.Text>
+            </Card.Text>
+          </Form>
+        </Card.Body>
+      </Card>
+
       </div>
     </Container>
   );
