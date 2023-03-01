@@ -10875,7 +10875,7 @@ body {
   flex-flow: row wrap;
   justify-content: space-between;
   gap: 3em;
-  align-items: baseline;
+  align-items: stretch;
 }
 .App .layoutContainer .categoriesCards .card {
   flex: 30%;
@@ -10952,8 +10952,15 @@ body {
   margin: 3em 5em;
 }
 
-@media only screen and (max-width: 1000px) {
-  .teamIntro {
-    gap: 2em;
+@media (max-width: 770px) {
+  .categoriesCards {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    gap: 3em;
+    align-items: stretch;
+  }
+  .categoriesCards .card {
+    flex: 100% !important;
   }
 }/*# sourceMappingURL=styles.css.map */
