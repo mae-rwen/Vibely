@@ -71,9 +71,7 @@ const logout = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
   try {
     const { email, id } = req.user;
-
     const user = await User.findById(id);
-
     res.json(user);
   } catch (error) {
     next(error);

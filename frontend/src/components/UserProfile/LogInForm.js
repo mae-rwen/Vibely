@@ -13,7 +13,7 @@ import "./registerform.css";
 const LOGIN_URL = "/auth/login";
 
 export default function LogInForm() {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, setUser } = useContext(AuthContext);
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,7 +23,7 @@ export default function LogInForm() {
   const emailRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -42,20 +42,20 @@ export default function LogInForm() {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        JSON.stringify({ email, name: user, password }),
+        JSON.stringify({ email, name, password }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
-
-      setUser(JSON.stringify(response?.data));
-
+      setUser(response.data);
+      setName(JSON.stringify(response?.data));
+      console.log(name);
       console.log(JSON.stringify(response?.data));
 
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, name: user, password, accessToken });
+      setAuth({ email, name, password, accessToken });
       // setOperator("");
       // setEmail("");
       // setPassword("");
