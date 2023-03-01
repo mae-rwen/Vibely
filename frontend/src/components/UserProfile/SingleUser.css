@@ -1,0 +1,19 @@
+.myProfilePic {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+/* .personalInfo {
+  border: 1px solid rgba(0, 0, 0, 0.422);
+  border-radius: 5px;
+} */
+/* .userDescription {
+  border: 1px solid rgba(0, 0, 0, 0.422);
+  border-radius: 5px;
+  padding: 10px;
+} */
+.userEvents {
+  border: 1px solid rgba(0, 0, 0, 0.422);
+  border-radius: 5px;
+}

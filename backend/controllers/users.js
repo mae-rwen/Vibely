@@ -72,6 +72,7 @@ const getProfile = async (req, res, next) => {
   try {
     const { email, id } = req.user;
     const user = await User.findById(id);
+    console.log(user);
     res.json(user);
   } catch (error) {
     next(error);
@@ -90,12 +91,14 @@ const getUsers = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const { email, description, name, location, profilePic } = req.body;
     const user = await User.findByIdAndUpdate(
       id,
       { email, description, name, location, profilePic },
       { new: true }
     );
+    res.json(user);
   } catch (error) {
     next(error);
   }

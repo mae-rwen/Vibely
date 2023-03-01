@@ -18,6 +18,7 @@ eventRouter.post("/", verifyToken, createEvent);
 // eventRouter.post("/", createEvent);
 
 eventRouter.get("/:id", getEvent);
+
 eventRouter.put("/:id", verifyToken, updateEvent);
 eventRouter.delete("/:id", verifyToken, deleteEvent);
 

@@ -4,16 +4,22 @@ const { ErrorResponse } = require("../utils/ErrorResponse");
 const getEvents = async (req, res, next) => {
   try {
     const query = {};
+
     if (req.query.location) {
-      query.general_location = req.query.location
+      console.log(req.query.location);
+      query.general_location = req.query.location;
     }
     if (req.query.type) {
-      query.type = req.query.type
+      query.type = req.query.type;
     }
     if (req.query.category) {
-      query.category = req.query.category
+      query.category = req.query.category;
+    }
+    if (req.query.user) {
+      query.author = req.query.user;
     }
     const events = await Event.find(query);
+
     res.json(events);
   } catch (error) {
     next(error);
@@ -23,7 +29,9 @@ const getEvents = async (req, res, next) => {
 const getEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = await Event.findById(id).populate("author").populate("category");
+    const event = await Event.findById(id)
+      .populate("author")
+      .populate("category");
     res.json(event);
   } catch (error) {
     next(error);

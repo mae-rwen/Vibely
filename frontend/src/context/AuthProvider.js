@@ -5,7 +5,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [eventCat, setEventCat] = useState([]);
   const [allUsers, setAllUsers] = useState({});
   const [allEvents, setAllEvents] = useState({});
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
       .get("/users/profile")
       .then((response) => {
         setUser(response.data);
+        // console.log(response.data);
       })
       .catch((err) => {
         setUser(null);
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       .get("/users", {
         name,
         _id,
-        email
+        email,
       })
       .then((response) => {
         setAllUsers(response.data);
@@ -58,13 +59,13 @@ export const AuthProvider = ({ children }) => {
       });
   }, []);
 
-//   do I need it if I have it in login form?       
+  //   do I need it if I have it in login form?
   const login = (email, name, password) => {
     axios
       .post("/auth/login", {
         email,
         name,
-        password
+        password,
       })
       .then((response) => {
         setUser(response.data);
@@ -81,7 +82,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, user, allEvents, logout, login, allUsers, eventCat }}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        setAuth,
+        user,
+        allEvents,
+        logout,
+        login,
+        allUsers,
+        eventCat,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
