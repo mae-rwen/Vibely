@@ -1,5 +1,3 @@
-import axios from '../../api/axios';
-import { useEffect, useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 

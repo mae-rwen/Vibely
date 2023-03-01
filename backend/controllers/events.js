@@ -4,6 +4,7 @@ const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
   try {
+    // for filters
     const query = {};
     if (req.query.location) {
       query.general_location = req.query.location
@@ -13,11 +14,27 @@ const getEvents = async (req, res, next) => {
     }
     if (req.query.category) {
       query.category = req.query.category
+    }   
+    
+    // for sorting
+    const { sortBy } = req.query;
+    let sortOptions = {};
+    if (sortBy === 'createdAt') {
+      sortOptions.createdAt = -1; 
+    } else if (sortBy === 'dateAsc') {
+      sortOptions.date = 1 
+    } else if (sortBy === 'dateDesc') {
+      sortOptions.date = -1 
+    } else if (sortBy === 'locationAsc') {
+      sortOptions.general_location = 1 
+    } else if (sortBy === 'locationDesc') {
+      sortOptions.general_location = -1 
+    } else if (sortBy === 'organizer') {
+      sortOptions.author = 1 
     }
-    const sort = {createdAt: -1}
     const events = await Event.find(query)
     .populate("author").populate("category")
-    .sort(sort);
+    .sort(sortOptions);
     res.json(events);
   } catch (error) {
     next(error);

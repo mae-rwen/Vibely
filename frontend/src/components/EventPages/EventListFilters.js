@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 export default function EventListFilters({
   location,
@@ -13,6 +14,8 @@ export default function EventListFilters({
   setTypeQuery,
   categoryQuery,
   setCategoryQuery,
+  sortBy,
+  setSortBy,
 }) {
   return (
     <>
@@ -120,6 +123,53 @@ export default function EventListFilters({
         >
           Reset all filters
         </Button>
+
+        {/* sorting button */}
+        <DropdownButton
+          as={ButtonGroup}
+          variant="outline-secondary"
+          title="Sort"
+        >
+          <DropdownItem onClick={(e) => {
+              setSortBy("dateAsc");       
+              }}>
+                Nearest date
+          </DropdownItem>
+          <Dropdown.Divider />
+          <DropdownItem onClick={(e) => {
+              setSortBy("dateDesc");           
+              }}>
+                Furthest date
+          </DropdownItem>
+          <Dropdown.Divider />
+          <DropdownItem onClick={(e) => {
+              setSortBy("locationAsc");             
+              }}>
+                By location ↑
+          </DropdownItem>
+          <Dropdown.Divider />
+          <DropdownItem onClick={(e) => {
+              setSortBy("locationDesc");              
+              }}>
+                By location ↓
+          </DropdownItem>
+          <Dropdown.Divider />
+          <DropdownItem onClick={(e) => {
+              setSortBy("organizer");              
+              }}>
+                By organizer
+          </DropdownItem>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            style={{ fontWeight: "bold" }}
+            onClick={(e) => {
+              setSortBy("createdAt");            
+            }}
+          >
+            Reset sorting
+          </Dropdown.Item>
+          </DropdownButton>        
+
         </div>
           <div className="createNewButton">
         <Button id="createNew" variant="secondary" href="/create_event">

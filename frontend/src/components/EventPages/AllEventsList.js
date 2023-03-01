@@ -15,8 +15,10 @@ export default function AllEventsList() {
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
   const [categoryQuery, setCategoryQuery] = useState(category); 
+  const [sortBy, setSortBy] = useState("createdAt");
 
-  //get all categories and events for displaying locations and types of events
+  // get all categories 
+  // and events for displaying locations and types of events
   useEffect(() => {
     axios
     .get(`/categories`)
@@ -43,7 +45,7 @@ export default function AllEventsList() {
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}`)
+      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}&sortBy=${sortBy}`)
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -51,7 +53,7 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [locationQuery, typeQuery, categoryQuery]);
+  }, [locationQuery, typeQuery, categoryQuery, sortBy]);
 
   return (
     <>
@@ -82,6 +84,8 @@ export default function AllEventsList() {
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
             setCategoryQuery={setCategoryQuery}
+            sortBy={sortBy}
+            setSortBy={setSortBy}           
           />
 
           <EventsList events={events} getCategories={getCategories} />
