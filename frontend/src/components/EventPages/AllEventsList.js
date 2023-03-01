@@ -14,22 +14,18 @@ export default function AllEventsList() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState(category);
+  const [categoryQuery, setCategoryQuery] = useState(category); 
 
-  // get the categories
+  //get all categories and events for displaying locations and types of events
   useEffect(() => {
     axios
-      .get(`/categories`)
-      .then((response) => {
-        setGetCategories(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  //get all events for displaying locations and types of events
-  useEffect(() => {
+    .get(`/categories`)
+    .then((response) => {
+      setGetCategories(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     axios
       .get(`/events`)
       .then((response) => {
