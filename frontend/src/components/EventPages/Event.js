@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import axios from "../../../api/axios";
+import axios from "../../api/axios";
 import {
   Button,
   Row,
@@ -24,7 +24,7 @@ import {
 import {
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
-import { AuthContext } from "../../../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 
 const Event = () => {

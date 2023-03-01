@@ -10856,6 +10856,9 @@ body {
 .App .layoutContainer .hpSection .card-events-list {
   padding: 0;
 }
+.App .layoutContainer .hpSection .carouselCaption {
+  background-color: rgba(128, 128, 128, 0.763);
+}
 .App .layoutContainer .subpageHeader {
   margin-bottom: 4em;
 }
@@ -10893,7 +10896,10 @@ body {
 .App .layoutContainer .eventsDiv {
   display: flex;
   flex-direction: column;
-  gap: 3em;
+  gap: 1em;
+}
+.App .layoutContainer .eventsDiv p {
+  font-size: smaller;
 }
 .App .layoutContainer .eventsDiv .eventsFilters {
   display: flex;
@@ -10902,6 +10908,16 @@ body {
 }
 .App .layoutContainer .eventsDiv .eventsFilters #createNew {
   margin-left: auto;
+}
+.App .layoutContainer .eventsDiv .eventsList li {
+  margin: 0.5em auto;
+}
+.App .layoutContainer .eventsDiv .eventsList li > * {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.App .layoutContainer .eventsDiv .eventsList li:hover {
+  background-color: #f8f9fa;
 }
 .App .activeClass,
 .App .activeClass:hover {

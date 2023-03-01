@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+
 export default function SingleCard({ categories }) { 
 
   return (
@@ -17,7 +18,7 @@ export default function SingleCard({ categories }) {
               <Button
                 className="catBtn"
                 variant="outline-secondary"
-                href="/allevents"
+                href={`/allevents/${category._id}`}
               >
                 Explore the activities
               </Button>

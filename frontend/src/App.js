@@ -33,7 +33,8 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/tc" element={<UnderConstruction />} />
-          <Route path="/allevents" element={<AllEventsList />} />
+          <Route path="/allevents/" element={<AllEventsList />} />
+          <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/profile/joined" element={<Joined />} />

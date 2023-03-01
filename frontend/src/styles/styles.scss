@@ -43,6 +43,9 @@ body {
       .card-events-list {
         padding: 0;
       }
+      .carouselCaption {
+        background-color: rgba(128, 128, 128, 0.763);
+      }
     }
     // // <<-- homepage styling
     .subpageHeader {
@@ -88,7 +91,10 @@ body {
     .eventsDiv {
       display: flex;
       flex-direction: column;
-      gap: 3em;
+      gap: 1em;
+      p {
+        font-size: smaller;
+      }
       .eventsFilters {
         display: flex;
         flex-direction: row;
@@ -96,6 +102,18 @@ body {
         #createNew {
           margin-left: auto;
         }
+      }
+      .eventsList {
+        li {
+          margin: 0.5em auto;
+          >* {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;            
+          }
+          &:hover {
+            background-color: $light;
+          }
+        }        
       }
     }
     // // <<-- events lists styling
