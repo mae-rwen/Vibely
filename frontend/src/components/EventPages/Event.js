@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
@@ -24,12 +24,13 @@ import {
 import {
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
-import { AuthContext } from "../../context/AuthProvider";
+import useAuth from "../hooks/useAuth"
 import "./event.css";
 
 const Event = () => {
 
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  console.log(user)
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -69,6 +70,37 @@ const Event = () => {
         setEvent(null);
       }, []);
     }
+
+    const date = new Date(event.date);
+    const year = date.getFullYear();
+    const day = date.getDate();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = months[date.getMonth()];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const weekday = days[date.getDay()];
+    const formattedDate = weekday && day && month && year ? `${weekday}, ${day} ${month} ${year}` : null;
+
+
+    // get the time
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
+
+
+
 
   const renderTooltip = (props) => (
     <Tooltip id="tooltip" {...props}></Tooltip>
@@ -114,10 +146,10 @@ const Event = () => {
                     <div>
                     <span className="text mb-0">
                       <FontAwesomeIcon icon={faCalendarDays} size="xs" />{" "}
-                      {event.date}
+                      {formattedDate}
                     </span>
                     <span className="text mb-0">
-                    <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
+                    <FontAwesomeIcon icon={faClock} size="xs" /> {formattedTime}{" "}
                     </span>
                     <div className="mx-2">
                       <span className={type === "private" ? "show" : "hide"}>
