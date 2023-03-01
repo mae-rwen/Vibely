@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-
 body {
   font-family: "Ubuntu", sans-serif;
 }
@@ -10,7 +9,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between;  
   .layoutContainer {
     margin: 8em auto !important;
     // border: $border2;
@@ -19,17 +18,17 @@ body {
       display: flex;
       gap: 1em;
       flex-direction: row;
-      justify-content: center;   
+      justify-content: center;
     }
     #construction {
-      margin: 20vh auto !important;      
+      margin: 20vh auto !important;
     }
     // // homepage styling -->>
     #heroSection {
-      margin: 30vh auto !important;      
+      margin: 30vh auto !important;
     }
     .hpSection {
-      margin: 8em auto;     
+      margin: 8em auto;
       .showMoreP:hover {
         cursor: pointer;
         color: rgba(128, 128, 128, 0.434);
@@ -59,8 +58,8 @@ body {
       flex-flow: row wrap;
       justify-content: space-between;
       gap: 3em;
-      align-items: baseline;
-      .card {        
+      align-items: stretch;
+      .card {
         flex: 30%;
         .text-end {
           font-size: smaller;
@@ -96,19 +95,19 @@ body {
         }
         .createNewButton {
           margin-left: auto;
-        }       
+        }
       }
       .eventsList {
         li {
           margin: 0.5em auto;
-          >* {
+          > * {
             margin-top: 0.5em;
-            margin-bottom: 0.5em;            
+            margin-bottom: 0.5em;
           }
           &:hover {
             background-color: $light;
           }
-        }        
+        }
       }
     }
     // // <<-- events lists styling
@@ -136,7 +135,6 @@ body {
   // // <<-- Navbar classes
 }
 
-
 // // signup page styling -->
 .signupCard {
   width: 30vw;
@@ -148,8 +146,35 @@ body {
 // // <-- signup page styling
 
 // // <-- media queries
-// @media only screen and (max-width: 1000px) {
-//   .teamIntro {
-//     gap: 2em;
-//   }
+@media (max-width: 770px) { 
+  .categoriesCards {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    gap: 3em;
+    align-items: stretch;
+    .card {
+      flex: 100% !important;      
+    }
+  }
+  .eventsDiv {
+    .eventsFilters {     
+      flex-flow: column !important;
+      gap: 0.75em;      
+      .filtersButtons {  
+        // border: solid 2px red;   
+        flex-flow: row wrap;        
+        // max-height: 2.25em;
+        order: 2 !important;
+      }
+      .createNewButton {       
+        margin: auto;
+        order: 1 !important; 
+        #createNew {
+        height: 3.5em;
+        padding-top: 1em;  
+        }   
+      }
+    }    
+  }
 }
