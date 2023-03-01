@@ -2,8 +2,6 @@ import React, { useEffect, useContext, useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
-  Alert,
-  Container,
   Row,
   Col,
   Card,
@@ -24,26 +22,29 @@ import {
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faFontAwesomeIcon,
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 
 const Event = () => {
+
   const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
   const { event_id } = useParams();
 
   const [event, setEvent] = useState({});
+  const [join, setJoin] = useState({});
+  const [booked, setBooked] = useState(false)
 
   useEffect(() => {
     axios
       .get(`/events/find/${event_id}`)
       .then((response) => {
-        console.log("found:", response.data);
+        // console.log("found:", response.data);
         setEvent(response.data);
       })
       .catch((err) => {
@@ -51,19 +52,30 @@ const Event = () => {
       });
   }, []);
 
-  console.log(user);
+  // console.log(user);
 
-     const type = event.type
-     console.log(type)
+  const type = event?.type;
+  //  console.log(type)
 
+ const joinEvent = (e) => {
+    e.preventDefault();
+      axios.post(`/booking/${event_id}`)
+      .then((response)=> {
+        console.log("joined", response.data);
+        setBooked(true)
+        // setJoin(response.data)
+      })
+      .catch((err) => {
+        setEvent(null);
+      }, []);
+    }
 
   const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}></Tooltip>
+    <Tooltip id="tooltip" {...props}></Tooltip>
   );
 
   return (
-    <div>
-      <h5>Hej {user?.name}! nice to see you</h5>
+    <>
       {event && (
         <Card>
           <Card.Header className="d-flex">
@@ -79,18 +91,17 @@ const Event = () => {
           </Card.Header>
 
           <Card.Body>
-            <Container fluid>
+            <div className="mx-3">
               <Row className="ms-auto gap-5"></Row>
               <Row className="justify-content-end">
                 Category: {event.category?.name}
               </Row>
               <Row>
-                <Col className="p-1">
-                  <Alert variant="outline-secondary">
-                    <Alert.Heading>
-                      Hosted by: {event.author?.name}
-                    </Alert.Heading>
-                    <p>
+                <Col className="p-1 mx-3 my-2">
+                    <Card.Title>
+                      Hosted by: { event.author?.name }
+                    </Card.Title>
+                    <Card.Subtitle>
                       <p>
                         <FontAwesomeIcon
                           icon={faLocationCrosshairs}
@@ -98,54 +109,51 @@ const Event = () => {
                         />{" "}
                         Location: {event.general_location}
                       </p>
-                    </p>
+                      </Card.Subtitle>
                     <hr />
-                    <p className="text mb-0">
+                    <div>
+                    <span className="text mb-0">
                       <FontAwesomeIcon icon={faCalendarDays} size="xs" />{" "}
-                      {event.date} <br />
-                      <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
-                      <br />
-                    </p>
-                    <div className="mx-2">
-                    <span className={type==="private" ? "show" : "hide"}>
-                     <FontAwesomeIcon icon={faHouseChimney} size="xs" />
-                    </span> 
-                    <span className={type==="public" ? "show" : "hide"} >
-                    <FontAwesomeIcon
-                        icon={faBuildingColumns}
-                        size="xs"
-                      /> 
+                      {event.date}
                     </span>
+                    <span className="text mb-0">
+                    <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
+                    </span>
+                    <div className="mx-2">
+                      <span className={type === "private" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faHouseChimney} size="xs" />
+                      </span>
+                      <span className={type === "public" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faBuildingColumns} size="xs" />
+                      </span>
                     </div>
-                    <p className="text mb-0">{event.type}</p>
-                  </Alert>
+                    <span className="text mb-0 first-letter">{event.type}</span>
+                    </div>
                 </Col>
                 <Col></Col>
               </Row>
 
               <Row>
-                <Card>
-                  <Card.Title>
-                    <h4>
-                       About Event
-                    </h4>
-                  </Card.Title>
+                <Col className="mx-2 my-3 about">
+                  <h5>About Event</h5>
                   <Card.Text>{event.description}</Card.Text>
                   <Row className="justify-content-end">
-                    <Card.Text>
+                    <div>
                       <p> max participants: {event.participants}</p>
                       <p>already joining: </p>
-                    </Card.Text>
+                    </div>
                   </Row>
-                </Card>
+                </Col>
               </Row>
-              <p className="my-2"><FontAwesomeIcon icon={faInfo} size="sm" /></p>
+              <p className="my-2">
+                <FontAwesomeIcon icon={faInfo} size="sm" />
+              </p>
               <Row></Row>
-            </Container>
+            </div>
           </Card.Body>
 
-          <Card.Footer className="d-flex justify-content-end display-content-end gap-2">
-            <OverlayTrigger
+          <Card.Footer className="d-flex justify-content-end display-content-end gap-3">
+            {/* <OverlayTrigger
               placement="top-end"
               overlay={
                 <Tooltip id="button-tooltip-2">Add to your Watch List</Tooltip>
@@ -169,7 +177,7 @@ const Event = () => {
                   </div>
                 </Button>
               )}
-            </OverlayTrigger>
+            </OverlayTrigger> */}
 
             <OverlayTrigger
               placement="top-end"
@@ -196,11 +204,13 @@ const Event = () => {
               )}
             </OverlayTrigger>
 
-            <Button variant="secondary">JOIN</Button>
+            <Button variant="secondary" disabled={booked} onClick={joinEvent}>
+              JOIN
+            </Button>
           </Card.Footer>
         </Card>
       )}
-    </div>
+    </>
   );
 };
 

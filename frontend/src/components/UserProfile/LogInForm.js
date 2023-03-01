@@ -1,29 +1,27 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Card, Container }from "react-bootstrap";
-import image from "./Vibely.png";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import axios from "../../api/axios";
-import useAuth from "../hooks/useAuth";
+import AuthContext from "../../context/AuthProvider";
+// import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./registerform.css"
 
 const LOGIN_URL = "/auth/login";
 
-export default function LogInForm({ setSetAccount }) {
-  const { setAuth } = useAuth();
-
+export default function LogInForm() {
+  const { setAuth } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
-  // const changeState = () => setSetAccount(false);
 
   const userRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -56,9 +54,9 @@ export default function LogInForm({ setSetAccount }) {
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name: user, password, accessToken });
-      setUser("");
-      setEmail("");
-      setPassword("");
+      // setOperator("");
+      // setEmail("");
+      // setPassword("");
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
@@ -77,7 +75,7 @@ export default function LogInForm({ setSetAccount }) {
   };
 
   return (
-    <Container className="d-flex justify-content-center" style={{ minHeight: "100vh"}}>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh"}}>
       <div className="w-100" style={{ maxWidth: "400px"}}>
       <Card className="text-center card">
         <Card.Body>
@@ -88,11 +86,6 @@ export default function LogInForm({ setSetAccount }) {
           >
             {error}
           </p>
-          {/* <img
-            src={image}
-            alt="Logo"
-            style={{ width: "100px", marginTop: "1.5em" }}
-          /> */}
           <Card.Title className="my-4">
             <h2>Login in to your account</h2>
           </Card.Title>

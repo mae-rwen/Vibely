@@ -10,7 +10,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-38%, 20%)
+    transform: translate(-45%, 20%)
 }
 
 .absolute_add{
@@ -40,11 +40,7 @@
     margin-bottom: 0%;
 }
 
-p::first-letter {
-    text-transform:capitalize;
-}
-
-span::first-letter {
+.first-letter {
     text-transform:capitalize;
 }
 
@@ -54,4 +50,12 @@ span::first-letter {
 
 .show {
     justify-content: center;
+}
+
+.about {
+    /* background-color: brown; */
+    border-radius: 1rem;
+    padding-top: 0.5rem;
+    border: 1px solid;
+    
 }
