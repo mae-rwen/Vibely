@@ -82,21 +82,21 @@ export const AuthProvider = ({ children }) => {
       });
   }, []);
 
-  // const login = (email, name, password) => {
-  //   axios
-  //     .post("/auth/login", {
-  //       email,
-  //       name,
-  //       password
-  //     })
-  //     .then((response) => {
-  //       setUser(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       setUser(null);
-  //     });
-  // };
+  const login = (email, name, password) => {
+    axios
+      .post("/auth/login", {
+        email,
+        name,
+        password
+      })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((err) => {
+        console.log(err)
+        setUser(null);
+      });
+  };
 
   const logout = () => {
     axios.get("/auth/logout").then((response) => {

@@ -20,12 +20,7 @@ const getEvents = async (req, res, next) => {
     }
     if (req.query.user) {
       query.author = req.query.user;
-    }
-    const events = await Event.find(query);
-
-
-    
-     
+    }  
     
     // for sorting
     const { sortBy } = req.query;

@@ -10952,7 +10952,7 @@ body {
   margin: 3em 5em;
 }
 
-@media only screen and (max-width: 998px) {
+@media only screen and (max-width: 1000px) {
   .teamIntro {
     gap: 2em;
   }
