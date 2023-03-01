@@ -5,24 +5,28 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
+
   const [user, setUser] = useState({});
   const [bookings, setBookings] = useState({});
+
   const [eventCat, setEventCat] = useState([]);
   const [allUsers, setAllUsers] = useState({});
   const [allEvents, setAllEvents] = useState({});
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`/users/profile/`)
-  //     .then((response) => {
-  //       console.log(response)
-  //       setUser(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       setUser(null);
-  //     });
-  // }, []);
+
+  useEffect(() => {
+    axios
+      .get("/users/profile")
+      .then((response) => {
+        setUser(response.data);
+        // console.log(response.data);
+      })
+      .catch((err) => {
+        setUser(null);
+      });
+  }, []);
+
+  
 
   useEffect(() => {
     axios
@@ -41,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       .get("/users", {
         name,
         _id,
-        email
+        email,
       })
       .then((response) => {
         setAllUsers(response.data);
@@ -64,9 +68,11 @@ export const AuthProvider = ({ children }) => {
       });
   }, []);
 
+
   useEffect(() => {
     axios
       .get("/booking")
+
       .then((response) => {
         setBookings(response.data);
       })

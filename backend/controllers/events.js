@@ -4,17 +4,44 @@ const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
   try {
+    // for filters
     const query = {};
+
     if (req.query.location) {
-      query.general_location = req.query.location
+      console.log(req.query.location);
+      query.general_location = req.query.location;
     }
     if (req.query.type) {
-      query.type = req.query.type
+      query.type = req.query.type;
     }
     if (req.query.category) {
-      query.category = req.query.category
+
+      query.category = req.query.category;
     }
-    const events = await Event.find(query).populate("author").populate("category");
+    if (req.query.user) {
+      query.author = req.query.user;
+    }  
+    
+    // for sorting
+    const { sortBy } = req.query;
+    let sortOptions = {};
+    if (sortBy === 'createdAt') {
+      sortOptions.createdAt = -1; 
+    } else if (sortBy === 'dateAsc') {
+      sortOptions.date = 1 
+    } else if (sortBy === 'dateDesc') {
+      sortOptions.date = -1 
+    } else if (sortBy === 'locationAsc') {
+      sortOptions.general_location = 1 
+    } else if (sortBy === 'locationDesc') {
+      sortOptions.general_location = -1 
+    } else if (sortBy === 'organizer') {
+      sortOptions.author = 1 
+    }
+    const events = await Event.find(query)
+    .populate("author").populate("category")
+    .sort(sortOptions);
+
     res.json(events);
   } catch (error) {
     next(error);
@@ -24,7 +51,9 @@ const getEvents = async (req, res, next) => {
 const getEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = await Event.findById(id).populate("author").populate("category");
+    const event = await Event.findById(id)
+      .populate("author")
+      .populate("category");
     res.json(event);
   } catch (error) {
     next(error);

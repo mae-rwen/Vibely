@@ -17,8 +17,6 @@ import {
   faLocationCrosshairs,
   faMessage,
   faQuestionCircle,
-  faAdd,
-  faEye,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -32,13 +30,14 @@ const Event = () => {
   const { user } = useAuth();
   console.log(user)
 
+
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
   const { event_id } = useParams();
 
   const [event, setEvent] = useState({});
-  const [join, setJoin] = useState({});
+  // const [join, setJoin] = useState({});
   const [booked, setBooked] = useState(false)
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const Event = () => {
       .catch((err) => {
         setEvent(null);
       });
-  }, []);
+  }, [event_id]);
 
   // console.log(user);
 
@@ -71,40 +70,11 @@ const Event = () => {
       }, []);
     }
 
-    const date = new Date(event.date);
-    const year = date.getFullYear();
-    const day = date.getDate();
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const month = months[date.getMonth()];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const weekday = days[date.getDay()];
-    const formattedDate = weekday && day && month && year ? `${weekday}, ${day} ${month} ${year}` : null;
 
+  // const renderTooltip = (props) => (
+  //   <Tooltip id="tooltip" {...props}></Tooltip>
+  // );
 
-    // get the time
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-    const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
-
-
-
-
-  const renderTooltip = (props) => (
-    <Tooltip id="tooltip" {...props}></Tooltip>
-  );
 
   return (
     <>

@@ -11,19 +11,6 @@ function Joined() {
     console.log(auth)
     console.log(user)
 
-    // const booked = bookings.filter((book) => book.user._id === 23)
-//    useEffect(() => {
-//     axios
-//       .get(`/users/profile/`)
-//       .then((response) => {
-//         console.log(response)
-//         setUser(response.data);
-//       })
-//       .catch((err) => {
-//         console.log(err)
-//         setUser(null);
-//       });
-//   }, []);
 
   console.log(user._id)
 
@@ -32,15 +19,8 @@ function Joined() {
   return (
     <div>
         <ListGroup className="eventsList" as="ul">
-          {bookings.map(() => {
-
-
-            const userFromBooking = bookings.find()
-
-          })
-            
-          }
-          
+   
+        Joined Events
           
         </ListGroup>
        

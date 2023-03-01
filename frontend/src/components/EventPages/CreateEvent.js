@@ -5,7 +5,6 @@ import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./createEvents.css";
-import EventSuccess from "./EventSuccess";
 
 export default function CreateEvent() {
   const navigate = useNavigate();

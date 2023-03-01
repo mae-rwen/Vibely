@@ -12,14 +12,15 @@ import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
+import SingleUser from "./components/UserProfile/SingleUser";
 import AllEventsList from "./components/EventPages/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/EventSuccess";
 import Joined from "./components/UserProfile/BookedEvents/Joined";
 import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
-function App() {
 
+function App() {
   return (
     <div className="App">
       <ScrollToTop style={{ borderRadius: "50%" }} />
@@ -37,10 +38,14 @@ function App() {
           <Route path="/allevents/" element={<AllEventsList />} />
           <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
+
+          <Route path="/users/profile" element={<SingleUser />} />
+
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
           <Route path="/event/:event_id" element={<Event />} />
+
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
