@@ -72,7 +72,7 @@ const getProfile = async (req, res, next) => {
   try {
     const { email, id } = req.user;
 
-    const user = await User.findById(id).populateBy("booking");
+    const user = await User.findById(id);
 
     res.json(user);
   } catch (error) {
