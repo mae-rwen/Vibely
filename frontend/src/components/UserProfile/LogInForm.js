@@ -1,12 +1,14 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
 import { Card, Container }from "react-bootstrap";
 import { useRef, useState, useEffect, useContext } from "react";
+
 import axios from "../../api/axios";
 import AuthContext from "../../context/AuthProvider";
 // import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./registerform.css"
+import "./registerform.css";
 
 const LOGIN_URL = "/auth/login";
 
@@ -46,9 +48,9 @@ export default function LogInForm() {
           withCredentials: true,
         }
       );
-      console.log(response.data);
+
       setUser(JSON.stringify(response?.data));
-      console.log(user);
+
       console.log(JSON.stringify(response?.data));
 
       console.log(JSON.stringify(response));
@@ -75,6 +77,7 @@ export default function LogInForm() {
   };
 
   return (
+
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh"}}>
       <div className="w-100" style={{ maxWidth: "400px"}}>
       <Card className="text-center card">
@@ -115,6 +118,7 @@ export default function LogInForm() {
             </Form.Floating>
 
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
                   <Form.Check
                     type="checkbox"
                     label="Remember me"
@@ -142,6 +146,7 @@ export default function LogInForm() {
           </Form>
         </Card.Body>
       </Card>
+
       </div>
     </Container>
   );
