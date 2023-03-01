@@ -17,7 +17,7 @@ export default function LogInForm() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const userRef = useRef();
+  // const userRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
 
@@ -124,7 +124,7 @@ export default function LogInForm() {
 
             <Card.Text className="mt-3 text-end">
               <Form.Text className="text-muted">
-                <a href="#" style={{ color: "inherit" }}>
+                <a href ="/resetpassword" style={{ color: "inherit" }}>
                   Forgot password?
                 </a>
               </Form.Text>

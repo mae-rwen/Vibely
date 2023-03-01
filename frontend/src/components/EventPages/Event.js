@@ -1,4 +1,6 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, 
+  // useContext, 
+  useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
@@ -17,19 +19,17 @@ import {
   faLocationCrosshairs,
   faMessage,
   faQuestionCircle,
-  faAdd,
-  faEye,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
-import { AuthContext } from "../../context/AuthProvider";
+// import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 
 const Event = () => {
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -37,7 +37,7 @@ const Event = () => {
   const { event_id } = useParams();
 
   const [event, setEvent] = useState({});
-  const [join, setJoin] = useState({});
+  // const [join, setJoin] = useState({});
   const [booked, setBooked] = useState(false)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Event = () => {
       .catch((err) => {
         setEvent(null);
       });
-  }, []);
+  }, [event_id]);
 
   // console.log(user);
 
@@ -70,9 +70,9 @@ const Event = () => {
       }, []);
     }
 
-  const renderTooltip = (props) => (
-    <Tooltip id="tooltip" {...props}></Tooltip>
-  );
+  // const renderTooltip = (props) => (
+  //   <Tooltip id="tooltip" {...props}></Tooltip>
+  // );
 
   return (
     <>
