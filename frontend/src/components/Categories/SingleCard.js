@@ -1,12 +1,39 @@
+import axios from '../../api/axios';
+import { useEffect, useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+export default function SingleCard({ categories, categoriesIDs}) { 
+  // const [eventsCount, setEventsCount] = useState([]);
 
-export default function SingleCard({ categories }) { 
+  // useEffect(() => {
+
+  //   axios
+  //     .get(`/events/countByCategory?category=${category._id}`)
+  //     .then((response) => {        
+  //       setEventsCount(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="categoriesCards">
-      {categories.map((category) => {     
+       {categories.map((category) => { 
+
+        
+            // axios
+            //   .get(`/events/countByCategory?category=${category._id}`)
+            //   .then((response) => {  
+            //     console.log(response.data)      
+            //     // setEventsCount(response.data);
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
+        
+            
         return (
           <Card key={category._id} className="card text-center">
             <Card.Img variant="top" src={category.picture} />

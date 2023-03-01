@@ -8,8 +8,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function Header() {
   return (
-    <Navbar className="fixed-top headerContainer1" bg="light" expand="lg">
-      <Container className="headerContainer">
+    <Navbar className="fixed-top" bg="light" expand="lg">
+      <Container>
         <Navbar.Brand href="/" className="fw-bold">
           Vibely
         </Navbar.Brand>

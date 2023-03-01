@@ -5,10 +5,6 @@ const eventSchema = new Schema(
     title: { type: String, required: true },
     description: { type: String, required: true },
     general_location: { type: String, required: true },
-    // type: {
-    //   public: { type: Boolean, default: false },
-    //   private: { type: Boolean, default: false },
-    // },
     type: { type: String, required: true },
     is_active: { type: Boolean, default: true },
     date: { type: Date },

@@ -17,6 +17,7 @@ export default function EventListFilters({
   return (
     <>
       <div className="eventsFilters">
+      <div className="filtersButtons">
         {/* Location filter */}
         <DropdownButton
           as={ButtonGroup}
@@ -119,10 +120,12 @@ export default function EventListFilters({
         >
           Reset all filters
         </Button>
-
+        </div>
+          <div className="createNewButton">
         <Button id="createNew" variant="secondary" href="/create_event">
           Create new event
         </Button>
+        </div>
       </div>
       {locationQuery || categoryQuery || typeQuery ? (
         <p>

@@ -5,7 +5,8 @@ const categoriesSchema = new Schema(
     name: { type: String, required: true },
     description: { type: String }, 
     picture: { type: String },
-    events: [{ type: Types.ObjectId, ref: "Event"}]
+    // events: [{ type: Types.ObjectId, ref: "Event" }],
+    eventTotal: { type: Number, default: 0},
   }  
 );
 

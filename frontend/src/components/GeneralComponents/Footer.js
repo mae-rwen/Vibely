@@ -3,9 +3,9 @@ import Container from "react-bootstrap/Container";
 
 export default function Footer() {
   return (
-    <div className="d-flex flex-column bg-light text-center headerContainer1">
-      <Container className="headerContainer">
-      <div className="p-2 d-flex gap-3 justify-content-center">
+    <div className="d-flex flex-column bg-light text-center" style={{height: "15vh"}}>
+      <Container>
+      <div className="p-2 d-flex gap-5 mt-3 justify-content-center">
         <NavLink to="/aboutus" className="text-decoration-none text-dark">
           About us
         </NavLink>
