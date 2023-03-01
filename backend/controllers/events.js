@@ -40,22 +40,8 @@ const coutAllEvents = async (req, res, next) => {
   }
 };
 
-const countEventsByCategory = async (req, res, next) => {  
-  try { 
-    const query = {}; 
-    if (req.query.category) {
-      query.category = req.query.category
-    } 
-    const count = await Event.find(query).countDocuments({category: req.query.category})
-    res.json(count);
-  } catch (error) {
-    next(error);
-  }
-};
-
 const createEvent = async (req, res, next) => {
   try {
-    // console.log(req.body);
     const {
       title,
       general_location,
@@ -67,8 +53,7 @@ const createEvent = async (req, res, next) => {
     } = req.body;
     const author = req.user.id;
     // const categoryDoc = await Category.findById(category) 
-    console.log(author);
-    // console.log(`this is the user ${author} that created the event`);
+    console.log(author);    
     const event = await Event.create({
       title,
       general_location,
@@ -80,16 +65,8 @@ const createEvent = async (req, res, next) => {
       author,
     });
     // categoryDoc.events = [...categoryDoc.events, event._id]
-    // await categoryDoc.save();
-    // Category.findById(req.body.category).update({ $inc: { eventTotal: 1 } }, { new: true, upsert: true });  
-    //  Category.findOneAndUpdate({_id: category}, { $inc: { eventTotal: 1 } }, { new: true, upsert: true });  
-    // Category.findAndModify(
-    //   {
-    //     query: { category },
-    //     update: { $inc:{ eventTotal: 1 } },
-    //     upsert: true,
-    //   })
-   
+    // await categoryDoc.save();  
+    const categoryDoc = await Category.findByIdAndUpdate( category, { $inc: { eventTotal: 1 } }, { new : true });    
     res.json(event);
   } catch (error) {
     next(error);
@@ -135,20 +112,12 @@ const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
     const event = await Event.findByIdAndDelete(id);
+    const categoryDoc = await Category.findByIdAndUpdate( event.category, { $inc: { eventTotal: -1 } }, { new : true });
     res.json(event);
   } catch (error) {
     next(error);
   }
 };
-
-// const getEvents = async (req, res, next) => {
-//   try {
-//     const events = await Event.find({});
-//     res.json(events);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 module.exports = {
   getEvent,
@@ -157,5 +126,4 @@ module.exports = {
   updateEvent,
   deleteEvent,
   coutAllEvents,
-  countEventsByCategory,
 };

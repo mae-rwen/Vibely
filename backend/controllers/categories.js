@@ -14,7 +14,7 @@ const getCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
     const category = await Category.findById(id);
-    req.json(category);
+    res.json(category);
   } catch (error) {
     next(error);
   }
@@ -37,7 +37,7 @@ const createCategory = async (req, res, next) => {
 const updateCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, description, picture } = req.body;
+    const { name, description, picture, events, eventTotal } = req.body;
 
     const category = await Category.findByIdAndUpdate(
       id,
@@ -45,6 +45,8 @@ const updateCategory = async (req, res, next) => {
         name,
         description,
         picture,
+        events,
+        eventTotal
       },
       { new: true }
     );
