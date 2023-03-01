@@ -13,10 +13,14 @@ export default function Header() {
         <Navbar.Brand href="/" className="fw-bold">
           Vibely
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Offcanvas placement="top">
+        <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
+        <Navbar.Offcanvas 
+        id="offcanvasNavbar-expand-lg"
+        placement="top">
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title className="fw-bold">Vibely</Offcanvas.Title>
+            <Offcanvas.Title
+            id="offcanvasNavbarLabel-expand-lg" 
+            className="fw-bold">Vibely</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body id="navbarOffcanvas">
             <Nav className="ms-auto gap-2">

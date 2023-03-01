@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between;  
   .layoutContainer {
     margin: 8em auto !important;
     // border: $border2;
@@ -146,7 +146,7 @@ body {
 // // <-- signup page styling
 
 // // <-- media queries
-@media (max-width: 770px) {
+@media (max-width: 770px) { 
   .categoriesCards {
     display: flex;
     flex-flow: column nowrap;
@@ -160,8 +160,7 @@ body {
   .eventsDiv {
     .eventsFilters {     
       flex-flow: column !important;
-      gap: 0.75em;
-      
+      gap: 0.75em;      
       .filtersButtons {  
         // border: solid 2px red;   
         flex-flow: row wrap;        
