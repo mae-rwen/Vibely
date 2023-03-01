@@ -5,7 +5,6 @@ import LoadingSpinner from '../GeneralComponents/LoadingSpinner';
 
 export default function Categories() {
   const [eventsCount, setEventsCount] = useState("");
-  const [eventsByCategoryCount, setEventsByCategoryCount] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoriesIDs, setCategoriesIDs] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,17 +29,6 @@ export default function Categories() {
         console.log(error);
       });      
   }, []);
-
-  
-  // axios
-  // .get(`/events/countByCategory?category=${category._id}`)
-  // .then((response) => {       
-  //   setEventsByCategoryCount(response.data);
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
-
 
   return (
     <>

@@ -14,22 +14,20 @@ export default function AllEventsList() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState(category);
+  const [categoryQuery, setCategoryQuery] = useState(category); 
+  const [sortBy, setSortBy] = useState("createdAt");
 
-  // get the categories
+  // get all categories 
+  // and events for displaying locations and types of events
   useEffect(() => {
     axios
-      .get(`/categories`)
-      .then((response) => {
-        setGetCategories(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  //get all events for displaying locations and types of events
-  useEffect(() => {
+    .get(`/categories`)
+    .then((response) => {
+      setGetCategories(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     axios
       .get(`/events`)
       .then((response) => {
@@ -47,7 +45,7 @@ export default function AllEventsList() {
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}`)
+      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}&sortBy=${sortBy}`)
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -55,7 +53,7 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [locationQuery, typeQuery, categoryQuery]);
+  }, [locationQuery, typeQuery, categoryQuery, sortBy]);
 
   return (
     <>
@@ -86,6 +84,8 @@ export default function AllEventsList() {
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
             setCategoryQuery={setCategoryQuery}
+            sortBy={sortBy}
+            setSortBy={setSortBy}           
           />
 
           <EventsList events={events} getCategories={getCategories} />
