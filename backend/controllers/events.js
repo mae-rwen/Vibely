@@ -14,7 +14,10 @@ const getEvents = async (req, res, next) => {
     if (req.query.category) {
       query.category = req.query.category
     }
-    const events = await Event.find(query).populate("author").populate("category");
+    const sort = {createdAt: -1}
+    const events = await Event.find(query)
+    .populate("author").populate("category")
+    .sort(sort);
     res.json(events);
   } catch (error) {
     next(error);
