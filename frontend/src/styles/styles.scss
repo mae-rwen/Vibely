@@ -157,4 +157,25 @@ body {
       flex: 100% !important;      
     }
   }
+  .eventsDiv {
+    .eventsFilters {     
+      flex-flow: column !important;
+      gap: 0.75em;
+      
+      .filtersButtons {  
+        // border: solid 2px red;   
+        flex-flow: row wrap;        
+        // max-height: 2.25em;
+        order: 2 !important;
+      }
+      .createNewButton {       
+        margin: auto;
+        order: 1 !important; 
+        #createNew {
+        height: 3.5em;
+        padding-top: 1em;  
+        }   
+      }
+    }    
+  }
 }

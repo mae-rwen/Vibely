@@ -10963,4 +10963,20 @@ body {
   .categoriesCards .card {
     flex: 100% !important;
   }
+  .eventsDiv .eventsFilters {
+    flex-flow: column !important;
+    gap: 0.75em;
+  }
+  .eventsDiv .eventsFilters .filtersButtons {
+    flex-flow: row wrap;
+    order: 2 !important;
+  }
+  .eventsDiv .eventsFilters .createNewButton {
+    margin: auto;
+    order: 1 !important;
+  }
+  .eventsDiv .eventsFilters .createNewButton #createNew {
+    height: 3.5em;
+    padding-top: 1em;
+  }
 }/*# sourceMappingURL=styles.css.map */
