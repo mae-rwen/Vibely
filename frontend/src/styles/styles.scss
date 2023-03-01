@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-$border1: 2px solid rgb(0, 255, 94);
-$border2: 2px solid red;
 
 body {
   font-family: "Ubuntu", sans-serif;
@@ -21,21 +19,17 @@ body {
       display: flex;
       gap: 1em;
       flex-direction: row;
-      justify-content: center;
-      // border: $border1;
+      justify-content: center;   
     }
     #construction {
-      margin: 20vh auto !important;
-      // border: $border1;
+      margin: 20vh auto !important;      
     }
     // // homepage styling -->>
     #heroSection {
-      margin: 30vh auto !important;
-      // border: $border1;
+      margin: 30vh auto !important;      
     }
     .hpSection {
-      margin: 8em auto;
-      // border: $border1;
+      margin: 8em auto;     
       .showMoreP:hover {
         cursor: pointer;
         color: rgba(128, 128, 128, 0.434);
@@ -50,7 +44,6 @@ body {
     // // <<-- homepage styling
     .subpageHeader {
       margin-bottom: 4em;
-      // border: $border1;
       p {
         font-size: smaller;
         margin-top: 0.5em;
@@ -67,9 +60,7 @@ body {
       justify-content: space-between;
       gap: 3em;
       align-items: baseline;
-      // border: $border1;
-      .card {
-        // max-width: 300px;
+      .card {        
         flex: 30%;
         .text-end {
           font-size: smaller;
@@ -98,10 +89,14 @@ body {
       .eventsFilters {
         display: flex;
         flex-direction: row;
-        gap: 0.75em;
-        #createNew {
-          margin-left: auto;
+        .filtersButtons {
+          display: flex;
+          flex-direction: row;
+          gap: 0.75em;
         }
+        .createNewButton {
+          margin-left: auto;
+        }       
       }
       .eventsList {
         li {
@@ -141,13 +136,6 @@ body {
   // // <<-- Navbar classes
 }
 
-// .headerContainer {
-//   border: $border1;
-// }
-
-// .headerContainer1 {
-//   border: $border2;
-// }
 
 // // signup page styling -->
 .signupCard {
@@ -158,3 +146,10 @@ body {
   margin: 3em 5em;
 }
 // // <-- signup page styling
+
+// // <-- media queries
+@media only screen and (max-width: 998px) {
+  .teamIntro {
+    gap: 2em;
+  }
+}

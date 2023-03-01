@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <ScrollToTop style={{ borderRadius: "50%" }} />
       <Header />
-      <Routes>
+      <Routes>        
         <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route path="/register" element={<RegisterForm />} />

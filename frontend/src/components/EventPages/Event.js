@@ -41,7 +41,7 @@ const Event = () => {
 
   useEffect(() => {
     axios
-      .get(`/events/${event_id}`)
+      .get(`/events/find/${event_id}`)
       .then((response) => {
         console.log("found:", response.data);
         setEvent(response.data);

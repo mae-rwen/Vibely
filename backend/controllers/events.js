@@ -1,5 +1,6 @@
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
+const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
   try {
@@ -30,9 +31,17 @@ const getEvent = async (req, res, next) => {
   }
 };
 
+const coutAllEvents = async (req, res, next) => {
+  try {   
+    const count = await Event.estimatedDocumentCount()
+    res.json(count);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createEvent = async (req, res, next) => {
   try {
-    // console.log(req.body);
     const {
       title,
       general_location,
@@ -43,11 +52,10 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
-    console.log(author);
-    // console.log(`this is the user ${author} that created the event`);
+    // const categoryDoc = await Category.findById(category) 
+    console.log(author);    
     const event = await Event.create({
       title,
-
       general_location,
       type,
       date,
@@ -56,6 +64,9 @@ const createEvent = async (req, res, next) => {
       description,
       author,
     });
+    // categoryDoc.events = [...categoryDoc.events, event._id]
+    // await categoryDoc.save();  
+    const categoryDoc = await Category.findByIdAndUpdate( category, { $inc: { eventTotal: 1 } }, { new : true });    
     res.json(event);
   } catch (error) {
     next(error);
@@ -101,20 +112,12 @@ const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
     const event = await Event.findByIdAndDelete(id);
+    const categoryDoc = await Category.findByIdAndUpdate( event.category, { $inc: { eventTotal: -1 } }, { new : true });
     res.json(event);
   } catch (error) {
     next(error);
   }
 };
-
-// const getEvents = async (req, res, next) => {
-//   try {
-//     const events = await Event.find({});
-//     res.json(events);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 module.exports = {
   getEvent,
@@ -122,4 +125,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  coutAllEvents,
 };
