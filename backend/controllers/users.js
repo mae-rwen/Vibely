@@ -13,13 +13,13 @@ const signup = async (req, res, next) => {
     const newUser = await User.create({ name, email, password: hash });
     const payload = { id: newUser, email: newUser.email, name: newUser.name };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "8h",
     });
 
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60,
+        maxAge: 1000 * 60 * 60 * 8,
       })
       .send(payload);
   } catch (error) {

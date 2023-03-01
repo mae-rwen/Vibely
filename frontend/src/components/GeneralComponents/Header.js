@@ -55,7 +55,16 @@ export default function Header() {
                 }
               >
                 Instructions
-              </NavLink>            
+              </NavLink>   
+              <NavLink
+                style={{ padding: "10px" }}
+                to="/profile/joined"
+                className={({ isActive }) =>
+                  isActive ? "activeClass " : "nonActive"
+                }
+              >
+                Joined
+              </NavLink>           
               <Form className="d-flex">
                 <Button className="m-auto" href="/register" variant="outline-secondary">
                   Register

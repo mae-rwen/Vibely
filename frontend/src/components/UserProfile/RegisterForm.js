@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Card, Container } from "react-bootstrap";
-import image from "./Vibely.png";
 import "./registerform.css";
 import {
   faCheck,
@@ -10,13 +9,12 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faFontAwesomeIcon,
   FontAwesomeIcon,
 } from "@fortawesome/react-fontawesome";
 // import axiosClient from "../../api/axiosClient";
 import axios from "../../api/axios";
-import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import AuthContext from "../../context/AuthProvider";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._!-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
@@ -25,7 +23,7 @@ const SIGNUP_URL = "/auth/signup";
 
 const RegisterForm = ({ setSetAccount }) => {
   // const changeState = () => setSetAccount(true);
-  const { setAuth } = useAuth();
+  const { setAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -112,6 +110,8 @@ const RegisterForm = ({ setSetAccount }) => {
       // console.log(response.data);
       // console.log(response.accessToken);
       // console.log(JSON.stringify(response))
+      const accessToken = response?.data?.accessToken;
+      setAuth({ email, name: user, password, accessToken });
       navigate(from, { replace: true });
       // clear input fields
     } catch (err) {

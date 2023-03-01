@@ -61,6 +61,7 @@ const createEvent = async (req, res, next) => {
   }
 };
 
+
 const updateEvent = async (req, res, next) => {
   try {
     const { id } = req.params;

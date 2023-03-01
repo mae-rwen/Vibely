@@ -9,12 +9,12 @@ const {
 
 const { verifyToken } = require("../middlewares/verifyToken");
 
-const eventRouter = express.Router();
+const bookingRouter = express.Router();
 
-eventRouter.get("/", verifyToken, getBookings);
-eventRouter.post("event_id/", verifyToken, bookEvent);
-eventRouter.get("/:id", verifyToken, getBookedEvent);
-eventRouter.delete("/:id", verifyToken, deleteBookedEvent);
+bookingRouter.get("/", verifyToken, getBookings);
+bookingRouter.post("/:event", verifyToken, bookEvent);
+bookingRouter.get("/:id", verifyToken, getBookedEvent);
+bookingRouter.delete("/:id", verifyToken, deleteBookedEvent);
 
 module.exports = {
   bookingRouter,

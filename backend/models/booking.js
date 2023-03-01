@@ -3,7 +3,6 @@ const { Schema, Types, model } = require("mongoose");
 const bookingSchema = new Schema(
   {
     event: { type: Types.ObjectId, ref: "Event"},
-    category: { type: Types.ObjectId, ref: "Category" },
     user: {type: Types.ObjectId, ref: "User"},
   },
   {
@@ -11,8 +10,8 @@ const bookingSchema = new Schema(
   }  
 );
 
-const Book = model("Book", bookingSchema);
+const Booking = model("Booking", bookingSchema);
 
 module.exports = {
-    Book,
+    Booking,
 };
