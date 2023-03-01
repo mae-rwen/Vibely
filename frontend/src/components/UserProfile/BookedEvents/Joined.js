@@ -9,9 +9,9 @@ function Joined() {
     console.log(allUsers)
     console.log(auth)
 
-    function JoinedEvents(props) {
+    // function JoinedEvents(props) {
 
-    }
+    // }
  
   return (
     <div>
