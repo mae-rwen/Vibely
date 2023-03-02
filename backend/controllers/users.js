@@ -94,6 +94,8 @@ const updateUser = async (req, res, next) => {
     const { id } = req.params;
 
     const { email, description, name, location, profilePic } = req.body;
+
+    console.log("string:" + profilePic);
     const result = await cloudinary.uploader.unsigned_upload(
       profilePic,
       "c01lxqzs",
