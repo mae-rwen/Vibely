@@ -1,14 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import { Card, Container }from "react-bootstrap";
+import { Card }from "react-bootstrap";
 import { useRef, useState, useEffect, useContext } from "react";
 
 import axios from "../../api/axios";
 import AuthContext from "../../context/AuthProvider";
 // import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./registerform.css";
 
 const LOGIN_URL = "/auth/login";
 
@@ -76,11 +75,9 @@ export default function LogInForm() {
     }
   };
 
-  return (
-
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh"}}>
-      <div className="w-100" style={{ maxWidth: "400px"}}>
-      <Card className="text-center card">
+  return (    
+      
+      <Card className="signUpCards">
         <Card.Body>
           <p
             ref={errRef}
@@ -89,10 +86,11 @@ export default function LogInForm() {
           >
             {error}
           </p>
-          <Card.Title className="my-4">
-            <h2>Login in to your account</h2>
+          <Card.Title className="my-4 text-center fw-bold">
+            Login to your account
           </Card.Title>
-          <Form className="form" onSubmit={handleSubmit}>
+
+          <Form className="text-center" onSubmit={handleSubmit}>
             <Form.Floating className="mb-3">
               <Form.Control
                 type="text"
@@ -103,7 +101,7 @@ export default function LogInForm() {
                 value={email}
                 required
               />
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email">Email</label>
             </Form.Floating>
 
             <Form.Floating className="mb-3">
@@ -114,40 +112,31 @@ export default function LogInForm() {
                 value={password}
                 required
               />
-              <label htmlFor="pwd">Password:</label>
-            </Form.Floating>
+              <label htmlFor="pwd">Password</label>
+            </Form.Floating>           
 
-            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-
-                  <Form.Check
-                    type="checkbox"
-                    label="Remember me"
-                    className="text-start"
-                  />
-                </Form.Group> */}
-
-            <Card.Text className="mt-3 text-end">
+            {/* <Card.Text className="mt-3 text-end">
               <Form.Text className="text-muted">
                 <a href ="/resetpassword" style={{ color: "inherit" }}>
                   Forgot password?
                 </a>
               </Form.Text>
-            </Card.Text>
+            </Card.Text> */}
 
-            <Button className="w-100 my-3" variant="outline-secondary" type="submit">
+            <Button className="w-50 my-3" variant="secondary" type="submit">
               Login
             </Button>
 
-            <Card.Text className="mt-1">
+            <Card.Text className="mb-2">
               <Form.Text className="text-muted">
-                No account yet? Register <Link to="/register">here</Link>
+                No account yet? Register <Link to="/register" className="signUpHere">here</Link>.
               </Form.Text>
             </Card.Text>
           </Form>
         </Card.Body>
       </Card>
 
-      </div>
-    </Container>
+      
+    
   );
 }

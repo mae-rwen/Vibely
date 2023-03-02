@@ -35,7 +35,8 @@ export default function CreateEvent() {
     e.preventDefault();
     console.log(event);
     axios.post("/events", event).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
+    
     }).catch((error) => console.log(error));
 
     setEventCategory("");

@@ -8,8 +8,10 @@ export default function EventsList({ events, getCategories }) {
       {events.length !== 0 ? (
         <ListGroup className="eventsList" as="ul">
           {events.map((event) => {
+            // console.log(event.date)
             // get the date
             const date = new Date(event.date);
+            console.log(date.toTimeString())
             const year = date.getFullYear();
             const day = date.getDate();
             const months = [
@@ -35,9 +37,13 @@ export default function EventsList({ events, getCategories }) {
                 : null;
 
             // get the time
-            const hour = date.getHours();
-            const minutes = date.getMinutes();
+            const hour = date.getHours().toString();
+            const minutes = date.getMinutes().toString();
+            // console.log(typeof hour)
+            // console.log(typeof minutes)
             const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
+
+          
 
             return (
               <NavLink
@@ -52,6 +58,8 @@ export default function EventsList({ events, getCategories }) {
                   <div className="ms-2 me-auto">
                     <span>
                       <b>{event.title}</b> in {event.general_location} <br /> on{" "}
+                      <br/>
+                      {event.date}<br/>
                       {formattedDate ? formattedDate : `not specified date`} at{" "}
                       {formattedTime ? formattedTime : `not specified time`}{" "}
                       <br /> searching for{" "}

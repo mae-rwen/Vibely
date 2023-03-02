@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  
+  justify-content: space-between;
   .layoutContainer {
     margin: 8em auto !important;
     // border: $border2;
@@ -133,20 +133,51 @@ body {
     }
   }
   // // <<-- Navbar classes
+  // ------
+  // Signup forms -->>
+  .signUpCards {
+    max-width: 50vh;
+    margin: auto;    
+    .signUpHere {
+      color: inherit;
+    }
+    .offscreen {
+      position: absolute;
+      left: -9999px;
+    }
+    .errmsg {
+      background-color: lightpink;
+      color: firebrick;
+      font-weight: bold;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .instructions {
+      font-size: 0.75rem;
+      border-radius: 0.5rem;
+      background: $secondary;
+      color: #fff;
+      padding: 0.25rem;
+      position: relative;
+      bottom: -10px;
+    }
+    .hide {
+      display: none;
+    }
+    .valid {
+      color: limegreen;
+      margin-left: 0.25rem;
+    }
+    .invalid {
+      color: red;
+      margin-left: 0.25rem;
+    }   
+  }
+  // <<-- Signup forms
 }
-
-// // signup page styling -->
-.signupCard {
-  width: 30vw;
-  margin: auto;
-}
-.signupForm {
-  margin: 3em 5em;
-}
-// // <-- signup page styling
 
 // // <-- media queries
-@media (max-width: 770px) { 
+@media (max-width: 770px) {
   .categoriesCards {
     display: flex;
     flex-flow: column nowrap;
@@ -154,27 +185,27 @@ body {
     gap: 3em;
     align-items: stretch;
     .card {
-      flex: 100% !important;      
+      flex: 100% !important;
     }
   }
   .eventsDiv {
-    .eventsFilters {     
+    .eventsFilters {
       flex-flow: column !important;
-      gap: 0.75em;      
-      .filtersButtons {  
-        // border: solid 2px red;   
-        flex-flow: row wrap;        
+      gap: 0.75em;
+      .filtersButtons {
+        // border: solid 2px red;
+        flex-flow: row wrap;
         // max-height: 2.25em;
         order: 2 !important;
       }
-      .createNewButton {       
+      .createNewButton {
         margin: auto;
-        order: 1 !important; 
+        order: 1 !important;
         #createNew {
-        height: 3.5em;
-        padding-top: 1em;  
-        }   
+          height: 3.5em;
+          padding-top: 1em;
+        }
       }
-    }    
+    }
   }
 }
