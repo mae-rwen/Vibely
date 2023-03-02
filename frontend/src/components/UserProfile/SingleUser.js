@@ -70,6 +70,7 @@ export default function SingleUser() {
       setUserEmail(response.data?.email);
       setUserDescription(response?.data.description);
       setUserLocation(response.data?.location);
+      console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
         setEvents(response.data);
       });

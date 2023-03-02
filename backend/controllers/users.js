@@ -92,24 +92,31 @@ const getUsers = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-
     const { email, description, name, location, profilePic } = req.body;
-
-    console.log("string:" + profilePic);
-    const result = await cloudinary.uploader.unsigned_upload(
-      profilePic,
-      "c01lxqzs",
-      {
-        max_bytes: 10000000,
-      }
-    );
-    console.log(result);
-    const user = await User.findByIdAndUpdate(
-      id,
-      { email, description, name, location, profilePic: result.secure_url },
-      { new: true }
-    );
-    res.json(user);
+    // console.log("string:" + profilePic);
+    if (profilePic) {
+      const result = await cloudinary.uploader.unsigned_upload(
+        profilePic,
+        "c01lxqzs",
+        {
+          max_bytes: 10000000,
+        }
+      );
+      // console.log(result);
+      const user = await User.findByIdAndUpdate(
+        id,
+        { email, description, name, location, profilePic: result.secure_url },
+        { new: true }
+      );
+      res.json(user);
+    } else {
+      const user = await User.findByIdAndUpdate(
+        id,
+        { email, description, name, location, profilePic },
+        { new: true }
+      );
+      res.json(user);
+    }
   } catch (error) {
     next(error);
   }
