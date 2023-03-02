@@ -1,4 +1,6 @@
 const { User } = require("../models/users");
+const cloudinary = require("cloudinary").v2;
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { ErrorResponse } = require("../utils/ErrorResponse");
@@ -71,9 +73,7 @@ const logout = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
   try {
     const { email, id } = req.user;
-
     const user = await User.findById(id);
-
     res.json(user);
   } catch (error) {
     next(error);
@@ -94,9 +94,17 @@ const updateUser = async (req, res, next) => {
     const { id } = req.params;
 
     const { email, description, name, location, profilePic } = req.body;
+    const result = await cloudinary.uploader.unsigned_upload(
+      profilePic,
+      "c01lxqzs",
+      {
+        max_bytes: 10000000,
+      }
+    );
+    console.log(result);
     const user = await User.findByIdAndUpdate(
       id,
-      { email, description, name, location, profilePic },
+      { email, description, name, location, profilePic: result.secure_url },
       { new: true }
     );
     res.json(user);
