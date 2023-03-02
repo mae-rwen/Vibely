@@ -19,7 +19,7 @@ export default function SingleUser() {
   const [userEmail, setUserEmail] = useState("");
   const [userLocation, setUserLocation] = useState("");
   const [userDescription, setUserDescription] = useState("");
-  const [userImage, setUserImage] = useState("");
+  const [userImage, setUserImage] = useState(null);
   //state for events of logged in user
   const [events, setEvents] = useState([]);
   //for pagination in events
@@ -44,6 +44,7 @@ export default function SingleUser() {
     description: userDescription,
     name: userName,
     location: userLocation,
+    profilePic: userImage,
   };
 
   const submitHandler = (e) => {
@@ -73,9 +74,17 @@ export default function SingleUser() {
     setVisible((prev) => prev + 3);
   };
 
-  // const uploadImage = (e) => {
-  //   setUserImage(e.target.files[0]);
-  // };
+  const toBase64 = (userImage) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(userImage);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  const uploadImage = async (e) => {
+    const base64 = await toBase64(e.target.files[0]);
+    setUserImage(base64);
+  };
   return (
     <div>
       {/* <h1 className="text-center">Welcome {user.name}</h1> */}
@@ -146,14 +155,14 @@ export default function SingleUser() {
                     />
                   </FloatingLabel>
                 </Form.Group>
-                {/* <Form.Group controlId="formFile" className="mb-3">
+                <Form.Group controlId="formFile" className="mb-3">
                   <Form.Label>Upload profile picture</Form.Label>
                   <Form.Control
                     type="file"
                     name="profileImage"
                     onChange={uploadImage}
                   />
-                </Form.Group> */}
+                </Form.Group>
               </Form>
             </Modal.Body>
             <Modal.Footer>
