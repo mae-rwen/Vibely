@@ -10942,14 +10942,78 @@ body {
   opacity: 1;
   border-radius: 5px;
 }
-
-.signupCard {
-  width: 30vw;
+.App .signUpCards {
+  max-width: 30em;
   margin: auto;
 }
-
-.signupForm {
-  margin: 3em 5em;
+.App .signUpCards .signUpHere {
+  color: inherit;
+}
+.App .signUpCards .offscreen {
+  position: absolute;
+  left: -9999px;
+}
+.App .signUpCards .errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.App .signUpCards .instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #6c757d;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+.App .signUpCards .hide {
+  display: none;
+}
+.App .signUpCards .valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+.App .signUpCards .invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+.App .createEvent {
+  margin: auto;
+  max-width: 50em;
+}
+.App .createEvent .createEventForm {
+  margin: 3em auto;
+  max-width: 45em;
+}
+.App .createEvent .createEventForm .radioButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+.App .userProfileDiv {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3em;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.App .userProfileDiv #userDesc {
+  width: 20em;
+}
+.App .userProfileDiv #userDesc img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 2em;
+}
+.App .userProfileDiv #userEvents {
+  width: 50em;
 }
 
 @media (max-width: 770px) {

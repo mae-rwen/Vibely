@@ -27,7 +27,7 @@ export default function EventsList({ events, getCategories }) {
               "December",
             ];
             const month = months[date.getMonth()];
-            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const weekday = days[date.getDay()];
             const formattedDate =
               weekday && day && month && year
@@ -35,8 +35,9 @@ export default function EventsList({ events, getCategories }) {
                 : null;
 
             // get the time
-            const hour = date.getHours();
-            const minutes = date.getMinutes();
+            const hour = date.getHours().toString();
+            const minutes = date.getMinutes().toString();
+
             const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
 
             return (

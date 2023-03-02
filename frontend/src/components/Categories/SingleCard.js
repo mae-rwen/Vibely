@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function SingleCard({ categories, categoriesIDs}) {  
+export default function SingleCard({ categories }) {  
 
   return (
     <div className="categoriesCards">

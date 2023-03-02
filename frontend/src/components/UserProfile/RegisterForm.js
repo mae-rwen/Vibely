@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Card, Container } from "react-bootstrap";
-import "./registerform.css";
+import { Card } from "react-bootstrap";
 import {
   faCheck,
   faInfoCircle,
@@ -127,9 +126,8 @@ const RegisterForm = ({ setSetAccount }) => {
   };
 
   return (
-    <Container className="d-flex justify-content-center" style={{ minHeight: "100vh"}}>
-      <div className="w-100" style={{ maxWidth: "400px"}}>
-      <Card className="card">
+    
+      <Card className="signUpCards">
         <Card.Body>
           <p
             ref={errRef}
@@ -137,17 +135,12 @@ const RegisterForm = ({ setSetAccount }) => {
             aria-live="assertive"
           >
             {error}
-          </p>
-          {/* <img
-            src={image}
-            alt="Logo"
-            style={{ width: "100px", marginTop: "1.5em" }}
-          /> */}
-          <Card.Title className="my-4 text-center">
-            Create a new account
+          </p>         
+          <Card.Title className="my-4 text-center fw-bold">
+            Create new account
           </Card.Title>
 
-          <Form className="text-center form" onSubmit={handleSubmit}>
+          <Form className="text-center" onSubmit={handleSubmit}>
             {/* username */}
             <Form.Floating className="mb-3">
               <Form.Control
@@ -163,7 +156,7 @@ const RegisterForm = ({ setSetAccount }) => {
                 onBlur={() => setUserFocus(false)}
               />
               <label htmlFor="username">
-                Username:
+                Username
                 <span className={validName ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -200,7 +193,7 @@ const RegisterForm = ({ setSetAccount }) => {
                 onBlur={() => setEmailFocus(false)}
               />
               <label htmlFor="email">
-                Email address:
+                Email address
                 <span className={validEmail ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -241,7 +234,7 @@ const RegisterForm = ({ setSetAccount }) => {
                 onBlur={() => setPasswordFocus(false)}
               />
               <label htmlFor="password">
-                Password:
+                Password
                 <span className={validPassword ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -254,7 +247,7 @@ const RegisterForm = ({ setSetAccount }) => {
               <p
                 id="pwdnote"
                 className={
-                  passwordFocus && !validPassword ? "instructions" : "offscreen"
+                  passwordFocus && password && !validPassword ? "instructions" : "offscreen"
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -283,7 +276,7 @@ const RegisterForm = ({ setSetAccount }) => {
                 onBlur={() => setMatchFocus(false)}
               />
               <label htmlFor="confirm_pwd">
-                Confirm Password:
+                Confirm Password
                 <span
                   className={validMatch && matchPassword ? "valid" : "hide"}
                 >
@@ -305,37 +298,27 @@ const RegisterForm = ({ setSetAccount }) => {
                 <br />
                 Must match the first password input field.
               </p>
-            </Form.Floating>
-
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Accept T&C"
-                className="text-start"
-              />
-            </Form.Group>
+            </Form.Floating>            
             <Button
               disabled={
                 !validName || !validEmail || !validPassword || !validMatch
                   ? true
                   : false
               }
-              className="w-100 my-3"
-              variant="outline-secondary"
+              className="w-50 my-3"
+              variant="secondary"
               type="submit"
             >
               Sign Up
             </Button>
-            <Card.Text>
+            <Card.Text className="mb-2">
               <Form.Text className="text-muted">
-                Already have an account? Login <Link to="/login">here</Link>
+                Already have an account? Login <Link to="/login" className="signUpHere">here</Link>.
               </Form.Text>
             </Card.Text>
           </Form>
         </Card.Body>
-      </Card>
-      </div>
-    </Container>
+      </Card>    
   );
 };
 
