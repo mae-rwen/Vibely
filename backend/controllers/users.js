@@ -5,10 +5,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { ErrorResponse } = require("../utils/ErrorResponse");
 
-const cloudinary_cloud_name = process.env.CLOUDINARY_CLOUD_NAME;
-const cloudinary_api_key = process.env.CLOUDINARY_API_KEY;
-const cloudinary_api_secret = process.env.CLOUDINARY_API_SECRET;
-
 const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
