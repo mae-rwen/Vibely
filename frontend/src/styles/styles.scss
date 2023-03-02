@@ -134,10 +134,10 @@ body {
   }
   // // <<-- Navbar classes
   // ------
-  // Signup forms -->>
+  // // Signup forms -->>
   .signUpCards {
-    max-width: 50vh;
-    margin: auto;    
+    max-width: 30em;
+    margin: auto;
     .signUpHere {
       color: inherit;
     }
@@ -171,9 +171,25 @@ body {
     .invalid {
       color: red;
       margin-left: 0.25rem;
-    }   
+    }
   }
-  // <<-- Signup forms
+  // // <<-- Signup forms
+  // ------
+  // // Create event form -->>
+  .createEvent {
+    margin: auto;
+    max-width: 50em;
+    .createEventForm {
+      margin: 3em auto;
+      max-width: 45em;
+      .radioButtons {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+      }
+    }
+  }
+  // // <<-- Create event form
 }
 
 // // <-- media queries
