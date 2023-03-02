@@ -190,6 +190,16 @@ body {
     }
   }
   // // <<-- Create event form
+  // -----
+  // // User profile -->>
+  .userProfileDiv {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 3em;
+    justify-content: space-evenly;
+
+  }
+  // // <<-- User profile
 }
 
 // // <-- media queries

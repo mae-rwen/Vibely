@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -164,7 +163,7 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Button className="w-30" variant="secondary" type="submit">
+            <Button className="w-30 mt-3" variant="secondary" type="submit">
               Create this event
             </Button>
           </div>

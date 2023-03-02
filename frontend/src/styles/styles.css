@@ -10993,6 +10993,12 @@ body {
   flex-direction: row;
   gap: 1em;
 }
+.App .userProfileDiv {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3em;
+  justify-content: space-evenly;
+}
 
 @media (max-width: 770px) {
   .categoriesCards {

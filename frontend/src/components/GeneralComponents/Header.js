@@ -14,13 +14,14 @@ export default function Header() {
           Vibely
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
-        <Navbar.Offcanvas 
-        id="offcanvasNavbar-expand-lg"
-        placement="top">
+        <Navbar.Offcanvas id="offcanvasNavbar-expand-lg" placement="top">
           <Offcanvas.Header closeButton>
             <Offcanvas.Title
-            id="offcanvasNavbarLabel-expand-lg" 
-            className="fw-bold">Vibely</Offcanvas.Title>
+              id="offcanvasNavbarLabel-expand-lg"
+              className="fw-bold"
+            >
+              Vibely
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body id="navbarOffcanvas">
             <Nav className="ms-auto gap-2">
@@ -59,7 +60,7 @@ export default function Header() {
                 }
               >
                 Instructions
-              </NavLink>   
+              </NavLink>
               <NavLink
                 style={{ padding: "10px" }}
                 to="/profile/joined"
@@ -68,7 +69,7 @@ export default function Header() {
                 }
               >
                 Joined
-              </NavLink>           
+              </NavLink>
               <NavLink
                 style={{ padding: "10px" }}
                 to="users/profile/"
@@ -77,14 +78,21 @@ export default function Header() {
                 }
               >
                 User Profile
-              </NavLink>           
+              </NavLink>
               <Form className="d-flex">
-                <Button className="m-auto" href="/register" variant="outline-secondary">
+                <Button
+                  className="m-auto me-1"
+                  href="/register"
+                  variant="outline-secondary"
+                >
                   Register
                 </Button>
-              </Form>
-              <Form className="d-flex">
-                <Button className="m-auto" href="/login" variant="outline-secondary">
+
+                <Button
+                  className="m-auto ms-1"
+                  href="/login"
+                  variant="outline-secondary"
+                >
                   Login
                 </Button>
               </Form>
