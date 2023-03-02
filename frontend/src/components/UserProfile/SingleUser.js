@@ -20,13 +20,16 @@ export default function SingleUser() {
   const [userEmail, setUserEmail] = useState("");
   const [userLocation, setUserLocation] = useState("");
   const [userDescription, setUserDescription] = useState("");
-  const [userImage, setUserImage] = useState(null);
+
+  //state for profile image
+  const [userFile, setUserFile] = useState(null);
+
   //state for events of logged in user
   const [events, setEvents] = useState([]);
   //for pagination in events
   const [visible, setVisible] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const [load, setLoad] = useState(false);
   //funcation for foramtting date time
   const formatDateTime = (date) => {
     const year = date.getFullYear();
@@ -80,12 +83,11 @@ export default function SingleUser() {
     description: userDescription,
     name: userName,
     location: userLocation,
-    profilePic: userImage,
+    profilePic: userFile,
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     axios.put(`/users/${user._id}`, userProfile).then((response) => {
       setUserP({
         email: response.data?.email,
@@ -95,6 +97,7 @@ export default function SingleUser() {
         profilePic: response.data?.profilePic,
       });
       console.log(response.data);
+      setLoad(true);
     });
     setShow(false);
   };
@@ -112,10 +115,10 @@ export default function SingleUser() {
   };
 
   //method for method upload
-  const toBase64 = (userImage) =>
+  const toBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.readAsDataURL(userImage);
+      reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
@@ -123,7 +126,7 @@ export default function SingleUser() {
   //method for selecting an image in the form
   const uploadImage = async (e) => {
     const base64 = await toBase64(e.target.files[0]);
-    setUserImage(base64);
+    setUserFile(base64);
   };
 
   return (
@@ -196,7 +199,7 @@ export default function SingleUser() {
                     <Form.Label>Upload profile picture</Form.Label>
                     <Form.Control
                       type="file"
-                      name="profileImage"
+                      name="file"
                       onChange={uploadImage}
                     />
                   </Form.Group>
