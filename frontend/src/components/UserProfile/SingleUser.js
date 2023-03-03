@@ -20,7 +20,7 @@ export default function SingleUser() {
   const [userEmail, setUserEmail] = useState("");
   const [userLocation, setUserLocation] = useState("");
   const [userDescription, setUserDescription] = useState("");
-
+  const [userId, setUserId] = useState("");
   //state for profile image
   const [userFile, setUserFile] = useState(null);
 
@@ -29,7 +29,6 @@ export default function SingleUser() {
   //for pagination in events
   const [visible, setVisible] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [load, setLoad] = useState(false);
   //funcation for foramtting date time
   const formatDateTime = (date) => {
     const year = date.getFullYear();
@@ -66,17 +65,19 @@ export default function SingleUser() {
   useEffect(() => {
     axios.get(`/users/profile`).then((response) => {
       setUserP(response.data);
+      setUserId(response.data?._id);
       setUserName(response.data?.name);
       setUserEmail(response.data?.email);
       setUserDescription(response?.data.description);
       setUserLocation(response.data?.location);
+      setUserFile(response.data?.profilePic);
+      console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
         setEvents(response.data);
       });
       setIsLoaded(true);
     });
   }, []);
-
   //object sent in put request
   const userProfile = {
     email: userEmail,
@@ -88,7 +89,7 @@ export default function SingleUser() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    axios.put(`/users/${user._id}`, userProfile).then((response) => {
+    axios.put(`/users/${userId}`, userProfile).then((response) => {
       setUserP({
         email: response.data?.email,
         description: response.data?.description,
@@ -97,7 +98,6 @@ export default function SingleUser() {
         profilePic: response.data?.profilePic,
       });
       console.log(response.data);
-      setLoad(true);
     });
     setShow(false);
   };
@@ -109,12 +109,12 @@ export default function SingleUser() {
 
   const handleShow = () => setShow(true);
 
-  //method for pagination on events of user
+  //method for pagination on events of the logged in user
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
 
-  //method for method upload
+  //method for image upload
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -123,7 +123,7 @@ export default function SingleUser() {
       reader.onerror = (error) => reject(error);
     });
 
-  //method for selecting an image in the form
+  //method for selecting an image in the edit profile modal
   const uploadImage = async (e) => {
     const base64 = await toBase64(e.target.files[0]);
     setUserFile(base64);
@@ -175,7 +175,6 @@ export default function SingleUser() {
                       name="name"
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
-                      // required
                     />
                   </Form.Group>
                   <Form.Group className="mb-3">
@@ -186,7 +185,6 @@ export default function SingleUser() {
                       value={userEmail}
                       name="email"
                       onChange={(e) => setUserEmail(e.target.value)}
-                      // required
                     />
                   </Form.Group>
 
@@ -195,7 +193,6 @@ export default function SingleUser() {
                     <Form.Control
                       type="text"
                       placeholder="Location"
-                      // required
                       value={userLocation}
                       name="location"
                       onChange={(e) => setUserLocation(e.target.value)}
@@ -219,6 +216,7 @@ export default function SingleUser() {
                     <Form.Control
                       type="file"
                       name="file"
+                      // value={userFile}
                       onChange={uploadImage}
                     />
                   </Form.Group>
