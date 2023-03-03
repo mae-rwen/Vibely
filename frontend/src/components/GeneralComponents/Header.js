@@ -12,10 +12,8 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 
 export default function Header() {
-  const { user, logout } = useContext(AuthContext);
-  
+  const { user, logout } = useContext(AuthContext); 
 
-  // {auth?.email ? ():()}
   return (
     <Navbar className="fixed-top" bg="light" expand="lg">
       <Container>

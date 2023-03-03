@@ -1,8 +1,3 @@
-// import Alex from "./pics/Alex.gif";
-// import Agata from "./pics/Agata.gif";
-// import Simran from "./pics/Simran.gif";
-// import Ola from "./pics/Ola.gif";
-import Alex from "./pics/Alex.png";
 import Agata from "./pics/Agata.png";
 import Simran from "./pics/Simran.png";
 import Ola from "./pics/Ola.png";
@@ -15,11 +10,6 @@ export default function MeetTheTeam() {
     pic: Agata,
     name: "Agata",
     desc: "The affirmative one",
-  };
-  const alex = {
-    pic: Alex,
-    name: "Alex",
-    desc: "With his head in the clouds",
   };
   const simran = {
     pic: Simran,
@@ -39,7 +29,6 @@ export default function MeetTheTeam() {
             <TeamCard member={agata} />
             <TeamCard member={simran} />
             <TeamCard member={ola} />
-            <TeamCard member={alex} />
           </div>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button variant="outline-secondary" href="/categories">
