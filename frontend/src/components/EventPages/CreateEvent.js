@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
+import CitySelector from "./CitySelector";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
@@ -67,16 +68,13 @@ export default function CreateEvent() {
               required
             />
           </Form.Group>
-
+    <div className="locationAndType">
           <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Location of the event</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Location of the event"
-              required
-              value={eventLocation}
-              onChange={(e) => setEventLocation(e.target.value)}
-            />
+            <CitySelector setEventLocation={setEventLocation} />
+            <Form.Text muted>
+              Select the desired location from the list
+            </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Type</Form.Label>
@@ -109,7 +107,7 @@ export default function CreateEvent() {
               </div>
             </div>
           </Form.Group>
-
+          </div>
           <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Date and time</Form.Label>
             <div className="form-check">

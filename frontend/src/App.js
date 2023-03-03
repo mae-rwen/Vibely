@@ -19,6 +19,7 @@ import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/EventSuccess";
 import Joined from "./components/UserProfile/BookedEvents/Joined";
 import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
+import NavigateToLogin from "./components/GeneralComponents/NavigateToLogin";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
           <Route path="/event/:event_id" element={<Event />} />
+          <Route path="/reqLogin" element={<NavigateToLogin />} />
 
 
           {/* protected routes */}

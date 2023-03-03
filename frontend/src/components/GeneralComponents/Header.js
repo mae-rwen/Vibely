@@ -5,8 +5,18 @@ import { NavLink } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import useAuth from "../hooks/useAuth";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 
 export default function Header() {
+  const { user, logout } = useContext(AuthContext);
+  
+
+  // {auth?.email ? ():()}
   return (
     <Navbar className="fixed-top" bg="light" expand="lg">
       <Container>
@@ -25,6 +35,26 @@ export default function Header() {
           </Offcanvas.Header>
           <Offcanvas.Body id="navbarOffcanvas">
             <Nav className="ms-auto gap-2">
+              <NavDropdown title="All routes" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/">Home</NavDropdown.Item>
+                <NavDropdown.Item href="/categories">
+                  Categories
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/allevents">
+                  All events
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/instructions">
+                  Instructions
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/joined">Joined</NavDropdown.Item>
+                <NavDropdown.Item href="/users/profile/">
+                  User profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                <NavDropdown.Item href="/aboutus">About us</NavDropdown.Item>
+              </NavDropdown>
+
               <NavLink
                 to="/"
                 style={{ padding: "10px" }}
@@ -32,7 +62,7 @@ export default function Header() {
                   isActive ? "activeClass " : "nonActive"
                 }
               >
-                Home
+                <FontAwesomeIcon icon={faHouse} />
               </NavLink>
               <NavLink
                 style={{ padding: "10px" }}
@@ -43,15 +73,7 @@ export default function Header() {
               >
                 Categories
               </NavLink>
-              <NavLink
-                style={{ padding: "10px" }}
-                to="/allevents"
-                className={({ isActive }) =>
-                  isActive ? "activeClass " : "nonActive"
-                }
-              >
-                All events
-              </NavLink>
+
               <NavLink
                 style={{ padding: "10px" }}
                 to="/instructions"
@@ -61,40 +83,35 @@ export default function Header() {
               >
                 Instructions
               </NavLink>
-              <NavLink
-                style={{ padding: "10px" }}
-                to="/profile/joined"
-                className={({ isActive }) =>
-                  isActive ? "activeClass " : "nonActive"
-                }
-              >
-                Joined
-              </NavLink>
-              <NavLink
-                style={{ padding: "10px" }}
-                to="users/profile/"
-                className={({ isActive }) =>
-                  isActive ? "activeClass " : "nonActive"
-                }
-              >
-                User Profile
-              </NavLink>
-              <Form className="d-flex">
-                <Button
-                  className="m-auto me-1"
-                  href="/register"
-                  variant="outline-secondary"
-                >
-                  Register
-                </Button>
 
-                <Button
-                  className="m-auto ms-1"
-                  href="/login"
-                  variant="outline-secondary"
-                >
-                  Login
-                </Button>
+              <Form className="d-flex">
+                {user ? (
+                  <>
+                  <Button
+                    className="m-auto ms-1"
+                    href="/users/profile/"
+                    variant="outline-secondary"
+                  >
+                    <FontAwesomeIcon icon={faUser} /> Your profile
+                  </Button>
+                  <Button
+                    className="m-auto ms-1"
+                    href="/"
+                    variant="outline-secondary"
+                    onClick={logout}
+                  >
+                    Log out
+                  </Button>
+                  </>
+                ) : (
+                  <Button
+                    className="m-auto ms-1"
+                    href="/login"
+                    variant="outline-secondary"
+                  >
+                    Vibein
+                  </Button>
+                )}
               </Form>
             </Nav>
           </Offcanvas.Body>
