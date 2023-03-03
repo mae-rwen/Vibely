@@ -99,8 +99,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    axios.get("/auth/logout").then((response) => {
+    axios.post("/auth/logout").then((response) => {
       setUser(null);
+      setAuth(null);
     });
   };
 

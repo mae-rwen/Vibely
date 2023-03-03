@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./SingleUser.css";
 import Table from "react-bootstrap/Table";
 import { useEffect, useContext, useState } from "react";
 import axios from "../../api/axios";

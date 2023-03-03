@@ -10846,6 +10846,12 @@ body {
 .App .layoutContainer #heroSection {
   margin: 30vh auto !important;
 }
+.App .layoutContainer #loggedInHero {
+  margin: 5em auto !important;
+}
+.App .layoutContainer .carouselCaption {
+  background-color: rgba(128, 128, 128, 0.763);
+}
 .App .layoutContainer .hpSection {
   margin: 8em auto;
 }
@@ -10855,9 +10861,6 @@ body {
 }
 .App .layoutContainer .hpSection .card-events-list {
   padding: 0;
-}
-.App .layoutContainer .hpSection .carouselCaption {
-  background-color: rgba(128, 128, 128, 0.763);
 }
 .App .layoutContainer .subpageHeader {
   margin-bottom: 4em;

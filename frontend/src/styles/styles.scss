@@ -27,6 +27,12 @@ body {
     #heroSection {
       margin: 30vh auto !important;
     }
+    #loggedInHero {
+      margin: 5em auto !important;
+    }
+    .carouselCaption {
+        background-color: rgba(128, 128, 128, 0.763);
+      }
     .hpSection {
       margin: 8em auto;
       .showMoreP:hover {
@@ -36,9 +42,7 @@ body {
       .card-events-list {
         padding: 0;
       }
-      .carouselCaption {
-        background-color: rgba(128, 128, 128, 0.763);
-      }
+      
     }
     // // <<-- homepage styling
     .subpageHeader {
