@@ -80,7 +80,6 @@ export default function Header() {
               >
                 Instructions
               </NavLink>
-
               <Form className="d-flex">
                 {user ? (
                   <>

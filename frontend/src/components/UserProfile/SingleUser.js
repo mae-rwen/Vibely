@@ -8,7 +8,9 @@ import { AuthContext } from "../../context/AuthProvider";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Modal from "react-bootstrap/Modal";
+import EventsDisplay from "./BookedEvents/EventsDisplay";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+
 
 export default function SingleUser() {
   const { user } = useContext(AuthContext);
@@ -268,6 +270,7 @@ export default function SingleUser() {
 
               </Card.Body>
             </Card>
+             <EventsDisplay />
           </div>
         </>
       ) : (
