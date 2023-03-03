@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "../api/axios";
+import { useNavigate } from "react-router";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [auth, setAuth] = useState({});
 
   const [user, setUser] = useState({});
@@ -109,6 +111,7 @@ export const AuthProvider = ({ children }) => {
     axios.post("/auth/logout").then((response) => {
       setUser(null);
       setAuth(null);
+      navigate('/');
     });
   };
 
