@@ -12,15 +12,13 @@ import LogInForm from "./components/UserProfile/LogInForm";
 import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
-
 import SingleUser from "./components/UserProfile/SingleUser";
-
 import AllEventsList from "./components/EventPages/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/EventSuccess";
 import Joined from "./components/UserProfile/BookedEvents/Joined";
-import CitySelector from "./components/EventPages/CitySelector";
+import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
 
 function App() {
   return (
@@ -45,14 +43,14 @@ function App() {
 
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/profile/joined" element={<Joined />} />
-          <Route path="/citySelector" element={<CitySelector />} />
+          <Route path="/profile/events" element={<EventsDisplay />} />
+          <Route path="/event/:event_id" element={<Event />} />
 
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
           <Route element={<RequireAuth />}>
-            <Route path="/event/:event_id" element={<Event />} />
-            {/* <Route path="/categories" element={<Categories />} /> */}
+            {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
           {/* catch all - to create missing element */}

@@ -1,6 +1,4 @@
-import React, { useEffect, 
-  // useContext, 
-  useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
@@ -21,15 +19,13 @@ import {
   faQuestionCircle,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
-// import { AuthContext } from "../../context/AuthProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useAuth from "../hooks/useAuth";
 import "./event.css";
 
 const Event = () => {
-
-  // const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  console.log(user);
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -38,7 +34,7 @@ const Event = () => {
 
   const [event, setEvent] = useState({});
   // const [join, setJoin] = useState({});
-  const [booked, setBooked] = useState(false)
+  const [booked, setBooked] = useState(false);
 
   useEffect(() => {
     axios
@@ -57,18 +53,19 @@ const Event = () => {
   const type = event?.type;
   //  console.log(type)
 
- const joinEvent = (e) => {
+  const joinEvent = (e) => {
     e.preventDefault();
-      axios.post(`/booking/${event_id}`)
-      .then((response)=> {
+    axios
+      .post(`/booking/${event_id}`)
+      .then((response) => {
         console.log("joined", response.data);
-        setBooked(true)
+        setBooked(true);
         // setJoin(response.data)
       })
       .catch((err) => {
         setEvent(null);
       }, []);
-    }
+  };
 
   // const renderTooltip = (props) => (
   //   <Tooltip id="tooltip" {...props}></Tooltip>
@@ -98,26 +95,22 @@ const Event = () => {
               </Row>
               <Row>
                 <Col className="p-1 mx-3 my-2">
-                    <Card.Title>
-                      Hosted by: { event.author?.name }
-                    </Card.Title>
-                    <Card.Subtitle>
-                      <p>
-                        <FontAwesomeIcon
-                          icon={faLocationCrosshairs}
-                          size="xs"
-                        />{" "}
-                        Location: {event.general_location}
-                      </p>
-                      </Card.Subtitle>
-                    <hr />
-                    <div>
+                  <Card.Title>Hosted by: {event.author?.name}</Card.Title>
+                  <Card.Subtitle>
+                    <p>
+                      <FontAwesomeIcon icon={faLocationCrosshairs} size="xs" />{" "}
+                      Location: {event.general_location}
+                    </p>
+                  </Card.Subtitle>
+                  <hr />
+                  <div>
                     <span className="text mb-0">
                       <FontAwesomeIcon icon={faCalendarDays} size="xs" />{" "}
-                      {event.date}
+                      {/* {formattedDate} */}
                     </span>
                     <span className="text mb-0">
-                    <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
+                      <FontAwesomeIcon icon={faClock} size="xs" />
+                      {/* {formattedTime}{" "} */}
                     </span>
                     <div className="mx-2">
                       <span className={type === "private" ? "show" : "hide"}>
@@ -128,7 +121,7 @@ const Event = () => {
                       </span>
                     </div>
                     <span className="text mb-0 first-letter">{event.type}</span>
-                    </div>
+                  </div>
                 </Col>
                 <Col></Col>
               </Row>

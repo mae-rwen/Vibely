@@ -131,6 +131,7 @@ export default function SingleUser() {
   };
 
   return (
+
     <>
       {isLoaded ? (
         <>
@@ -162,6 +163,7 @@ export default function SingleUser() {
 
             <Modal className="mt-4" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
+
                 <Modal.Title>Edit your profile</Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -224,6 +226,7 @@ export default function SingleUser() {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
+
                 <Button variant="outline-secondary" onClick={handleClose}>
                   Close
                 </Button>
@@ -281,5 +284,6 @@ export default function SingleUser() {
         <LoadingSpinner />
       )}
     </>
+
   );
 }
