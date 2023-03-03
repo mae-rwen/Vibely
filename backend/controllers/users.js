@@ -1,4 +1,6 @@
 const { User } = require("../models/users");
+const cloudinary = require("cloudinary").v2;
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { ErrorResponse } = require("../utils/ErrorResponse");
@@ -55,7 +57,7 @@ const login = async (req, res, next) => {
         maxAge: 1000 * 60 * 60 * 8,
       })
       .send(payload);
-    console.log(payload);
+    // console.log(payload);
   } catch (error) {
     next(error);
   }
@@ -92,14 +94,30 @@ const getUsers = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { email, description, name, location, profilePic } = req.body;
 
-    const { email, description, name, location, profilePic, booked } = req.body;
-    const user = await User.findByIdAndUpdate(
-      id,
-      { email, description, name, location, profilePic, booked },
-      { new: true }
-    );
-    res.json(user);
+    if (profilePic) {
+      const result = await cloudinary.uploader.unsigned_upload(
+        profilePic,
+        "c01lxqzs",
+        {
+          max_bytes: 10000000,
+        }
+      );
+      const user = await User.findByIdAndUpdate(
+        id,
+        { email, description, name, location, profilePic: result.secure_url, booked },
+        { new: true }
+      );
+      res.json(user);
+    } else {
+      const user = await User.findByIdAndUpdate(
+        id,
+        { email, description, name, location, profilePic: profilePic, booked },
+        { new: true }
+      );
+      res.json(user);
+    }
   } catch (error) {
     next(error);
   }

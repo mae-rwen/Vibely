@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [joined, setJoined] = useState({});
   const [created, setCreated] = useState({});
 
+
   useEffect(() => {
     axios
       .get("/users/profile")
@@ -26,14 +27,15 @@ export const AuthProvider = ({ children }) => {
         axios.get(`/events?user=${response.data._id}`).then((response) => {
           setCreated(response.data);
         });
+
+        console.log(response.data);
+
       })
       .catch((err) => {
         console.log(err)
         setUser(null);
       });
   }, []);
-
-  
 
   useEffect(() => {
     axios
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
         setEventCat(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setEventCat(null);
       });
   }, []);
@@ -58,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         setAllUsers(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setAllUsers(null);
       });
   }, []);
@@ -70,11 +72,10 @@ export const AuthProvider = ({ children }) => {
         setAllEvents(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setAllEvents(null);
       });
   }, []);
-
 
   useEffect(() => {
     axios
@@ -83,35 +84,50 @@ export const AuthProvider = ({ children }) => {
         setBookings(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setBookings(null);
       });
   }, []);
 
-  // const login = (email, name, password) => {
-  //   axios
-  //     .post("/auth/login", {
-  //       email,
-  //       name,
-  //       password
-  //     })
-  //     .then((response) => {
-  //       setUser(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       setUser(null);
-  //     });
-  // };
+  const login = (email, name, password) => {
+    axios
+      .post("/auth/login", {
+        email,
+        name,
+        password,
+      })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setUser(null);
+      });
+  };
 
   const logout = () => {
-    axios.get("/auth/logout").then((response) => {
+    axios.post("/auth/logout").then((response) => {
       setUser(null);
+      setAuth(null);
     });
   };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, user, setUser, allEvents, logout, allUsers, eventCat, bookings, joined, created,}}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        setAuth,
+        user,
+        setUser,
+        allEvents,
+        logout,
+        allUsers,
+        eventCat,
+        bookings,
+        joined,
+        created
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

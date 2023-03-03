@@ -1,6 +1,6 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./SingleUser.css";
 import Table from "react-bootstrap/Table";
 import { useEffect, useContext, useState } from "react";
 import axios from "../../api/axios";
@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Modal from "react-bootstrap/Modal";
 import EventsDisplay from "./BookedEvents/EventsDisplay";
+import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 
 
 export default function SingleUser() {
@@ -21,186 +22,260 @@ export default function SingleUser() {
   const [userEmail, setUserEmail] = useState("");
   const [userLocation, setUserLocation] = useState("");
   const [userDescription, setUserDescription] = useState("");
-  const [userImage, setUserImage] = useState("");
+  const [userId, setUserId] = useState("");
+  //state for profile image
+  const [userFile, setUserFile] = useState(null);
+
   //state for events of logged in user
   const [events, setEvents] = useState([]);
   //for pagination in events
   const [visible, setVisible] = useState(3);
-  const length = events.length;
+  const [isLoaded, setIsLoaded] = useState(false);
+  //funcation for foramtting date time
+  const formatDateTime = (date) => {
+    const year = date.getFullYear();
+    const day = date.getDate();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = months[date.getMonth()];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const weekday = days[date.getDay()];
+    const formattedDate =
+      weekday && day && month && year
+        ? `${weekday}, ${day} ${month} ${year}`
+        : null;
+
+    // get the time
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
+    return [formattedDate, formattedTime];
+  };
 
   useEffect(() => {
     axios.get(`/users/profile`).then((response) => {
       setUserP(response.data);
+      setUserId(response.data?._id);
       setUserName(response.data?.name);
       setUserEmail(response.data?.email);
       setUserDescription(response?.data.description);
       setUserLocation(response.data?.location);
+      setUserFile(response.data?.profilePic);
+      console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
         setEvents(response.data);
       });
+      setIsLoaded(true);
     });
   }, []);
-
+  //object sent in put request
   const userProfile = {
     email: userEmail,
     description: userDescription,
     name: userName,
     location: userLocation,
+    profilePic: userFile,
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    //testing by removing userprofile
-    axios.put(`/users/${user._id}`, userProfile).then((response) => {
+    axios.put(`/users/${userId}`, userProfile).then((response) => {
       setUserP({
         email: response.data?.email,
         description: response.data?.description,
         name: response.data?.name,
         location: response.data?.location,
-        // profilePic: response.data?.profilePic,
+        profilePic: response.data?.profilePic,
       });
       console.log(response.data);
     });
     setShow(false);
   };
 
+  //methods to hide and show the edit profile modal
   const handleClose = () => {
     setShow(false);
   };
 
   const handleShow = () => setShow(true);
 
+  //method for pagination on events of the logged in user
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
 
-  // const uploadImage = (e) => {
-  //   setUserImage(e.target.files[0]);
-  // };
+  //method for image upload
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  //method for selecting an image in the edit profile modal
+  const uploadImage = async (e) => {
+    const base64 = await toBase64(e.target.files[0]);
+    setUserFile(base64);
+  };
+
   return (
-    <div>
-      {/* <h1 className="text-center">Welcome {user.name}</h1> */}
+    <>
+      {isLoaded ? (
+        <>
+          <div className="userProfileDiv">
+            <Card id="userDesc">
+              <Card.Img variant="top" src={userP.profilePic} />
+              <Card.Body>
+                <Card.Title className="text-center fw-bold">
+                  {userP.name}
+                </Card.Title>
+                <Card.Text>From: {userP.location}</Card.Text>
+                <Card.Text>{userP.description}</Card.Text>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                  <Button
+                    className="w-30 mt-3"
+                    variant="secondary"
+                    onClick={handleShow}
+                  >
+                    Edit profile
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
 
-      <div className="row">
-        <div className="col-4 p-3 mx-4 personalInfo">
-          <img
-            className="myProfilePic"
-            src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            alt=""
-          />
-          <h4>{userP.name}</h4>
-
-          <Button variant="primary" onClick={handleShow}>
-            Edit profile
-          </Button>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit your profile</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form onSubmit={submitHandler}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    // required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Email"
-                    value={userEmail}
-                    name="email"
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    // required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Location"
-                    // required
-                    value={userLocation}
-                    name="location"
-                    onChange={(e) => setUserLocation(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Description</Form.Label>
-                  <FloatingLabel controlId="floatingTextarea2">
+            <Modal className="mt-4" show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Edit your profile</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form onSubmit={submitHandler}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
-                      as="textarea"
-                      placeholder="About me"
-                      style={{ height: "100px" }}
-                      value={userDescription}
-                      name="description"
-                      onChange={(e) => setUserDescription(e.target.value)}
+                      type="text"
+                      placeholder="Name"
+                      name="name"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
                     />
-                  </FloatingLabel>
-                </Form.Group>
-                {/* <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Upload profile picture</Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="profileImage"
-                    onChange={uploadImage}
-                  />
-                </Form.Group> */}
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={submitHandler}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <div className="col ">
-          <h3>About Me</h3>
-          <h5 className="userDescription">{userP.description}</h5>
-          <h3>Event created by me</h3>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Email"
+                      value={userEmail}
+                      name="email"
+                      onChange={(e) => setUserEmail(e.target.value)}
+                    />
+                  </Form.Group>
 
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Event Name</th>
-                <th>Event Date</th>
-                <th>Event Time</th>
-                <th>Event Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {events.slice(0, visible).map((event, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{event.title}</td>
-                    <td>{event.date}</td>
-                    <td>{event.date}</td>
-                    <td>{event.general_location}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-          <Button variant="primary" onClick={loadMore}>
-            Load more
-          </Button>
-        </div>
-        <EventsDisplay />
-      </div>   
-    </div>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Location"
+                      value={userLocation}
+                      name="location"
+                      onChange={(e) => setUserLocation(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Description</Form.Label>
+                    <FloatingLabel controlId="floatingTextarea2">
+                      <Form.Control
+                        as="textarea"
+                        placeholder="About me"
+                        style={{ height: "100px" }}
+                        value={userDescription}
+                        name="description"
+                        onChange={(e) => setUserDescription(e.target.value)}
+                      />
+                    </FloatingLabel>
+                  </Form.Group>
+                  <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Label>Upload profile picture</Form.Label>
+                    <Form.Control
+                      type="file"
+                      name="file"
+                      // value={userFile}
+                      onChange={uploadImage}
+                    />
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="outline-secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="secondary" onClick={submitHandler}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
+
+            <Card id="userEvents">
+              <Card.Body>
+                <Card.Title className="fw-bold mb-4">My activities</Card.Title>
+
+
+                
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th><b>Event Name</b></th>
+                        <th><b>Event Date</b></th>
+                        <th><b>Event Time</b></th>
+                        <th><b>Event Location</b></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {events.slice(0, visible).map((event, index) => {
+                        const date = new Date(event.date);
+                        let dateTime = formatDateTime(date);
+                        return (
+                          <tr key={index}>
+                            <td>{event.title}</td>
+                            <td>{dateTime[0]}</td>
+                            <td>{dateTime[1]}</td>
+                            <td>{event.general_location}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                  <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                    <Button
+                      className="w-30 mt-3"
+                      variant="secondary"
+                      onClick={loadMore}
+                    >
+                      Load more
+                    </Button>
+                  </div>
+                
+
+              </Card.Body>
+            </Card>
+             <EventsDisplay />
+          </div>
+        </>
+      ) : (
+        <LoadingSpinner />
+      )}
+    </>
   );
 }

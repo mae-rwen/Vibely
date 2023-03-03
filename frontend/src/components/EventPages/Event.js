@@ -25,8 +25,10 @@ import useAuth from "../hooks/useAuth";
 import "./event.css";
 
 const Event = () => {
+
   const { user, setUser, joined, created, allEvents, booked } = useAuth();
   const { event_id } = useParams();
+
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
@@ -41,8 +43,6 @@ const Event = () => {
   console.log(created);
   console.log(booked);
   console.log(allEvents);
-
-  console.log()
 
   useEffect(() => {
     axios
@@ -71,6 +71,7 @@ const Event = () => {
         console.log("joined", response.data);
         setJoin(true);
         navigate("/event_joined");
+
       })
       .catch((err) => {
         if (!err?.response) {
@@ -90,7 +91,6 @@ const Event = () => {
   const date = new Date(event.date);
   const UTC = date.toUTCString();
   console.log(UTC);
-
   return (
     <Container>
       <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
