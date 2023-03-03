@@ -1,5 +1,6 @@
 require("dotenv/config");
 require("./db");
+
 const express = require("express");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
@@ -12,6 +13,7 @@ const { userRouter } = require("./routes/users")
 const { eventRouter } = require("./routes/events")
 const { categoriesRouter } = require("./routes/categories")
 const { bookingRouter } = require("./routes/booking")
+
 
 
 const { errorHandler } = require("./middlewares/errorHandler");
@@ -34,6 +36,7 @@ app.use("/users", userRouter);
 app.use("/events", eventRouter)
 app.use("/categories", categoriesRouter)
 app.use("/booking", bookingRouter)
+
 
 
 app.use(errorHandler);

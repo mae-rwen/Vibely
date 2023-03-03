@@ -83,8 +83,7 @@ export default function AllEventsList() {
             typeQuery={typeQuery}
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
-            setCategoryQuery={setCategoryQuery}
-            sortBy={sortBy}
+            setCategoryQuery={setCategoryQuery}            
             setSortBy={setSortBy}           
           />
 

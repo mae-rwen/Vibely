@@ -92,6 +92,9 @@ body {
           display: flex;
           flex-direction: row;
           gap: 0.75em;
+          > * {          
+            width: auto;
+          }
         }
         .createNewButton {
           margin-left: auto;
@@ -182,11 +185,20 @@ body {
     .createEventForm {
       margin: 3em auto;
       max-width: 45em;
-      .radioButtons {
+      .locationAndType {
         display: flex;
         flex-direction: row;
-        gap: 1em;
+        gap: 5em;
+        .citySelector {
+          max-width: 13em;
+        }
+        .radioButtons {
+          display: flex;
+          flex-direction: row;
+          gap: 1em;
+        }
       }
+      
     }
   }
   // // <<-- Create event form

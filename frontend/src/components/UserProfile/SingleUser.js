@@ -240,10 +240,10 @@ export default function SingleUser() {
                   <Table striped bordered hover>
                     <thead>
                       <tr>
-                        <th>Event Name</th>
-                        <th>Event Date</th>
-                        <th>Event Time</th>
-                        <th>Event Location</th>
+                        <th><b>Event Name</b></th>
+                        <th><b>Event Date</b></th>
+                        <th><b>Event Time</b></th>
+                        <th><b>Event Location</b></th>
                       </tr>
                     </thead>
                     <tbody>

@@ -20,6 +20,7 @@ import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/EventSuccess";
 import Joined from "./components/UserProfile/BookedEvents/Joined";
+import CitySelector from "./components/EventPages/CitySelector";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
 
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/profile/joined" element={<Joined />} />
+          <Route path="/citySelector" element={<CitySelector />} />
 
 
           {/* protected routes */}

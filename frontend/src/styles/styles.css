@@ -10910,6 +10910,9 @@ body {
   flex-direction: row;
   gap: 0.75em;
 }
+.App .layoutContainer .eventsDiv .eventsFilters .filtersButtons > * {
+  width: auto;
+}
 .App .layoutContainer .eventsDiv .eventsFilters .createNewButton {
   margin-left: auto;
 }
@@ -10988,7 +10991,15 @@ body {
   margin: 3em auto;
   max-width: 45em;
 }
-.App .createEvent .createEventForm .radioButtons {
+.App .createEvent .createEventForm .locationAndType {
+  display: flex;
+  flex-direction: row;
+  gap: 5em;
+}
+.App .createEvent .createEventForm .locationAndType .citySelector {
+  max-width: 13em;
+}
+.App .createEvent .createEventForm .locationAndType .radioButtons {
   display: flex;
   flex-direction: row;
   gap: 1em;
