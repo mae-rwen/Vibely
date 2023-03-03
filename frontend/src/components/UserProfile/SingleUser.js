@@ -131,24 +131,18 @@ export default function SingleUser() {
   };
 
   return (
-
     <>
       {isLoaded ? (
         <>
           <div className="userProfileDiv">
             <Card id="userDesc">
-              <Card.Img
-                variant="top"
-                src="https://media.istockphoto.com/id/1372144488/de/foto/niedliche-katze-mit-blumenkrone-mit-blauen-bl%C3%BCten-auf-kopfportr%C3%A4t.jpg?s=612x612&w=0&k=20&c=NedGT3gmxz3HE9PneCi8nhaZrz7L7srQ5Li-qibG_y8="
-              />
+              <Card.Img variant="top" src={userP.profilePic} />
               <Card.Body>
                 <Card.Title className="text-center fw-bold">
                   {userP.name}
                 </Card.Title>
                 <Card.Text>From: {userP.location}</Card.Text>
-                <Card.Text>
-                  {userP.description}
-                </Card.Text>
+                <Card.Text>{userP.description}</Card.Text>
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
                   <Button
                     className="w-30 mt-3"
@@ -162,8 +156,7 @@ export default function SingleUser() {
             </Card>
 
             <Modal className="mt-4" show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-
+              <Modal.Header closeButton>
                 <Modal.Title>Edit your profile</Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -224,7 +217,6 @@ export default function SingleUser() {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-
                 <Button variant="outline-secondary" onClick={handleClose}>
                   Close
                 </Button>
@@ -232,56 +224,52 @@ export default function SingleUser() {
                   Save Changes
                 </Button>
               </Modal.Footer>
-          </Modal>
+            </Modal>
 
             <Card id="userEvents">
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
-                
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Event Name</th>
-                        <th>Event Date</th>
-                        <th>Event Time</th>
-                        <th>Event Location</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {events.slice(0, visible).map((event, index) => {
-                        const date = new Date(event.date);
-                        let dateTime = formatDateTime(date);
-                        return (
-                          <tr key={index}>
-                            <td>{event.title}</td>
-                            <td>{dateTime[0]}</td>
-                            <td>{dateTime[1]}</td>
-                            <td>{event.general_location}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                  <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-                    <Button
-                      className="w-30 mt-3"
-                      variant="secondary"
-                      onClick={loadMore}
-                    >
-                      Load more
-                    </Button>
-                  </div>
-                
+
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Event Name</th>
+                      <th>Event Date</th>
+                      <th>Event Time</th>
+                      <th>Event Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {events.slice(0, visible).map((event, index) => {
+                      const date = new Date(event.date);
+                      let dateTime = formatDateTime(date);
+                      return (
+                        <tr key={index}>
+                          <td>{event.title}</td>
+                          <td>{dateTime[0]}</td>
+                          <td>{dateTime[1]}</td>
+                          <td>{event.general_location}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                  <Button
+                    className="w-30 mt-3"
+                    variant="secondary"
+                    onClick={loadMore}
+                  >
+                    Load more
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           </div>
-
-          
         </>
       ) : (
         <LoadingSpinner />
       )}
     </>
-
   );
 }
