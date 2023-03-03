@@ -52,7 +52,7 @@ export default function LogInForm() {
       console.log(name);
       console.log(JSON.stringify(response?.data));
 
-      console.log(JSON.stringify(response));
+      console.log(response);
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name, password, accessToken });
       // setOperator("");

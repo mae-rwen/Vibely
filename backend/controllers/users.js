@@ -48,7 +48,7 @@ const login = async (req, res, next) => {
 
     const payload = { id: user._id, email: user.email, name: user.name };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "8h",
     });
 
     res
@@ -64,11 +64,13 @@ const login = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
+  // res
+  //   .cookie("access_token", "", {
+  //     httpOnly: true,
+  //     maxAge: 0,
+  //   })
   res
-    .cookie("access_token", "", {
-      httpOnly: true,
-      maxAge: 0,
-    })
+    .clearCookie("access_token")
     .send("See you later, alligator");
 };
 

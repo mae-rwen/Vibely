@@ -92,7 +92,7 @@ export default function Header() {
                   </Button>
                   <Button
                     className="m-auto ms-1"
-                    href="/"
+                    // href="/"
                     variant="outline-secondary"
                     onClick={logout}
                   >
