@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
         maxAge: 1000 * 60 * 60 * 8,
       })
       .send(payload);
-    console.log(payload);
+    // console.log(payload);
   } catch (error) {
     next(error);
   }
@@ -93,7 +93,6 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { email, description, name, location, profilePic } = req.body;
-    // console.log("string:" + profilePic);
     if (profilePic) {
       const result = await cloudinary.uploader.unsigned_upload(
         profilePic,
@@ -102,7 +101,6 @@ const updateUser = async (req, res, next) => {
           max_bytes: 10000000,
         }
       );
-      // console.log(result);
       const user = await User.findByIdAndUpdate(
         id,
         { email, description, name, location, profilePic: result.secure_url },
@@ -112,7 +110,7 @@ const updateUser = async (req, res, next) => {
     } else {
       const user = await User.findByIdAndUpdate(
         id,
-        { email, description, name, location, profilePic },
+        { email, description, name, location, profilePic: profilePic },
         { new: true }
       );
       res.json(user);
