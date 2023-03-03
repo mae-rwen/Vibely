@@ -93,6 +93,7 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { email, description, name, location, profilePic } = req.body;
+
     if (profilePic) {
       const result = await cloudinary.uploader.unsigned_upload(
         profilePic,
@@ -115,6 +116,7 @@ const updateUser = async (req, res, next) => {
       );
       res.json(user);
     }
+
   } catch (error) {
     next(error);
   }
