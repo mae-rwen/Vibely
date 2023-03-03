@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import useAuth from "../hooks/useAuth";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,7 +89,7 @@ export default function Header() {
                   <Button
                     className="m-auto ms-1"
                     href="/users/profile/"
-                    variant="outline-secondary"
+                    variant="secondary"
                   >
                     <FontAwesomeIcon icon={faUser} /> Your profile
                   </Button>

@@ -4,7 +4,6 @@ import MeetTheTeam from "./MeetTheTeam";
 import CategoriesOverview from "./CategoriesOverview";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
-// import useAuth from "../hooks/useAuth";
 import LoggedInView from "./LoggedInView";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
