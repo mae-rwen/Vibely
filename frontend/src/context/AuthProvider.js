@@ -13,20 +13,17 @@ export const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState({});
   const [allEvents, setAllEvents] = useState({});
 
-
   useEffect(() => {
     axios
       .get("/users/profile")
       .then((response) => {
         setUser(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((err) => {
         setUser(null);
       });
   }, []);
-
-  
 
   useEffect(() => {
     axios
@@ -35,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         setEventCat(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setEventCat(null);
       });
   }, []);
@@ -51,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         setAllUsers(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setAllUsers(null);
       });
   }, []);
@@ -63,11 +60,10 @@ export const AuthProvider = ({ children }) => {
         setAllEvents(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setAllEvents(null);
       });
   }, []);
-
 
   useEffect(() => {
     axios
@@ -77,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         setBookings(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setBookings(null);
       });
   }, []);
@@ -87,13 +83,13 @@ export const AuthProvider = ({ children }) => {
       .post("/auth/login", {
         email,
         name,
-        password
+        password,
       })
       .then((response) => {
         setUser(response.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setUser(null);
       });
   };
@@ -105,7 +101,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, user, setUser, allEvents, logout, allUsers, eventCat, bookings}}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        setAuth,
+        user,
+        setUser,
+        allEvents,
+        logout,
+        allUsers,
+        eventCat,
+        bookings,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
