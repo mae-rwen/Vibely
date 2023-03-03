@@ -12,8 +12,8 @@ export const AuthProvider = ({ children }) => {
   const [eventCat, setEventCat] = useState([]);
   const [allUsers, setAllUsers] = useState({});
   const [allEvents, setAllEvents] = useState({});
-  const [joined, setJoined] = useState({});
-  const [created, setCreated] = useState({});
+  const [joined, setJoined] = useState([]);
+  const [created, setCreated] = useState([]);
 
 
   useEffect(() => {

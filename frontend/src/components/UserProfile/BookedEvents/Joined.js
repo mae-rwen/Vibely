@@ -17,22 +17,14 @@ function Joined() {
   console.log(allEvents);
   console.log(user._id);
 
-  useEffect(() => {
-    axios.get(`/booking?user._id`)
-    .then((response) => {
-          setJoined(response.data);
-        }).catch((err) => {
-          console.log(err)
-        });
-      }, [])
 
   return (
     <div>
-      {joined.length !== 0
+      {joined?.length !== 0
         ? (
           <ListGroup as="ul">
             {joined.map((val) => {
-              const date = new Date(val.event.date);
+              const date = new Date(val.event?.date);
               const UTC = date.toUTCString();
 
               return(
