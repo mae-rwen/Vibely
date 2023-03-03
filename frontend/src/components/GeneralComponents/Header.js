@@ -60,15 +60,7 @@ export default function Header() {
               >
                 Instructions
               </NavLink>   
-              <NavLink
-                style={{ padding: "10px" }}
-                to="/profile/joined"
-                className={({ isActive }) =>
-                  isActive ? "activeClass " : "nonActive"
-                }
-              >
-                Joined
-              </NavLink>           
+                  
               <NavLink
                 style={{ padding: "10px" }}
                 to="users/profile/"

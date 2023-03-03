@@ -9,7 +9,8 @@ const userSchema = new Schema({
     profilePic: { type: String },
     active: { type: Boolean, default: true},
     rating: { type: Number, min: 0, max: 5},
-    booked: { type: Types.ObjectId, ref: "Booking"},
+    // booked: { type: Object},
+    // joined: { type: Types.ObjectId, ref: "Booking"},
 },
 {
     timestamps: true,

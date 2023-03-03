@@ -5,6 +5,7 @@ import {
   Row,
   Col,
   Card,
+  Container,
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
@@ -19,35 +20,41 @@ import {
   faQuestionCircle,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
-import useAuth from "../hooks/useAuth"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useAuth from "../hooks/useAuth";
 import "./event.css";
 
 const Event = () => {
-
-  const { user } = useAuth();
-  console.log(user)
-
-
+  const { user, setUser, joined, created, allEvents, booked } = useAuth();
+  const { event_id } = useParams();
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
-  const { event_id } = useParams();
-
+  const [err, setErr] = useState("");
   const [event, setEvent] = useState({});
-  // const [join, setJoin] = useState({});
-  const [booked, setBooked] = useState(false)
+  const [join, setJoin] = useState(false);
+
+  const [userData, setUserData] = useState("");
+  const [updatedEvent, setUpdatedEvent] = useState({});
+
+  console.log(joined);
+  console.log(created);
+  console.log(booked);
+  console.log(allEvents);
+
+  console.log()
 
   useEffect(() => {
     axios
       .get(`/events/find/${event_id}`)
       .then((response) => {
-        // console.log("found:", response.data);
         setEvent(response.data);
       })
       .catch((err) => {
+        console.log(err.response.data);
+        console.log(err.response.status);
+        console.log(err.response.headers);
+        console.log(err.message);
         setEvent(null);
       });
   }, [event_id]);
@@ -55,41 +62,54 @@ const Event = () => {
   // console.log(user);
 
   const type = event?.type;
-  //  console.log(type)
 
- const joinEvent = (e) => {
+  const joinEvent = (e) => {
     e.preventDefault();
-      axios.post(`/booking/${event_id}`)
-      .then((response)=> {
+    axios
+      .post(`/booking/${event_id}`)
+      .then((response) => {
         console.log("joined", response.data);
-        setBooked(true)
-        // setJoin(response.data)
+        setJoin(true);
+        navigate("/event_joined");
       })
       .catch((err) => {
-        setEvent(null);
+        if (!err?.response) {
+          setErr("No Server Response");
+        } else if (err.response?.status === 409) {
+          setErr("You already joined this event");
+        } else {
+          setEvent(null);
+        }
       }, []);
-    }
-
+  };
 
   // const renderTooltip = (props) => (
   //   <Tooltip id="tooltip" {...props}></Tooltip>
   // );
 
+  const date = new Date(event.date);
+  const UTC = date.toUTCString();
+  console.log(UTC);
 
   return (
-    <>
+    <Container>
+      <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
+        Go Back
+      </Button>
       {event && (
         <Card>
           <Card.Header className="d-flex">
-            <Card.Title className="title my-3">{event.title}</Card.Title>
-            <Button
-              className="ms-auto my-3"
-              //   size="sm"
-              variant="secondary"
-              onClick={goBack}
-            >
-              Go Back
-            </Button>
+            <Row>
+              <Col>
+                <Card.Title className="event">{event.title}</Card.Title>
+
+                <Card.Subtitle className="subtitle">
+                  <span>
+                    <FontAwesomeIcon icon={faCalendarDays} /> {UTC}
+                  </span>
+                </Card.Subtitle>
+              </Col>
+            </Row>
           </Card.Header>
 
           <Card.Body>
@@ -100,27 +120,21 @@ const Event = () => {
               </Row>
               <Row>
                 <Col className="p-1 mx-3 my-2">
-                    <Card.Title>
-                      Hosted by: { event.author?.name }
-                    </Card.Title>
-                    <Card.Subtitle>
-                      <p>
-                        <FontAwesomeIcon
-                          icon={faLocationCrosshairs}
-                          size="xs"
-                        />{" "}
-                        Location: {event.general_location}
-                      </p>
-                      </Card.Subtitle>
-                    <hr />
-                    <div>
+                  <Card.Title>Hosted by: {event.author?.name}</Card.Title>
+                  <Card.Subtitle>
+                    <p>
+                      <FontAwesomeIcon icon={faLocationCrosshairs} size="xs" />{" "}
+                      Location: {event.general_location}
+                    </p>
+                  </Card.Subtitle>
+                  <hr />
+                  <div>
                     <span className="text mb-0">
-                      <FontAwesomeIcon icon={faCalendarDays} size="xs" />{" "}
-                      {formattedDate}
+                      <FontAwesomeIcon icon={faCalendarDays} size="xs" /> {UTC}
                     </span>
-                    <span className="text mb-0">
-                    <FontAwesomeIcon icon={faClock} size="xs" /> {formattedTime}{" "}
-                    </span>
+                    {/* <span className="text mb-0">
+                      <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
+                    </span> */}
                     <div className="mx-2">
                       <span className={type === "private" ? "show" : "hide"}>
                         <FontAwesomeIcon icon={faHouseChimney} size="xs" />
@@ -130,7 +144,7 @@ const Event = () => {
                       </span>
                     </div>
                     <span className="text mb-0 first-letter">{event.type}</span>
-                    </div>
+                  </div>
                 </Col>
                 <Col></Col>
               </Row>
@@ -206,13 +220,13 @@ const Event = () => {
               )}
             </OverlayTrigger>
 
-            <Button variant="secondary" disabled={booked} onClick={joinEvent}>
+            <Button variant="secondary" disabled={join} onClick={joinEvent}>
               JOIN
             </Button>
           </Card.Footer>
         </Card>
       )}
-    </>
+    </Container>
   );
 };
 

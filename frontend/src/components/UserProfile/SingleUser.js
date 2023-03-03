@@ -8,6 +8,8 @@ import { AuthContext } from "../../context/AuthProvider";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Modal from "react-bootstrap/Modal";
+import EventsDisplay from "./BookedEvents/EventsDisplay";
+
 
 export default function SingleUser() {
   const { user } = useContext(AuthContext);
@@ -197,7 +199,8 @@ export default function SingleUser() {
             Load more
           </Button>
         </div>
-      </div>
+        <EventsDisplay />
+      </div>   
     </div>
   );
 }

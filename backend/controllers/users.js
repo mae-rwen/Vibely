@@ -7,7 +7,9 @@ const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const user = await User.findOne({ email });
-    if (user) throw new ErrorResponse("User already exists", 409);
+    const userName = await User.findOne({ name });
+    if (user) throw new ErrorResponse("Email already exists", 409);
+    if (userName) throw new ErrorResponse("User Name already exists", 409);
 
     const hash = await bcrypt.hash(password, 8);
     const newUser = await User.create({ name, email, password: hash });
@@ -91,10 +93,10 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const { email, description, name, location, profilePic } = req.body;
+    const { email, description, name, location, profilePic, booked } = req.body;
     const user = await User.findByIdAndUpdate(
       id,
-      { email, description, name, location, profilePic },
+      { email, description, name, location, profilePic, booked },
       { new: true }
     );
     res.json(user);

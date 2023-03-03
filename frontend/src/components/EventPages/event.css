@@ -59,3 +59,14 @@
     border: 1px solid;
     
 }
+
+.event {
+    font-size: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    padding-bottom: 0.5rem;
+}
