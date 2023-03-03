@@ -5,21 +5,9 @@ import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
 
 function CreatedEvent() {
-  const { created, setCreated } = useContext(AuthContext);
+  const { created  } = useContext(AuthContext);
   console.log(created);
-  // const [created, setCreated] = useState([]);
-
-  useEffect(() => {
-   axios.get(`/events?user._id`).then((response) => {
-          console.log(response.data)
-          setCreated(response.data);
-        })
-        .catch((err) => {
-        console.log(err)
-       })
-      }, []);
-
-
+  
   return (
     <div>
       {created.length !== 0 ? (

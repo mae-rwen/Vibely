@@ -106,14 +106,14 @@ const updateUser = async (req, res, next) => {
       );
       const user = await User.findByIdAndUpdate(
         id,
-        { email, description, name, location, profilePic: result.secure_url, booked },
+        { email, description, name, location, profilePic: result.secure_url },
         { new: true }
       );
       res.json(user);
     } else {
       const user = await User.findByIdAndUpdate(
         id,
-        { email, description, name, location, profilePic: profilePic, booked },
+        { email, description, name, location, profilePic: profilePic },
         { new: true }
       );
       res.json(user);
