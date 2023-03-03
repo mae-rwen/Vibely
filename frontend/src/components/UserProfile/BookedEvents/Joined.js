@@ -6,7 +6,7 @@ import axios from "../../../api/axios";
 import "./eventdisplay.css"
 
 function Joined() {
-  const { joined, allEvents, user, booking, setJoined } = useContext(AuthContext);
+  const { joined, allEvents, user, booking } = useContext(AuthContext);
 
   // const [joined, setJoined] = useState({})
 

@@ -38,7 +38,7 @@ const bookEvent = async (req, res, next) => {
     const joinedEvent = await Event.findById(event)
     const user = req.user.id;
     const attendant = await User.findById(user)
-    const check = await Booking.findOne({});
+    // const check = await Booking.findOne({});
     // if (check) throw new ErrorResponse("Yu already joined this event", 409);
     const bookEvent = await Booking.create({
       event: joinedEvent,
