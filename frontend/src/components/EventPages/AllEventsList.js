@@ -1,33 +1,37 @@
 import axios from "../../api/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 import { useParams } from "react-router-dom";
+import AuthContext from "../../context/AuthProvider";
+import ListGroup from "react-bootstrap/ListGroup";
 
 export default function AllEventsList() {
   const { category } = useParams();
+  const { user } = useContext(AuthContext);
 
   const [allEvents, setAllEvents] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [eventsToDisplay, setEventsToDisplay] = useState([]);
+  const [notMyEvents, setNotMyEvents] = useState();
   const [getCategories, setGetCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState(category); 
+  const [categoryQuery, setCategoryQuery] = useState(category);
   const [sortBy, setSortBy] = useState("createdAt");
 
-  // get all categories 
+  // get all categories
   // and events for displaying locations and types of events
   useEffect(() => {
     axios
-    .get(`/categories`)
-    .then((response) => {
-      setGetCategories(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .get(`/categories`)
+      .then((response) => {
+        setGetCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     axios
       .get(`/events`)
       .then((response) => {
@@ -45,9 +49,23 @@ export default function AllEventsList() {
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}&sortBy=${sortBy}`)
+      .get(
+        `/events?location=${locationQuery}&type=${typeQuery}&category=${
+          categoryQuery ? categoryQuery : ""
+        }&sortBy=${sortBy}`
+      )
       .then((response) => {
-        setEvents(response.data);
+        // if (user) {
+        //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);         
+        //   console.log(filteredEvents)
+        // } else {
+        setEventsToDisplay(
+          // user ? (
+          //   response?.data?.filter(event => response.data.author?._id !== user?._id)
+          //   ):(
+              response.data)
+              // );
+        // }
         setIsLoaded(true);
       })
       .catch((error) => {
@@ -83,11 +101,18 @@ export default function AllEventsList() {
             typeQuery={typeQuery}
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
-            setCategoryQuery={setCategoryQuery}            
-            setSortBy={setSortBy}           
+            setCategoryQuery={setCategoryQuery}
+            setSortBy={setSortBy}
           />
-
-          <EventsList events={events} getCategories={getCategories} />
+          {eventsToDisplay.length !== 0 ? (
+            <ListGroup className="eventsList" as="ul">
+              {eventsToDisplay.map((event) => {
+                return <EventsList key={event._id} event={event} />;
+              })}
+            </ListGroup>
+          ) : (
+            "No matching events. Please try out with different filters."
+          )}
         </div>
       ) : (
         <LoadingSpinner />
