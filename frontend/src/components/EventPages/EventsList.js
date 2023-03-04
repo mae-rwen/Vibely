@@ -3,7 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { NavLink } from "react-router-dom";
 
 export default function EventsList({ event }) {
- 
+  // get the date
   const date = new Date(event.date);
   const year = date.getFullYear();
   const day = date.getDate();
@@ -39,16 +39,12 @@ export default function EventsList({ event }) {
 
   // get the time
   const hour = date.getHours().toString();
-  const minutes = date.getMinutes().toString();
+  const minutes = date.getMinutes().toString(); 
 
-  const formattedTime =
-    hour && minutes ? `${hour}:${minutes}` : null; 
+  const formattedTime = hour && minutes ? `${hour.length === 2 ? hour : "0"+hour}:${minutes.length === 2 ? minutes : "0"+minutes}` : null;
   return (
     <>
-      <NavLink
-        to={`/event/${event._id}`}
-        style={{ textDecoration: "none" }}        
-      >
+      <NavLink to={`/event/${event._id}`} style={{ textDecoration: "none" }}>
         <ListGroup.Item
           as="li"
           className="d-flex justify-content-between align-items-start"

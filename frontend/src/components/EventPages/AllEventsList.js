@@ -56,11 +56,15 @@ export default function AllEventsList() {
       )
       .then((response) => {
         // if (user) {
-        //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);
-        //   setEventsToDisplay(filteredEvents);
+        //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);         
         //   console.log(filteredEvents)
         // } else {
-        setEventsToDisplay(response.data);
+        setEventsToDisplay(
+          // user ? (
+          //   response?.data?.filter(event => response.data.author?._id !== user?._id)
+          //   ):(
+              response.data)
+              // );
         // }
         setIsLoaded(true);
       })
@@ -103,8 +107,6 @@ export default function AllEventsList() {
           {eventsToDisplay.length !== 0 ? (
             <ListGroup className="eventsList" as="ul">
               {eventsToDisplay.map((event) => {
-                // get the date
-
                 return <EventsList key={event._id} event={event} />;
               })}
             </ListGroup>
