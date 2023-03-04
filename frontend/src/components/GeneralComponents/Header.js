@@ -1,7 +1,7 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -12,7 +12,7 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 
 export default function Header() {
-  const { user, logout } = useContext(AuthContext); 
+  const { user, logout } = useContext(AuthContext);   
 
   return (
     <Navbar className="fixed-top" bg="light" expand="lg">
@@ -84,15 +84,14 @@ export default function Header() {
                 {user ? (
                   <>
                   <Button
-                    className="m-auto ms-1"
+                    className="m-auto ms-1"                 
                     href="/users/profile/"
                     variant="secondary"
                   >
                     <FontAwesomeIcon icon={faUser} /> Your profile
                   </Button>
                   <Button
-                    className="m-auto ms-1"
-                    // href="/"
+                    className="m-auto ms-1"                 
                     variant="outline-secondary"
                     onClick={logout}
                   >
