@@ -99,7 +99,6 @@ export default function SingleUser() {
         profilePic: response.data?.profilePic,
       });
       setUser({ name: response.data?.name });
-      console.log(response.data);
     });
     setShow(false);
   };
@@ -231,39 +230,6 @@ export default function SingleUser() {
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
                 <EventsDisplay />
-
-                {/* <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>
-                        <b>Event Name</b>
-                      </th>
-                      <th>
-                        <b>Event Date</b>
-                      </th>
-                      <th>
-                        <b>Event Time</b>
-                      </th>
-                      <th>
-                        <b>Event Location</b>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {events.slice(0, visible).map((event, index) => {
-                      const date = new Date(event.date);
-                      let dateTime = formatDateTime(date);
-                      return (
-                        <tr key={index}>
-                          <td>{event.title}</td>
-                          <td>{dateTime[0]}</td>
-                          <td>{dateTime[1]}</td>
-                          <td>{event.general_location}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </Table> */}
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
                   {/* <Button
                     className="w-30 mt-3"
@@ -275,7 +241,6 @@ export default function SingleUser() {
                 </div>
               </Card.Body>
             </Card>
-            {/* <EventsDisplay /> */}
           </div>
         </>
       ) : (
