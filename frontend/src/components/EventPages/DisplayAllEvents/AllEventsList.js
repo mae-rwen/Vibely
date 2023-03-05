@@ -109,7 +109,7 @@ export default function AllEventsList() {
           {eventsToDisplay.length !== 0 ? (
             <ListGroup className="eventsList" as="ul">
               {eventsToDisplay.map((event) => {
-                return <EventsList key={event._id} event={event} />;
+                return <EventsList key={event._id} event={event} getCategories={getCategories}/>;
               })}
             </ListGroup>
           ) : (

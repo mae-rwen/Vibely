@@ -1,8 +1,9 @@
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import { NavLink } from "react-router-dom";
+import Figure from "react-bootstrap/Figure";
 
-export default function EventsList({ event }) {
+export default function EventsList({ event, getCategories }) {
   // get the date
   const date = new Date(event.date);
   const year = date.getFullYear();
@@ -39,9 +40,16 @@ export default function EventsList({ event }) {
 
   // get the time
   const hour = date.getHours().toString();
-  const minutes = date.getMinutes().toString(); 
+  const minutes = date.getMinutes().toString();
+  const formattedTime =
+    hour && minutes
+      ? `${hour.length === 2 ? hour : "0" + hour}:${
+          minutes.length === 2 ? minutes : "0" + minutes
+        }`
+      : null;
 
-  const formattedTime = hour && minutes ? `${hour.length === 2 ? hour : "0"+hour}:${minutes.length === 2 ? minutes : "0"+minutes}` : null;
+  // get the picture
+
   return (
     <>
       <NavLink to={`/event/${event._id}`} style={{ textDecoration: "none" }}>
@@ -49,7 +57,16 @@ export default function EventsList({ event }) {
           as="li"
           className="d-flex justify-content-between align-items-start"
         >
-          <div className="ms-2 me-auto">
+          <Figure className="me-3">
+              <Figure.Image
+                width={171}
+                height={180}
+                alt="category"
+                src={event.category?.picture}
+                rounded
+              />            
+            </Figure>
+          <div className="ms-2 me-auto">            
             <span>
               <b>{event.title}</b> in {event.general_location} <br /> on{" "}
               {formattedDate ? formattedDate : `not specified date`} at{" "}
@@ -62,7 +79,7 @@ export default function EventsList({ event }) {
               Created by {event.author?.name ? event.author?.name : "unknown"}
               <br />
               Category:{" "}
-              {event.category?.name ? event.category?.name : "undefined"}
+                {event.category?.name ? event.category?.name : "undefined"}
             </span>
           </div>
           <Badge bg="secondary" pill>

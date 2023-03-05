@@ -1,8 +1,18 @@
+$primary: #a5b2ab;
+$secondary: #c98f61;
+$success: #a5b2ab;
+$info: #c98f61;
+$warning:#3d5d52;
+$danger: #352e28;
+$light: #e1cbbc;
+$dark: #352e28;
+
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 body {
   font-family: "Ubuntu", sans-serif;
+  color: $dark;
 }
 
 .App {
@@ -11,8 +21,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   .layoutContainer {
-    margin: 8em auto !important;
-    // border: $border2;
+    margin: 8em auto !important;    
     .spinner {
       margin: 25vh auto;
       display: flex;
@@ -25,24 +34,31 @@ body {
     }
     // // homepage styling -->>
     #heroSection {
-      margin: 30vh auto !important;
-    }
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: space-evenly;
+      position: relative;
+      height: 80vh;
+      background-image: url("https://media.istockphoto.com/id/941491560/de/foto/gro%C3%9Fe-gruppe-von-menschen-erfolg-berggipfel.jpg?s=612x612&w=0&k=20&c=D3GOHEQMM7JP72T4lCTGRVkq70uctZ_1hq0ZvN9hm3w=");
+      background-size: 150%;
+      background-position: center;
+          }    
     #loggedInHero {
       margin: 5em auto !important;
     }
     .carouselCaption {
-        background-color: rgba(128, 128, 128, 0.763);
-      }
+      background-color: $secondary;
+    }
     .hpSection {
       margin: 8em auto;
       .showMoreP:hover {
         cursor: pointer;
-        color: rgba(128, 128, 128, 0.434);
+        color: $light;
       }
       .card-events-list {
         padding: 0;
       }
-      
     }
     // // <<-- homepage styling
     .subpageHeader {
@@ -96,7 +112,7 @@ body {
           display: flex;
           flex-direction: row;
           gap: 0.75em;
-          > * {          
+          > * {
             width: auto;
           }
         }
@@ -123,18 +139,20 @@ body {
   .activeClass,
   .activeClass:hover {
     background-color: $secondary;
-    color: rgb(255, 255, 255);
+    color: $dark;
+    font-weight: bold;
     opacity: 1;
     border-radius: 5px;
     text-decoration: none;
   }
   .nonActive {
     text-decoration: none;
-    color: black;
+    color: $dark;
     opacity: 0.6;
+    font-weight: bold;
     &:hover {
       background-color: $secondary;
-      color: rgb(255, 255, 255);
+      color: $dark;
       opacity: 1;
       border-radius: 5px;
     }
@@ -202,7 +220,6 @@ body {
           gap: 1em;
         }
       }
-      
     }
   }
   // // <<-- Create event form

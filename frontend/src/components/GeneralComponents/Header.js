@@ -82,7 +82,7 @@ export default function Header() {
               </NavLink>
               <Form className="d-flex">
                 {user ? (
-                  <>
+                  <>                
                   <Button
                     className="m-auto ms-1"                 
                     href="/users/profile/"
@@ -96,13 +96,13 @@ export default function Header() {
                     onClick={logout}
                   >
                     Log out
-                  </Button>
+                  </Button>            
                   </>
                 ) : (
                   <Button
                     className="m-auto ms-1"
                     href="/login"
-                    variant="outline-secondary"
+                    variant="secondary"
                   >
                     Vibein
                   </Button>
