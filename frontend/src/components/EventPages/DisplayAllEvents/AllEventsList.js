@@ -46,6 +46,7 @@ export default function AllEventsList() {
     ...new Set(allEvents.map((event) => event.general_location)),
   ];
   const types = [...new Set(allEvents.map((event) => event.type))];
+  
 
   useEffect(() => {
     axios
@@ -58,6 +59,7 @@ export default function AllEventsList() {
         // if (user) {
         //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);         
         //   console.log(filteredEvents)
+        //   setEventsToDisplay(response?.data?.filter(event => response.data.author?._id !== user?._id))
         // } else {
         setEventsToDisplay(
           // user ? (
@@ -65,7 +67,7 @@ export default function AllEventsList() {
           //   ):(
               response.data)
               // );
-        // }
+        //  }
         setIsLoaded(true);
       })
       .catch((error) => {
