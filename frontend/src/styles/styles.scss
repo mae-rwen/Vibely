@@ -1,8 +1,18 @@
+$primary: #a5b2ab;
+$secondary: #c98f61;
+$success: #a5b2ab;
+$info: #c98f61;
+$warning: #3d5d52;
+$danger: #352e28;
+$light: #e1cbbc;
+$dark: #352e28;
+
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 body {
   font-family: "Ubuntu", sans-serif;
+  color: $dark;
 }
 
 .App {
@@ -12,7 +22,6 @@ body {
   justify-content: space-between;
   .layoutContainer {
     margin: 8em auto !important;
-    // border: $border2;
     .spinner {
       margin: 25vh auto;
       display: flex;
@@ -25,24 +34,31 @@ body {
     }
     // // homepage styling -->>
     #heroSection {
-      margin: 30vh auto !important;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: space-evenly;
+      position: relative;
+      height: 80vh;
+      background-image: url("https://media.istockphoto.com/id/941491560/de/foto/gro%C3%9Fe-gruppe-von-menschen-erfolg-berggipfel.jpg?s=612x612&w=0&k=20&c=D3GOHEQMM7JP72T4lCTGRVkq70uctZ_1hq0ZvN9hm3w=");
+      background-size: 150%;
+      background-position: center;
     }
     #loggedInHero {
       margin: 5em auto !important;
     }
     .carouselCaption {
-        background-color: rgba(128, 128, 128, 0.763);
-      }
+      background-color: $secondary;
+    }
     .hpSection {
       margin: 8em auto;
       .showMoreP:hover {
         cursor: pointer;
-        color: rgba(128, 128, 128, 0.434);
+        color: $light;
       }
       .card-events-list {
         padding: 0;
       }
-      
     }
     // // <<-- homepage styling
     .subpageHeader {
@@ -96,7 +112,7 @@ body {
           display: flex;
           flex-direction: row;
           gap: 0.75em;
-          > * {          
+          > * {
             width: auto;
           }
         }
@@ -105,14 +121,43 @@ body {
         }
       }
       .eventsList {
-        li {
-          margin: 0.5em auto;
-          > * {
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-          }
+        li {    
+          margin: 0.5em auto; 
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          gap: 3em;
+          align-items: flex-start;                
           &:hover {
             background-color: $light;
+          }
+          .eventDescription {
+           margin-top: 1em;
+           width: 30em;
+           span {
+            p {
+              font-size: 1em;
+              margin: 0;
+            }
+           }
+          }
+          #eventThumbnail {           
+            position: relative;  
+            width: 20em;         
+            img {
+             
+              opacity: 0.7;
+            }          
+            #thumbnailBadge {
+              position: absolute;
+              top: 1em;
+              left: .5em;
+            }
+          }
+          #eventData {
+            margin-top:1em;
+            margin-left: auto;
+            width: 20em;
           }
         }
       }
@@ -123,18 +168,20 @@ body {
   .activeClass,
   .activeClass:hover {
     background-color: $secondary;
-    color: rgb(255, 255, 255);
+    color: $dark;
+    font-weight: bold;
     opacity: 1;
     border-radius: 5px;
     text-decoration: none;
   }
   .nonActive {
     text-decoration: none;
-    color: black;
+    color: $dark;
     opacity: 0.6;
+    font-weight: bold;
     &:hover {
       background-color: $secondary;
-      color: rgb(255, 255, 255);
+      color: $dark;
       opacity: 1;
       border-radius: 5px;
     }
@@ -202,7 +249,6 @@ body {
           gap: 1em;
         }
       }
-      
     }
   }
   // // <<-- Create event form
@@ -247,12 +293,12 @@ body {
   .eventsDiv {
     .eventsFilters {
       flex-flow: column !important;
-      gap: 0.75em;
-      .filtersButtons {
-        // border: solid 2px red;
-        flex-flow: row wrap;
-        // max-height: 2.25em;
+      gap: 0.75em;      
+      .filtersButtons {   
+        flex-flow: row wrap;    
         order: 2 !important;
+        align-items: center;
+        justify-content: center;
       }
       .createNewButton {
         margin: auto;
@@ -261,6 +307,38 @@ body {
           height: 3.5em;
           padding-top: 1em;
         }
+      }
+    }
+  }
+  .eventsList {
+    li {       
+      // border: solid 2px aqua;
+      margin: 1.5em auto !important;
+      flex-direction: column !important;
+      gap: 0.75em !important;
+      align-items: center !important;
+        
+      .eventDescription {
+        margin: auto !important;
+        margin-top: 1em !important;
+        // border: solid 2px purple; 
+        order: 1; 
+        max-width: 20em !important;           
+      }
+      #eventThumbnail {
+        margin: auto !important;  
+        // border: solid 2px green;          
+        order: 2;
+        max-width: 20em !important;
+        img {
+          width: 20em !important;
+        } 
+      }
+      #eventData {
+        margin: auto !important;
+        // border: solid 2px red; 
+        order: 3;
+        max-width: 20em !important;
       }
     }
   }

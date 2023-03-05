@@ -45,36 +45,7 @@ export default function EventListFilters({
                 {city.name}
               </option>
             ))}
-          </Form.Select>
-
-          {/* <DropdownButton
-            as={ButtonGroup}
-            variant="outline-secondary"
-            title="Location"
-          >
-            <Dropdown.Item
-              style={{ fontWeight: "bold" }}
-              onClick={(e) => {
-                setLocationQuery("");
-              }}
-            >
-              All locations
-            </Dropdown.Item>
-            {location.map((value, id) => {
-              return (
-                <div key={id}>
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    onClick={(e) => {
-                      setLocationQuery(value);
-                    }}
-                  >
-                    {value}
-                  </Dropdown.Item>
-                </div>
-              );
-            })}
-          </DropdownButton> */}
+          </Form.Select>          
 
           {/* Categories filter */}
           <DropdownButton

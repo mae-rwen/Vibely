@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
 
-export default function EventSuccess() {
+export default function Registered() {
   const navigate = useNavigate();
   const [remainingTime, setRemainingTime] = useState(3);
 
@@ -25,7 +25,7 @@ export default function EventSuccess() {
   return (
     <div id="construction" className="text-center">
       <h4 className="display-8 fw-bold">
-        You've successfully logged in!
+        You've successfully registered at Vibely!
       </h4>
       <p>You'll be redirected to your user profile in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">

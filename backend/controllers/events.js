@@ -6,7 +6,6 @@ const getEvents = async (req, res, next) => {
   try {
     // for filters
     const query = {};
-
     if (req.query.location) {
       console.log(req.query.location);
       query.general_location = req.query.location;
@@ -15,32 +14,32 @@ const getEvents = async (req, res, next) => {
       query.type = req.query.type;
     }
     if (req.query.category) {
-
       query.category = req.query.category;
     }
     if (req.query.user) {
       query.author = req.query.user;
-    }  
-    
+    }
+
     // for sorting
     const { sortBy } = req.query;
     let sortOptions = {};
-    if (sortBy === 'createdAt') {
-      sortOptions.createdAt = -1; 
-    } else if (sortBy === 'dateAsc') {
-      sortOptions.date = 1 
-    } else if (sortBy === 'dateDesc') {
-      sortOptions.date = -1 
-    } else if (sortBy === 'locationAsc') {
-      sortOptions.general_location = 1 
-    } else if (sortBy === 'locationDesc') {
-      sortOptions.general_location = -1 
-    } else if (sortBy === 'organizer') {
-      sortOptions.author = 1 
+    if (sortBy === "createdAt") {
+      sortOptions.createdAt = -1;
+    } else if (sortBy === "dateAsc") {
+      sortOptions.date = 1;
+    } else if (sortBy === "dateDesc") {
+      sortOptions.date = -1;
+    } else if (sortBy === "locationAsc") {
+      sortOptions.general_location = 1;
+    } else if (sortBy === "locationDesc") {
+      sortOptions.general_location = -1;
+    } else if (sortBy === "organizer") {
+      sortOptions.author = 1;
     }
     const events = await Event.find(query)
-    .populate("author").populate("category")
-    .sort(sortOptions);
+      .populate("author")
+      .populate("category")
+      .sort(sortOptions);
 
     res.json(events);
   } catch (error) {
@@ -51,7 +50,8 @@ const getEvents = async (req, res, next) => {
 const getEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = await Event.findById(id).populate("category")
+    const event = await Event.findById(id)
+      .populate("category")
       .populate("author")
       .populate("category");
     res.json(event);
@@ -61,8 +61,8 @@ const getEvent = async (req, res, next) => {
 };
 
 const coutAllEvents = async (req, res, next) => {
-  try {   
-    const count = await Event.estimatedDocumentCount()
+  try {
+    const count = await Event.estimatedDocumentCount();
     res.json(count);
   } catch (error) {
     next(error);
@@ -81,8 +81,8 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
-    // const categoryDoc = await Category.findById(category) 
-    console.log(author);    
+    // const categoryDoc = await Category.findById(category)
+    console.log(author);
     const event = await Event.create({
       title,
       general_location,
@@ -94,14 +94,17 @@ const createEvent = async (req, res, next) => {
       author,
     });
     // categoryDoc.events = [...categoryDoc.events, event._id]
-    // await categoryDoc.save();  
-    const categoryDoc = await Category.findByIdAndUpdate( category, { $inc: { eventTotal: 1 } }, { new : true });    
+    // await categoryDoc.save();
+    const categoryDoc = await Category.findByIdAndUpdate(
+      category,
+      { $inc: { eventTotal: 1 } },
+      { new: true }
+    );
     res.json(event);
   } catch (error) {
     next(error);
   }
 };
-
 
 const updateEvent = async (req, res, next) => {
   try {
@@ -142,7 +145,11 @@ const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
     const event = await Event.findByIdAndDelete(id);
-    const categoryDoc = await Category.findByIdAndUpdate( event.category, { $inc: { eventTotal: -1 } }, { new : true });
+    const categoryDoc = await Category.findByIdAndUpdate(
+      event.category,
+      { $inc: { eventTotal: -1 } },
+      { new: true }
+    );
     res.json(event);
   } catch (error) {
     next(error);

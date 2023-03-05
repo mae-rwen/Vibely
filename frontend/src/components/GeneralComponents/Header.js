@@ -15,7 +15,11 @@ export default function Header() {
   const { user, logout } = useContext(AuthContext);   
 
   return (
-    <Navbar className="fixed-top" bg="light" expand="lg">
+    <Navbar 
+    className="fixed-top" 
+    // bg="light" 
+    expand="lg" 
+    style={{backgroundColor: "#fff"}}>
       <Container>
         <Navbar.Brand href="/" className="fw-bold">
           Vibely
@@ -82,7 +86,7 @@ export default function Header() {
               </NavLink>
               <Form className="d-flex">
                 {user ? (
-                  <>
+                  <>                
                   <Button
                     className="m-auto ms-1"                 
                     href="/users/profile/"
@@ -96,13 +100,13 @@ export default function Header() {
                     onClick={logout}
                   >
                     Log out
-                  </Button>
+                  </Button>            
                   </>
                 ) : (
                   <Button
                     className="m-auto ms-1"
                     href="/login"
-                    variant="outline-secondary"
+                    variant="secondary"
                   >
                     Vibein
                   </Button>

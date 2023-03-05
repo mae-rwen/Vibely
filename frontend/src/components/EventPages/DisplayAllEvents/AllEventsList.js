@@ -1,10 +1,10 @@
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useEffect, useState, useContext } from "react";
-import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 import { useParams } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
+import AuthContext from "../../../context/AuthProvider";
 import ListGroup from "react-bootstrap/ListGroup";
 
 export default function AllEventsList() {
@@ -46,6 +46,7 @@ export default function AllEventsList() {
     ...new Set(allEvents.map((event) => event.general_location)),
   ];
   const types = [...new Set(allEvents.map((event) => event.type))];
+  
 
   useEffect(() => {
     axios
@@ -58,6 +59,7 @@ export default function AllEventsList() {
         // if (user) {
         //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);         
         //   console.log(filteredEvents)
+        //   setEventsToDisplay(response?.data?.filter(event => response.data.author?._id !== user?._id))
         // } else {
         setEventsToDisplay(
           // user ? (
@@ -65,7 +67,7 @@ export default function AllEventsList() {
           //   ):(
               response.data)
               // );
-        // }
+        //  }
         setIsLoaded(true);
       })
       .catch((error) => {
@@ -107,7 +109,7 @@ export default function AllEventsList() {
           {eventsToDisplay.length !== 0 ? (
             <ListGroup className="eventsList" as="ul">
               {eventsToDisplay.map((event) => {
-                return <EventsList key={event._id} event={event} />;
+                return <EventsList key={event._id} event={event} getCategories={getCategories}/>;
               })}
             </ListGroup>
           ) : (

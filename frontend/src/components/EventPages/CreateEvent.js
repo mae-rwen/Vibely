@@ -4,7 +4,7 @@ import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
-import CitySelector from "./CitySelector";
+import CitySelector from "./HelpersComponents/CitySelector";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
