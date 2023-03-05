@@ -6,7 +6,7 @@ export default function EventJoined() {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
-  const [remainingTime, setRemainingTime] = useState(3);
+  const [remainingTime, setRemainingTime] = useState(5);
 
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export default function EventJoined() {
       <h4 className="display-8 fw-bold">
         Way to go! You succefully joined the event.
       </h4>
+      <p>Soon you'll get a message from the organizer with more details.</p>
       <p>You'll be redirected back to the event in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
