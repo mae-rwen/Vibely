@@ -2,6 +2,7 @@ import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import { NavLink } from "react-router-dom";
 import Figure from "react-bootstrap/Figure";
+import Card from "react-bootstrap/Card";
 
 export default function EventsList({ event, getCategories }) {
   // get the date
@@ -48,43 +49,48 @@ export default function EventsList({ event, getCategories }) {
         }`
       : null;
 
-  // get the picture
+  // get description preview
+  const truncatedDescription = event.description.substring(0, 150);
 
   return (
     <>
       <NavLink to={`/event/${event._id}`} style={{ textDecoration: "none" }}>
-        <ListGroup.Item
-          as="li"
-          className="d-flex justify-content-between align-items-start"
-        >
-          <Figure className="me-3">
-              <Figure.Image
-                width={171}
-                height={180}
-                alt="category"
-                src={event.category?.picture}
-                rounded
-              />            
-            </Figure>
-          <div className="ms-2 me-auto">            
-            <span>
-              <b>{event.title}</b> in {event.general_location} <br /> on{" "}
-              {formattedDate ? formattedDate : `not specified date`} at{" "}
-              {formattedTime ? formattedTime : `not specified time`} <br />{" "}
-              searching for{" "}
-              {event.participants
-                ? event.participants
-                : "not specified number of"}{" "}
-              people <br />
-              Created by {event.author?.name ? event.author?.name : "unknown"}
-              <br />
+        <ListGroup.Item as="li">
+          <Figure id="eventThumbnail">
+            <Figure.Image              
+              alt="category"
+              src={event.category?.picture}
+              thumbnail
+            />
+            <h5>
+              <Badge bg="secondary" pill id="thumbnailBadge">
+                joined: {event.joined}
+                {event.participants ? `/${event.participants}` : null}
+              </Badge>
+            </h5>
+            <Figure.Caption>
               Category:{" "}
-                {event.category?.name ? event.category?.name : "undefined"}
+              {event.category?.name ? event.category?.name : "undefined"}
+            </Figure.Caption>
+          </Figure>
+          <div className="eventDescription">
+            <span>
+              <h5 className="fw-bold"> {event.title}</h5>
+              <p>{event.description.length > 150 ? `${truncatedDescription}...` : truncatedDescription}</p>
             </span>
           </div>
-          <Badge bg="secondary" pill>
-            already joined: {event.joined}
-          </Badge>
+          <Card id="eventData">
+            <ListGroup variant="flush">
+              <ListGroup.Item>in {event.general_location}</ListGroup.Item>
+              <ListGroup.Item>
+                on {formattedDate ? formattedDate : `not specified date`} at{" "}
+                {formattedTime ? formattedTime : `not specified time`}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Created by {event.author?.name ? event.author?.name : "unknown"}
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
         </ListGroup.Item>
       </NavLink>
     </>

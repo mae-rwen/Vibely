@@ -10930,13 +10930,39 @@ body {
 }
 .App .layoutContainer .eventsDiv .eventsList li {
   margin: 0.5em auto;
-}
-.App .layoutContainer .eventsDiv .eventsList li > * {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 3em;
+  align-items: flex-start;
 }
 .App .layoutContainer .eventsDiv .eventsList li:hover {
   background-color: #e1cbbc;
+}
+.App .layoutContainer .eventsDiv .eventsList li .eventDescription {
+  margin-top: 1em;
+  width: 30em;
+}
+.App .layoutContainer .eventsDiv .eventsList li .eventDescription span p {
+  font-size: 1em;
+  margin: 0;
+}
+.App .layoutContainer .eventsDiv .eventsList li #eventThumbnail {
+  position: relative;
+  width: 20em;
+}
+.App .layoutContainer .eventsDiv .eventsList li #eventThumbnail img {
+  opacity: 0.7;
+}
+.App .layoutContainer .eventsDiv .eventsList li #eventThumbnail #thumbnailBadge {
+  position: absolute;
+  top: 1em;
+  left: 0.5em;
+}
+.App .layoutContainer .eventsDiv .eventsList li #eventData {
+  margin-top: 1em;
+  margin-left: auto;
+  width: 20em;
 }
 .App .activeClass,
 .App .activeClass:hover {
@@ -11059,6 +11085,8 @@ body {
   .eventsDiv .eventsFilters .filtersButtons {
     flex-flow: row wrap;
     order: 2 !important;
+    align-items: center;
+    justify-content: center;
   }
   .eventsDiv .eventsFilters .createNewButton {
     margin: auto;
@@ -11067,5 +11095,30 @@ body {
   .eventsDiv .eventsFilters .createNewButton #createNew {
     height: 3.5em;
     padding-top: 1em;
+  }
+  .eventsList li {
+    margin: 1.5em auto !important;
+    flex-direction: column !important;
+    gap: 0.75em !important;
+    align-items: center !important;
+  }
+  .eventsList li .eventDescription {
+    margin: auto !important;
+    margin-top: 1em !important;
+    order: 1;
+    max-width: 20em !important;
+  }
+  .eventsList li #eventThumbnail {
+    margin: auto !important;
+    order: 2;
+    max-width: 20em !important;
+  }
+  .eventsList li #eventThumbnail img {
+    width: 20em !important;
+  }
+  .eventsList li #eventData {
+    margin: auto !important;
+    order: 3;
+    max-width: 20em !important;
   }
 }/*# sourceMappingURL=styles.css.map */
