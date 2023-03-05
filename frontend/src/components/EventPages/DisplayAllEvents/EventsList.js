@@ -81,13 +81,13 @@ export default function EventsList({ event, getCategories }) {
           </div>
           <Card id="eventData">
             <ListGroup variant="flush">
-              <ListGroup.Item>in {event.general_location}</ListGroup.Item>
+              <ListGroup.Item>in <b>{event.general_location}</b></ListGroup.Item>
               <ListGroup.Item>
                 on {formattedDate ? formattedDate : `not specified date`} at{" "}
                 {formattedTime ? formattedTime : `not specified time`}
               </ListGroup.Item>
               <ListGroup.Item>
-                Created by {event.author?.name ? event.author?.name : "unknown"}
+                Created by <b>{event.author?.name ? event.author?.name : "unknown"}</b>
               </ListGroup.Item>
             </ListGroup>
           </Card>
