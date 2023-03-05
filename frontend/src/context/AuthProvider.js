@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }) => {
     axios.post("/auth/logout").then((response) => {
       setUser(null);
       setAuth(null);
-      navigate('/');
+      navigate('/loggedOut');
     });
   };
 
