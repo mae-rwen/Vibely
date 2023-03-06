@@ -175,10 +175,10 @@ const Event = () => {
                   <div className="mb-4">
                     <div className="mx-2">
                       <span className={type === "private" ? "show" : "hide"}>
-                        <FontAwesomeIcon icon={faHouseChimney} size="l" />
+                        <FontAwesomeIcon icon={faHouseChimney}/>
                       </span>
                       <span className={type === "public" ? "show" : "hide"}>
-                        <FontAwesomeIcon icon={faBuildingColumns} size="m" />
+                        <FontAwesomeIcon icon={faBuildingColumns} />
                       </span>
                     </div>
                     <span className="text mb-0 first-letter">{event.type}</span>
