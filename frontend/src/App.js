@@ -13,7 +13,7 @@ import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import SingleUser from "./components/UserProfile/SingleUser";
-import AllEventsList from "./components/EventPages/DisplayAllEvents/AllEventsList";
+import AllEventsList from "./components/EventPages/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/HelpersComponents/EventSuccess";
