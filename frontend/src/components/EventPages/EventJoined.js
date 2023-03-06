@@ -19,7 +19,7 @@ export default function EventJoined() {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      navigate(-1);
+      navigate("/allevents");
     }
   }, [navigate, remainingTime]);
 
@@ -29,7 +29,7 @@ export default function EventJoined() {
         Way to go! You succefully joined the event.
       </h4>
       <p>Soon you'll get a message from the organizer with more details.</p>
-      <p>You'll be redirected back to the event in {remainingTime} seconds...</p>
+      <p>You'll be redirected back to events in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <Button

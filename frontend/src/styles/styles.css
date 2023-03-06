@@ -190,7 +190,7 @@
 }
 .eventsDiv .eventsList li #eventThumbnail {
   position: relative;
-  width: 10em;
+  width: 15em;
 }
 .eventsDiv .eventsList li #eventThumbnail #thumbnailBadge {
   position: absolute;
@@ -200,6 +200,26 @@
 .eventsDiv .eventsList li #eventData {
   margin-top: 1em;
   margin-left: auto;
+  width: 20em;
+}
+
+#joinedItem {
+  display: flex;
+  flex-direction: column;
+}
+#joinedItem span {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  align-items: center;
+}
+#joinedItem span #joinedThumbnail {
+  width: 15em;
+}
+#joinedItem span .joinedDescription {
+  flex-direction: column;
+}
+#joinedItem span .joinedDescription #joinedData {
   width: 20em;
 }
 
