@@ -110,11 +110,6 @@ export default function SingleUser() {
 
   const handleShow = () => setShow(true);
 
-  //method for pagination on events of the logged in user
-  const loadMore = () => {
-    setVisible((prev) => prev + 3);
-  };
-
   //method for image upload
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -230,15 +225,7 @@ export default function SingleUser() {
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
                 <EventsDisplay />
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-                  {/* <Button
-                    className="w-30 mt-3"
-                    variant="secondary"
-                    onClick={loadMore}
-                  >
-                    Load more
-                  </Button> */}
-                </div>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3"></div>
               </Card.Body>
             </Card>
           </div>
