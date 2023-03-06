@@ -2,11 +2,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
-
+import AuthContext from "../../context/AuthProvider";
 export default function CreateEvent() {
+  const { created, setCreated } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [eventName, setEventName] = useState("");
@@ -41,7 +43,8 @@ export default function CreateEvent() {
       axios
         .post("/events", event)
         .then((response) => {
-          // console.log(response.data);
+          const result = [...created, response.data];
+          console.log(result);
         })
         .catch((error) => console.log(error));
       navigate("/event_success");
@@ -176,7 +179,12 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Button className="w-30 mt-3" variant="secondary" type="submit">
+            <Button
+              disabled={!eventCategory || !eventLocation ? true : false}
+              className="w-30 mt-3"
+              variant="secondary"
+              type="submit"
+            >
               Create this event
             </Button>
           </div>
