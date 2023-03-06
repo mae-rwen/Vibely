@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const [eventCat, setEventCat] = useState([]);
   const [allUsers, setAllUsers] = useState({});
-  const [allEvents, setAllEvents] = useState({});
+  // const [allEvents, setAllEvents] = useState({});commenting out to check something
   const [joined, setJoined] = useState([]);
   const [created, setCreated] = useState([]);
 
@@ -25,9 +25,9 @@ export const AuthProvider = ({ children }) => {
         axios.get(`/booking?user=${response.data._id}`).then((response) => {
           setJoined(response.data);
         });
-        axios.get(`/events?user=${response.data._id}`).then((response) => {
-          setCreated(response.data);
-        });
+        // axios.get(`/events?user=${response.data._id}`).then((response) => {
+        //   setCreated(response.data);
+        // });
 
         console.log(response.data);
       })
@@ -64,18 +64,18 @@ export const AuthProvider = ({ children }) => {
         setAllUsers(null);
       });
   }, []);
-
-  useEffect(() => {
-    axios
-      .get("/events")
-      .then((response) => {
-        setAllEvents(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setAllEvents(null);
-      });
-  }, []);
+  //commenting out to check
+  // useEffect(() => {
+  //   axios
+  //     .get("/events")
+  //     .then((response) => {
+  //       setAllEvents(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setAllEvents(null);
+  //     });
+  // }, []);
 
   useEffect(() => {
     axios
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
         setAuth,
         user,
         setUser,
-        allEvents,
+        // allEvents,
         logout,
         allUsers,
         eventCat,

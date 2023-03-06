@@ -3,9 +3,16 @@ const { ErrorResponse } = require("../utils/ErrorResponse");
 const { Category } = require("../models/categories");
 
 const getEvents = async (req, res, next) => {
+  const { page } = req.query || 1;
+  console.log("page" + page);
+  const eventsPerPage = 8;
+
   try {
     // for filters
     const query = {};
+    const skip = (page - 1) * eventsPerPage;
+    const count = await Event.estimatedDocumentCount(query);
+    const pageCount = Math.ceil(count / eventsPerPage);
     if (req.query.location) {
       console.log(req.query.location);
       query.general_location = req.query.location;
@@ -37,11 +44,20 @@ const getEvents = async (req, res, next) => {
       sortOptions.author = 1;
     }
     const events = await Event.find(query)
+      .limit(eventsPerPage)
+      .skip(skip)
       .populate("author")
       .populate("category")
       .sort(sortOptions);
-
-    res.json(events);
+    // console.log(events);
+    // res.json(events);//commenting for a while
+    res.json({
+      pagination: {
+        count,
+        pageCount,
+      },
+      events,
+    });
   } catch (error) {
     next(error);
   }
@@ -120,9 +136,10 @@ const updateEvent = async (req, res, next) => {
       is_active,
     } = req.body;
     const eventDoc = await Event.findById(id);
-    const isAuthor = JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id)
+    const isAuthor =
+      JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id);
     if (!isAuthor) {
-      return res.status(401).json("you're nor the author")
+      return res.status(401).json("you're nor the author");
     }
     const event = await Event.findByIdAndUpdate(
       id,
