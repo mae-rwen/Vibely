@@ -50,15 +50,10 @@ export default function AllEventsList() {
         console.log(error);
       });
     axios
-      .get(`/events?page=${currentPage}`)
+      .get(`/events`)
       .then((response) => {
         // setAllEvents(response.data);//commeting to check
-        console.log(currentPage);
         setAllEvents(response.data.events);
-        setPageCount(response.data.pagination.pageCount);
-        console.log(
-          "page count from bbackend" + response.data.pagination.pageCount
-        );
       })
       .catch((error) => {
         console.log(error);

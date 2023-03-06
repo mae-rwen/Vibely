@@ -15,53 +15,64 @@ function CreatedEvent({ events }) {
   return (
     <div>
       {events.length !== 0 ? (
-        <ListGroup as="ul">
-          {events.slice(0, visible).map((val) => {
-            const date = new Date(val.date);
-            const UTC = date.toUTCString();
+        <>
+          <ListGroup as="ul">
+            {events.slice(0, visible).map((val) => {
+              const date = new Date(val.date);
+              const UTC = date.toUTCString();
 
-            return (
-              <ListGroupItem as="li" key={val._id}>
-                <Row>
-                  <Col>
-                    <Card
-                      className="bg-dark text-dark"
-                      style={{ width: "12rem" }}
-                    >
-                      <Card.Img
-                        variant="top"
-                        src={val.category.picture}
-                        alt="outdoor activities image"
-                      />
-                      <Card.ImgOverlay>
-                        <Card.Title>{val.category.name}</Card.Title>
-                      </Card.ImgOverlay>
-                    </Card>
-                  </Col>
-                  <Col>
-                    <p className="event_title">{val.title}</p>
-                    <p>{UTC}</p>
-                    <p>in: {val.general_location}</p>
-                  </Col>
+              return (
+                <ListGroupItem as="li" key={val._id}>
+                  <Row>
+                    <Col>
+                      <Card
+                        className="bg-dark text-dark"
+                        style={{ width: "12rem" }}
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={val.category.picture}
+                          alt="outdoor activities image"
+                        />
+                        <Card.ImgOverlay>
+                          <Card.Title>{val.category.name}</Card.Title>
+                        </Card.ImgOverlay>
+                      </Card>
+                    </Col>
+                    <Col>
+                      <p className="event_title">{val.title}</p>
+                      <p>{UTC}</p>
+                      <p>in: {val.general_location}</p>
+                    </Col>
 
-                  <Col>
-                    <p>functions like delete</p>
-                    <p>edit event</p>
-                    <p>or go to event</p>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
+                    <Col>
+                      <p>functions like delete</p>
+                      <p>edit event</p>
+                      <p>or go to event</p>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
+          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
+            <Button
+              className="w-30 mt-3"
+              variant="secondary"
+              onClick={loadMore}
+            >
+              Load more
+            </Button>
+          </div>
+        </>
       ) : (
         "You haven't created any Events yet"
       )}
-      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
+      {/* <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
         <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
           Load more
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -73,7 +73,7 @@ export default function SingleUser() {
       setUserFile(response.data?.profilePic);
       console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
-        setEvents(response.data);
+        setEvents(response.data.events);
         console.log(response.data);
       });
       setIsLoaded(true);
