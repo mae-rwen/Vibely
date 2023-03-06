@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
 import { useEffect, useContext, useState } from "react";
 import axios from "../../api/axios";
 import { AuthContext } from "../../context/AuthProvider";
@@ -76,6 +75,7 @@ export default function SingleUser() {
       console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
         setEvents(response.data);
+        console.log(response.data);
       });
       setIsLoaded(true);
     });
@@ -225,7 +225,7 @@ export default function SingleUser() {
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
 
-                <EventsDisplay />
+                <EventsDisplay events={events} />
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3"></div>
               </Card.Body>
             </Card>

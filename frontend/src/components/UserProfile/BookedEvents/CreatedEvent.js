@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 
-function CreatedEvent() {
+function CreatedEvent({ events }) {
   const { created } = useContext(AuthContext);
   console.log(created);
   const [visible, setVisible] = useState(3);
@@ -16,7 +16,7 @@ function CreatedEvent() {
     <div>
       {created.length !== 0 ? (
         <ListGroup as="ul">
-          {created.slice(0, visible).map((val) => {
+          {events.slice(0, visible).map((val) => {
             const date = new Date(val.date);
             const UTC = date.toUTCString();
 

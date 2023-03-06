@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState({});
-  
+
   const [user, setUser] = useState({});
   const [bookings, setBookings] = useState({});
 
@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   const [allEvents, setAllEvents] = useState({});
   const [joined, setJoined] = useState([]);
   const [created, setCreated] = useState([]);
-
 
   useEffect(() => {
     axios
@@ -31,10 +30,9 @@ export const AuthProvider = ({ children }) => {
         });
 
         console.log(response.data);
-
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setUser(null);
       });
   }, []);
@@ -111,7 +109,7 @@ export const AuthProvider = ({ children }) => {
     axios.post("/auth/logout").then((response) => {
       setUser(null);
       setAuth(null);
-      navigate('/loggedOut');
+      navigate("/loggedOut");
     });
   };
 
@@ -128,7 +126,8 @@ export const AuthProvider = ({ children }) => {
         eventCat,
         bookings,
         joined,
-        created
+        created,
+        setCreated,
       }}
     >
       {children}

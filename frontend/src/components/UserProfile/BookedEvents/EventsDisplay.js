@@ -3,8 +3,8 @@ import { Tab, Tabs } from "react-bootstrap";
 import CreatedEvent from "./CreatedEvent";
 import Joined from "./Joined";
 
-function EventsDisplay() {
-    const [key, setKey] = useState('joined')
+function EventsDisplay({ events }) {
+  const [key, setKey] = useState("joined");
 
   return (
     <div>
@@ -18,7 +18,7 @@ function EventsDisplay() {
           <Joined />
         </Tab>
         <Tab eventKey="created" title="Created">
-          <CreatedEvent />
+          <CreatedEvent events={events} />
         </Tab>
       </Tabs>
     </div>
