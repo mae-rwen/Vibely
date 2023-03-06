@@ -57,7 +57,7 @@ function App() {
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth />}>        
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
             {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
