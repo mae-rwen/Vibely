@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function AllEventsList() {
   const { category } = useParams();
@@ -14,24 +14,30 @@ export default function AllEventsList() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
   const [typeQuery, setTypeQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState(category); 
+  const [categoryQuery, setCategoryQuery] = useState(category);
   const [sortBy, setSortBy] = useState("createdAt");
-
-  // get all categories 
+  const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    navigate(`?page=${pageNumber}`);
+  };
+  // get all categories
   // and events for displaying locations and types of events
   useEffect(() => {
     axios
-    .get(`/categories`)
-    .then((response) => {
-      setGetCategories(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .get(`/categories`)
+      .then((response) => {
+        setGetCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     axios
-      .get(`/events`)
+      .get(`/events?page=${currentPage}`)
       .then((response) => {
         setAllEvents(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +51,11 @@ export default function AllEventsList() {
 
   useEffect(() => {
     axios
-      .get(`/events?location=${locationQuery}&type=${typeQuery}&category=${categoryQuery ? categoryQuery : ""}&sortBy=${sortBy}`)
+      .get(
+        `/events?location=${locationQuery}&type=${typeQuery}&category=${
+          categoryQuery ? categoryQuery : ""
+        }&sortBy=${sortBy}`
+      )
       .then((response) => {
         setEvents(response.data);
         setIsLoaded(true);
@@ -83,8 +93,8 @@ export default function AllEventsList() {
             typeQuery={typeQuery}
             setTypeQuery={setTypeQuery}
             categoryQuery={categoryQuery}
-            setCategoryQuery={setCategoryQuery}            
-            setSortBy={setSortBy}           
+            setCategoryQuery={setCategoryQuery}
+            setSortBy={setSortBy}
           />
 
           <EventsList events={events} getCategories={getCategories} />
