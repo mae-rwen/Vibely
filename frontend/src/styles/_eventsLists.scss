@@ -43,7 +43,7 @@
         }
         #eventThumbnail {           
           position: relative;  
-          width: 10em;     
+          width: 15em;     
           #thumbnailBadge {
             position: absolute;
             top: 1em;
@@ -54,6 +54,28 @@
           margin-top:1em;
           margin-left: auto;
           width: 20em;
+        }
+      }
+    }
+  }
+
+  #joinedItem {     
+      display: flex;
+      flex-direction: column;
+  
+      span {
+        display: flex;
+      flex-direction: row;
+      gap: 2em;
+      align-items: center;
+        #joinedThumbnail {           
+          width: 15em;
+        } 
+        .joinedDescription {
+        flex-direction: column;           
+            
+        #joinedData { 
+        width: 20em;
         }
       }
     }
