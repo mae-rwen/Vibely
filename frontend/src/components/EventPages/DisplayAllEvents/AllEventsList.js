@@ -1,10 +1,10 @@
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useEffect, useState, useContext } from "react";
-import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
 import { useParams } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
+import AuthContext from "../../../context/AuthProvider";
 import ListGroup from "react-bootstrap/ListGroup";
 
 export default function AllEventsList() {
@@ -36,6 +36,7 @@ export default function AllEventsList() {
       .get(`/events`)
       .then((response) => {
         setAllEvents(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);

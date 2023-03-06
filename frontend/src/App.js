@@ -13,7 +13,7 @@ import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import SingleUser from "./components/UserProfile/SingleUser";
-import AllEventsList from "./components/EventPages/AllEventsList";
+import AllEventsList from "./components/EventPages/DisplayAllEvents/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/HelpersComponents/EventSuccess";
@@ -26,14 +26,14 @@ import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import LoggedIn from "./components/UserProfile/HelpersComponents/LoggedIn";
 import Registered from "./components/UserProfile/HelpersComponents/Registered";
 
-
+import EventFailed from "./components/EventPages/EventFailed";
 
 function App() {
   return (
     <div className="App">
       <ScrollToTop style={{ borderRadius: "50%" }} />
       <Header />
-      <Routes>        
+      <Routes>
         <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route path="/register" element={<RegisterForm />} />
@@ -48,6 +48,8 @@ function App() {
           <Route path="/create_event" element={<CreateEvent />} />
           <Route path="/users/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
+          <Route path="/event_failed" element={<EventFailed />} />
+
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
           <Route path="/event/:event_id" element={<Event />} />
@@ -62,9 +64,8 @@ function App() {
           {/* profile, edit events, edit profile, join events, single event page? */}
 
           <Route element={<RequireAuth />}>
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}    
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}                
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-
             {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
