@@ -1,7 +1,7 @@
 $primary: #a5b2ab;
 $secondary: #c98f61;
 $success: #a5b2ab;
-$info: #c98f61;
+$info: #c99061bc;
 $warning: #3d5d52;
 $danger: #352e28;
 $light: #e1cbbc;
@@ -45,10 +45,10 @@ body {
       background-position: center;
     }
     #loggedInHero {
-      margin: 5em auto !important;
+      margin: 5em auto !important;      
     }
     .carouselCaption {
-      background-color: $secondary;
+      background-color: $info;
     }
     .hpSection {
       margin: 8em auto;
