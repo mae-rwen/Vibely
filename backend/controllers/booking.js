@@ -14,7 +14,7 @@ const getBookings = async (req, res, next) => {
     if (req.query.event) {
       query.event = req.query.event;
     }  
-    const bookings = await Booking.find(query).populate("user").populate("event");
+    const bookings = await Booking.find(query).populate("user").populate("event").sort({createdAt: -1});
     res.json(bookings);
   } catch (error) {
     next(error);

@@ -40,17 +40,11 @@ export default function LogInForm() {
 
     try {
       const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ email, name, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+        LOGIN_URL,{ email, name, password });
       setUser(response.data);
-      setName(JSON.stringify(response?.data));
-      console.log(name);
-      console.log(JSON.stringify(response?.data));
+      console.log(response.data)
+      setName(response?.data?.name);
+      console.log(response?.data);
 
       console.log(response);
       const accessToken = response?.data?.accessToken;

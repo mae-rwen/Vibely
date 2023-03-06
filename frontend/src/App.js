@@ -21,9 +21,11 @@ import Joined from "./components/UserProfile/BookedEvents/Joined";
 import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
 import EventJoined from "./components/EventPages/EventJoined";
 import NavigateToLogin from "./components/GeneralComponents/NavigateToLogin";
+import EventEdit from "./components/EventPages/EventEdit";
 import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import LoggedIn from "./components/UserProfile/HelpersComponents/LoggedIn";
 import Registered from "./components/UserProfile/HelpersComponents/Registered";
+
 
 
 function App() {
@@ -49,6 +51,7 @@ function App() {
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
           <Route path="/event/:event_id" element={<Event />} />
+          <Route path="/event/edit/:id" element={<EventEdit />} />
           <Route path="/event_joined" element={<EventJoined />} />
           <Route path="/reqLogin" element={<NavigateToLogin />} />
           <Route path="/loggedOut" element={<LoggedOut />} />
@@ -57,8 +60,12 @@ function App() {
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
+
+          <Route element={<RequireAuth />}>
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
           <Route element={<RequireAuth />}>        
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
+
             {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>

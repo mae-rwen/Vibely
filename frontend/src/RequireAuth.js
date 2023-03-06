@@ -4,8 +4,9 @@ import { useContext } from "react";
 import AuthContext from "./context/AuthProvider";
 
 const RequireAuth = () => {
-  const { auth } = useAuth();
-  const { user } = useContext(AuthContext);
+  // const { auth } = useAuth();
+  const { user, auth } = useContext(AuthContext);
+  console.log(auth)
   
   const location = useLocation();
 

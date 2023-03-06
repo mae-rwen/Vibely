@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
@@ -21,16 +21,17 @@ import {
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 
 const Event = () => {
 
-  const { user, setUser, joined, created, allEvents, booked } = useAuth();
+  const { auth, user, setJoined, setUser, joined, created, allEvents, booked } = useContext(AuthContext);
   const { event_id } = useParams();
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
+  const goEdit = () => navigate(`/event/edit/${event_id}`);
 
   const [err, setErr] = useState("");
   const [event, setEvent] = useState({});
@@ -40,7 +41,7 @@ const Event = () => {
   const [updatedEvent, setUpdatedEvent] = useState({});
 
   console.log(joined);
-  console.log(created);
+  console.log(event)
   console.log(booked);
   console.log(allEvents);
 
@@ -70,6 +71,8 @@ const Event = () => {
       .then((response) => {
         console.log("joined", response.data);
         setJoin(true);
+        const joining = response.data;
+        setJoined((prev) => [...prev, joining])
         navigate("/event_joined");
 
       })
@@ -90,12 +93,28 @@ const Event = () => {
 
   const date = new Date(event.date);
   const UTC = date.toUTCString();
-  console.log(UTC);
+
+  const isAuthor = user._id === event?.author?._id
+  console.log(isAuthor)
+
+  console.log(event.attenders)
+  // const isJoined = event.find(joinId => joinId.attenders?.user === user._id)
+  // const check = isJoined(element => element.isJoined === true)
+
+  // console.log(isJoined)
+  // console.log(Join)
+
   return (
     <Container>
+      <div className="btn" >
       <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
         Go Back
       </Button>
+      {isAuthor === true ? (<Button className="ms-end my-3" variant="secondary" onClick={goEdit}>
+        Edit
+      </Button>) : (null)}
+      
+      </div>
       {event && (
         <Card>
           <Card.Header className="d-flex">
@@ -129,16 +148,16 @@ const Event = () => {
                   </Card.Subtitle>
                   <hr />
                   <div>
-                    <span className="text mb-0">
+                    {/* <span className="text mb-0">
                       <FontAwesomeIcon icon={faCalendarDays} size="xs" /> {UTC}
-                    </span>
+                    </span> */}
                     {/* <span className="text mb-0">
                       <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
                     </span> */}
                     <div className="mx-2">
-                      <span className={type === "private" ? "show" : "hide"}>
+                      {/* <span className={type === "private" ? "show" : "hide"}>
                         <FontAwesomeIcon icon={faHouseChimney} size="xs" />
-                      </span>
+                      </span> */}
                       <span className={type === "public" ? "show" : "hide"}>
                         <FontAwesomeIcon icon={faBuildingColumns} size="xs" />
                       </span>
@@ -213,16 +232,18 @@ const Event = () => {
                     icon={faMessage}
                     size="xl"
                   />
-                  <div className="absolute">
+                  {/* <div className="absolute">
                     <FontAwesomeIcon icon={faQuestionCircle} size="sm" />
-                  </div>
+                  </div> */}
                 </Button>
               )}
             </OverlayTrigger>
-
-            <Button variant="secondary" disabled={join} onClick={joinEvent}>
-              JOIN
-            </Button>
+        {isAuthor === true ? (
+          null
+        ) : (<Button variant="secondary" disabled={join} onClick={joinEvent}>
+        JOIN
+      </Button>) }
+            
           </Card.Footer>
         </Card>
       )}

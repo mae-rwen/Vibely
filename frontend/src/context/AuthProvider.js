@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState({});
-
+  
   const [user, setUser] = useState({});
   const [bookings, setBookings] = useState({});
 

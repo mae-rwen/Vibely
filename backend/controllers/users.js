@@ -55,6 +55,9 @@ const login = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 8,
+      }).json({
+        id: user._id, 
+        name: user.name,
       })
       .send(payload);
     // console.log(payload);

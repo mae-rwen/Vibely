@@ -99,13 +99,7 @@ const RegisterForm = ({ setSetAccount }) => {
 
     try {
       const response = await axios.post(
-        SIGNUP_URL,
-        JSON.stringify({ name: user, email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+        SIGNUP_URL, { name: user, email, password });
       // console.log(response.data);
       // console.log(response.accessToken);
       // console.log(JSON.stringify(response))
