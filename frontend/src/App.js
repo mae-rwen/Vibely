@@ -62,8 +62,7 @@ function App() {
           {/* profile, edit events, edit profile, join events, single event page? */}
 
           <Route element={<RequireAuth />}>
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-          <Route element={<RequireAuth />}>        
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}    
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
 
             {/* <Route path="/event/:event_id" element={<Event />} /> */}

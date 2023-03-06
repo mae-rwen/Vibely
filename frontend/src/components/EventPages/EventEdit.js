@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../hooks/useAuth";
 import "./event.css";
 import { AuthContext } from "../../context/AuthProvider";
-import CitySelector from "./CitySelector";
+import CitySelector from "./HelpersComponents/CitySelector";
 
 import Editor from "../../context/Editor";
 
@@ -52,7 +52,7 @@ export default function EventEdit() {
   async function updateEvent(e) {
     e.preventDefault();
     const data = new FormData();
-    data.set('title', title);
+    data.set("title", title);
     data.set('general_location', location);
     data.set('description', description);
     data.set('category', category);
@@ -61,8 +61,8 @@ export default function EventEdit() {
     data.set('participants', participants);
     data.set('id', id)
 //        data.set('file', files);
-    await axios.put(`/events/find/${id}`, data).then((response) => {
-        console.log(response)
+    await axios.put(`/events/find/${id}`, {body: data}).then((response) => {
+        console.log(response.data)
     })
        
   }
@@ -136,7 +136,7 @@ export default function EventEdit() {
 
       <Editor value={description} onChange={newValue => setDescription(newValue)}  />
 
-      <Button variant="secondary">Update Event</Button>
+      <Button variant="secondary" type="submit">Update Event</Button>
     </Form>
   );
 }
