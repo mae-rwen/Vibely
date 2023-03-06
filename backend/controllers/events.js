@@ -120,7 +120,10 @@ const updateEvent = async (req, res, next) => {
       is_active,
     } = req.body;
     const eventDoc = await Event.findById(id);
-    // const isAuthor = JSON.stringify(eventDoc.author) === req.user.id
+    const isAuthor = JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id)
+    if (!isAuthor) {
+      return res.status(401).json("you're nor the author")
+    }
     const event = await Event.findByIdAndUpdate(
       id,
       {
@@ -145,7 +148,13 @@ const updateEvent = async (req, res, next) => {
 const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
+    // const { author } = req.body;
     const event = await Event.findByIdAndDelete(id);
+    // const isAuthor = JSON.stringify(event.author._id) === JSON.stringify(req.user.id)
+    // if (!isAuthor) {
+    //   return res.status(401).json("you're nor the author")
+    // }
+
     const categoryDoc = await Category.findByIdAndUpdate(
       event.category,
       { $inc: { eventTotal: -1 } },
