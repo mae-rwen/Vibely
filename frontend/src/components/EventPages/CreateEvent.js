@@ -33,14 +33,19 @@ export default function CreateEvent() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(event);
-    axios
-      .post("/events", event)
-      .then((response) => {
-        // console.log(response.data);
-      })
-      .catch((error) => console.log(error));
-
+    if (event.category === "" || event.general_location === "") {
+      console.log("not added");
+      navigate("/event_failed");
+    } else {
+      console.log(event);
+      axios
+        .post("/events", event)
+        .then((response) => {
+          // console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+      navigate("/event_success");
+    }
     setEventCategory("");
     setEventDate("");
     setEventDescription("");
@@ -48,7 +53,6 @@ export default function CreateEvent() {
     setEventLocation("");
     setEventParticipants("");
     setEventType("");
-    navigate("/event_success");
   };
   return (
     <Card className="createEvent">
@@ -68,45 +72,52 @@ export default function CreateEvent() {
               required
             />
           </Form.Group>
-    <div className="locationAndType">
-          <Form.Group className="mb-3">
-            <Form.Label className="fw-bold">Location of the event</Form.Label>
-            <CitySelector setEventLocation={setEventLocation} />
-            <Form.Text muted>
-              Select the desired location from the list
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label className="fw-bold">Type</Form.Label>
-            <div className="radioButtons">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  value="public"
-                  onChange={(e) => setEventType(e.target.value)}
-                />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  public
-                </label>
+          <div className="locationAndType">
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-bold">Location of the event</Form.Label>
+              <CitySelector setEventLocation={setEventLocation} />
+              <Form.Text muted>
+                Select the desired location from the list
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-bold">Type</Form.Label>
+              <div className="radioButtons">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault1"
+                    value="public"
+                    required
+                    onChange={(e) => setEventType(e.target.value)}
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexRadioDefault1"
+                  >
+                    public
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault1"
+                    value="private"
+                    onChange={(e) => setEventType(e.target.value)}
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexRadioDefault1"
+                  >
+                    private
+                  </label>
+                </div>
               </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  value="private"
-                  onChange={(e) => setEventType(e.target.value)}
-                />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  private
-                </label>
-              </div>
-            </div>
-          </Form.Group>
+            </Form.Group>
           </div>
           <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Date and time</Form.Label>
@@ -128,7 +139,9 @@ export default function CreateEvent() {
                 setEventCategory(e.target.value);
               }}
               required
+              // defaultValue={"DEFAULT"}
             >
+              <option value=" ">Choose a category</option>
               {categories.map((category, index) => {
                 return (
                   <option key={index} value={category._id}>
@@ -140,13 +153,14 @@ export default function CreateEvent() {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label className="fw-bold">
-              Number of participants (minimum: 4){" "}
+              Number of participants (minimum: 1){" "}
             </Form.Label>
             <Form.Control
               type="number"
-              min="4"
+              min="1"
               name="participants"
               value={eventParticipants}
+              required
               onChange={(e) => setEventParticipants(e.target.value)}
             />
           </Form.Group>
@@ -156,6 +170,7 @@ export default function CreateEvent() {
               as="textarea"
               placeholder="Write something about this activity"
               rows={3}
+              required
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
             />

@@ -12,7 +12,7 @@ import EventsDisplay from "./BookedEvents/EventsDisplay";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 
 export default function SingleUser() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   //to show and hide the modal
   const [show, setShow] = useState(false);
   //logged in user info
@@ -98,7 +98,7 @@ export default function SingleUser() {
         location: response.data?.location,
         profilePic: response.data?.profilePic,
       });
-      console.log(response.data);
+      setUser({ name: response.data?.name });
     });
     setShow(false);
   };
@@ -109,11 +109,6 @@ export default function SingleUser() {
   };
 
   const handleShow = () => setShow(true);
-
-  //method for pagination on events of the logged in user
-  const loadMore = () => {
-    setVisible((prev) => prev + 3);
-  };
 
   //method for image upload
   const toBase64 = (file) =>
@@ -228,51 +223,10 @@ export default function SingleUser() {
             <Card id="userEvents">
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
-
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>
-                        <b>Event Name</b>
-                      </th>
-                      <th>
-                        <b>Event Date</b>
-                      </th>
-                      <th>
-                        <b>Event Time</b>
-                      </th>
-                      <th>
-                        <b>Event Location</b>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {events.slice(0, visible).map((event, index) => {
-                      const date = new Date(event.date);
-                      let dateTime = formatDateTime(date);
-                      return (
-                        <tr key={index}>
-                          <td>{event.title}</td>
-                          <td>{dateTime[0]}</td>
-                          <td>{dateTime[1]}</td>
-                          <td>{event.general_location}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </Table>
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-                  <Button
-                    className="w-30 mt-3"
-                    variant="secondary"
-                    onClick={loadMore}
-                  >
-                    Load more
-                  </Button>
-                </div>
+                <EventsDisplay />
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3"></div>
               </Card.Body>
             </Card>
-            <EventsDisplay />
           </div>
         </>
       ) : (

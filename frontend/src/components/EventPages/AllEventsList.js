@@ -36,6 +36,7 @@ export default function AllEventsList() {
       .get(`/events`)
       .then((response) => {
         setAllEvents(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
