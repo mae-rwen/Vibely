@@ -13,15 +13,19 @@ import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import SingleUser from "./components/UserProfile/SingleUser";
-import AllEventsList from "./components/EventPages/AllEventsList";
+import AllEventsList from "./components/EventPages/DisplayAllEvents/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
-import EventSuccess from "./components/EventPages/EventSuccess";
+import EventSuccess from "./components/EventPages/HelpersComponents/EventSuccess";
 import Joined from "./components/UserProfile/BookedEvents/Joined";
 import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
 import EventJoined from "./components/EventPages/EventJoined";
 import NavigateToLogin from "./components/GeneralComponents/NavigateToLogin";
 import EventEdit from "./components/EventPages/EventEdit";
+import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
+import LoggedIn from "./components/UserProfile/HelpersComponents/LoggedIn";
+import Registered from "./components/UserProfile/HelpersComponents/Registered";
+
 
 
 function App() {
@@ -42,9 +46,7 @@ function App() {
           <Route path="/allevents/" element={<AllEventsList />} />
           <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
-
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-
+          <Route path="/users/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
@@ -52,13 +54,18 @@ function App() {
           <Route path="/event/edit/:id" element={<EventEdit />} />
           <Route path="/event_joined" element={<EventJoined />} />
           <Route path="/reqLogin" element={<NavigateToLogin />} />
-
-
+          <Route path="/loggedOut" element={<LoggedOut />} />
+          <Route path="/loggedIn" element={<LoggedIn />} />
+          <Route path="/registered" element={<Registered />} />
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
+
           <Route element={<RequireAuth />}>
-          <Route path="/users/profile" element={<SingleUser />} />
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
+          <Route element={<RequireAuth />}>        
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
+
             {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>

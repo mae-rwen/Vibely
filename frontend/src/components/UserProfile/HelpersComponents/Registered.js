@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
-export default function EventJoined() {
-  const navigate = useNavigate();
-  const goBack = () => navigate(-1);
 
-  const [remainingTime, setRemainingTime] = useState(5);
+export default function Registered() {
+  const navigate = useNavigate();
+  const [remainingTime, setRemainingTime] = useState(3);
 
 
   useEffect(() => {
@@ -19,35 +18,26 @@ export default function EventJoined() {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      navigate(-1);
+      navigate('/users/profile');
     }
   }, [navigate, remainingTime]);
 
   return (
     <div id="construction" className="text-center">
       <h4 className="display-8 fw-bold">
-        Way to go! You succefully joined the event.
+        You've successfully registered at Vibely!
       </h4>
-      <p>Soon you'll get a message from the organizer with more details.</p>
-      <p>You'll be redirected back to the event in {remainingTime} seconds...</p>
+      <p>You'll be redirected to your user profile in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <Button
-            variant="secondary"
-            onClick={goBack}
-          >
-           Go to the event
-          </Button>
           <Button
             variant="secondary"
             onClick={() => {
-              navigate("/allevents");
+              navigate("/users/profile");
             }}
           >
-           See all events
+            Go to your user profile
           </Button>
-
-         
         </div>
       </div>
     </div>

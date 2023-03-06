@@ -12,11 +12,7 @@ export default function LoggedInView({ categories, isLoaded, user }) {
           Your space for sharing skills, get involved in new hobbies and find
           friends to vibe with.
         </p>   
-        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Button href="/categories" variant="secondary">
-                Explore All Activities
-              </Button>
-            </div>     
+       
       </div>
     
 
@@ -24,7 +20,7 @@ export default function LoggedInView({ categories, isLoaded, user }) {
 
         {isLoaded ? (
           <>
-            <div className="row p-4 mt-3 text-center justify-content-center">
+            <div className="row 4 mt-3 text-center justify-content-center">
               <Carousel>
                 {categories.map((category) => {
                   return (
@@ -45,6 +41,11 @@ export default function LoggedInView({ categories, isLoaded, user }) {
                   );
                 })}
               </Carousel>{" "}
+               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3">
+              <Button href="/categories" variant="secondary">
+                Explore All Activities
+              </Button>
+            </div>     
             </div>
           
           </>

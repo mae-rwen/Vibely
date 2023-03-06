@@ -15,7 +15,7 @@ export default function NavigateToLogin() {
               navigate("/login");
             }}
           >
-            Login
+            Proceed
           </Button>
         </div>
       </div>

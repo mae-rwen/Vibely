@@ -16,7 +16,7 @@ export default function SingleCard({ categories }) {
               </Card.Text>
               <Button
                 className="catBtn"
-                variant="outline-secondary"
+                variant="light"
                 href={`/allevents/${category._id}`}
               >
                 Explore the activities
