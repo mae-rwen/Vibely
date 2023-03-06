@@ -1,0 +1,21 @@
+.createEvent {
+    margin: auto;
+    max-width: 50em;
+    .createEventForm {
+      margin: 3em auto;
+      max-width: 45em;
+      .locationAndType {
+        display: flex;
+        flex-direction: row;
+        gap: 5em;
+        .citySelector {
+          max-width: 13em;
+        }
+        .radioButtons {
+          display: flex;
+          flex-direction: row;
+          gap: 1em;
+        }
+      }
+    }
+  }
