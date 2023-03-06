@@ -116,7 +116,8 @@ const updateEvent = async (req, res, next) => {
       author,
       is_active,
     } = req.body;
-
+    const eventDoc = await Event.findById(id);
+    // const isAuthor = JSON.stringify(eventDoc.author) === req.user.id
     const event = await Event.findByIdAndUpdate(
       id,
       {

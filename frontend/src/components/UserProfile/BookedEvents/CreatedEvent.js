@@ -6,7 +6,7 @@ import "./eventdisplay.css";
 
 function CreatedEvent() {
   const { created  } = useContext(AuthContext);
-  console.log(created);
+  // console.log(created);
   
   return (
     <div>
