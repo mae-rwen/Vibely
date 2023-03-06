@@ -53,9 +53,11 @@ function Joined() {
               );
             })}
           </ListGroup>
+          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
           <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
             Load more
-          </Button>{" "}
+          </Button>
+          </div>
         </>
       ) : (
         "You haven't joined any Events yet"

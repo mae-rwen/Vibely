@@ -57,9 +57,11 @@ function CreatedEvent({ events }) {
       ) : (
         "You haven't created any Events yet"
       )}
+       <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
       <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
         Load more
       </Button>
+      </div>
     </div>
   );
 }

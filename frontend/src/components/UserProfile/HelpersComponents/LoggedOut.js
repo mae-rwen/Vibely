@@ -25,9 +25,10 @@ export default function LoggedOut() {
   return (
     <div id="construction" className="text-center">
       <h4 className="display-8 fw-bold">
-        You've logged out.
+        See you next time!
       </h4>
-      <p>You'll be redirected to the homepage in {remainingTime} seconds...</p>
+      <p>You've been successfully logged out.<br/>
+      You'll be redirected to the homepage in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button

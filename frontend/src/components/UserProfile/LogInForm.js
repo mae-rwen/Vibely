@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Spinner from 'react-bootstrap/Spinner';
 
 import { Card }from "react-bootstrap";
 import { useRef, useState, useEffect, useContext } from "react";
@@ -26,6 +27,7 @@ export default function LogInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     emailRef.current.focus();
@@ -52,7 +54,15 @@ export default function LogInForm() {
       // setOperator("");
       // setEmail("");
       // setPassword("");
-      navigate(from, { replace: true });
+
+      setIsClicked(true);
+      setTimeout(() => {
+        setIsClicked(false);
+        // Perform login logic here and redirect to another page
+        navigate(from, { replace: true });
+      }, 2000);
+
+      
     } catch (err) {
       if (!err?.response) {
         setError("No Server Response");
@@ -116,10 +126,12 @@ export default function LogInForm() {
                 </a>
               </Form.Text>
             </Card.Text> */}
-
-            <Button className="w-50 my-3" variant="secondary" type="submit">
+  {isClicked ? (<Button className="w-50 my-3" variant="secondary" type="submit">
+  <Spinner animation="border" size="sm" />
+            </Button>):(<Button className="w-50 my-3" variant="secondary" type="submit">
               Login
-            </Button>
+            </Button>)}
+            
 
             <Card.Text className="mb-2">
               <Form.Text className="text-muted">

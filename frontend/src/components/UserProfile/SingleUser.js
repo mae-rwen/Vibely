@@ -146,7 +146,9 @@ export default function SingleUser() {
                     onClick={handleShow}
                   >
                     Edit profile
-                  </Button>
+
+                  </Button>                  
+
                 </div>
               </Card.Body>
             </Card>
@@ -225,8 +227,16 @@ export default function SingleUser() {
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
 
-                <EventsDisplay events={events} />
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3"></div>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-end mb-3 mt-3">
+                <Button variant="secondary" href="/create_event">
+                    Create new event
+                  </Button>
+                <Button variant="outline-secondary" href="/allevents">
+                    See all events
+                  </Button>
+                  </div>
+                <EventsDisplay />
+
               </Card.Body>
             </Card>
           </div>

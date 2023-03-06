@@ -12,8 +12,7 @@ export default function AllEventsList() {
   const { user } = useContext(AuthContext);
 
   const [allEvents, setAllEvents] = useState([]);
-  const [eventsToDisplay, setEventsToDisplay] = useState([]);
-  const [notMyEvents, setNotMyEvents] = useState();
+  const [eventsToDisplay, setEventsToDisplay] = useState([]);  
   const [getCategories, setGetCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
@@ -35,8 +34,7 @@ export default function AllEventsList() {
     axios
       .get(`/events`)
       .then((response) => {
-        setAllEvents(response.data);
-        console.log(response.data);
+        setAllEvents(response.data);        
       })
       .catch((error) => {
         console.log(error);
@@ -57,18 +55,11 @@ export default function AllEventsList() {
         }&sortBy=${sortBy}`
       )
       .then((response) => {
-        // if (user) {
-        //   const filteredEvents = response?.data?.filter(event => response.data.author?._id !== user?._id);         
-        //   console.log(filteredEvents)
-        //   setEventsToDisplay(response?.data?.filter(event => response.data.author?._id !== user?._id))
-        // } else {
-        setEventsToDisplay(
-          // user ? (
-          //   response?.data?.filter(event => response.data.author?._id !== user?._id)
-          //   ):(
-              response.data)
-              // );
-        //  }
+         if (user) {         
+        setEventsToDisplay(response?.data?.filter(event => event.author?._id !== user?._id))
+         } else {
+        setEventsToDisplay(response.data)}
+        
         setIsLoaded(true);
       })
       .catch((error) => {
