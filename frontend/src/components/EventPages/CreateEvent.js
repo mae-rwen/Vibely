@@ -2,13 +2,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
-import AuthContext from "../../context/AuthProvider";
 export default function CreateEvent() {
-  const { created, setCreated } = useContext(AuthContext);
-
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [eventName, setEventName] = useState("");
@@ -38,9 +35,9 @@ export default function CreateEvent() {
     axios
       .post("/events", event)
       .then((response) => {
-        const result = [...created, response.data];
-        console.log(result);
-        setCreated([...created, response.data]);
+        // const result = [...created, response.data];
+        // console.log(result);
+        // setCreated([...created, response.data]);
       })
       .catch((error) => console.log(error));
     navigate("/event_success");
