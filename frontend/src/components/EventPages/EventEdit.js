@@ -17,6 +17,7 @@ import useAuth from "../hooks/useAuth";
 import "./event.css";
 import { AuthContext } from "../../context/AuthProvider";
 import CitySelector from "./HelpersComponents/CitySelector";
+
 import Editor from "../../context/Editor";
 
 export default function EventEdit() {
