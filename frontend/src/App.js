@@ -13,7 +13,7 @@ import RegisterForm from "./components/UserProfile/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import UnderConstruction from "./components/GeneralComponents/UnderConstruction";
 import SingleUser from "./components/UserProfile/SingleUser";
-import AllEventsList from "./components/EventPages/AllEventsList";
+import AllEventsList from "./components/EventPages/DisplayAllEvents/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
 import EventSuccess from "./components/EventPages/HelpersComponents/EventSuccess";
@@ -62,10 +62,8 @@ function App() {
           {/* profile, edit events, edit profile, join events, single event page? */}
 
           <Route element={<RequireAuth />}>
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}                
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-          <Route element={<RequireAuth />}>        
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-
             {/* <Route path="/event/:event_id" element={<Event />} /> */}
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
