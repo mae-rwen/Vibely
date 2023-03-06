@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
 import { useEffect, useContext, useState } from "react";
 import axios from "../../api/axios";
 import { AuthContext } from "../../context/AuthProvider";
@@ -10,6 +9,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Modal from "react-bootstrap/Modal";
 import EventsDisplay from "./BookedEvents/EventsDisplay";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+
 
 export default function SingleUser() {
   const { user, setUser } = useContext(AuthContext);
@@ -75,6 +75,7 @@ export default function SingleUser() {
       console.log(response.data);
       axios.get(`/events?user=${response.data._id}`).then((response) => {
         setEvents(response.data);
+        console.log(response.data);
       });
       setIsLoaded(true);
     });
@@ -138,10 +139,16 @@ export default function SingleUser() {
                 </Card.Title>
                 <Card.Text>From: {userP.location}</Card.Text>
                 <Card.Text>{userP.description}</Card.Text>
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
-                  <Button variant="outline-secondary" onClick={handleShow}>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                  <Button
+                    className="w-30 mt-3"
+                    variant="secondary"
+                    onClick={handleShow}
+                  >
                     Edit profile
+
                   </Button>                  
+
                 </div>
               </Card.Body>
             </Card>
@@ -219,6 +226,7 @@ export default function SingleUser() {
             <Card id="userEvents">
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
+
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-end mb-3 mt-3">
                 <Button variant="secondary" href="/create_event">
                     Create new event
@@ -228,6 +236,7 @@ export default function SingleUser() {
                   </Button>
                   </div>
                 <EventsDisplay />
+
               </Card.Body>
             </Card>
           </div>

@@ -8,6 +8,7 @@ import {
   Container,
   OverlayTrigger,
   Tooltip,
+  Figure,
 } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -23,6 +24,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
+import Avatar from 'react-avatar';
 
 const Event = () => {
 
@@ -43,7 +45,7 @@ const Event = () => {
   console.log(joined);
   console.log(event)
   console.log(booked);
-  console.log(allEvents);
+  console.log(user);
 
   useEffect(() => {
     axios
@@ -94,14 +96,13 @@ const Event = () => {
   const date = new Date(event.date);
   const UTC = date.toUTCString();
 
-  const isAuthor = user._id === event?.author?._id
+  const isAuthor = user._id === event?.author?._id;
   console.log(isAuthor)
 
-  console.log(event.attenders)
-  // const isJoined = event.find(joinId => joinId.attenders?.user === user._id)
+  const isJoined = event.attenders?.filter(joined => joined.user === user._id)
   // const check = isJoined(element => element.isJoined === true)
 
-  // console.log(isJoined)
+  console.log(isJoined?.length)
   // console.log(Join)
 
   return (
@@ -133,13 +134,29 @@ const Event = () => {
 
           <Card.Body>
             <div className="mx-3">
-              <Row className="ms-auto gap-5"></Row>
-              <Row className="justify-content-end">
-                Category: {event.category?.name}
+              <Row className="ms-auto gap-5">
+
+              <Figure>
+      <Figure.Image
+        width={80}
+        height={60}
+        alt={event.category?.name}
+        src={event.category?.picture}
+      />
+      <Figure.Caption>
+        Nulla vitae elit libero, a pharetra augue mollis interdum.
+      </Figure.Caption>
+    </Figure>
+              </Row>
+              <Row className="justify-content-end"> {event.category?.name}
+              <Avatar size="80" round="20px" src={event.category?.picture} name={event.category?.name} />
               </Row>
               <Row>
                 <Col className="p-1 mx-3 my-2">
-                  <Card.Title>Hosted by: {event.author?.name}</Card.Title>
+                <Card.Title>Hosted by:</Card.Title>
+               
+                <Avatar size="50" round={true} src={event.author?.picture} name={event.author?.name} />
+                  <Card.Title>{event.author?.name}</Card.Title> 
                   <Card.Subtitle>
                     <p>
                       <FontAwesomeIcon icon={faLocationCrosshairs} size="xs" />{" "}
@@ -213,7 +230,6 @@ const Event = () => {
                 </Button>
               )}
             </OverlayTrigger> */}
-
             <OverlayTrigger
               placement="top-end"
               overlay={<Tooltip id="button-tooltip-2">Contact</Tooltip>}
