@@ -1,18 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "../../../api/axios";
 import AuthContext from "../../../context/AuthProvider";
 import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
+import Button from "react-bootstrap/Button";
 
 function CreatedEvent() {
-  const { created  } = useContext(AuthContext);
-  // console.log(created);
-  
+  const { created } = useContext(AuthContext);
+  console.log(created);
+  const [visible, setVisible] = useState(3);
+  const loadMore = () => {
+    setVisible((prev) => prev + 3);
+  };
   return (
     <div>
       {created.length !== 0 ? (
         <ListGroup as="ul">
-          {created.map((val) => {
+          {created.slice(0, visible).map((val) => {
             const date = new Date(val.date);
             const UTC = date.toUTCString();
 
@@ -20,8 +24,15 @@ function CreatedEvent() {
               <ListGroupItem as="li" key={val._id}>
                 <Row>
                   <Col>
-                    <Card className="bg-dark text-dark" style={{ width: "12rem" }}>
-                      <Card.Img variant="top" src={val.category.picture} alt="outdoor activities image"/>
+                    <Card
+                      className="bg-dark text-dark"
+                      style={{ width: "12rem" }}
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={val.category.picture}
+                        alt="outdoor activities image"
+                      />
                       <Card.ImgOverlay>
                         <Card.Title>{val.category.name}</Card.Title>
                       </Card.ImgOverlay>
@@ -46,6 +57,9 @@ function CreatedEvent() {
       ) : (
         "You haven't created any Events yet"
       )}
+      <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
+        Load more
+      </Button>
     </div>
   );
 }

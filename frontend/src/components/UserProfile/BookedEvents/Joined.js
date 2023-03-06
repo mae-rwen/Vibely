@@ -3,11 +3,15 @@ import ListGroup from "react-bootstrap/ListGroup";
 import AuthContext from "../../../context/AuthProvider";
 import { ListGroupItem, Row, Col } from "react-bootstrap";
 import axios from "../../../api/axios";
-import "./eventdisplay.css"
+import "./eventdisplay.css";
+import Button from "react-bootstrap/Button";
 
 function Joined() {
   const { joined, allEvents, user, booking } = useContext(AuthContext);
-
+  const [visible, setVisible] = useState(3);
+  const loadMore = () => {
+    setVisible((prev) => prev + 3);
+  };
   // const [joined, setJoined] = useState({})
 
   console.log(joined);
@@ -17,44 +21,45 @@ function Joined() {
   console.log(allEvents);
   console.log(user._id);
 
-
   return (
     <div>
-      {joined?.length !== 0
-        ? (
+      {joined?.length !== 0 ? (
+        <>
           <ListGroup as="ul">
-            {joined.map((val) => {
+            {joined.slice(0, visible).map((val) => {
               const date = new Date(val.event?.date);
               const UTC = date.toUTCString();
 
-              return(
+              return (
                 <ListGroupItem as="li" key={val._id}>
                   <Row>
                     <Col>
-                    <p>{val.event.general_location}</p>
-                    Picture of Event?
+                      <p>{val.event.general_location}</p>
+                      Picture of Event?
                     </Col>
                     <Col>
-                    <p className="event_title">{val.event.title}</p>
-                    <p>{UTC}</p>
-                    <p>in: {val.event.general_location}</p>
+                      <p className="event_title">{val.event.title}</p>
+                      <p>{UTC}</p>
+                      <p>in: {val.event.general_location}</p>
                     </Col>
 
                     <Col>
-                    <p>functions like delete</p>
-                    <p>maybe kontakt author?</p>
-                    <p>or go to event</p>
-                 
+                      <p>functions like delete</p>
+                      <p>maybe kontakt author?</p>
+                      <p>or go to event</p>
                     </Col>
-            
                   </Row>
                 </ListGroupItem>
-              )
+              );
             })}
           </ListGroup>
-          ):(
-          "You haven't joined any Events yet"
-          )}
+          <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
+            Load more
+          </Button>{" "}
+        </>
+      ) : (
+        "You haven't joined any Events yet"
+      )}
     </div>
   );
 }
