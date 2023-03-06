@@ -15,15 +15,15 @@ export default function HomePage({ categories, isLoaded }) {
                 {categories.map((category) => {
                   return (
                     <Carousel.Item
-                      style={{ height: "20em" }}
+                      style={{ height: "25em" }}
                       key={category._id}
                     >
                       <img
-                        className="d-block w-100"
+                        className="carouselPic"
                         src={category.picture}
                         alt={`Slide for ${category.name}`}
                       />
-                      <Carousel.Caption className="carouselCaption">
+                      <Carousel.Caption className="carouselCaption p-4 mb-3">
                         <h3>{category.name}</h3>
                         <p>{category.description}</p>
                       </Carousel.Caption>
@@ -33,7 +33,7 @@ export default function HomePage({ categories, isLoaded }) {
               </Carousel>{" "}
             </div>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Button href="/categories" variant="outline-secondary">
+              <Button href="/categories" variant="secondary">
                 Explore All Activities
               </Button>
             </div>

@@ -1,11 +1,21 @@
+
+
 $primary: #a5b2ab;
 $secondary: #c98f61;
-$success: #a5b2ab;
-$info: #c99061bc;
+$success: #a5b2ab8f;
+$info: #c99061b3;
 $warning: #3d5d52;
 $danger: #352e28;
 $light: #e1cbbc;
 $dark: #352e28;
+
+@import "./mediaQueries";
+@import "./userProfile";
+@import "./createEventForm";
+@import "./signUpCards";
+@import "./eventsLists";
+@import "./homePage";
+@import "./categoriesSubPage";
 
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 @import "../../node_modules/bootstrap/scss/bootstrap";
@@ -33,33 +43,7 @@ body {
       margin: 20vh auto !important;
     }
     // // homepage styling -->>
-    #heroSection {
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      justify-content: space-evenly;
-      position: relative;
-      height: 80vh;
-      background-image: url("https://media.istockphoto.com/id/941491560/de/foto/gro%C3%9Fe-gruppe-von-menschen-erfolg-berggipfel.jpg?s=612x612&w=0&k=20&c=D3GOHEQMM7JP72T4lCTGRVkq70uctZ_1hq0ZvN9hm3w=");
-      background-size: 150%;
-      background-position: center;
-    }
-    #loggedInHero {
-      margin: 5em auto !important;      
-    }
-    .carouselCaption {
-      background-color: $info;
-    }
-    .hpSection {
-      margin: 8em auto;
-      .showMoreP:hover {
-        cursor: pointer;
-        color: $light;
-      }
-      .card-events-list {
-        padding: 0;
-      }
-    }
+    
     // // <<-- homepage styling
     .subpageHeader {
       margin-bottom: 4em;
@@ -71,98 +55,7 @@ body {
           color: inherit;
         }
       }
-    }
-    // // categories page styling -->>
-    .categoriesCards {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-      gap: 3em;
-      align-items: stretch;
-      .card {
-        flex: 30%;
-        .text-end {
-          font-size: smaller;
-          a {
-            color: inherit;
-            text-decoration: none;
-          }
-        }
-        img {
-          max-height: 200px;
-          object-fit: cover;
-          aspect-ratio: 1;
-        }
-      }
-    }
-    // // <<-- categories page styling
-    // -------
-    // // events lists styling -->>
-    .eventsDiv {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      p {
-        font-size: smaller;
-      }
-      .eventsFilters {
-        display: flex;
-        flex-direction: row;
-        .filtersButtons {
-          display: flex;
-          flex-direction: row;
-          gap: 0.75em;
-          > * {
-            width: auto;
-          }
-        }
-        .createNewButton {
-          margin-left: auto;
-        }
-      }
-      .eventsList {
-        li {    
-          margin: 0.5em auto; 
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          gap: 3em;
-          align-items: flex-start;                
-          &:hover {
-            background-color: $light;
-          }
-          .eventDescription {
-           margin-top: 1em;
-           width: 30em;
-           span {
-            p {
-              font-size: 1em;
-              margin: 0;
-            }
-           }
-          }
-          #eventThumbnail {           
-            position: relative;  
-            width: 20em;         
-            img {
-             
-              opacity: 0.7;
-            }          
-            #thumbnailBadge {
-              position: absolute;
-              top: 1em;
-              left: .5em;
-            }
-          }
-          #eventData {
-            margin-top:1em;
-            margin-left: auto;
-            width: 20em;
-          }
-        }
-      }
-    }
-    // // <<-- events lists styling
+    }   
   }
   // // Navbar classes -->>
   .activeClass,
@@ -186,160 +79,7 @@ body {
       border-radius: 5px;
     }
   }
-  // // <<-- Navbar classes
-  // ------
-  // // Signup forms -->>
-  .signUpCards {
-    max-width: 30em;
-    margin: auto;
-    .signUpHere {
-      color: inherit;
-    }
-    .offscreen {
-      position: absolute;
-      left: -9999px;
-    }
-    .errmsg {
-      background-color: lightpink;
-      color: firebrick;
-      font-weight: bold;
-      padding: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .instructions {
-      font-size: 0.75rem;
-      border-radius: 0.5rem;
-      background: $secondary;
-      color: #fff;
-      padding: 0.25rem;
-      position: relative;
-      bottom: -10px;
-    }
-    .hide {
-      display: none;
-    }
-    .valid {
-      color: limegreen;
-      margin-left: 0.25rem;
-    }
-    .invalid {
-      color: red;
-      margin-left: 0.25rem;
-    }
-  }
-  // // <<-- Signup forms
-  // ------
-  // // Create event form -->>
-  .createEvent {
-    margin: auto;
-    max-width: 50em;
-    .createEventForm {
-      margin: 3em auto;
-      max-width: 45em;
-      .locationAndType {
-        display: flex;
-        flex-direction: row;
-        gap: 5em;
-        .citySelector {
-          max-width: 13em;
-        }
-        .radioButtons {
-          display: flex;
-          flex-direction: row;
-          gap: 1em;
-        }
-      }
-    }
-  }
-  // // <<-- Create event form
-  // -----
-  // // User profile -->>
-  .userProfileDiv {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 3em;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    #userDesc {
-      width: 20em;
-      img {
-        object-fit: cover;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        margin: auto;
-        margin-top: 2em;
-      }
-    }
-    #userEvents {
-      width: 50em;
-    }
-  }
-  // // <<-- User profile
+  // // <<-- Navbar classes 
 }
 
-// // <-- media queries
-@media (max-width: 770px) {
-  .categoriesCards {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    gap: 3em;
-    align-items: stretch;
-    .card {
-      flex: 100% !important;
-    }
-  }
-  .eventsDiv {
-    .eventsFilters {
-      flex-flow: column !important;
-      gap: 0.75em;      
-      .filtersButtons {   
-        flex-flow: row wrap;    
-        order: 2 !important;
-        align-items: center;
-        justify-content: center;
-      }
-      .createNewButton {
-        margin: auto;
-        order: 1 !important;
-        #createNew {
-          height: 3.5em;
-          padding-top: 1em;
-        }
-      }
-    }
-  }
-  .eventsList {
-    li {       
-      // border: solid 2px aqua;
-      margin: 1.5em auto !important;
-      flex-direction: column !important;
-      gap: 0.75em !important;
-      align-items: center !important;
-        
-      .eventDescription {
-        margin: auto !important;
-        margin-top: 1em !important;
-        // border: solid 2px purple; 
-        order: 1; 
-        max-width: 20em !important;           
-      }
-      #eventThumbnail {
-        margin: auto !important;  
-        // border: solid 2px green;          
-        order: 2;
-        max-width: 20em !important;
-        img {
-          width: 20em !important;
-        } 
-      }
-      #eventData {
-        margin: auto !important;
-        // border: solid 2px red; 
-        order: 3;
-        max-width: 20em !important;
-      }
-    }
-  }
-}
+
