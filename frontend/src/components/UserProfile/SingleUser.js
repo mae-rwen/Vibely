@@ -10,7 +10,6 @@ import Modal from "react-bootstrap/Modal";
 import EventsDisplay from "./BookedEvents/EventsDisplay";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 
-
 export default function SingleUser() {
   const { user, setUser } = useContext(AuthContext);
   //to show and hide the modal
@@ -146,9 +145,7 @@ export default function SingleUser() {
                     onClick={handleShow}
                   >
                     Edit profile
-
-                  </Button>                  
-
+                  </Button>
                 </div>
               </Card.Body>
             </Card>
@@ -228,15 +225,14 @@ export default function SingleUser() {
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
 
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-end mb-3 mt-3">
-                <Button variant="secondary" href="/create_event">
+                  <Button variant="secondary" href="/create_event">
                     Create new event
                   </Button>
-                <Button variant="outline-secondary" href="/allevents">
+                  <Button variant="outline-secondary" href="/allevents">
                     See all events
                   </Button>
-                  </div>
-                <EventsDisplay />
-
+                </div>
+                <EventsDisplay events={events} />
               </Card.Body>
             </Card>
           </div>
