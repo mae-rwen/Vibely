@@ -14,7 +14,7 @@ function CreatedEvent({ events }) {
   };
   return (
     <div>
-      {created.length !== 0 ? (
+      {/* {created.length !== 0 ? (
         <ListGroup as="ul">
           {events.slice(0, visible).map((val) => {
             const date = new Date(val.date);
@@ -61,7 +61,7 @@ function CreatedEvent({ events }) {
       <Button className="w-30 mt-3" variant="secondary" onClick={loadMore}>
         Load more
       </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
