@@ -26,14 +26,14 @@ import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import LoggedIn from "./components/UserProfile/HelpersComponents/LoggedIn";
 import Registered from "./components/UserProfile/HelpersComponents/Registered";
 
-
+import EventFailed from "./components/EventPages/EventFailed";
 
 function App() {
   return (
     <div className="App">
       <ScrollToTop style={{ borderRadius: "50%" }} />
       <Header />
-      <Routes>        
+      <Routes>
         <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route path="/register" element={<RegisterForm />} />
@@ -48,6 +48,8 @@ function App() {
           <Route path="/create_event" element={<CreateEvent />} />
           <Route path="/users/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
+          <Route path="/event_failed" element={<EventFailed />} />
+
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
           <Route path="/event/:event_id" element={<Event />} />
