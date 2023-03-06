@@ -14,7 +14,6 @@ export default function CitySelector({setEventLocation}) {
         aria-label="Default select example"
         onChange={handleCitySelect}
         className="citySelector"
-        placeholder="select location"
       >
         {germanCities.map((city, index) => (
           <option key={index} value={city.name}>
