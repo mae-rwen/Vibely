@@ -204,7 +204,6 @@ export default function SingleUser() {
                     <Form.Control
                       type="file"
                       name="file"
-                      // value={userFile}
                       onChange={uploadImage}
                     />
                   </Form.Group>
