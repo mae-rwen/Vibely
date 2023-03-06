@@ -35,20 +35,16 @@ export default function CreateEvent() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (event.category === "" || event.general_location === "") {
-      console.log("not added");
-      navigate("/event_failed");
-    } else {
-      console.log(event);
-      axios
-        .post("/events", event)
-        .then((response) => {
-          const result = [...created, response.data];
-          console.log(result);
-        })
-        .catch((error) => console.log(error));
-      navigate("/event_success");
-    }
+    axios
+      .post("/events", event)
+      .then((response) => {
+        const result = [...created, response.data];
+        console.log(result);
+        setCreated([...created, response.data]);
+      })
+      .catch((error) => console.log(error));
+    navigate("/event_success");
+
     setEventCategory("");
     setEventDate("");
     setEventDescription("");
