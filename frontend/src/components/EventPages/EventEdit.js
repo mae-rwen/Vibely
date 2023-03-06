@@ -16,10 +16,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../hooks/useAuth";
 import "./event.css";
 import { AuthContext } from "../../context/AuthProvider";
-import CitySelector from "./CitySelector";
-
+import CitySelector from "./HelpersComponents/CitySelector";
 import Editor from "../../context/Editor";
-
 
 export default function EventEdit() {
   const { id } = useParams();
@@ -28,7 +26,7 @@ export default function EventEdit() {
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [date, setDate] = useState("");
-  const [participants, setParticipants ] = useState("")
+  const [participants, setParticipants] = useState("");
   const [description, setDescription] = useState("");
   const [eventPic, setEventPic] = useState("");
   const [files, setFiles] = useState("");
@@ -37,34 +35,32 @@ export default function EventEdit() {
 
   useEffect(() => {
     axios.get(`/events/find/${id}`).then((response) => {
-        const event = response.data;
-        setTitle(event.title);
-        setLocation(event.general_location);
-        setType(event.type);
-        setDate(event.date);
-        setDescription(event.description);
-        setParticipants(event.participants);
+      const event = response.data;
+      setTitle(event.title);
+      setLocation(event.general_location);
+      setType(event.type);
+      setDate(event.date);
+      setDescription(event.description);
+      setParticipants(event.participants);
       console.log(event);
-
     });
   }, []);
 
   async function updateEvent(e) {
     e.preventDefault();
     const data = new FormData();
-    data.set('title', title);
-    data.set('general_location', location);
-    data.set('description', description);
-    data.set('category', category);
-    data.set('date', date);
-    data.set('type', type);
-    data.set('participants', participants);
-    data.set('id', id)
-//        data.set('file', files);
+    data.set("title", title);
+    data.set("general_location", location);
+    data.set("description", description);
+    data.set("category", category);
+    data.set("date", date);
+    data.set("type", type);
+    data.set("participants", participants);
+    data.set("id", id);
+    //        data.set('file', files);
     await axios.put(`/events/find/${id}`, data).then((response) => {
-        console.log(response)
-    })
-       
+      console.log(response);
+    });
   }
 
   return (
@@ -95,19 +91,16 @@ export default function EventEdit() {
               })}
             </Form.Select> */}
 
-        <Form.Group >
-            <Form.Label>
-              Number of participants (minimum: 4){" "}
-            </Form.Label>
-            <Form.Control
-              type="number"
-              min="4"
-              name="participants"
-              value={participants}
-              onChange={(e) => setParticipants(e.target.value)}
-            />
-          </Form.Group>
-
+      <Form.Group>
+        <Form.Label>Number of participants (minimum: 4) </Form.Label>
+        <Form.Control
+          type="number"
+          min="4"
+          name="participants"
+          value={participants}
+          onChange={(e) => setParticipants(e.target.value)}
+        />
+      </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label className="fw-bold">Location of the event</Form.Label>
@@ -134,7 +127,10 @@ export default function EventEdit() {
         />
       </Form.Group>
 
-      <Editor value={description} onChange={newValue => setDescription(newValue)}  />
+      <Editor
+        value={description}
+        onChange={(newValue) => setDescription(newValue)}
+      />
 
       <Button variant="secondary">Update Event</Button>
     </Form>
