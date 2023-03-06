@@ -71,7 +71,7 @@
     padding-bottom: 0.5rem;
 }
 
-.btn {
+.btn_event {
     display: flex;
     justify-content: space-between;
 }

@@ -141,10 +141,7 @@ export default function SingleUser() {
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3 mt-3">
                   <Button variant="outline-secondary" onClick={handleShow}>
                     Edit profile
-                  </Button>
-                  <Button variant="secondary" href="/create_event">
-                    Create new event
-                  </Button>
+                  </Button>                  
                 </div>
               </Card.Body>
             </Card>
@@ -222,8 +219,15 @@ export default function SingleUser() {
             <Card id="userEvents">
               <Card.Body>
                 <Card.Title className="fw-bold mb-4">My activities</Card.Title>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-end mb-3 mt-3">
+                <Button variant="secondary" href="/create_event">
+                    Create new event
+                  </Button>
+                <Button variant="outline-secondary" href="/allevents">
+                    See all events
+                  </Button>
+                  </div>
                 <EventsDisplay />
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3"></div>
               </Card.Body>
             </Card>
           </div>

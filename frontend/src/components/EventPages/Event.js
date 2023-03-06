@@ -106,7 +106,7 @@ const Event = () => {
 
   return (
     <Container>
-      <div className="btn" >
+      <div className="btn_event" >
       <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
         Go Back
       </Button>
