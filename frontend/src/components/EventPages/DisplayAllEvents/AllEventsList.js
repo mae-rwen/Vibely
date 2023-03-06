@@ -105,7 +105,7 @@ export default function AllEventsList() {
               })}
             </ListGroup>
           ) : (
-            "No matching events. Please try out with different filters."
+           "No matching events. Please try out with different filters."
           )}
         </div>
       ) : (

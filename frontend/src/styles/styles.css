@@ -51,7 +51,7 @@
   .eventsDiv .eventsList li #eventThumbnail {
     margin: auto !important;
     order: 2;
-    max-width: 20em !important;
+    width: 20em !important;
   }
   .eventsDiv .eventsList li #eventThumbnail img {
     width: 20em !important;
@@ -190,10 +190,7 @@
 }
 .eventsDiv .eventsList li #eventThumbnail {
   position: relative;
-  width: 20em;
-}
-.eventsDiv .eventsList li #eventThumbnail img {
-  opacity: 0.7;
+  width: 10em;
 }
 .eventsDiv .eventsList li #eventThumbnail #thumbnailBadge {
   position: absolute;
