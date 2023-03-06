@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
-
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -33,19 +32,16 @@ export default function CreateEvent() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (event.category === "" || event.general_location === "") {
-      console.log("not added");
-      navigate("/event_failed");
-    } else {
-      console.log(event);
-      axios
-        .post("/events", event)
-        .then((response) => {
-          // console.log(response.data);
-        })
-        .catch((error) => console.log(error));
-      navigate("/event_success");
-    }
+    axios
+      .post("/events", event)
+      .then((response) => {
+        // const result = [...created, response.data];
+        // console.log(result);
+        // setCreated([...created, response.data]);
+      })
+      .catch((error) => console.log(error));
+    navigate("/event_success");
+
     setEventCategory("");
     setEventDate("");
     setEventDescription("");
@@ -176,7 +172,12 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Button className="w-30 mt-3" variant="secondary" type="submit">
+            <Button
+              disabled={!eventCategory || !eventLocation ? true : false}
+              className="w-30 mt-3"
+              variant="secondary"
+              type="submit"
+            >
               Create this event
             </Button>
           </div>
