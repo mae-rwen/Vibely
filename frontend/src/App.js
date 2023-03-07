@@ -43,7 +43,7 @@ function App() {
           <Route path="/allevents/" element={<AllEventsList />} />
           <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
-          <Route path="/users/profile" element={<SingleUser />} />
+          <Route path="/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/event_updated" element={<UpdateSuccess />} />
           <Route path="/event_failed" element={<EventFailed />} />
@@ -57,8 +57,7 @@ function App() {
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
 
-          <Route element={<RequireAuth />}>
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}                
+          <Route element={<RequireAuth />}>                          
           {/* <Route path="/users/profile" element={<SingleUser />} /> */}
             <Route path="/event/:event_id" element={<Event />} />
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}

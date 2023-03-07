@@ -48,7 +48,7 @@ export default function Header() {
                   Instructions
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/joined">Joined</NavDropdown.Item>
-                <NavDropdown.Item href="/users/profile/">
+                <NavDropdown.Item href="/profile">
                   User profile
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/register">Register</NavDropdown.Item>
@@ -89,7 +89,7 @@ export default function Header() {
                   <>                
                   <Button
                     className="m-auto ms-1"                 
-                    href="/users/profile/"
+                    href="/profile/"
                     variant="secondary"
                   >
                     <FontAwesomeIcon icon={faUser} /> Your profile

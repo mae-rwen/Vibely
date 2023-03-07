@@ -52,7 +52,7 @@ export default function LogInForm() {
         setIsClicked(false);
         // Perform login logic here and redirect to another page
         navigate(from, { replace: true });
-      }, 2000);
+      }, 1000);
 
       
     } catch (err) {
