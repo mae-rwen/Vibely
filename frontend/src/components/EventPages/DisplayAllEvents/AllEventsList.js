@@ -55,11 +55,8 @@ export default function AllEventsList() {
         }&sortBy=${sortBy}`
       )
       .then((response) => {
-         if (user) {         
-        setEventsToDisplay(response?.data?.filter(event => event.author?._id !== user?._id))
-         } else {
-        setEventsToDisplay(response.data)}
-        
+         
+        setEventsToDisplay(response.data)           
         setIsLoaded(true);
       })
       .catch((error) => {
