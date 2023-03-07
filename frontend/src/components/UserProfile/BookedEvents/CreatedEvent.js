@@ -23,6 +23,7 @@ function CreatedEvent({ events }) {
         <>
           <ListGroup as="ul">
             {events.slice(0, visible).map((val) => {
+
               // get the date
               const date = new Date(val.date);
               const year = date.getFullYear();
@@ -139,6 +140,7 @@ function CreatedEvent({ events }) {
                       </ListGroup>
                     </div>
                   </div>
+
                 </ListGroupItem>
               );
             })}
@@ -166,6 +168,7 @@ function CreatedEvent({ events }) {
           </div>
         </div>
       )}
+
     </div>
   );
 }
