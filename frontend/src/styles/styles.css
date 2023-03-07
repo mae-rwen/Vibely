@@ -85,6 +85,13 @@
     justify-content: flex-end;
     gap: 0.5em;
   }
+  #singleEventThumbnail {
+    display: none;
+    margin-left: auto;
+  }
+  #singleEventThumbnail img {
+    width: 10em;
+  }
 }
 .userProfileDiv {
   display: flex;
@@ -369,6 +376,14 @@
   margin-left: 2em;
   margin-right: 2em;
   margin-bottom: 1em;
+}
+
+#eventDescBtns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  justify-content: flex-end;
+  padding-right: 1em;
 }
 
 /*!

@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 export default function Instructions() {
   return (
     <>
+     
       <div className="subpageHeader">
         <h2 className="fw-bold col-lg-8 mx-auto text-start">
           How to use Vibely
@@ -97,6 +98,7 @@ export default function Instructions() {
           Create your profile
         </Button>
       </div>
+      
     </>
   );
 }
