@@ -24,6 +24,7 @@ import EventEdit from "./components/EventPages/EventEdit";
 import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import EventFailed from "./components/EventPages/EventFailed";
 import UpdateSuccess from "./components/EventPages/HelpersComponents/UpdateSuccess"
+import DeleteEvent from "./components/EventPages/DeleteEvent";
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
           <Route path="/event_failed" element={<EventFailed />} />
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />
+          <Route path="/event_delete" element={<DeleteEvent />} />
+
           {/* <Route path="/event/:event_id" element={<Event />} /> */}
           <Route path="/event/edit/:id" element={<EventEdit />} />
           <Route path="/event_joined" element={<EventJoined />} />   

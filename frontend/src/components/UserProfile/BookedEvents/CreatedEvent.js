@@ -10,10 +10,13 @@ import {
   faEye,
   faPenToSquare,
   faXmark,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import axios from "../../../api/axios";
+import { Modal } from "react-bootstrap";
 
 function CreatedEvent({ events }) {
   const { created } = useContext(AuthContext);
@@ -22,6 +25,48 @@ function CreatedEvent({ events }) {
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
+
+  const [show, setShow] = useState(false);
+
+  async function handleDelete(e) {
+    e.preventDefault();
+    await axios.delete(`/find/:id`);
+  }
+
+  if (show) {
+    return (
+      <>
+        <Modal
+          onClose={() => setShow(false)}
+          size="sm"
+          show={setShow}
+          onHide={() => setShow(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="modal-sizes-title-sm">Are you sure?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Do you really want to delete this event?. This process cannot be
+            undone.
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="d-flex justify-content-end gap-3">
+              <Button
+                onClick={() => setShow(false)}
+                variant="outline-secondary"
+              >
+                Cancel
+              </Button>
+              <Button onClick={(e) => handleDelete()} variant="danger">
+                Delete
+              </Button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
   return (
     <div>
       {events.length !== 0 ? (
@@ -147,8 +192,11 @@ function CreatedEvent({ events }) {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="outline-warning">
-                                <FontAwesomeIcon icon={faXmark} />
+                              <Button
+                                onClick={() => setShow(true)}
+                                variant="outline-warning"
+                              >
+                                <FontAwesomeIcon icon={faTrash} />
                               </Button>
                             </OverlayTrigger>
                           </div>
