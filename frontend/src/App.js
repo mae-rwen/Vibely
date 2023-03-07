@@ -23,6 +23,7 @@ import EventJoined from "./components/EventPages/EventJoined";
 import EventEdit from "./components/EventPages/EventEdit";
 import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import EventFailed from "./components/EventPages/EventFailed";
+import UpdateSuccess from "./components/EventPages/HelpersComponents/UpdateSuccess"
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/create_event" element={<CreateEvent />} />
           <Route path="/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
+          <Route path="/event_updated" element={<UpdateSuccess />} />
           <Route path="/event_failed" element={<EventFailed />} />
           <Route path="/profile/joined" element={<Joined />} />
           <Route path="/profile/events" element={<EventsDisplay />} />

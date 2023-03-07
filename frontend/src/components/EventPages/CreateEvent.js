@@ -178,7 +178,7 @@ export default function CreateEvent() {
               variant="secondary"
               type="submit"
             >
-              Create this event
+              Create
             </Button>
           </div>
         </Form>

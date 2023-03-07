@@ -1,11 +1,18 @@
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
 const { Category } = require("../models/categories");
-
+function isObjEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 const getEvents = async (req, res, next) => {
+  const { page } = req.query || 1;
+  const eventsPerPage = 8;
+
   try {
     // for filters
     const query = {};
+    const skip = (page - 1) * eventsPerPage;
+
     if (req.query.location) {
       console.log(req.query.location);
       query.general_location = req.query.location;
@@ -36,12 +43,59 @@ const getEvents = async (req, res, next) => {
     } else if (sortBy === "organizer") {
       sortOptions.author = 1;
     }
-    const events = await Event.find(query)
-      .populate("author")
-      .populate("category")
-      .sort(sortOptions);
 
-    res.json(events);
+    //trying out
+    if (isObjEmpty(query)) {
+      const count = await Event.estimatedDocumentCount(query); //commenting for a while
+      const pageCount = Math.ceil(count / eventsPerPage);
+      const events = await Event.find(query)
+        .limit(eventsPerPage)
+        .skip(skip)
+        .populate("author")
+        .populate("category")
+        .sort(sortOptions);
+      const allEvents = await Event.find(query);
+      console.log(
+        "total events are " +
+          count +
+          " and page count for pagination is " +
+          pageCount
+      );
+
+      res.json({
+        pagination: {
+          count,
+          pageCount,
+        },
+        events,
+        allEvents,
+      });
+    } else {
+      const events = await Event.find(query)
+        .limit(eventsPerPage)
+        .skip(skip)
+        .populate("author")
+        .populate("category")
+        .sort(sortOptions);
+      const count = events.length;
+      const pageCount = Math.ceil(count / eventsPerPage);
+      console.log(query);
+      console.log(
+        "total events are " +
+          count +
+          " and page count for pagination is " +
+          pageCount
+      );
+      // console.log(events);
+      
+      res.json({
+        pagination: {
+          count,
+          pageCount,
+        },
+        events,
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -117,12 +171,14 @@ const updateEvent = async (req, res, next) => {
       date,
       eventPic,
       author,
+      participants,
       is_active,
     } = req.body;
     const eventDoc = await Event.findById(id);
-    const isAuthor = JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id)
+    const isAuthor =
+      JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id);
     if (!isAuthor) {
-      return res.status(401).json("you're nor the author")
+      return res.status(401).json("you're nor the author");
     }
     const event = await Event.findByIdAndUpdate(
       id,
@@ -134,11 +190,11 @@ const updateEvent = async (req, res, next) => {
         date,
         eventPic,
         author,
+        participants,
         is_active,
       },
       { new: true }
     );
-
     res.json(event);
   } catch (error) {
     next(error);
@@ -148,13 +204,14 @@ const updateEvent = async (req, res, next) => {
 const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    // const { author } = req.body;
+    const { author } = req.body;
+    const eventDoc = await Event.findById(id);
+    const isAuthor =
+      JSON.stringify(eventDoc.author) === JSON.stringify(req.user.id);
+    if (!isAuthor) {
+      return res.status(401).json("you're not the author");
+    }
     const event = await Event.findByIdAndDelete(id);
-    // const isAuthor = JSON.stringify(event.author._id) === JSON.stringify(req.user.id)
-    // if (!isAuthor) {
-    //   return res.status(401).json("you're nor the author")
-    // }
-
     const categoryDoc = await Category.findByIdAndUpdate(
       event.category,
       { $inc: { eventTotal: -1 } },

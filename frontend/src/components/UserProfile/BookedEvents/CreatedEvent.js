@@ -1,11 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "../../../api/axios";
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
 import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
-import { faShareFromSquare, faEye, faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShareFromSquare,
+  faEye,
+  faPenToSquare,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -95,32 +100,44 @@ function CreatedEvent({ events }) {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                            <OverlayTrigger
-                              placement="top"
-                              delay={{ show: 250, hide: 400 }}
-                              overlay={
-                                <Tooltip id="tooltip-leave">
-                                  Go to the event page
-                                </Tooltip>
-                              }
+                            <NavLink
+                              to={`/event/${val._id}`}
+                              style={{ textDecoration: "none" }}
                             >
-                              <Button variant="outline-warning">
-                                <FontAwesomeIcon icon={faEye} />
-                              </Button>
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                              placement="top"
-                              delay={{ show: 250, hide: 400 }}
-                              overlay={
-                                <Tooltip id="tooltip-leave">
-                                  Edit the event
-                                </Tooltip>
-                              }
+                              <OverlayTrigger
+                                placement="top"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={
+                                  <Tooltip id="tooltip-leave">
+                                    Go to the event page
+                                  </Tooltip>
+                                }
+                              >
+                                <Button variant="outline-warning">
+                                  <FontAwesomeIcon icon={faEye} />
+                                </Button>
+                              </OverlayTrigger>
+                            </NavLink>
+
+                            <NavLink
+                              to={`/event/edit/${val._id}`}
+                              style={{ textDecoration: "none" }}
                             >
-                              <Button variant="outline-warning">
-                                <FontAwesomeIcon icon={faPenToSquare} />
-                              </Button>
-                            </OverlayTrigger>
+                              <OverlayTrigger
+                                placement="top"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={
+                                  <Tooltip id="tooltip-leave">
+                                    Edit the event
+                                  </Tooltip>
+                                }
+                              >
+                                <Button variant="outline-warning">
+                                  <FontAwesomeIcon icon={faPenToSquare} />
+                                </Button>
+                              </OverlayTrigger>
+                            </NavLink>
+
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}

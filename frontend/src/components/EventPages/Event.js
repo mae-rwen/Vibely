@@ -11,7 +11,9 @@ import {
   Figure,
   Badge,
 } from "react-bootstrap";
+
 import { useNavigate, useParams, Navigate } from "react-router-dom";
+
 import {
   faBuildingColumns,
   faClock,
@@ -92,6 +94,7 @@ const Event = () => {
 
   // get the date
   const date = new Date(event.date);
+
   const year = date.getFullYear();
   const day = date.getDate();
   const months = [
@@ -133,6 +136,7 @@ const Event = () => {
           minutes.length === 2 ? minutes : "0" + minutes
         }`
       : null;
+
 
   const isAuthor = user._id === event?.author?._id;
   console.log(isAuthor);
@@ -202,86 +206,66 @@ const Event = () => {
               </Row>
             </Card.Header>
 
-            <Card.Body>
-              <div className="mx-3">
-                <Row className="ms-auto gap-5"></Row>
-                <Row className="justify-content-end"></Row>
-                <Row className="my-4">
-                  <Col sm={1}>
-                    <Avatar
-                      size="50"
-                      round={true}
-                      src={event.author?.picture}
-                      name={event.author?.name}
-                    />
-                  </Col>
-                  <Col sm={4} className="justify-content-end">
-                    <Card.Title>Host: {event.author?.name}</Card.Title>
-                    <hr />
-                  </Col>
-                  <Col></Col>
-                </Row>
 
-                <Row className="my-4">
-                  <Col className="mx-2 my-3 about">
-                    <div className="mb-4">
-                      <div className="mx-2">
-                        <span className={type === "private" ? "show" : "hide"}>
-                          <FontAwesomeIcon icon={faHouseChimney} />
-                        </span>
-                        <span className={type === "public" ? "show" : "hide"}>
-                          <FontAwesomeIcon icon={faBuildingColumns} />
-                        </span>
-                      </div>
-                      <span className="text mb-0 first-letter">
-                        {event.type}
+              <Row className="my-4">
+                <Col className="mx-2 my-3 about">
+                  <div className="mb-4">
+                    <div className="mx-2">
+                      <span className={type === "private" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faHouseChimney} />
+                      </span>
+                      <span className={type === "public" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faBuildingColumns} />
                       </span>
                     </div>
-                    <Row className="mt-2 my-2">
-                      <Card.Text>{event.description}</Card.Text>
-                    </Row>
-
-                    <Row className="mt-4 my-2">
-                      <div>
-                        <h5>
-                          <Badge bg="dark" pill id="thumbnailBadge">
-                            joined: {event.joined}
-                            {event.participants
-                              ? `/${event.participants}`
-                              : null}
-                          </Badge>
-                        </h5>
-                      </div>
-                    </Row>
-                  </Col>
-                </Row>
-                <p className="my-2">
-                  <FontAwesomeIcon icon={faInfo} size="sm" />
-                </p>
-                <Row></Row>
-              </div>
-            </Card.Body>
-
-            <Card.Footer className="d-flex justify-content-end display-content-end gap-3">
-              <OverlayTrigger
-                placement="top-end"
-                overlay={<Tooltip id="button-tooltip-2">Contact</Tooltip>}
-              >
-                {({ ref, ...triggerHandler }) => (
-                  <Button
-                    ref={ref}
-                    variant="outline-secondary"
-                    alt="add to your watch list"
-                    {...triggerHandler}
-                    className="d-inline-flex align-items-center"
-                  >
-                    {" "}
-                    <FontAwesomeIcon
-                      style={{ position: "relative" }}
-                      icon={faMessage}
-                      size="xl"
+                    <span className="text mb-0 first-letter">{event.type}</span>
+                  </div>
+                  <Row className="mt-2 my-2">
+                    <div
+                      dangerouslySetInnerHTML={{ __html: event.description }}
                     />
-                    {/* <div className="absolute">
+                  </Row>
+
+                  <Row className="mt-4 my-2">
+                    <div>
+                      <h5>
+                        <Badge bg="dark" pill id="thumbnailBadge">
+                          joined: {event.joined}
+                          {event.participants ? `/${event.participants}` : null}
+                        </Badge>
+                      </h5>
+                    </div>
+                  </Row>
+                </Col>
+              </Row>
+              <p className="my-2">
+                <FontAwesomeIcon icon={faInfo} size="sm" />
+              </p>
+              <Row></Row>
+            </div>
+          </Card.Body>
+
+          <Card.Footer className="d-flex justify-content-end display-content-end gap-3">
+            <OverlayTrigger
+              placement="top-end"
+              overlay={<Tooltip id="button-tooltip-2">Contact</Tooltip>}
+            >
+              {({ ref, ...triggerHandler }) => (
+                <Button
+                  ref={ref}
+                  variant="outline-secondary"
+                  alt="add to your watch list"
+                  {...triggerHandler}
+                  className="d-inline-flex align-items-center"
+                >
+                  {" "}
+                  <FontAwesomeIcon
+                    style={{ position: "relative" }}
+                    icon={faMessage}
+                    size="xl"
+                  />
+                  {/* <div className="absolute">
+
                     <FontAwesomeIcon icon={faQuestionCircle} size="sm" />
                   </div> */}
                   </Button>
@@ -296,12 +280,26 @@ const Event = () => {
                   </Button>
                 </>
               )}
-            </Card.Footer>
-          </Card>
-        )}
-      </Container>
 
-      <br />
+            </OverlayTrigger>
+            {isAuthor === true ||
+            isJoined?.length > 0 ||
+            event?.joined >= event.participants ? null : (
+              <Button variant="secondary" onClick={joinEvent}>
+                JOIN
+              </Button>
+            )}
+          </Card.Footer>
+        </Card>
+      )}
+    </Container>
+    
+    
+    
+    
+    
+    
+    <br />
       <br />
       <hr />
       <hr />
@@ -410,7 +408,7 @@ const Event = () => {
               ) : null}
         </Card.Footer>
       </Card>
-    </>
+
   );
 };
 

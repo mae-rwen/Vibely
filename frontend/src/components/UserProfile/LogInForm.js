@@ -7,7 +7,6 @@ import { useRef, useState, useEffect, useContext } from "react";
 
 import axios from "../../api/axios";
 import AuthContext from "../../context/AuthProvider";
-// import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
@@ -44,17 +43,10 @@ export default function LogInForm() {
       const response = await axios.post(
         LOGIN_URL,{ email, name, password });
       setUser(response.data);
-      console.log(response.data)
       setName(response?.data?.name);
-      console.log(response?.data);
 
-      console.log(response);
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name, password, accessToken });
-      // setOperator("");
-      // setEmail("");
-      // setPassword("");
-
       setIsClicked(true);
       setTimeout(() => {
         setIsClicked(false);

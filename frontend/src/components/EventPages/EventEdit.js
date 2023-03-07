@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
-import { Form, InputGroup, FloatingLabel, Button } from "react-bootstrap";
+import { Form, InputGroup, Container, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   faBuildingColumns,
@@ -22,8 +22,12 @@ import Editor from "../../context/Editor";
 
 export default function EventEdit() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
 
-  const [title, setTitle] = useState("");
+  const [event, setEvent] = useState({});
+
+  const [title, setTitle] = useState();
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [date, setDate] = useState("");
@@ -32,60 +36,110 @@ export default function EventEdit() {
   const [eventPic, setEventPic] = useState("");
   const [files, setFiles] = useState("");
   const [category, setCategory] = useState("");
-  const [updatedEvent, setUpdatedEvent] = useState("");
+
+
 
   useEffect(() => {
     axios.get(`/events/find/${id}`).then((response) => {
-      const event = response.data;
-      setTitle(event.title);
-      setLocation(event.general_location);
-      setType(event.type);
-      setDate(event.date);
-      setDescription(event.description);
-      setParticipants(event.participants);
-      console.log(event);
+      console.log(response.data);
+      //   setEvent(response.data);
+      const data = response.data;
+    //   const dat = new Date(data.date);
+    //   const ISO = dat.toISOString;
+      setTitle(data.title);
+      setLocation(data.general_location);
+      setType(data.type);
+      setDate(data.date);
+      setCategory(data.category);
+      setDescription(data.description);
+      setParticipants(data.participants);
     });
   }, []);
 
+  useEffect(() => {
+    console.log("Event", event);
+  });
+
+  const updatedEvent = {
+    title: title,
+    general_location: location,
+    description: description,
+    category: category,
+    date: date,
+    type: type,
+    participants: Number(participants),
+  };
+
+
   async function updateEvent(e) {
     e.preventDefault();
-    const data = new FormData();
-    data.set("title", title);
-    data.set('general_location', location);
-    data.set('description', description);
-    data.set('category', category);
-    data.set('date', date);
-    data.set('type', type);
-    data.set('participants', participants);
-    data.set('id', id)
-//        data.set('file', files);
-    await axios.put(`/events/find/${id}`, {body: data}).then((response) => {
-        console.log(response.data)
-    })
-       
-
+    // const data = new FormData();
+    // data.set("title", title);
+    // data.set("location", location);
+    // data.set("description", description);
+    // data.set("category", category);
+    // data.set("date", date);
+    // data.set("type", type);
+    // data.set("participants", participants);
+    // console.log(data);
+    //        data.set('file', files);
+    await axios
+      .put(`/events/find/${id}`, updatedEvent)
+      .then((response) => {
+        // setEvent({body: data});
+        setEvent({
+          title: title,
+          general_location: location,
+          description: description,
+          category: category,
+          date: date,
+          type: type,
+          participants: Number(participants),
+          id: id,
+        });
+      })
+      .catch((error) => console.log(error));
+      navigate("/event_updated");
   }
 
   return (
-    <Form onSubmit={updateEvent}>
-      <InputGroup className="mb-3">
-        <InputGroup.Text>Title</InputGroup.Text>
-        <Form.Control
-          type="title"
-          placeholder={"Title"}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </InputGroup>
+    <Container>
+      <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
+        Cancel
+      </Button>
+      <Form onSubmit={updateEvent}>
+        <Form.Group className="mb-3">
+          <Form.Text muted>Title</Form.Text>
+          <Form.Control
+            type="Title"
+            placeholder={title}
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+        </Form.Group>
 
-      {/* <Form.Select
+        {/* <Form.Group className="mb-3">
+          <Form.Text muted>
+            Location: {location}, select from list to change
+          </Form.Text>
+          <CitySelector
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Select location from the list"
+          />
+        </Form.Group> */}
+
+        {/* <Form.Select
               aria-label="category"
               onChange={(e) => {
                 setCategory(e.target.value);
               }}
               required
             >
-              {category.map((cat, index) => {
+              {{category}.map((cat, index) => {
                 return (
                   <option key={index} value={cat._id}>
                     {cat.name}
@@ -94,48 +148,70 @@ export default function EventEdit() {
               })}
             </Form.Select> */}
 
-      <Form.Group>
-        <Form.Label>Number of participants (minimum: 4) </Form.Label>
-        <Form.Control
-          type="number"
-          min="4"
-          name="participants"
-          value={participants}
-          onChange={(e) => setParticipants(e.target.value)}
-        />
-      </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Text muted>Number of Participants: {participants}</Form.Text>
+          <Form.Control
+            type="number"
+            min="1"
+            name="participants"
+            value={participants}
+            onChange={(e) => setParticipants(e.target.value)}
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label className="fw-bold">Location of the event</Form.Label>
-        <CitySelector
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder="Select location from the list"
-        />
-        <Form.Text muted>Select the desired location from the list</Form.Text>
-      </Form.Group>
+        <Row className="mb-3">
+          <Col>
+            <Form className="mb-3">
+            <Form.Text muted>Event: {type.toLocaleUpperCase()}, select to change</Form.Text>
+              <Form.Check
+                label="Private"
+                name="group1"
+                type="radio"
+                value="private"
+                onChange={(e) => setType(e.target.value)}
+              />
+              <Form.Check
+                label="Public"
+                name="group1"
+                type="radio"
+                value="public"
+                onChange={(e) => setType(e.target.value)}
+              />
+            </Form>
+          </Col>
 
-      <Form.Select aria-label="Default select example">
-        <option disabled>type: {type} select to change</option>
-        <option value="Private">Private</option>
-        <option value="Public">Public</option>
-      </Form.Select>
+          <Col>
+            <Form.Group>
+              <Form.Text muted>Date & Time: {date} select to change</Form.Text>
+              <div className="form-check">
+                <input
+                  type="datetime-local"
+                  name="event-datetime"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </div>
+            </Form.Group>
+          </Col>
+        </Row>
 
-      <Form.Group controlId="formFileMultiple" className="mb-3">
+        {/* <Form.Group controlId="formFileMultiple" className="mb-3">
         <Form.Label>Multiple files input example</Form.Label>
         <Form.Control
           type="file"
           multiple
           onChange={(e) => setFiles(e.target.files)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
-      <Editor
-        value={description}
-        onChange={(newValue) => setDescription(newValue)}
-      />
-
-      <Button variant="secondary" type="submit">Update Event</Button>
-    </Form>
+        <Editor
+          value={description}
+          onChange={(newValue) => setDescription(newValue)}
+        />
+        <Button className="mb-3 mx-1 my-3" variant="secondary" type="submit">
+          Update
+        </Button>
+      </Form>
+    </Container>
   );
 }

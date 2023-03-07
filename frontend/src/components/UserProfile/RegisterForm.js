@@ -15,20 +15,20 @@ import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
+const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._!-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SIGNUP_URL = "/auth/signup";
 
 const RegisterForm = ({ setSetAccount }) => {
   // const changeState = () => setSetAccount(true);
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const userRef = useRef();
+  const nameRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
   // const usernameRef = useRef()
@@ -36,9 +36,9 @@ const RegisterForm = ({ setSetAccount }) => {
   // const passwordRef = useRef();
   // const passwordConfirmRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
 
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
@@ -55,27 +55,21 @@ const RegisterForm = ({ setSetAccount }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    userRef.current.focus();
+    nameRef.current.focus();
   }, []);
 
   useEffect(() => {
-    const result = USER_REGEX.test(user);
-    // console.log(result);
-    // console.log(user);
+    const result = NAME_REGEX.test(name);
     setValidName(result);
-  }, [user]);
+  }, [name]);
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    // console.log(result);
-    // console.log(email);
     setValidEmail(result);
   }, [email]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(password);
-    // console.log(result);
-    // console.log(password);
     setValidPassword(result);
     const match = password === matchPassword;
     setValidMatch(match);
@@ -83,12 +77,12 @@ const RegisterForm = ({ setSetAccount }) => {
 
   useEffect(() => {
     setError("");
-  }, [user, email, password, matchPassword]);
+  }, [name, email, password, matchPassword]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(user);
+    const v1 = NAME_REGEX.test(name);
     const v2 = EMAIL_REGEX.test(email);
     const v3 = PWD_REGEX.test(password);
     if (!v1 || !v2 || !v3) {
@@ -99,13 +93,14 @@ const RegisterForm = ({ setSetAccount }) => {
 
     try {
       const response = await axios.post(
-        SIGNUP_URL, { name: user, email, password });
+        SIGNUP_URL, { name, email, password });
       // console.log(response.data);
       // console.log(response.accessToken);
       // console.log(JSON.stringify(response))
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, name: user, password, accessToken });
-      navigate("/event_joined");
+      setUser({ email, name, password, accessToken });
+      setAuth({ email, name, password, accessToken });
+      navigate("users/profile/");
       // clear input fields
     } catch (err) {
       if (!err?.response) {
@@ -140,28 +135,28 @@ const RegisterForm = ({ setSetAccount }) => {
               <Form.Control
                 type="text"
                 id="username"
-                ref={userRef}
+                ref={nameRef}
                 autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 required
                 aria-invalid={validName ? "false" : "true"}
                 aria-describedby="uidnote"
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
+                onFocus={() => setNameFocus(true)}
+                onBlur={() => setNameFocus(false)}
               />
               <label htmlFor="username">
                 Username
                 <span className={validName ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
-                <span className={validName || !user ? "hide" : "invalid"}>
+                <span className={validName || !name ? "hide" : "invalid"}>
                   <FontAwesomeIcon icon={faTimes} />
                 </span>
               </label>
               <p
                 id="uidnote"
                 className={
-                  userFocus && user && !validName ? "instructions" : "offscreen"
+                  nameFocus && name && !validName ? "instructions" : "offscreen"
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
