@@ -348,7 +348,7 @@ const Event = () => {
                 <FontAwesomeIcon icon={faUsers} />{" "}
                 {event.joined < event.participants
                   ? event.participants
-                    ? `Joined: ${event.joined}/${event.participants}`
+                    ? `${event.joined}/${event.participants}`
                     : null
                   : `event full (${event.participants})`}
               </p>
@@ -399,6 +399,15 @@ const Event = () => {
               </OverlayTrigger>
             </>
           )}
+          {isJoined?.length > 0 ? (
+                   <>
+                   <OverlayTrigger placement="top" overlay={<Tooltip>Leave</Tooltip>}>
+                     <Button variant="outline-warning" onClick={joinEvent}>
+                       <FontAwesomeIcon icon={faRightToBracket} />
+                     </Button>
+                   </OverlayTrigger>
+                 </>
+              ) : null}
         </Card.Footer>
       </Card>
     </>
