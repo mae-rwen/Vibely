@@ -83,7 +83,7 @@ export default function EventsList({ event, getCategories, user }) {
                   <>
                     <h6>
                       <Badge bg="secondary" pill id="thumbnailBadge">
-                        you already joined this event
+                        You've joined this event
                       </Badge>
                     </h6>
                   </>
@@ -96,8 +96,8 @@ export default function EventsList({ event, getCategories, user }) {
               </p>
             </span>
           </div>
-          <Card id="eventData">
-            <ListGroup variant="flush">
+         
+            <ListGroup variant="flush" id="eventData">
               <ListGroup.Item>
                 in <b>{event.general_location}</b>
               </ListGroup.Item>
@@ -110,7 +110,7 @@ export default function EventsList({ event, getCategories, user }) {
                 <b>{event.author?.name ? event.author?.name : "unknown"}</b>
               </ListGroup.Item>
             </ListGroup>
-          </Card>
+     
         </ListGroup.Item>
       </NavLink>
     </>

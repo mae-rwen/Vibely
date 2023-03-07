@@ -1,21 +1,45 @@
 .userProfileDiv {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 3em;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    #userDesc {
-      width: 20em;
-      img {
-        object-fit: cover;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        margin: auto;
-        margin-top: 2em;
-      }
-    }
-    #userEvents {
-      width: 50em;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3em;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  #userDesc {
+    width: 20em;
+    img {
+      object-fit: cover;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      margin: auto;
+      margin-top: 2em;
     }
   }
+  #userEvents {
+    width: 50em;
+  }
+}
+
+#joinedItem {
+  display: flex;
+  flex-direction: column;
+  #underTheTitle {
+    display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2em;
+    #joinedThumbnail {
+      width: 10em;
+    }
+    #joinedDescription {
+      margin-left: auto;
+      flex-grow: 1;
+      #joinedBtns {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: .5em;
+      }
+    }
+  } 
+}
