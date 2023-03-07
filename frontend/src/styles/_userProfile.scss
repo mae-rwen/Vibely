@@ -23,7 +23,6 @@
 #joinedItem {
   display: flex;
   flex-direction: column;
-
   #underTheTitle {
     display: flex;
   flex-direction: row;
@@ -42,8 +41,5 @@
         gap: .5em;
       }
     }
-  }
- 
-  
-  
+  } 
 }
