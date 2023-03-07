@@ -59,24 +59,4 @@
     }
   }
 
-  #joinedItem {     
-      display: flex;
-      flex-direction: column;
   
-      span {
-        display: flex;
-      flex-direction: row;
-      gap: 2em;
-      align-items: center;
-        #joinedThumbnail {           
-          width: 15em;
-        } 
-        .joinedDescription {
-        flex-direction: column;           
-            
-        #joinedData { 
-        width: 20em;
-        }
-      }
-    }
-  }

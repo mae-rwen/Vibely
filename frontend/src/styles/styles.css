@@ -85,6 +85,26 @@
   width: 50em;
 }
 
+#joinedItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 2em;
+}
+#joinedItem #joinedThumbnail {
+  width: 10em;
+}
+#joinedItem #joinedDescription {
+  margin-left: auto;
+  flex-grow: 1;
+}
+#joinedItem #joinedDescription #joinedBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 0.5em;
+}
+
 .createEvent {
   margin: auto;
   max-width: 50em;
@@ -200,26 +220,6 @@
 .eventsDiv .eventsList li #eventData {
   margin-top: 1em;
   margin-left: auto;
-  width: 20em;
-}
-
-#joinedItem {
-  display: flex;
-  flex-direction: column;
-}
-#joinedItem span {
-  display: flex;
-  flex-direction: row;
-  gap: 2em;
-  align-items: center;
-}
-#joinedItem span #joinedThumbnail {
-  width: 15em;
-}
-#joinedItem span .joinedDescription {
-  flex-direction: column;
-}
-#joinedItem span .joinedDescription #joinedData {
   width: 20em;
 }
 

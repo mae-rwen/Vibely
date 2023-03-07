@@ -7,7 +7,10 @@ import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
 import Card from "react-bootstrap/Card";
-import Vibely from "./../Vibely.png";
+import { faShareFromSquare, faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 function Joined() {
   const { joined, allEvents, user, booking } = useContext(AuthContext);
@@ -76,45 +79,69 @@ function Joined() {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
-                  <span>
+                  <span id="titleAndThumbnail">
+                    <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
                     <Figure id="joinedThumbnail">
-                      <Figure.Image alt="thumbnail" src={Vibely} thumbnail />
+                      <Figure.Image
+                        alt="thumbnail"
+                        src="https://media.tenor.com/htKQgBPrAIEAAAAM/vibing-cat.gif"
+                        thumbnail
+                      />
                     </Figure>
-
-                    <div className="joinedDescription">
-                      <Card id="joinedData">
-                        <ListGroup variant="flush">
-                          <ListGroup.Item>
-                            {" "}
-                            in {val.event?.general_location}{" "}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            on{" "}
-                            {formattedDate
-                              ? formattedDate
-                              : `not specified date`}{" "}
-                            at{" "}
-                            {formattedTime
-                              ? formattedTime
-                              : `not specified time`}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Created by{" "}
-                            <b>
-                              {val.event?.author?.name
-                                ? val.event?.author?.name
-                                : "unknown"}
-                            </b>
-                          </ListGroup.Item>
-                        </ListGroup>
-                      </Card>
-                    </div>
-                    <div>
-                      <Button variant="secondary">Leave the event</Button>
-                      <Button variant="secondary">Go to the event</Button>
-                    </div>
                   </span>
+
+                  <div id="joinedDescription">
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        {" "}
+                        in {val.event?.general_location}{" "}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        on{" "}
+                        {formattedDate ? formattedDate : `not specified date`}{" "}
+                        at{" "}
+                        {formattedTime ? formattedTime : `not specified time`}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Created by{" "}
+                        <b>
+                          {val.event?.author?.name
+                            ? val.event?.author?.name
+                            : "unknown"}
+                        </b>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <div id="joinedBtns">
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 250, hide: 400 }}
+                            overlay={
+                              <Tooltip id="tooltip-leave">
+                                Go to the event page
+                              </Tooltip>
+                            }
+                          >
+                            <Button variant="outline-warning">
+                              <FontAwesomeIcon icon={faEye} />
+                            </Button>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 250, hide: 400 }}
+                            overlay={
+                              <Tooltip id="tooltip-leave">
+                                Leave the event
+                              </Tooltip>
+                            }
+                          >
+                            <Button variant="outline-warning">
+                              <FontAwesomeIcon icon={faShareFromSquare} />
+                            </Button>
+                          </OverlayTrigger>
+                        </div>
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </div>
                 </ListGroupItem>
               );
             })}
@@ -130,7 +157,17 @@ function Joined() {
           </div>
         </>
       ) : (
-        "You haven't joined any Events yet"
+        <div>
+          <h6 className="display-8 fw-bold">
+            You haven't joined any events yet
+          </h6>
+
+          <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
+            <Button variant="outline-secondary" href="/allevents">
+              Browse the events
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );
