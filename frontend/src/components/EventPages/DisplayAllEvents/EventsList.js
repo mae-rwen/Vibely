@@ -68,8 +68,9 @@ export default function EventsList({ event, getCategories, user }) {
             />
             <h5>
               <Badge bg="secondary" pill id="thumbnailBadge">
-                joined: {event.joined < event.participants ? event.joined : "event full"}
-                {event.participants ? `/${event.participants}` : null}
+                {event.joined < event.participants ? (event.participants ? `Joined: ${event.joined}/${event.participants}` : null) : (`event full (${event.participants})`)}
+               
+                
               </Badge>
             </h5>
             <Figure.Caption>
@@ -107,7 +108,9 @@ export default function EventsList({ event, getCategories, user }) {
               </ListGroup.Item>
               <ListGroup.Item>
                 Created by{" "}
-                <b>{event.author?.name ? event.author?.name : "unknown"}</b>
+                <b>
+                  {event.author?._id !== user._id ? (event.author?.name ? event.author?.name : "unknown") : ("you")}
+                 </b>
               </ListGroup.Item>
             </ListGroup>
      

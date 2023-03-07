@@ -42,7 +42,7 @@ function App() {
           <Route path="/allevents/" element={<AllEventsList />} />
           <Route path="/allevents/:category" element={<AllEventsList />} />
           <Route path="/create_event" element={<CreateEvent />} />
-          <Route path="/users/profile" element={<SingleUser />} />
+          <Route path="/profile" element={<SingleUser />} />
           <Route path="/event_success" element={<EventSuccess />} />
           <Route path="/event_failed" element={<EventFailed />} />
           <Route path="/profile/joined" element={<Joined />} />
