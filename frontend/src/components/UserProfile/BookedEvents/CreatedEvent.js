@@ -113,7 +113,7 @@ function CreatedEvent({ events }) {
                                   </Tooltip>
                                 }
                               >
-                                <Button variant="outline-warning">
+                                <Button variant="warning">
                                   <FontAwesomeIcon icon={faEye} />
                                 </Button>
                               </OverlayTrigger>
@@ -128,11 +128,11 @@ function CreatedEvent({ events }) {
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={
                                   <Tooltip id="tooltip-leave">
-                                    Edit the event
+                                    Edit
                                   </Tooltip>
                                 }
                               >
-                                <Button variant="outline-warning">
+                                <Button variant="primary">
                                   <FontAwesomeIcon icon={faPenToSquare} />
                                 </Button>
                               </OverlayTrigger>
@@ -143,7 +143,7 @@ function CreatedEvent({ events }) {
                               delay={{ show: 250, hide: 400 }}
                               overlay={
                                 <Tooltip id="tooltip-leave">
-                                  Delete the event
+                                  Delete
                                 </Tooltip>
                               }
                             >

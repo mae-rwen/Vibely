@@ -93,4 +93,12 @@
       }
     } 
   }
+
+  #singleEventThumbnail {
+    display: none;
+    margin-left: auto;
+    img {
+      width: 10em;
+    }
+  }
 }
