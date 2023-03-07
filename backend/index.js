@@ -20,7 +20,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 app.use(express.json({ limit: "10mb" }));
 
-app.use(express.static(path.resolve(__dirname, "../frontend", "build")));
+app.use(express.static(path.resolve(__dirname, "frontend", "build")));
 
 // app.use(express.static("/uploads"));
 app.use(
@@ -40,7 +40,7 @@ app.use("/categories", categoriesRouter);
 app.use("/booking", bookingRouter);
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
  });
  
 
