@@ -87,18 +87,22 @@
 
 #joinedItem {
   display: flex;
+  flex-direction: column;
+}
+#joinedItem #underTheTitle {
+  display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 2em;
 }
-#joinedItem #joinedThumbnail {
+#joinedItem #underTheTitle #joinedThumbnail {
   width: 10em;
 }
-#joinedItem #joinedDescription {
+#joinedItem #underTheTitle #joinedDescription {
   margin-left: auto;
   flex-grow: 1;
 }
-#joinedItem #joinedDescription #joinedBtns {
+#joinedItem #underTheTitle #joinedDescription #joinedBtns {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

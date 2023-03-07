@@ -79,68 +79,70 @@ function Joined() {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <span id="titleAndThumbnail">
-                    <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
-                    <Figure id="joinedThumbnail">
-                      <Figure.Image
-                        alt="thumbnail"
-                        src="https://media.tenor.com/htKQgBPrAIEAAAAM/vibing-cat.gif"
-                        thumbnail
-                      />
-                    </Figure>
-                  </span>
+                  <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
+                  <div id="underTheTitle">
+                    <span id="titleAndThumbnail">
+                      <Figure id="joinedThumbnail">
+                        <Figure.Image
+                          alt="thumbnail"
+                          src="https://media.tenor.com/htKQgBPrAIEAAAAM/vibing-cat.gif"
+                          thumbnail
+                        />
+                      </Figure>
+                    </span>
 
-                  <div id="joinedDescription">
-                    <ListGroup variant="flush">
-                      <ListGroup.Item>
-                        {" "}
-                        in {val.event?.general_location}{" "}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        on{" "}
-                        {formattedDate ? formattedDate : `not specified date`}{" "}
-                        at{" "}
-                        {formattedTime ? formattedTime : `not specified time`}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        Created by{" "}
-                        <b>
-                          {val.event?.author?.name
-                            ? val.event?.author?.name
-                            : "unknown"}
-                        </b>
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <div id="joinedBtns">
-                          <OverlayTrigger
-                            placement="top"
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={
-                              <Tooltip id="tooltip-leave">
-                                Go to the event page
-                              </Tooltip>
-                            }
-                          >
-                            <Button variant="outline-warning">
-                              <FontAwesomeIcon icon={faEye} />
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            placement="top"
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={
-                              <Tooltip id="tooltip-leave">
-                                Leave the event
-                              </Tooltip>
-                            }
-                          >
-                            <Button variant="outline-warning">
-                              <FontAwesomeIcon icon={faShareFromSquare} />
-                            </Button>
-                          </OverlayTrigger>
-                        </div>
-                      </ListGroup.Item>
-                    </ListGroup>
+                    <div id="joinedDescription">
+                      <ListGroup variant="flush">
+                        <ListGroup.Item>
+                          {" "}
+                          in {val.event?.general_location}{" "}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          on{" "}
+                          {formattedDate ? formattedDate : `not specified date`}{" "}
+                          at{" "}
+                          {formattedTime ? formattedTime : `not specified time`}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          Created by{" "}
+                          <b>
+                            {val.event?.author?.name
+                              ? val.event?.author?.name
+                              : "unknown"}
+                          </b>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <div id="joinedBtns">
+                            <OverlayTrigger
+                              placement="top"
+                              delay={{ show: 250, hide: 400 }}
+                              overlay={
+                                <Tooltip id="tooltip-leave">
+                                  Go to the event page
+                                </Tooltip>
+                              }
+                            >
+                              <Button variant="outline-warning">
+                                <FontAwesomeIcon icon={faEye} />
+                              </Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger
+                              placement="top"
+                              delay={{ show: 250, hide: 400 }}
+                              overlay={
+                                <Tooltip id="tooltip-leave">
+                                  Leave the event
+                                </Tooltip>
+                              }
+                            >
+                              <Button variant="outline-warning">
+                                <FontAwesomeIcon icon={faShareFromSquare} />
+                              </Button>
+                            </OverlayTrigger>
+                          </div>
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </div>
                   </div>
                 </ListGroupItem>
               );

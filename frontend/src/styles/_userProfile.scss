@@ -22,22 +22,28 @@
 
 #joinedItem {
   display: flex;
+  flex-direction: column;
+
+  #underTheTitle {
+    display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 2em;
-  #joinedThumbnail {
-    width: 10em;
-  }
-  #joinedDescription {
-    margin-left: auto;
-    flex-grow: 1;
-    #joinedBtns {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      gap: .5em;
+    #joinedThumbnail {
+      width: 10em;
+    }
+    #joinedDescription {
+      margin-left: auto;
+      flex-grow: 1;
+      #joinedBtns {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: .5em;
+      }
     }
   }
+ 
   
   
 }
