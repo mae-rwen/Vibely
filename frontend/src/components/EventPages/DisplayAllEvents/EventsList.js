@@ -83,7 +83,7 @@ export default function EventsList({ event, getCategories, user }) {
                   <>
                     <h6>
                       <Badge bg="secondary" pill id="thumbnailBadge">
-                        you already joined this event
+                        You've joined this event
                       </Badge>
                     </h6>
                   </>

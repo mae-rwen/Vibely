@@ -160,7 +160,7 @@ function CreatedEvent({ events }) {
           </h6>
 
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
-            <Button variant="outline-secondary" href="/create_event">
+            <Button variant="outline-warning" href="/create_event">
               Create new event
             </Button>
           </div>

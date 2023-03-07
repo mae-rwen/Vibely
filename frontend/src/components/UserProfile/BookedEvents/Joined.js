@@ -165,7 +165,7 @@ function Joined() {
           </h6>
 
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-start">
-            <Button variant="outline-secondary" href="/allevents">
+            <Button variant="outline-warning" href="/allevents">
               Browse the events
             </Button>
           </div>
