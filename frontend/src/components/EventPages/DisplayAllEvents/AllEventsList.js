@@ -22,7 +22,6 @@ export default function AllEventsList() {
   const [sortBy, setSortBy] = useState("createdAt");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  console.log("befror set" + currentPage);
   const handlePrevious = () => {
     // setCurrentPage((prev) => {
     //   if (prev === 1) return currentPage;
@@ -52,7 +51,6 @@ export default function AllEventsList() {
     axios
       .get(`/events`)
       .then((response) => {
-        // setAllEvents(response.data);//commeting to check
         setAllEvents(response.data.events);
       })
       .catch((error) => {
@@ -80,9 +78,11 @@ export default function AllEventsList() {
               (event) => event.author?._id !== user?._id
             )
           );
-          setCurrentPage(response.data.pagination.pageCount);
+          console.log(eventsToDisplay);
+          setPageCount(response.data.pagination.pageCount);
         } else {
           setEventsToDisplay(response.data.events);
+          console.log(eventsToDisplay);
         }
 
         setIsLoaded(true);
@@ -90,8 +90,8 @@ export default function AllEventsList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [locationQuery, typeQuery, categoryQuery, sortBy]);
-  console.log(pageCount + "backend");
+  }, [locationQuery, typeQuery, categoryQuery, sortBy, currentPage]);
+
   return (
     <>
       <div className="subpageHeader">
@@ -126,6 +126,7 @@ export default function AllEventsList() {
           {eventsToDisplay.length !== 0 ? (
             <ListGroup className="eventsList" as="ul">
               {eventsToDisplay.map((event) => {
+                console.log(eventsToDisplay);
                 return (
                   <EventsList
                     key={event._id}

@@ -13,6 +13,7 @@ const getEvents = async (req, res, next) => {
     const skip = (page - 1) * eventsPerPage;
     const count = await Event.estimatedDocumentCount(query);
     const pageCount = Math.ceil(count / eventsPerPage);
+    console.log("page count" + pageCount + " count:" + count);
     if (req.query.location) {
       console.log(req.query.location);
       query.general_location = req.query.location;

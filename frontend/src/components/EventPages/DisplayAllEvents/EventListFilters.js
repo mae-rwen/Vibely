@@ -19,7 +19,9 @@ export default function EventListFilters({
   setSortBy,
 }) {
   const germanCities = cities.filter((city) => city.country === "DE");
-  const filteredCities = germanCities.filter((value) => location.includes(value.name));
+  const filteredCities = germanCities.filter((value) =>
+    location.includes(value.name)
+  );
 
   const handleLocationQuery = (e) => {
     if (e.target.value === "All locations") {
@@ -37,7 +39,7 @@ export default function EventListFilters({
 
           <Form.Select
             aria-label="Default select example"
-            onChange={handleLocationQuery}            
+            onChange={handleLocationQuery}
           >
             <option style={{ fontWeight: "bold" }}>All locations</option>
             {filteredCities.map((city, index) => (
@@ -45,7 +47,7 @@ export default function EventListFilters({
                 {city.name}
               </option>
             ))}
-          </Form.Select>          
+          </Form.Select>
 
           {/* Categories filter */}
           <DropdownButton
