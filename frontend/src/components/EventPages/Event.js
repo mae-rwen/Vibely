@@ -11,7 +11,7 @@ import {
   Figure,
   Badge,
 } from "react-bootstrap";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   faBuildingColumns,
   faClock,
@@ -87,6 +87,7 @@ const Event = () => {
   // );
 
   const date = new Date(event.date);
+  console.log(date.toString())
   const UTC = date.toUTCString();
 
   const isAuthor = user._id === event?.author?._id;
@@ -175,7 +176,7 @@ const Event = () => {
                   <div className="mb-4">
                     <div className="mx-2">
                       <span className={type === "private" ? "show" : "hide"}>
-                        <FontAwesomeIcon icon={faHouseChimney}/>
+                        <FontAwesomeIcon icon={faHouseChimney} />
                       </span>
                       <span className={type === "public" ? "show" : "hide"}>
                         <FontAwesomeIcon icon={faBuildingColumns} />
@@ -184,9 +185,9 @@ const Event = () => {
                     <span className="text mb-0 first-letter">{event.type}</span>
                   </div>
                   <Row className="mt-2 my-2">
-                    <Card.Text>
-                      <div dangerouslySetInnerHTML={{__html: event.description}} />
-                      </Card.Text>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: event.description }}
+                    />
                   </Row>
 
                   <Row className="mt-4 my-2">
@@ -233,14 +234,12 @@ const Event = () => {
                 </Button>
               )}
             </OverlayTrigger>
-            {isAuthor === true || isJoined?.length > 0 || event?.joined >= event.participants ? null : (
-              <>
-              
+            {isAuthor === true ||
+            isJoined?.length > 0 ||
+            event?.joined >= event.participants ? null : (
               <Button variant="secondary" onClick={joinEvent}>
                 JOIN
               </Button>
-              </>
-              
             )}
           </Card.Footer>
         </Card>
