@@ -371,6 +371,14 @@
   margin-bottom: 1em;
 }
 
+#eventDescBtns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  justify-content: flex-end;
+  padding-right: 1em;
+}
+
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
