@@ -94,6 +94,7 @@ export default function AllEventsList() {
             categoryQuery={categoryQuery}
             setCategoryQuery={setCategoryQuery}
             setSortBy={setSortBy}
+            eventsToDisplay={eventsToDisplay}
           />
           {eventsToDisplay.length !== 0 ? (
             <ListGroup className="eventsList" as="ul">

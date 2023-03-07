@@ -17,6 +17,7 @@ export default function EventListFilters({
   categoryQuery,
   setCategoryQuery,
   setSortBy,
+  eventsToDisplay
 }) {
   const germanCities = cities.filter((city) => city.country === "DE");
   const filteredCities = germanCities.filter((value) => location.includes(value.name));
@@ -40,9 +41,9 @@ export default function EventListFilters({
             onChange={handleLocationQuery}            
           >
             <option style={{ fontWeight: "bold" }}>All locations</option>
-            {filteredCities.map((city, index) => (
-              <option key={index} value={city.name}>
-                {city.name}
+            {eventsToDisplay.map((city, index) => (
+              <option key={index} value={city.general_location}>
+                {city.general_location}
               </option>
             ))}
           </Form.Select>          

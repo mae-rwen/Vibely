@@ -51,13 +51,15 @@ function App() {
           <Route path="/event/edit/:id" element={<EventEdit />} />
           <Route path="/event_joined" element={<EventJoined />} />   
           <Route path="/loggedOut" element={<LoggedOut />} />
+          
+          
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
 
           <Route element={<RequireAuth />}>                          
-          {/* <Route path="/users/profile" element={<SingleUser />} /> */}
-            <Route path="/event/:event_id" element={<Event />} />
+          {/* <Route path="/users/profile" element={<SingleUser />} /> */}  
+          <Route path="/event/:event_id" element={<Event />} />        
             {/* <Route path="/create_event" element={<CreateEvent />} /> */}
           </Route>
           {/* catch all - to create missing element */}

@@ -38,7 +38,7 @@ export default function Categories() {
         </h2>
         <div className="col-lg-8 mx-auto text-end">
           <p>
-            There are <b>{eventsCount}</b> events waiting for you to join!
+            There are <strong>{eventsCount}</strong> events waiting for you to join!
           </p>
           {/* <p>
             You can change your location in <a href="#">your account</a>. *To

@@ -19,14 +19,14 @@ function Joined() {
     setVisible((prev) => prev + 3);
   };
   // const [joined, setJoined] = useState({})
-
+  console.log("AAAAAAAAAAAAA");
   console.log(joined);
   // console.log(user);
   // console.log(booking);
 
   // console.log(allEvents);
   // console.log(user._id);
-
+  
   return (
     <div>
       {joined?.length !== 0 ? (
