@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "../../../api/axios";
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
 import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
