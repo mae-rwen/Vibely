@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
         axios.get(`/events?user=${response.data._id}`).then((response) => {
           setCreated(response.data);
         });
-
         console.log(response.data);
       })
       .catch((err) => {

@@ -11,7 +11,7 @@ import {
   Figure,
   Badge,
 } from "react-bootstrap";
-import { useNavigate, useParams, Navigate} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import {
   faBuildingColumns,
   faClock,
@@ -184,7 +184,9 @@ const Event = () => {
                     <span className="text mb-0 first-letter">{event.type}</span>
                   </div>
                   <Row className="mt-2 my-2">
-                    <Card.Text>{event.description}</Card.Text>
+                    <Card.Text>
+                      <div dangerouslySetInnerHTML={{__html: event.description}} />
+                      </Card.Text>
                   </Row>
 
                   <Row className="mt-4 my-2">
