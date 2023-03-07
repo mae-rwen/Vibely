@@ -109,7 +109,7 @@ export default function EventsList({ event, getCategories, user }) {
               <ListGroup.Item>
                 Created by{" "}
                 <b>
-                  {event.author?._id !== user._id ? (event.author?.name ? event.author?.name : "unknown") : ("you")}
+                  {event.author?._id !== user?._id ? (event.author?.name ? event.author?.name : "unknown") : ("you")}
                  </b>
               </ListGroup.Item>
             </ListGroup>

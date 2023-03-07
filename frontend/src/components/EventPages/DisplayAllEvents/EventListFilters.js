@@ -18,6 +18,7 @@ export default function EventListFilters({
   categoryQuery,
   setCategoryQuery,
   setSortBy,
+  eventsToDisplay
 }) {
   const germanCities = cities.filter((city) => city.country === "DE");
   const filteredCities = germanCities.filter((value) =>
@@ -43,10 +44,12 @@ export default function EventListFilters({
             onChange={handleLocationQuery}
           >
             <option style={{ fontWeight: "bold" }}>All locations</option>
+
             {/* changint to germanCities */}
             {filteredCities.map((city, index) => (
               <option key={index} value={city.name}>
                 {city.name}
+
               </option>
             ))}
           </Form.Select>

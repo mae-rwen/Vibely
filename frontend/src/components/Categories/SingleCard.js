@@ -12,7 +12,7 @@ export default function SingleCard({ categories }) {
             <Card.Body>
               <Card.Title className="fw-bold">{category.name}</Card.Title>
               <Card.Text className="text-end">
-                <a href="#top">{category.eventTotal} events in this category</a>
+                <a href="#top"><strong>{category.eventTotal}</strong> events in this category</a>
               </Card.Text>
               <Button
                 className="catBtn"
