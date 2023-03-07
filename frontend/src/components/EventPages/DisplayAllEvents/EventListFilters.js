@@ -17,8 +17,7 @@ export default function EventListFilters({
   setTypeQuery,
   categoryQuery,
   setCategoryQuery,
-  setSortBy,
-  eventsToDisplay
+  setSortBy,  
 }) {
   const germanCities = cities.filter((city) => city.country === "DE");
   const filteredCities = germanCities.filter((value) =>
