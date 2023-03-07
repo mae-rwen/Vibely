@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data);
         axios.get(`/booking?user=${response.data._id}`).then((response) => {
           setJoined(response.data);
+          console.log(joined);
         });
         // axios.get(`/events?user=${response.data._id}`).then((response) => {
         //   setCreated(response.data);

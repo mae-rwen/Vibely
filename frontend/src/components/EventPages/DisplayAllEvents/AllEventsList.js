@@ -23,19 +23,16 @@ export default function AllEventsList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const handlePrevious = () => {
-    // setCurrentPage((prev) => {
-    //   if (prev === 1) return currentPage;
-    //   return currentPage - 1;
-    // });
-
-    setCurrentPage(currentPage - 1);
+    setCurrentPage((prev) => {
+      if (prev === 1) return currentPage;
+      return currentPage - 1;
+    });
   };
   const handleNext = () => {
-    // setCurrentPage((prev) => {
-    //   if (prev === pageCount) return prev;
-    //   return prev + 1;
-    // });
-    setCurrentPage(currentPage + 1);
+    setCurrentPage((prev) => {
+      if (prev === pageCount) return prev;
+      return prev + 1;
+    });
   };
   // get all categories
   // and events for displaying locations and types of events
@@ -51,7 +48,7 @@ export default function AllEventsList() {
     axios
       .get(`/events`)
       .then((response) => {
-        setAllEvents(response.data.events);
+        setAllEvents(response.data.allEvents);
       })
       .catch((error) => {
         console.log(error);
@@ -61,7 +58,9 @@ export default function AllEventsList() {
   const location = [
     ...new Set(allEvents.map((event) => event.general_location)),
   ];
+  console.log(location);
   const types = [...new Set(allEvents.map((event) => event.type))];
+  console.log(types);
 
   useEffect(() => {
     axios
@@ -71,19 +70,10 @@ export default function AllEventsList() {
         }&sortBy=${sortBy}&page=${currentPage}`
       )
       .then((response) => {
-        if (user) {
-          //adding .events to check
-          setEventsToDisplay(
-            response?.data?.events.filter(
-              (event) => event.author?._id !== user?._id
-            )
-          );
-          console.log(eventsToDisplay);
-          setPageCount(response.data.pagination.pageCount);
-        } else {
-          setEventsToDisplay(response.data.events);
-          console.log(eventsToDisplay);
-        }
+        setEventsToDisplay(response.data.events);
+        setPageCount(response.data.pagination.pageCount);
+
+        console.log(eventsToDisplay);
 
         setIsLoaded(true);
       })
@@ -112,6 +102,7 @@ export default function AllEventsList() {
       {isLoaded ? (
         <div className="eventsDiv">
           <EventListFilters
+            eventsToDisplay={eventsToDisplay}
             location={location}
             types={types}
             getCategories={getCategories}
@@ -124,18 +115,40 @@ export default function AllEventsList() {
             setSortBy={setSortBy}
           />
           {eventsToDisplay.length !== 0 ? (
-            <ListGroup className="eventsList" as="ul">
-              {eventsToDisplay.map((event) => {
-                console.log(eventsToDisplay);
-                return (
-                  <EventsList
-                    key={event._id}
-                    event={event}
-                    getCategories={getCategories}
-                  />
-                );
-              })}
-            </ListGroup>
+            <>
+              <ListGroup className="eventsList" as="ul">
+                {eventsToDisplay.map((event) => {
+                  console.log(eventsToDisplay);
+                  return (
+                    <EventsList
+                      key={event._id}
+                      event={event}
+                      getCategories={getCategories}
+                    />
+                  );
+                })}
+              </ListGroup>
+              <div className=" d-flex flex-direction-row justify-content-center mt-3 gap-3">
+                <Button
+                  disabled={currentPage === 1}
+                  onClick={handlePrevious}
+                  className="w-30 mt-3"
+                  variant="secondary"
+                  type="submit"
+                >
+                  Previous
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  disabled={currentPage === pageCount}
+                  className="w-30 mt-3"
+                  variant="secondary"
+                  type="submit"
+                >
+                  Next
+                </Button>
+              </div>
+            </>
           ) : (
             "No matching events. Please try out with different filters."
           )}
@@ -143,26 +156,6 @@ export default function AllEventsList() {
       ) : (
         <LoadingSpinner />
       )}
-      <div className=" d-flex flex-direction-row justify-content-center mt-3 gap-3">
-        <Button
-          disabled={currentPage === 1}
-          onClick={handlePrevious}
-          className="w-30 mt-3"
-          variant="secondary"
-          type="submit"
-        >
-          Previous
-        </Button>
-        <Button
-          onClick={handleNext}
-          disabled={currentPage === pageCount}
-          className="w-30 mt-3"
-          variant="secondary"
-          type="submit"
-        >
-          Next
-        </Button>
-      </div>
     </>
   );
 }

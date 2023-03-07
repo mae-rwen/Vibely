@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 export default function EventListFilters({
   location,
   types,
+  eventsToDisplay,
   getCategories,
   locationQuery,
   setLocationQuery,
@@ -42,6 +43,7 @@ export default function EventListFilters({
             onChange={handleLocationQuery}
           >
             <option style={{ fontWeight: "bold" }}>All locations</option>
+            {/* changint to germanCities */}
             {filteredCities.map((city, index) => (
               <option key={index} value={city.name}>
                 {city.name}
