@@ -105,7 +105,7 @@ const RegisterForm = ({ setSetAccount }) => {
       // console.log(JSON.stringify(response))
       const accessToken = response?.data?.accessToken;
       setAuth({ email, name: user, password, accessToken });
-      navigate(from, { replace: true });
+      navigate("/event_joined");
       // clear input fields
     } catch (err) {
       if (!err?.response) {

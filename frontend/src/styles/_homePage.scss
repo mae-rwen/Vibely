@@ -1,0 +1,35 @@
+#heroSection {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    position: relative;
+    height: 80vh;
+    background-image: url("https://media.istockphoto.com/id/941491560/de/foto/gro%C3%9Fe-gruppe-von-menschen-erfolg-berggipfel.jpg?s=612x612&w=0&k=20&c=D3GOHEQMM7JP72T4lCTGRVkq70uctZ_1hq0ZvN9hm3w=");
+    background-size: 120%;
+    background-position: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 5em;
+    // #hS {
+    //   background-color: $success;
+    // }
+  }  
+  .carouselPic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1;
+  }
+  .carouselCaption {
+    background-color: $info;
+  }
+  .hpSection {
+    margin: 5em auto;
+    .showMoreP:hover {
+      cursor: pointer;
+      color: $light;
+    }
+    .card-events-list {
+      padding: 0;
+    }
+  }

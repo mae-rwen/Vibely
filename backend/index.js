@@ -1,6 +1,7 @@
 require("dotenv/config");
 require("./db");
 
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
@@ -19,6 +20,10 @@ const app = express();
 const port = process.env.PORT || 3001;
 app.use(express.json({ limit: "10mb" }));
 
+app.use(express.static(path.resolve(__dirname, "..", "frontend", "build")));
+
+
+
 // app.use(express.static("/uploads"));
 app.use(
   cors({
@@ -35,6 +40,11 @@ app.use("/users", userRouter);
 app.use("/events", eventRouter);
 app.use("/categories", categoriesRouter);
 app.use("/booking", bookingRouter);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
+ });
+
 
 
 app.use(errorHandler);

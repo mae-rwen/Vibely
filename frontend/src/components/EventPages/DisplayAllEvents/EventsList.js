@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Figure from "react-bootstrap/Figure";
 import Card from "react-bootstrap/Card";
 
-export default function EventsList({ event, getCategories }) {
+export default function EventsList({ event, getCategories, user }) {
   // get the date
   const date = new Date(event.date);
   const year = date.getFullYear();
@@ -50,22 +50,27 @@ export default function EventsList({ event, getCategories }) {
       : null;
 
   // get description preview
-  const truncatedDescription = event.description.substring(0, 150);
+  const truncatedDescription = event.description.substring(0, 100);
+
+  const isJoined = event.attenders?.filter(
+    (joined) => joined.user === user?._id
+  );
 
   return (
     <>
       <NavLink to={`/event/${event._id}`} style={{ textDecoration: "none" }}>
         <ListGroup.Item as="li">
           <Figure id="eventThumbnail">
-            <Figure.Image              
+            <Figure.Image
               alt="category"
               src={event.category?.picture}
               thumbnail
             />
             <h5>
               <Badge bg="secondary" pill id="thumbnailBadge">
-                joined: {event.joined}
-                {event.participants ? `/${event.participants}` : null}
+                {event.joined < event.participants ? (event.participants ? `Joined: ${event.joined}/${event.participants}` : null) : (`event full (${event.participants})`)}
+               
+                
               </Badge>
             </h5>
             <Figure.Caption>
@@ -75,22 +80,40 @@ export default function EventsList({ event, getCategories }) {
           </Figure>
           <div className="eventDescription">
             <span>
-              <h5 className="fw-bold"> {event.title}</h5>
-              <p>{event.description.length > 150 ? `${truncatedDescription}...` : truncatedDescription}</p>
+            {isJoined?.length > 0 ? (
+                  <>
+                    <h6>
+                      <Badge bg="secondary" pill id="thumbnailBadge">
+                        You've joined this event
+                      </Badge>
+                    </h6>
+                  </>
+                ) : null}
+              <h5 className="fw-bold">{event.title}</h5>
+              <p>                
+                {event.description.length > 100
+                  ? `${truncatedDescription}...`
+                  : truncatedDescription}
+              </p>
             </span>
           </div>
-          <Card id="eventData">
-            <ListGroup variant="flush">
-              <ListGroup.Item>in <b>{event.general_location}</b></ListGroup.Item>
+         
+            <ListGroup variant="flush" id="eventData">
+              <ListGroup.Item>
+                in <b>{event.general_location}</b>
+              </ListGroup.Item>
               <ListGroup.Item>
                 on {formattedDate ? formattedDate : `not specified date`} at{" "}
                 {formattedTime ? formattedTime : `not specified time`}
               </ListGroup.Item>
               <ListGroup.Item>
-                Created by <b>{event.author?.name ? event.author?.name : "unknown"}</b>
+                Created by{" "}
+                <b>
+                  {event.author?._id !== user._id ? (event.author?.name ? event.author?.name : "unknown") : ("you")}
+                 </b>
               </ListGroup.Item>
             </ListGroup>
-          </Card>
+     
         </ListGroup.Item>
       </NavLink>
     </>

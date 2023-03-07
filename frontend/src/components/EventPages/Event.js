@@ -9,8 +9,9 @@ import {
   OverlayTrigger,
   Tooltip,
   Figure,
+  Badge,
 } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate} from "react-router-dom";
 import {
   faBuildingColumns,
   faClock,
@@ -24,16 +25,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
 
 const Event = () => {
-
-  const { auth, user, setJoined, setUser, joined, created, allEvents, booked } = useContext(AuthContext);
+  const { auth, user, setJoined, setUser, joined, created, allEvents, booked } =
+    useContext(AuthContext);
   const { event_id } = useParams();
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
   const goEdit = () => navigate(`/event/edit/${event_id}`);
+  const joinSucc = () => navigate(`/event_joined`);
 
   const [err, setErr] = useState("");
   const [event, setEvent] = useState({});
@@ -41,11 +43,6 @@ const Event = () => {
 
   const [userData, setUserData] = useState("");
   const [updatedEvent, setUpdatedEvent] = useState({});
-
-  console.log(joined);
-  console.log(event)
-  console.log(booked);
-  console.log(user);
 
   useEffect(() => {
     axios
@@ -62,8 +59,6 @@ const Event = () => {
       });
   }, [event_id]);
 
-  // console.log(user);
-
   const type = event?.type;
 
   const joinEvent = (e) => {
@@ -74,9 +69,7 @@ const Event = () => {
         console.log("joined", response.data);
         setJoin(true);
         const joining = response.data;
-        setJoined((prev) => [...prev, joining])
-        navigate("/event_joined");
-
+        navigate(`/event_joined`, { replace: true });
       })
       .catch((err) => {
         if (!err?.response) {
@@ -97,102 +90,111 @@ const Event = () => {
   const UTC = date.toUTCString();
 
   const isAuthor = user._id === event?.author?._id;
-  console.log(isAuthor)
+  console.log(isAuthor);
 
-  const isJoined = event.attenders?.filter(joined => joined.user === user._id)
+  const isJoined = event.attenders?.filter(
+    (joined) => joined.user === user._id
+  );
   // const check = isJoined(element => element.isJoined === true)
 
-  console.log(isJoined?.length)
+  console.log(isJoined?.length);
   // console.log(Join)
 
   return (
     <Container>
-      <div className="btn_event" >
-      <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
-        Go Back
-      </Button>
-      {isAuthor === true ? (<Button className="ms-end my-3" variant="secondary" onClick={goEdit}>
-        Edit
-      </Button>) : (null)}
-      
+      <div className="btn_event">
+        <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
+          Go Back
+        </Button>
+        {isAuthor === true ? (
+          <Button className="ms-end my-3" variant="secondary" onClick={goEdit}>
+            Edit
+          </Button>
+        ) : null}
       </div>
       {event && (
         <Card>
-          <Card.Header className="d-flex">
-            <Row>
-              <Col>
+          <Card.Header className="">
+            {isJoined?.length > 0 ? (
+              <Badge bg="secondary" pill id="thumbnailBadge">
+                you already joined this event
+              </Badge>
+            ) : null}
+            <Row className="justify-content-space-between mx-2">
+              <Col sm={9}>
                 <Card.Title className="event">{event.title}</Card.Title>
-
-                <Card.Subtitle className="subtitle">
+                <Card.Subtitle className="subtitle mb-2">
                   <span>
                     <FontAwesomeIcon icon={faCalendarDays} /> {UTC}
                   </span>
                 </Card.Subtitle>
+                <Card.Subtitle className="subtitle2">
+                  <p>
+                    <FontAwesomeIcon icon={faLocationCrosshairs} size="xs" />{" "}
+                    Location: {event.general_location}
+                  </p>
+                </Card.Subtitle>
+              </Col>
+              <Col sm={3} className="ms-end category_event">
+                <Figure>
+                  <Figure.Image
+                    thumbnail
+                    width={120}
+                    rounded={true}
+                    alt={event.category?.name}
+                    src={event.category?.picture}
+                  />
+                  <Figure.Caption>{event.category?.name}</Figure.Caption>
+                </Figure>
               </Col>
             </Row>
           </Card.Header>
 
           <Card.Body>
             <div className="mx-3">
-              <Row className="ms-auto gap-5">
-
-              <Figure>
-      <Figure.Image
-        width={80}
-        height={60}
-        alt={event.category?.name}
-        src={event.category?.picture}
-      />
-      <Figure.Caption>
-        Nulla vitae elit libero, a pharetra augue mollis interdum.
-      </Figure.Caption>
-    </Figure>
-              </Row>
-              <Row className="justify-content-end"> {event.category?.name}
-              <Avatar size="80" round="20px" src={event.category?.picture} name={event.category?.name} />
-              </Row>
-              <Row>
-                <Col className="p-1 mx-3 my-2">
-                <Card.Title>Hosted by:</Card.Title>
-               
-                <Avatar size="50" round={true} src={event.author?.picture} name={event.author?.name} />
-                  <Card.Title>{event.author?.name}</Card.Title> 
-                  <Card.Subtitle>
-                    <p>
-                      <FontAwesomeIcon icon={faLocationCrosshairs} size="xs" />{" "}
-                      Location: {event.general_location}
-                    </p>
-                  </Card.Subtitle>
+              <Row className="ms-auto gap-5"></Row>
+              <Row className="justify-content-end"></Row>
+              <Row className="my-4">
+                <Col sm={1}>
+                  <Avatar
+                    size="50"
+                    round={true}
+                    src={event.author?.picture}
+                    name={event.author?.name}
+                  />
+                </Col>
+                <Col sm={4} className="justify-content-end">
+                  <Card.Title>Host: {event.author?.name}</Card.Title>
                   <hr />
-                  <div>
-                    {/* <span className="text mb-0">
-                      <FontAwesomeIcon icon={faCalendarDays} size="xs" /> {UTC}
-                    </span> */}
-                    {/* <span className="text mb-0">
-                      <FontAwesomeIcon icon={faClock} size="xs" /> here time{" "}
-                    </span> */}
-                    <div className="mx-2">
-                      {/* <span className={type === "private" ? "show" : "hide"}>
-                        <FontAwesomeIcon icon={faHouseChimney} size="xs" />
-                      </span> */}
-                      <span className={type === "public" ? "show" : "hide"}>
-                        <FontAwesomeIcon icon={faBuildingColumns} size="xs" />
-                      </span>
-                    </div>
-                    <span className="text mb-0 first-letter">{event.type}</span>
-                  </div>
                 </Col>
                 <Col></Col>
               </Row>
 
-              <Row>
+              <Row className="my-4">
                 <Col className="mx-2 my-3 about">
-                  <h5>About Event</h5>
-                  <Card.Text>{event.description}</Card.Text>
-                  <Row className="justify-content-end">
+                  <div className="mb-4">
+                    <div className="mx-2">
+                      <span className={type === "private" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faHouseChimney}/>
+                      </span>
+                      <span className={type === "public" ? "show" : "hide"}>
+                        <FontAwesomeIcon icon={faBuildingColumns} />
+                      </span>
+                    </div>
+                    <span className="text mb-0 first-letter">{event.type}</span>
+                  </div>
+                  <Row className="mt-2 my-2">
+                    <Card.Text>{event.description}</Card.Text>
+                  </Row>
+
+                  <Row className="mt-4 my-2">
                     <div>
-                      <p> max participants: {event.participants}</p>
-                      <p>already joining: </p>
+                      <h5>
+                        <Badge bg="dark" pill id="thumbnailBadge">
+                          joined: {event.joined}
+                          {event.participants ? `/${event.participants}` : null}
+                        </Badge>
+                      </h5>
                     </div>
                   </Row>
                 </Col>
@@ -205,31 +207,6 @@ const Event = () => {
           </Card.Body>
 
           <Card.Footer className="d-flex justify-content-end display-content-end gap-3">
-            {/* <OverlayTrigger
-              placement="top-end"
-              overlay={
-                <Tooltip id="button-tooltip-2">Add to your Watch List</Tooltip>
-              }
-            >
-              {({ ref, ...triggerHandler }) => (
-                <Button
-                  ref={ref}
-                  variant="outline-secondary"
-                  {...triggerHandler}
-                  className="d-inline-flex align-items-center"
-                >
-                  {" "}
-                  <FontAwesomeIcon
-                    style={{ position: "relative" }}
-                    icon={faEye}
-                    size="xl"
-                  />
-                  <div className="absolute_add">
-                    <FontAwesomeIcon icon={faAdd} size="sm" />
-                  </div>
-                </Button>
-              )}
-            </OverlayTrigger> */}
             <OverlayTrigger
               placement="top-end"
               overlay={<Tooltip id="button-tooltip-2">Contact</Tooltip>}
@@ -254,12 +231,15 @@ const Event = () => {
                 </Button>
               )}
             </OverlayTrigger>
-        {isAuthor === true ? (
-          null
-        ) : (<Button variant="secondary" disabled={join} onClick={joinEvent}>
-        JOIN
-      </Button>) }
-            
+            {isAuthor === true || isJoined?.length > 0 || event?.joined >= event.participants ? null : (
+              <>
+              
+              <Button variant="secondary" onClick={joinEvent}>
+                JOIN
+              </Button>
+              </>
+              
+            )}
           </Card.Footer>
         </Card>
       )}

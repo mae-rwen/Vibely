@@ -70,10 +70,12 @@ export default function AllEventsList() {
         }&sortBy=${sortBy}&page=${currentPage}`
       )
       .then((response) => {
+
         setEventsToDisplay(response.data.events);
         setPageCount(response.data.pagination.pageCount);
 
         console.log(eventsToDisplay);
+
 
         setIsLoaded(true);
       })
@@ -115,6 +117,7 @@ export default function AllEventsList() {
             setSortBy={setSortBy}
           />
           {eventsToDisplay.length !== 0 ? (
+
             <>
               <ListGroup className="eventsList" as="ul">
                 {eventsToDisplay.map((event) => {
@@ -123,6 +126,7 @@ export default function AllEventsList() {
                     <EventsList
                       key={event._id}
                       event={event}
+                      user={user}
                       getCategories={getCategories}
                     />
                   );
@@ -149,8 +153,9 @@ export default function AllEventsList() {
                 </Button>
               </div>
             </>
+
           ) : (
-            "No matching events. Please try out with different filters."
+           "No matching events. Please try out with different filters."
           )}
         </div>
       ) : (
