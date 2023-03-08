@@ -127,8 +127,8 @@ function Joined() {
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-                            {/* </NavLink> */} 
-                            <OverlayTrigger
+                        
+                            {/* <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
                               overlay={
@@ -140,7 +140,7 @@ function Joined() {
                               <Button variant="outline-warning">
                                 <FontAwesomeIcon icon={faShareFromSquare} />
                               </Button>
-                            </OverlayTrigger>
+                            </OverlayTrigger> */}
                           </div>
                         </ListGroup.Item>
                       </ListGroup>
