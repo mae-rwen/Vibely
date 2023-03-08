@@ -97,7 +97,7 @@ const Event = () => {
   };
 
   // get the date
-  const date = new Date(event.date);
+  const date = new Date(event?.date);
 
   const year = date.getFullYear();
   const day = date.getDate();
@@ -144,7 +144,7 @@ const Event = () => {
   const isAuthor = user._id === event?.author?._id;
   console.log(isAuthor);
 
-  const isJoined = event.attenders?.filter(
+  const isJoined = event?.attenders?.filter(
     (joined) => joined.user === user._id
   );
   // const check = isJoined(element => element.isJoined === true)
@@ -213,7 +213,7 @@ const Event = () => {
 
           <span id="cardHeader">
             <span id="eventTitleWBadge">
-              <h4 className="fw-bold">{event.title}</h4>
+              <h4 className="fw-bold">{event?.title}</h4>
               {isJoined?.length > 0 ? (
                 <Badge bg="secondary" pill>
                   Joined!
@@ -229,9 +229,9 @@ const Event = () => {
               </p>
               <p>
                 <FontAwesomeIcon icon={faLocationCrosshairs} /> in{" "}
-                {event.general_location}
+                {event?.general_location}
               </p>
-              {event.type === "private" ? (
+              {event?.type === "private" ? (
                 <p>
                   <FontAwesomeIcon icon={faHouseChimney} /> private event
                 </p>
@@ -242,23 +242,23 @@ const Event = () => {
               )}
               <p>
                 <FontAwesomeIcon icon={faUsers} />{" "}
-                {event.joined < event.participants
+                {event?.joined < event?.participants
                   ? event.participants
-                    ? `${event.joined}/${event.participants}`
+                    ? `${event?.joined}/${event?.participants}`
                     : null
-                  : `event full (${event.participants})`}
+                  : `event full (${event?.participants})`}
               </p>
             </Card.Subtitle>
           </span>
           <Figure id="singleEventThumbnail">
             <Figure.Image
               alt="category"
-              src={event.category?.picture}
+              src={event?.category?.picture}
               thumbnail
             />
             <Figure.Caption>
               Category:{" "}
-              {event.category?.name ? event.category?.name : "undefined"}
+              {event?.category?.name ? event?.category?.name : "undefined"}
             </Figure.Caption>
           </Figure>
         </Card.Header>
@@ -268,13 +268,13 @@ const Event = () => {
             <Avatar
               size="40"
               round={true}
-              src={event.author?.picture}
-              name={event.author?.name}
+              src={event?.author?.picture}
+              name={event?.author?.name}
             />{" "}
-            <h6 className="fw-bold">Hosted by {event.author?.name}</h6>
+            <h6 className="fw-bold">Hosted by {event?.author?.name}</h6>
           </Card.Text>
           <Card.Text id="actualDesc">
-            <div dangerouslySetInnerHTML={{ __html: event.description }} />
+            <div dangerouslySetInnerHTML={{ __html: event?.description }} />
           </Card.Text>
         </Card.Body>
         <Card.Footer id="eventDescBtns">
@@ -311,7 +311,7 @@ const Event = () => {
           {/* JOIN button */}
           {isAuthor === true ||
           isJoined?.length > 0 ||
-          event?.joined >= event.participants ? null : (
+          event?.joined >= event?.participants ? null : (
             <>
               <OverlayTrigger placement="top" overlay={<Tooltip>Join</Tooltip>}>
                 <Button variant="warning" onClick={joinEvent}>

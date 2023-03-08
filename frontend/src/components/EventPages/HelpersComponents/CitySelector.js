@@ -17,7 +17,7 @@ export default function CitySelector({ setEventLocation }) {
         required
         // defaultValue={"DEFAULT"}
       >
-        <option value=" ">Choose a city</option>
+        <option value="">Choose a city</option>
         {germanCities.map((city, index) => (
           <option key={index} value={city.name}>
             {city.name}

@@ -9,10 +9,10 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
 
   const [user, setUser] = useState({});
-  const [bookings, setBookings] = useState({});
+  const [bookings, setBookings] = useState([]);
 
   const [eventCat, setEventCat] = useState([]);
-  const [allUsers, setAllUsers] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
   // const [allEvents, setAllEvents] = useState({});commenting out to check something
   const [joined, setJoined] = useState([]);
   const [created, setCreated] = useState([]);
@@ -24,13 +24,10 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data);
         axios.get(`/booking?user=${response.data._id}`).then((response) => {
           setJoined(response.data);
-          console.log(joined);
         });
         // axios.get(`/events?user=${response.data._id}`).then((response) => {
         //   setCreated(response.data);
         // });
-
-        console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
