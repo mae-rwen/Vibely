@@ -192,7 +192,7 @@ const Event = () => {
     <>
       <Card>
         <Card.Header id="singeEventCardHeader">
-          <Button variant="primary" onClick={goBack}>
+          <Button variant="primary" href="/allevents">
             <FontAwesomeIcon icon={faArrowLeft} />
           </Button>
 

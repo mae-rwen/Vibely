@@ -18,7 +18,7 @@ export default function EventSuccess() {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      navigate('/profile');
+      navigate('/allevents');
     }
   }, [navigate, remainingTime]);
 
@@ -27,16 +27,20 @@ export default function EventSuccess() {
       <h4 className="display-8 fw-bold">
         You have successfully deleted your event!
       </h4>
-      <p>You'll be redirected to your user profile in {remainingTime} seconds...</p>
+      <p>You'll be redirected to the events list in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button
             variant="secondary"
-            onClick={() => {
-              navigate("/allevents");
-            }}
+            href="/allevents"          
           >
             See all events
+          </Button>
+          <Button
+            variant="outline-secondary"
+            href="/profile"       
+          >
+            Go to your user profile
           </Button>
         </div>
       </div>

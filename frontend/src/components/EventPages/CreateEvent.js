@@ -3,8 +3,12 @@ import Form from "react-bootstrap/Form";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -15,6 +19,7 @@ export default function CreateEvent() {
   const [eventCategory, setEventCategory] = useState("");
   const [eventParticipants, setEventParticipants] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
   const event = {
     title: eventName,
     general_location: eventLocation,
@@ -38,9 +43,25 @@ export default function CreateEvent() {
         // const result = [...created, response.data];
         // console.log(result);
         // setCreated([...created, response.data]);
+        setIsClicked(true);
+      toast(`You've successfully created an event! `, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      setTimeout(() => {
+        setIsClicked(false);
+        // Perform login logic here and redirect to another page
+        navigate(`/event/${response.data._id}`);
+      }, 2000);
       })
       .catch((error) => console.log(error));
-    navigate("/event_success");
+      
 
     setEventCategory("");
     setEventDate("");
@@ -172,14 +193,27 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          {isClicked ? (
             <Button
-              disabled={!eventCategory || !eventLocation ? true : false}
-              className="w-30 mt-3"
+              className="mb-3 mx-1 my-3"
               variant="secondary"
               type="submit"
             >
-              Create
+              <Spinner animation="border" size="sm" />
             </Button>
+          ) : (
+            <Button
+            disabled={!eventCategory || !eventLocation ? true : false}
+            className="w-30 mt-3"
+            variant="secondary"
+            type="submit"
+          >
+            Create
+          </Button>
+          )}
+           
+           
+            
           </div>
         </Form>
       </Card.Body>
