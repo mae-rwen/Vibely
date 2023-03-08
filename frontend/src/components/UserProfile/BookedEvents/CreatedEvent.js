@@ -125,7 +125,7 @@ function CreatedEvent({ events, props }) {
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
                   <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
-                      Joined: {val.joined}/{val.participants}
+                      Joined: {val.joined ? val.joined : "0"}/{val.participants}
                     </Badge></span>
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">

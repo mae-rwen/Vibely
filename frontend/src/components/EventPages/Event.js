@@ -242,11 +242,7 @@ const Event = () => {
               )}
               <p>
                 <FontAwesomeIcon icon={faUsers} />{" "}
-                {event?.joined < event?.participants
-                  ? event.participants
-                    ? `${event?.joined}/${event?.participants}`
-                    : null
-                  : `event full (${event?.participants})`}
+                {event.joined < event.participants ? (`Joined: ${event.joined}/${event.participants}`) : (`event full (${event.joined})`)}
               </p>
             </Card.Subtitle>
           </span>

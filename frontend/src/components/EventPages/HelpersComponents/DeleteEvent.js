@@ -18,7 +18,7 @@ export default function EventDeleted() {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      navigate('/allevents');
+      navigate('/profile');
     }
   }, [navigate, remainingTime]);
 
@@ -38,9 +38,9 @@ export default function EventDeleted() {
           </Button>
           <Button
             variant="outline-secondary"
-            href="/profile"       
+            href="/allevents"       
           >
-            Go to your user profile
+            Go to all events
           </Button>
         </div>
       </div>

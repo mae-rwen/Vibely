@@ -68,11 +68,8 @@ export default function EventsList({ event, getCategories, user }) {
             />
             <h5>
               <Badge bg="secondary" pill id="thumbnailBadge">
-                {event.joined < event.participants
-                  ? event.participants
-                    ? `Joined: ${event.joined}/${event.participants}`
-                    : null
-                  : `event full (${event.participants})`}
+                {event.joined < event.participants ? (`Joined: ${event.joined}/${event.participants}`) : (`event full (${event.joined})`)}
+               
               </Badge>
             </h5>
             <Figure.Caption>
