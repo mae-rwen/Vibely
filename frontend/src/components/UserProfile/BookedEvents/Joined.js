@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import AuthContext from "../../../context/AuthProvider";
-import { ListGroupItem, Row, Col } from "react-bootstrap";
+import { ListGroupItem, NavLink } from "react-bootstrap";
 import axios from "../../../api/axios";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
@@ -19,8 +19,7 @@ function Joined() {
     setVisible((prev) => prev + 3);
   };
   // const [joined, setJoined] = useState({})
-  console.log("AAAAAAAAAAAAA");
-  console.log(joined);
+  console.log("AAAAAAAAAAA", joined);
   // console.log(user);
   // console.log(booking);
 
@@ -33,6 +32,7 @@ function Joined() {
         <>
           <ListGroup as="ul">
             {joined.slice(0, visible).map((val) => {
+              console.log(val)
               // get the date
               const date = new Date(val.event?.date);
               const year = date.getFullYear();
@@ -113,6 +113,10 @@ function Joined() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
+                          <NavLink
+                              to={`/event/${val.event._id}`}
+                              style={{ textDecoration: "none" }}
+                            >
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -126,6 +130,8 @@ function Joined() {
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
+                            </NavLink>
+                            
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}

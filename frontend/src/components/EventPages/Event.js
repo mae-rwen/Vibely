@@ -10,6 +10,7 @@ import {
   Tooltip,
   Figure,
   Badge,
+  Modal,
 } from "react-bootstrap";
 
 import { useNavigate, useParams, Navigate } from "react-router-dom";
@@ -27,6 +28,7 @@ import {
   faArrowLeft,
   faRightToBracket,
   faPenToSquare,
+  faTrash,
   faShareFromSquare,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -34,11 +36,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 import Avatar from "react-avatar";
+import DeleteEvent from "./HelpersComponents/DeleteEvent";
 
 const Event = () => {
   const { auth, user, setJoined, setUser, joined, created, allEvents, booked } =
     useContext(AuthContext);
   const { event_id } = useParams();
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -146,6 +150,46 @@ const Event = () => {
   console.log(isJoined?.length);
   // console.log(Join)
 
+  const deleteEvent = async () => {
+    const response = await axios.delete(`/events/find/${event_id}`)
+        console.log("deleted successfully!");
+        navigate("/event_delete")
+  }
+
+  if (show) {
+    return (
+      <>
+        <Modal
+          onClose={() => setShow(false)}
+          size="sm"
+          show={setShow}
+          onHide={() => setShow(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="modal-sizes-title-sm">Are you sure?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Do you really want to delete this event?. This process cannot be
+            undone.
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="d-flex justify-content-end gap-3">
+              <Button
+                onClick={() => setShow(false)}
+                variant="outline-secondary"
+              >
+                Cancel
+              </Button>
+              <Button onClick={(e) => deleteEvent()} variant="danger">
+                Delete
+              </Button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
   return (
     <>
       <Card>
@@ -217,9 +261,9 @@ const Event = () => {
             <h6 className="fw-bold">Hosted by {event.author?.name}</h6>
           </Card.Text>
 
-          <Card.Text id="actualDesc">
+         
             <div dangerouslySetInnerHTML={{ __html: event.description }} />
-          </Card.Text>
+          
         </Card.Body>
         <Card.Footer id="eventDescBtns">
           {/* edit button */}
@@ -271,6 +315,17 @@ const Event = () => {
                   <FontAwesomeIcon icon={faShareFromSquare} />
                 </Button>
               </OverlayTrigger>
+              
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={<Tooltip id="tooltip-leave">Delete the event</Tooltip>}
+              >
+                <Button onClick={() => setShow(true)} variant="outline-warning">
+                  <FontAwesomeIcon icon={faTrash} />
+                </Button>
+              </OverlayTrigger>
+              
             </>
           )}
         </Card.Footer>

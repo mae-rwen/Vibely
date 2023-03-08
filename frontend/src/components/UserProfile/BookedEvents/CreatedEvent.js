@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
 import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
@@ -10,18 +10,64 @@ import {
   faEye,
   faPenToSquare,
   faXmark,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import axios from "../../../api/axios";
+import { Modal } from "react-bootstrap";
 
-function CreatedEvent({ events }) {
+function CreatedEvent({ events, props }) {
   const { created } = useContext(AuthContext);
   console.log(events);
   const [visible, setVisible] = useState(3);
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
+
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [eventsID, setEventsID] = useState(events);
+  const navigate = useNavigate();
+
+  const deleteEvent = async (eventsID) => {
+    // console.log(eventsID);
+    const response = await axios.delete(`/events/find/${eventsID}`);
+    console.log("deleted successfully!");
+    navigate("/event_delete");
+  };
+
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Are you sure?
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Do you really want to delete this event?. This process cannot be
+            undone.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={() => deleteEvent(eventsID)} variant="danger">
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
   return (
     <div>
       {events.length !== 0 ? (
@@ -29,6 +75,7 @@ function CreatedEvent({ events }) {
           <ListGroup as="ul">
             {events.slice(0, visible).map((val) => {
               // get the date
+              const eID = val._id;
               const date = new Date(val.date);
               const year = date.getFullYear();
               const day = date.getDate();
@@ -147,10 +194,22 @@ function CreatedEvent({ events }) {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="outline-warning">
-                                <FontAwesomeIcon icon={faXmark} />
+                              <Button
+                                onClick={() => {
+                                  setEventsID(val._id);
+                                  setShow(true);
+                                }}
+                                variant="outline-warning"
+                              >
+                                <FontAwesomeIcon icon={faTrash} />
                               </Button>
                             </OverlayTrigger>
+
+                            <MyVerticallyCenteredModal
+                              show={show}
+                              onHide={() => setShow(false)}
+                              key={val._id}
+                            />
                           </div>
                         </ListGroup.Item>
                       </ListGroup>

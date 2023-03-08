@@ -25,7 +25,7 @@ export default function EventSuccess() {
   return (
     <div id="construction" className="text-center">
       <h4 className="display-8 fw-bold">
-        You have successfully created a new event!
+        You have successfully deleted your event!
       </h4>
       <p>You'll be redirected to your user profile in {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
