@@ -107,13 +107,6 @@ export default function LogInForm() {
             <label htmlFor="pwd">Password</label>
           </Form.Floating>
 
-          {/* <Card.Text className="mt-3 text-end">
-              <Form.Text className="text-muted">
-                <a href ="/resetpassword" style={{ color: "inherit" }}>
-                  Forgot password?
-                </a>
-              </Form.Text>
-            </Card.Text> */}
           {isClicked ? (
             <Button className="w-50 my-3" variant="secondary">
               <Spinner animation="border" size="sm" />

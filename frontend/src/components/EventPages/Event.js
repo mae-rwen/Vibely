@@ -2,10 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
 import {
   Button,
-  Row,
-  Col,
   Card,
-  Container,
   OverlayTrigger,
   Tooltip,
   Figure,
@@ -18,27 +15,21 @@ import { useNavigate, useParams, Navigate } from "react-router-dom";
 
 import {
   faBuildingColumns,
-  faClock,
   faCalendarDays,
   faHouseChimney,
   faLocationCrosshairs,
-  faMessage,
-  faQuestionCircle,
-  faInfo,
   faUsers,
   faArrowLeft,
   faRightToBracket,
   faPenToSquare,
   faTrash,
   faShareFromSquare,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import Avatar from "react-avatar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const Event = () => {
   const { auth, user, setJoined, setUser, joined, created, allEvents, booked } =
@@ -80,7 +71,7 @@ const Event = () => {
     axios
       .post(`/booking/${event_id}`)
       .then((response) => {
-        console.log("joined", response.data);
+        
         setJoin(true);
         const joining = response.data;
         navigate(`/event_joined`, { replace: true });
@@ -142,15 +133,13 @@ const Event = () => {
       : null;
 
   const isAuthor = user._id === event?.author?._id;
-  console.log(isAuthor);
+  
 
   const isJoined = event?.attenders?.filter(
     (joined) => joined.user === user._id
   );
-  // const check = isJoined(element => element.isJoined === true)
 
-  console.log(isJoined?.length);
-  // console.log(Join)
+
 
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
@@ -158,11 +147,11 @@ const Event = () => {
 
   const deleteEvent = async () => {
     const response = await axios.delete(`/events/find/${event_id}`);
-    console.log("deleted successfully!");
+  
     setIsClicked(true);
-    toast(`This event has been deleted. Redirectingto all events.`);
+    toast(`This event has been deleted. Redirecting to all events.`);
     setTimeout(() => {
-      setIsClicked(false);    
+      setIsClicked(false);
       navigate(`/allevents`);
     }, 2000);
   };
@@ -189,15 +178,14 @@ const Event = () => {
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
           {isClicked ? (
-              <Button variant="danger">
-                <Spinner animation="border" size="sm" />
-              </Button>
-            ) : (
-              <Button onClick={() => deleteEvent()} variant="danger">
+            <Button variant="danger">
+              <Spinner animation="border" size="sm" />
+            </Button>
+          ) : (
+            <Button onClick={() => deleteEvent()} variant="danger">
               Delete
             </Button>
-            )}
-        
+          )}
         </Modal.Footer>
       </Modal>
     );
@@ -207,7 +195,7 @@ const Event = () => {
     <>
       <Card>
         <Card.Header id="singeEventCardHeader">
-          <Button variant="primary" onClick={()=> goBack()}>
+          <Button variant="primary" onClick={() => goBack()}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </Button>
 
@@ -242,7 +230,9 @@ const Event = () => {
               )}
               <p>
                 <FontAwesomeIcon icon={faUsers} />{" "}
-                {event.joined < event.participants ? (`Joined: ${event.joined}/${event.participants}`) : (`event full (${event.joined})`)}
+                {event.joined < event.participants
+                  ? `Joined: ${event.joined}/${event.participants}`
+                  : `event full (${event.joined})`}
               </p>
             </Card.Subtitle>
           </span>

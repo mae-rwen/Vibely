@@ -7,10 +7,7 @@ import {
   faInfoCircle,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
-// import axiosClient from "../../api/axiosClient";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
@@ -21,7 +18,6 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SIGNUP_URL = "/auth/signup";
 
 const RegisterForm = ({ setSetAccount }) => {
-  // const changeState = () => setSetAccount(true);
   const { setAuth, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -31,10 +27,6 @@ const RegisterForm = ({ setSetAccount }) => {
   const nameRef = useRef();
   const emailRef = useRef();
   const errRef = useRef();
-  // const usernameRef = useRef()
-
-  // const passwordRef = useRef();
-  // const passwordConfirmRef = useRef();
 
   const [name, setName] = useState("");
   const [validName, setValidName] = useState(false);
@@ -89,17 +81,13 @@ const RegisterForm = ({ setSetAccount }) => {
       setError("Invalid Entry");
       return;
     }
-    // console.log(user, email, password);
 
     try {
-      const response = await axios.post(
-        SIGNUP_URL, { name, email, password });
-      // console.log(response.data);
-      // console.log(response.accessToken);
-      // console.log(JSON.stringify(response))
+      const response = await axios.post(SIGNUP_URL, { name, email, password });
+
       const accessToken = response?.data?.accessToken;
       setUser({ email, name, password, accessToken });
-      setAuth({ email, name, password, accessToken });      
+      setAuth({ email, name, password, accessToken });
       navigate("/profile");
       // clear input fields
     } catch (err) {
@@ -115,199 +103,200 @@ const RegisterForm = ({ setSetAccount }) => {
   };
 
   return (
-    
-      <Card className="signUpCards">
-        <Card.Body>
-          <p
-            ref={errRef}
-            className={error ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {error}
-          </p>         
-          <Card.Title className="my-4 text-center fw-bold">
-            Create new account
-          </Card.Title>
+    <Card className="signUpCards">
+      <Card.Body>
+        <p
+          ref={errRef}
+          className={error ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {error}
+        </p>
+        <Card.Title className="my-4 text-center fw-bold">
+          Create new account
+        </Card.Title>
 
-          <Form className="text-center" onSubmit={handleSubmit}>
-            {/* username */}
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="text"
-                id="username"
-                ref={nameRef}
-                autoComplete="off"
-                onChange={(e) => setName(e.target.value)}
-                required
-                aria-invalid={validName ? "false" : "true"}
-                aria-describedby="uidnote"
-                onFocus={() => setNameFocus(true)}
-                onBlur={() => setNameFocus(false)}
-              />
-              <label htmlFor="username">
-                Username
-                <span className={validName ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span className={validName || !name ? "hide" : "invalid"}>
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="uidnote"
-                className={
-                  nameFocus && name && !validName ? "instructions" : "offscreen"
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                <br />
-                4-24 characters. Must begin with a letter.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
-              </p>
-            </Form.Floating>
-
-            {/* email */}
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="email"
-                id="email"
-                ref={emailRef}
-                autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                aria-invalid={validEmail ? "false" : "true"}
-                aria-describedby="emailnote"
-                onFocus={() => setEmailFocus(true)}
-                onBlur={() => setEmailFocus(false)}
-              />
-              <label htmlFor="email">
-                Email address
-                <span className={validEmail ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span className={validEmail || !email ? "hide" : "invalid"}>
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="emailnote"
-                className={
-                  emailFocus && email && !validEmail
-                    ? "instructions"
-                    : "offscreen"
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                <br />
-                instructions about email - to be changed. Letters, numbers,
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>{" "}
-                <span aria-label="underscores">_</span>{" "}
-                <span aria-label="period">.</span>{" "}
-                <span aria-label="dash">-</span>{" "}
-                <span aria-label="at symbol">@</span>
-              </p>
-            </Form.Floating>
-
-            {/* password  */}
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                aria-invalid={validPassword ? "false" : "true"}
-                aria-describedby="pwdnote"
-                onFocus={() => setPasswordFocus(true)}
-                onBlur={() => setPasswordFocus(false)}
-              />
-              <label htmlFor="password">
-                Password
-                <span className={validPassword ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span
-                  className={validPassword || !password ? "hide" : "invalid"}
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="pwdnote"
-                className={
-                  passwordFocus && password && !validPassword ? "instructions" : "offscreen"
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                <br />
-                8 to 24 characters. Must include uppercase and lowercase
-                letters, a number and special character.
-                <br />
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>{" "}
-                <span aria-label="at symbol">@</span>{" "}
-                <span aria-label="hashtag">#</span>{" "}
-                <span aria-label="dolar sign">$</span>{" "}
-                <span aria-label="percent">%</span>
-              </p>
-            </Form.Floating>
-
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="password"
-                id="confirm_pwd"
-                onChange={(e) => setMatchPassword(e.target.value)}
-                required
-                aria-invalid={validMatch ? "false" : "true"}
-                aria-describedby="confirmnote"
-                onFocus={() => setMatchFocus(true)}
-                onBlur={() => setMatchFocus(false)}
-              />
-              <label htmlFor="confirm_pwd">
-                Confirm Password
-                <span
-                  className={validMatch && matchPassword ? "valid" : "hide"}
-                >
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span
-                  className={validMatch || !matchPassword ? "hide" : "invalid"}
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="confirmnote"
-                className={
-                  matchFocus && !validMatch ? "instructions" : "offscreen"
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                <br />
-                Must match the first password input field.
-              </p>
-            </Form.Floating>            
-            <Button
-              disabled={
-                !validName || !validEmail || !validPassword || !validMatch
-                  ? true
-                  : false
+        <Form className="text-center" onSubmit={handleSubmit}>
+          {/* username */}
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="text"
+              id="username"
+              ref={nameRef}
+              autoComplete="off"
+              onChange={(e) => setName(e.target.value)}
+              required
+              aria-invalid={validName ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setNameFocus(true)}
+              onBlur={() => setNameFocus(false)}
+            />
+            <label htmlFor="username">
+              Username
+              <span className={validName ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validName || !name ? "hide" : "invalid"}>
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </label>
+            <p
+              id="uidnote"
+              className={
+                nameFocus && name && !validName ? "instructions" : "offscreen"
               }
-              className="w-50 my-3"
-              variant="secondary"
-              type="submit"
             >
-              Sign Up
-            </Button>
-            <Card.Text className="mb-2">
-              <Form.Text className="text-muted">
-                Already have an account? Login <Link to="/login" className="signUpHere">here</Link>.
-              </Form.Text>
-            </Card.Text>
-          </Form>
-        </Card.Body>
-      </Card>    
+              <FontAwesomeIcon icon={faInfoCircle} />
+              <br />
+              4-24 characters. Must begin with a letter.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+          </Form.Floating>
+
+          {/* email */}
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="email"
+              id="email"
+              ref={emailRef}
+              autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              aria-invalid={validEmail ? "false" : "true"}
+              aria-describedby="emailnote"
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+            />
+            <label htmlFor="email">
+              Email address
+              <span className={validEmail ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validEmail || !email ? "hide" : "invalid"}>
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </label>
+            <p
+              id="emailnote"
+              className={
+                emailFocus && email && !validEmail
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              <br />
+              instructions about email - to be changed. Letters, numbers,
+              Allowed special characters:{" "}
+              <span aria-label="exclamation mark">!</span>{" "}
+              <span aria-label="underscores">_</span>{" "}
+              <span aria-label="period">.</span>{" "}
+              <span aria-label="dash">-</span>{" "}
+              <span aria-label="at symbol">@</span>
+            </p>
+          </Form.Floating>
+
+          {/* password  */}
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              aria-invalid={validPassword ? "false" : "true"}
+              aria-describedby="pwdnote"
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
+            />
+            <label htmlFor="password">
+              Password
+              <span className={validPassword ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validPassword || !password ? "hide" : "invalid"}>
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </label>
+            <p
+              id="pwdnote"
+              className={
+                passwordFocus && password && !validPassword
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              <br />
+              8 to 24 characters. Must include uppercase and lowercase letters,
+              a number and special character.
+              <br />
+              Allowed special characters:{" "}
+              <span aria-label="exclamation mark">!</span>{" "}
+              <span aria-label="at symbol">@</span>{" "}
+              <span aria-label="hashtag">#</span>{" "}
+              <span aria-label="dolar sign">$</span>{" "}
+              <span aria-label="percent">%</span>
+            </p>
+          </Form.Floating>
+
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="password"
+              id="confirm_pwd"
+              onChange={(e) => setMatchPassword(e.target.value)}
+              required
+              aria-invalid={validMatch ? "false" : "true"}
+              aria-describedby="confirmnote"
+              onFocus={() => setMatchFocus(true)}
+              onBlur={() => setMatchFocus(false)}
+            />
+            <label htmlFor="confirm_pwd">
+              Confirm Password
+              <span className={validMatch && matchPassword ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span
+                className={validMatch || !matchPassword ? "hide" : "invalid"}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </label>
+            <p
+              id="confirmnote"
+              className={
+                matchFocus && !validMatch ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              <br />
+              Must match the first password input field.
+            </p>
+          </Form.Floating>
+          <Button
+            disabled={
+              !validName || !validEmail || !validPassword || !validMatch
+                ? true
+                : false
+            }
+            className="w-50 my-3"
+            variant="secondary"
+            type="submit"
+          >
+            Sign Up
+          </Button>
+          <Card.Text className="mb-2">
+            <Form.Text className="text-muted">
+              Already have an account? Login{" "}
+              <Link to="/login" className="signUpHere">
+                here
+              </Link>
+              .
+            </Form.Text>
+          </Card.Text>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

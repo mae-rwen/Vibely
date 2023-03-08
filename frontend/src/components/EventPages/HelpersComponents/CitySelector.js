@@ -15,7 +15,6 @@ export default function CitySelector({ setEventLocation }) {
         onChange={handleCitySelect}
         className="citySelector"
         required
-        // defaultValue={"DEFAULT"}
       >
         <option value="">Choose a city</option>
         {germanCities.map((city, index) => (

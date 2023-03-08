@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import AuthContext from "../../../context/AuthProvider";
-import { ListGroup, ListGroupItem, Row, Col, Card, Badge } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Badge } from "react-bootstrap";
 
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
 import {
-  faShareFromSquare,
   faEye,
   faPenToSquare,
-  faXmark,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +16,6 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import axios from "../../../api/axios";
 import { Modal } from "react-bootstrap";
-
 
 function CreatedEvent({ events, props }) {
   const [visible, setVisible] = useState(3);
@@ -34,7 +30,7 @@ function CreatedEvent({ events, props }) {
 
   const deleteEvent = async (eventsID) => {
     const response = await axios.delete(`/events/find/${eventsID}`);
-    console.log("deleted successfully!");
+  
     navigate("/event_delete");
   };
 
@@ -67,8 +63,7 @@ function CreatedEvent({ events, props }) {
     );
   }
 
-  console.log("the events are:")
-  console.log(events)
+
 
   return (
     <div>
@@ -124,9 +119,17 @@ function CreatedEvent({ events, props }) {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
+                  <span id="createdEventTitle">
+                    <h5 className="fw-bold mt-2 mb-3">{val.title}</h5>
+                    <Badge
+                      bg="secondary"
+                      pill
+                      id="thumbnailBadge"
+                      className="mt-2"
+                    >
                       Joined: {val.joined ? val.joined : "0"}/{val.participants}
-                    </Badge></span>
+                    </Badge>
+                  </span>
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">
                       <Figure id="joinedThumbnail">
@@ -152,35 +155,37 @@ function CreatedEvent({ events, props }) {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                            
-                              <OverlayTrigger
-                                placement="top"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={
-                                  <Tooltip id="tooltip-leave">
-                                    Go to the event page
-                                  </Tooltip>
-                                }
+                            <OverlayTrigger
+                              placement="top"
+                              delay={{ show: 250, hide: 400 }}
+                              overlay={
+                                <Tooltip id="tooltip-leave">
+                                  Go to the event page
+                                </Tooltip>
+                              }
+                            >
+                              <Button
+                                variant="warning"
+                                href={`/event/${val._id}`}
                               >
-                                <Button variant="warning" href={`/event/${val._id}`}>
-                                  <FontAwesomeIcon icon={faEye} />
-                                </Button>
-                              </OverlayTrigger>
-                           
+                                <FontAwesomeIcon icon={faEye} />
+                              </Button>
+                            </OverlayTrigger>
 
-                            
-                              <OverlayTrigger
-                                placement="top"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={
-                                  <Tooltip id="tooltip-leave">Edit</Tooltip>
-                                }
+                            <OverlayTrigger
+                              placement="top"
+                              delay={{ show: 250, hide: 400 }}
+                              overlay={
+                                <Tooltip id="tooltip-leave">Edit</Tooltip>
+                              }
+                            >
+                              <Button
+                                variant="primary"
+                                href={`/event/edit/${val._id}`}
                               >
-                                <Button variant="primary" href={`/event/edit/${val._id}`}>
-                                  <FontAwesomeIcon icon={faPenToSquare} />
-                                </Button>
-                              </OverlayTrigger>
-                           
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                              </Button>
+                            </OverlayTrigger>
 
                             <OverlayTrigger
                               placement="top"

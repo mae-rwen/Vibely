@@ -55,26 +55,19 @@ const login = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 8,
-      }).json({
-        id: user._id, 
+      })
+      .json({
+        id: user._id,
         name: user.name,
       })
       .send(payload);
-    // console.log(payload);
   } catch (error) {
     next(error);
   }
 };
 
 const logout = async (req, res, next) => {
-  // res
-  //   .cookie("access_token", "", {
-  //     httpOnly: true,
-  //     maxAge: 0,
-  //   })
-  res
-    .clearCookie("access_token")
-    .send("See you later, alligator");
+  res.clearCookie("access_token").send("See you later, alligator");
 };
 
 const getProfile = async (req, res, next) => {

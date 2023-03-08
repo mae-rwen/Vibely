@@ -1,32 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import {
-  Form,
-  InputGroup,
-  Container,
-  Button,
-  Row,
-  Col,
-  Card,
-  Spinner,
-} from "react-bootstrap";
+import { Form, Button, Row, Col, Card, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  faBuildingColumns,
-  faClock,
-  faCalendarDays,
-  faHouseChimney,
-  faLocationCrosshairs,
-  faMessage,
-  faQuestionCircle,
-  faInfo,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useAuth from "../hooks/useAuth";
 import "./event.css";
-import { AuthContext } from "../../context/AuthProvider";
-import CitySelector from "./HelpersComponents/CitySelector";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Editor from "../../context/Editor";
 
@@ -50,11 +27,8 @@ export default function EventEdit() {
 
   useEffect(() => {
     axios.get(`/events/find/${id}`).then((response) => {
-      console.log(response.data);
-      //   setEvent(response.data);
+     
       const data = response.data;
-      //   const dat = new Date(data.date);
-      //   const ISO = dat.toISOString;
       setTitle(data.title);
       setLocation(data.general_location);
       setType(data.type);
@@ -64,10 +38,6 @@ export default function EventEdit() {
       setParticipants(data.participants);
     });
   }, []);
-
-  useEffect(() => {
-    console.log("Event", event);
-  });
 
   const updatedEvent = {
     title: title,
@@ -81,20 +51,9 @@ export default function EventEdit() {
 
   async function updateEvent(e) {
     e.preventDefault();
-    // const data = new FormData();
-    // data.set("title", title);
-    // data.set("location", location);
-    // data.set("description", description);
-    // data.set("category", category);
-    // data.set("date", date);
-    // data.set("type", type);
-    // data.set("participants", participants);
-    // console.log(data);
-    //        data.set('file', files);
     await axios
       .put(`/events/find/${id}`, updatedEvent)
       .then((response) => {
-        // setEvent({body: data});
         setEvent({
           title: title,
           general_location: location,
@@ -120,7 +79,6 @@ export default function EventEdit() {
     });
     setTimeout(() => {
       setIsClicked(false);
-      // Perform login logic here and redirect to another page
       navigate(`/event/${id}`);
     }, 2000);
   }
@@ -143,34 +101,6 @@ export default function EventEdit() {
               }}
             />
           </Form.Group>
-
-          {/* <Form.Group className="mb-3">
-          <Form.Text muted>
-            Location: {location}, select from list to change
-          </Form.Text>
-          <CitySelector
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Select location from the list"
-          />
-        </Form.Group> */}
-
-          {/* <Form.Select
-              aria-label="category"
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }}
-              required
-            >
-              {{category}.map((cat, index) => {
-                return (
-                  <option key={index} value={cat._id}>
-                    {cat.name}
-                  </option>
-                );
-              })}
-            </Form.Select> */}
 
           <Form.Group className="mb-3">
             <Form.Text muted>Number of Participants: {participants}</Form.Text>
@@ -223,25 +153,13 @@ export default function EventEdit() {
             </Col>
           </Row>
 
-          {/* <Form.Group controlId="formFileMultiple" className="mb-3">
-        <Form.Label>Multiple files input example</Form.Label>
-        <Form.Control
-          type="file"
-          multiple
-          onChange={(e) => setFiles(e.target.files)}
-        />
-      </Form.Group> */}
-
           <Editor
             value={description}
             onChange={(newValue) => setDescription(newValue)}
           />
 
           {isClicked ? (
-            <Button
-              className="mb-3 mx-1 my-3"
-              variant="secondary"              
-            >
+            <Button className="mb-3 mx-1 my-3" variant="secondary">
               <Spinner animation="border" size="sm" />
             </Button>
           ) : (

@@ -1,30 +1,23 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import AuthContext from "../../../context/AuthProvider";
-import { Badge, ListGroupItem, NavLink } from "react-bootstrap";
-import axios from "../../../api/axios";
+import { Badge, ListGroupItem } from "react-bootstrap";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
-import Card from "react-bootstrap/Card";
-import { faShareFromSquare, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import placeholder from "./placeholder.png"
-
+import placeholder from "./placeholder.png";
 
 function Joined() {
-  const { joined, allEvents, user, booking } = useContext(AuthContext);
+  const { joined } = useContext(AuthContext);
   const [visible, setVisible] = useState(3);
 
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
-
-  console.log("the joined are:")
-  console.log(joined)
-  
 
   return (
     <div>
@@ -78,10 +71,19 @@ function Joined() {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
-                      Joined: {val.event?.joined ? val.event?.joined : "0"}/{val.event?.participants}
-                    </Badge></span>
-                  
+                  <span id="createdEventTitle">
+                    <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
+                    <Badge
+                      bg="secondary"
+                      pill
+                      id="thumbnailBadge"
+                      className="mt-2"
+                    >
+                      Joined: {val.event?.joined ? val.event?.joined : "0"}/
+                      {val.event?.participants}
+                    </Badge>
+                  </span>
+
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">
                       <Figure id="joinedThumbnail">
@@ -105,17 +107,9 @@ function Joined() {
                           at{" "}
                           {formattedTime ? formattedTime : `not specified time`}
                         </ListGroup.Item>
-                        {/* <ListGroup.Item>
-                          Created by{" "}
-                          <b>
-                            {val.event?.author?.name
-                              ? val.event?.author?.name
-                              : "unknown"}
-                          </b>
-                        </ListGroup.Item> */}
+
                         <ListGroup.Item>
                           <div id="joinedBtns">
-
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -132,22 +126,6 @@ function Joined() {
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-
-
-                            {/* <OverlayTrigger
-
-                              placement="top"
-                              delay={{ show: 250, hide: 400 }}
-                              overlay={
-                                <Tooltip id="tooltip-leave">
-                                  Leave the event
-                                </Tooltip>
-                              }
-                            >
-                              <Button variant="outline-warning">
-                                <FontAwesomeIcon icon={faShareFromSquare} />
-                              </Button>
-                            </OverlayTrigger>  */}
                           </div>
                         </ListGroup.Item>
                       </ListGroup>

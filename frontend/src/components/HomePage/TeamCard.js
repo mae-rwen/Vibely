@@ -9,12 +9,10 @@ export default function TeamCard({ member }) {
         />
         <h5 className="fw-bold">{member.name}</h5>
         <p>{member.desc}</p>
-        
-          <a href={member.github}>Github</a>
-       
-       
-          <a href={member.linkedin}>Linkedin</a>
-       
+
+        <a href={member.github}>Github</a>
+
+        <a href={member.linkedin}>Linkedin</a>
       </div>
     </>
   );

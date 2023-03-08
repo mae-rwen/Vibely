@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import LoadingSpinner from "../../GeneralComponents/LoadingSpinner";
 import EventsList from "./EventsList";
 import EventListFilters from "./EventListFilters";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
@@ -34,8 +34,7 @@ export default function AllEventsList() {
       return prev + 1;
     });
   };
-  // get all categories
-  // and events for displaying locations and types of events
+
   useEffect(() => {
     axios
       .get(`/categories`)
@@ -58,9 +57,9 @@ export default function AllEventsList() {
   const location = [
     ...new Set(allEvents.map((event) => event.general_location)),
   ];
-  console.log(location);
+  
   const types = [...new Set(allEvents.map((event) => event.type))];
-  console.log(types);
+ 
 
   useEffect(() => {
     axios
@@ -71,9 +70,7 @@ export default function AllEventsList() {
       )
       .then((response) => {
         setEventsToDisplay(response.data.events);
-        setPageCount(response.data.pagination.pageCount);
-
-        console.log(eventsToDisplay);
+        setPageCount(response.data.pagination.pageCount);       
 
         setIsLoaded(true);
       })
@@ -118,7 +115,7 @@ export default function AllEventsList() {
             <>
               <ListGroup className="eventsList" as="ul">
                 {eventsToDisplay.map((event) => {
-                  console.log(eventsToDisplay);
+                  
                   return (
                     <EventsList
                       key={event._id}

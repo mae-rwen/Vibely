@@ -39,11 +39,7 @@ export default function Categories() {
         <div className="col-lg-8 mx-auto text-end">
           <p>
             There are <strong>{eventsCount}</strong> events waiting for you to join!
-          </p>
-          {/* <p>
-            You can change your location in <a href="#">your account</a>. *To
-            change the time scope, browse category of your choice.
-          </p> */}
+          </p>       
         </div>
       </div>
       {isLoaded ? <SingleCard categories={categories} categoriesIDs={categoriesIDs}/> : <LoadingSpinner />}

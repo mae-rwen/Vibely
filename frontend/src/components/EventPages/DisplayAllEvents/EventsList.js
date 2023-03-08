@@ -2,9 +2,8 @@ import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import { NavLink } from "react-router-dom";
 import Figure from "react-bootstrap/Figure";
-import Card from "react-bootstrap/Card";
 
-export default function EventsList({ event, getCategories, user }) {
+export default function EventsList({ event, user }) {
   // get the date
   const date = new Date(event.date);
   const year = date.getFullYear();
@@ -68,8 +67,9 @@ export default function EventsList({ event, getCategories, user }) {
             />
             <h5>
               <Badge bg="secondary" pill id="thumbnailBadge">
-                {event.joined < event.participants ? (`Joined: ${event.joined}/${event.participants}`) : (`event full (${event.joined})`)}
-               
+                {event.joined < event.participants
+                  ? `Joined: ${event.joined}/${event.participants}`
+                  : `event full (${event.joined})`}
               </Badge>
             </h5>
             <Figure.Caption>

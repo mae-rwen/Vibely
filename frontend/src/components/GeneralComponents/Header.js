@@ -1,7 +1,7 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -12,14 +12,14 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 
 export default function Header() {
-  const { user, logout } = useContext(AuthContext);   
+  const { user, logout } = useContext(AuthContext);
 
   return (
-    <Navbar 
-    className="fixed-top" 
-    // bg="light" 
-    expand="lg" 
-    style={{backgroundColor: "#fff"}}>
+    <Navbar
+      className="fixed-top"
+      expand="lg"
+      style={{ backgroundColor: "#fff" }}
+    >
       <Container>
         <Navbar.Brand href="/" className="fw-bold">
           Vibely
@@ -35,26 +35,7 @@ export default function Header() {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body id="navbarOffcanvas">
-            <Nav className="ms-auto gap-2">
-              <NavDropdown title="All routes" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/">Home</NavDropdown.Item>
-                <NavDropdown.Item href="/categoriesfe">
-                  Categories
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/allevents">
-                  All events
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/instructions">
-                  Instructions
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/joined">Joined</NavDropdown.Item>
-                <NavDropdown.Item href="/profile">
-                  User profile
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/register">Register</NavDropdown.Item>
-                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                <NavDropdown.Item href="/aboutus">About us</NavDropdown.Item>
-              </NavDropdown>
+            <Nav className="ms-auto gap-2">             
 
               <NavLink
                 to="/"
@@ -86,21 +67,21 @@ export default function Header() {
               </NavLink>
               <Form className="d-flex">
                 {user ? (
-                  <>                
-                  <Button
-                    className="m-auto ms-1"                 
-                    href="/profile/"
-                    variant="warning"
-                  >
-                    <FontAwesomeIcon icon={faUser} /> Your profile
-                  </Button>
-                  <Button
-                    className="m-auto ms-1"                 
-                    variant="outline-secondary"
-                    onClick={logout}
-                  >
-                    Log out
-                  </Button>            
+                  <>
+                    <Button
+                      className="m-auto ms-1"
+                      href="/profile/"
+                      variant="warning"
+                    >
+                      <FontAwesomeIcon icon={faUser} /> Your profile
+                    </Button>
+                    <Button
+                      className="m-auto ms-1"
+                      variant="outline-secondary"
+                      onClick={logout}
+                    >
+                      Log out
+                    </Button>
                   </>
                 ) : (
                   <Button

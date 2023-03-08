@@ -13,7 +13,6 @@ const { eventRouter } = require("./routes/events");
 const { categoriesRouter } = require("./routes/categories");
 const { bookingRouter } = require("./routes/booking");
 
-
 const { errorHandler } = require("./middlewares/errorHandler");
 
 const app = express();
@@ -22,9 +21,6 @@ app.use(express.json({ limit: "10mb" }));
 
 app.use(express.static(path.resolve(__dirname, "..", "frontend", "build")));
 
-
-
-// app.use(express.static("/uploads"));
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -43,12 +39,10 @@ app.use("/booking", bookingRouter);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
- });
-
-
+});
 
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running`);
 });

@@ -1,5 +1,5 @@
 const { Event } = require("../models/events");
-const { User } = require("../models/users")
+const { User } = require("../models/users");
 const { ErrorResponse } = require("../utils/ErrorResponse");
 const { Category } = require("../models/categories");
 
@@ -11,15 +11,13 @@ function isObjEmpty(obj) {
 const getEvents = async (req, res, next) => {
   const { page } = req.query || 1;
   const eventsPerPage = 8;
-  // const createdEventsPerClick = 3;
 
   try {
     // for filters
     const query = {};
     const skip = (page - 1) * eventsPerPage;
 
-    if (req.query.location) {
-      console.log(req.query.location);
+    if (req.query.location) {      
       query.general_location = req.query.location;
     }
     if (req.query.type) {
@@ -70,11 +68,9 @@ const getEvents = async (req, res, next) => {
     } else {
       if (req.query.user) {
         const events = await Event.find(query)
-          // .limit(createdEventsPerClick)
           .populate("author")
           .populate("category")
-          .sort(sortOptions);
-        console.log(events);
+          .sort(sortOptions);      
         res.json(events);
       } else {
         const events = await Event.find(query)
@@ -105,10 +101,7 @@ const getEvent = async (req, res, next) => {
     // const user = req.user.id;
     const event = await Event.findById(id)
       .populate("category")
-      .populate("author")
-      // .populate({
-      //   path: "attenders",
-      // populate: {user}});
+      .populate("author");
     res.json(event);
   } catch (error) {
     next(error);
@@ -136,7 +129,7 @@ const createEvent = async (req, res, next) => {
       description,
     } = req.body;
     const author = req.user.id;
-    // const categoryDoc = await Category.findById(category)
+
     const event = await Event.create({
       title,
       general_location,
@@ -147,8 +140,6 @@ const createEvent = async (req, res, next) => {
       description,
       author,
     });
-    // categoryDoc.events = [...categoryDoc.events, event._id]
-    // await categoryDoc.save();
     const categoryDoc = await Category.findByIdAndUpdate(
       category,
       { $inc: { eventTotal: 1 } },

@@ -3,8 +3,6 @@ const { User } = require("../models/users");
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
 
-// update? like more people who would join?
-
 const getBookings = async (req, res, next) => {
   try {
     const query = {};
@@ -27,8 +25,7 @@ const getBookings = async (req, res, next) => {
 const getBookedEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const book = await Booking.findById(id).populate("user").populate("event");
-    console.log(book);
+    const book = await Booking.findById(id).populate("user").populate("event");   
     res.json(book);
   } catch (error) {
     next(error);
@@ -42,8 +39,6 @@ const bookEvent = async (req, res, next) => {
     const joinedEvent = await Event.findById(event);
     const user = req.user.id;
     const attendant = await User.findById(user);
-    // const check = await Booking.findOne({});
-    // if (check) throw new ErrorResponse("Yu already joined this event", 409);
     const bookEvent = await Booking.create({
       event: joinedEvent,
       user,
@@ -52,9 +47,7 @@ const bookEvent = async (req, res, next) => {
       event,
       { $inc: { joined: 1 }, $push: { attenders: { user } } },
       { new: true }
-    );
-    // const eventDoc = await Event.findByIdAndUpdate( event, { $inc: { joined: 1 }, $push: { attenders: {attendant} }}, { new : true }); // this is adding whole user who's joining event to Event DB
-    // const userDoc = await User.findByIdAndUpdate( user, { $push: {booked: event } }, { new : true })
+    );   
     res.json(bookEvent);
   } catch (error) {
     next(error);
@@ -72,9 +65,7 @@ const deleteBookedEvent = async (req, res, next) => {
       id,
       { $inc: { joined: -1 } },
       { new: true }
-    );
-    // const userDoc = await User.findOneAndUpdate( user, { $pull: {booked: {event} } }, { new : true })
-
+    );   
     
     res.json(book);
   } catch (error) {
