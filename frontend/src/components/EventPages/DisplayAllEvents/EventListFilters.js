@@ -56,7 +56,7 @@ export default function EventListFilters({
           {/* Categories filter */}
           <DropdownButton
             as={ButtonGroup}
-            variant="outline-secondary"
+            variant="outline-warning"
             title="Category"
           >
             <Dropdown.Item
@@ -86,7 +86,7 @@ export default function EventListFilters({
           {/* Types filter */}
           <DropdownButton
             as={ButtonGroup}
-            variant="outline-secondary"
+            variant="outline-warning"
             title="Type"
           >
             <Dropdown.Item
@@ -116,7 +116,7 @@ export default function EventListFilters({
           </DropdownButton>
 
           <Button
-            variant="secondary"
+            variant="warning"
             onClick={(e) => {
               setTypeQuery("");
               setCategoryQuery("");
@@ -129,7 +129,7 @@ export default function EventListFilters({
           {/* sorting button */}
           <DropdownButton
             as={ButtonGroup}
-            variant="outline-secondary"
+            variant="outline-warning"
             title="Sort"
           >
             <DropdownItem

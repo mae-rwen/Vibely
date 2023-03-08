@@ -10,7 +10,7 @@ export default function WrongPath() {
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button
-            variant="outline-secondary"
+            variant="outline-warning"
             onClick={() => {
               navigate(-1);
             }}

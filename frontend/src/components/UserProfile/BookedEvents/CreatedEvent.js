@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
+
+import AuthContext from "../../../context/AuthProvider";
+import { ListGroup, ListGroupItem, Row, Col, Card, Badge } from "react-bootstrap";
+
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
@@ -16,6 +19,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import axios from "../../../api/axios";
 import { Modal } from "react-bootstrap";
+
 
 function CreatedEvent({ events, props }) {
   const [visible, setVisible] = useState(3);
@@ -62,6 +66,9 @@ function CreatedEvent({ events, props }) {
       </Modal>
     );
   }
+
+  console.log("the events are:")
+  console.log(events)
 
   return (
     <div>
@@ -117,7 +124,9 @@ function CreatedEvent({ events, props }) {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <h5 className="fw-bold mt-2 mb-3">{val.title}</h5>
+                  <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
+                      Joined: {val.joined}/{val.participants}
+                    </Badge></span>
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">
                       <Figure id="joinedThumbnail">
@@ -143,10 +152,7 @@ function CreatedEvent({ events, props }) {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                            <NavLink
-                              to={`/event/${val._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
+                            
                               <OverlayTrigger
                                 placement="top"
                                 delay={{ show: 250, hide: 400 }}
@@ -156,16 +162,13 @@ function CreatedEvent({ events, props }) {
                                   </Tooltip>
                                 }
                               >
-                                <Button variant="warning">
+                                <Button variant="warning" href={`/event/${val._id}`}>
                                   <FontAwesomeIcon icon={faEye} />
                                 </Button>
                               </OverlayTrigger>
-                            </NavLink>
+                           
 
-                            <NavLink
-                              to={`/event/edit/${val._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
+                            
                               <OverlayTrigger
                                 placement="top"
                                 delay={{ show: 250, hide: 400 }}
@@ -173,11 +176,11 @@ function CreatedEvent({ events, props }) {
                                   <Tooltip id="tooltip-leave">Edit</Tooltip>
                                 }
                               >
-                                <Button variant="primary">
+                                <Button variant="primary" href={`/event/edit/${val._id}`}>
                                   <FontAwesomeIcon icon={faPenToSquare} />
                                 </Button>
                               </OverlayTrigger>
-                            </NavLink>
+                           
 
                             <OverlayTrigger
                               placement="top"

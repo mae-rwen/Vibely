@@ -3,8 +3,14 @@ import Form from "react-bootstrap/Form";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
+import Editor from "../../context/Editor";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+
+
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -15,6 +21,7 @@ export default function CreateEvent() {
   const [eventCategory, setEventCategory] = useState("");
   const [eventParticipants, setEventParticipants] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
   const event = {
     title: eventName,
     general_location: eventLocation,
@@ -39,9 +46,14 @@ export default function CreateEvent() {
         // const result = [...created, response.data];
         // console.log(result);
         // setCreated([...created, response.data]);
+        setIsClicked(true);
+        toast(`You've successfully created an event! `);
+        setTimeout(() => {
+          setIsClicked(false);         
+          navigate(`/event/${response.data._id}`);
+        }, 2000);
       })
       .catch((error) => console.log(error));
-    navigate("/event_success");
 
     setEventCategory("");
     setEventDate("");
@@ -52,6 +64,10 @@ export default function CreateEvent() {
     setEventType("");
   };
   return (
+    <>
+    {isClicked ? (
+      <LoadingSpinner />
+    ) : (
     <Card className="createEvent">
       <Card.Body>
         <Card.Title className="my-4 text-center fw-bold">
@@ -160,7 +176,8 @@ export default function CreateEvent() {
               onChange={(e) => setEventParticipants(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          {/* <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Description</Form.Label>
             <Form.Control
               as="textarea"
@@ -170,8 +187,15 @@ export default function CreateEvent() {
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
             />
-          </Form.Group>
+          </Form.Group> */}
+
+          <Editor
+          value={eventDescription}
+          onChange={(newValue) => setEventDescription(newValue)}
+          required
+        />
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
             <Button
               disabled={
                 !eventCategory ||
@@ -190,9 +214,13 @@ export default function CreateEvent() {
             >
               Create
             </Button>
+
+         
           </div>
         </Form>
       </Card.Body>
     </Card>
+    )}
+    </>
   );
 }

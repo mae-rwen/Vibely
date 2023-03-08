@@ -2,8 +2,6 @@ import Agata from "./pics/Agata.png";
 import Simran from "./pics/Simran.png";
 import Ola from "./pics/Ola.png";
 import TeamCard from "./TeamCard";
-import Button from 'react-bootstrap/Button';
-
 
 export default function MeetTheTeam() {
   const agata = {

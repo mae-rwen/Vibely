@@ -33,7 +33,7 @@ export default function HomePage({ categories, isLoaded }) {
               </Carousel>{" "}
             </div>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Button href="/categories" variant="secondary">
+              <Button href="/categoriesfe" variant="secondary">
                 Explore All Activities
               </Button>
             </div>
