@@ -19,7 +19,7 @@ function Joined() {
     setVisible((prev) => prev + 3);
   };
   // const [joined, setJoined] = useState({})
-  console.log("AAAAAAAAAAA", joined);
+ 
   // console.log(user);
   // console.log(booking);
 
@@ -113,10 +113,10 @@ function Joined() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                          <NavLink
-                              to={`/event/${val.event._id}`}
+                          {/* <NavLink
+                              to={`/event/${val.event?._id}`}
                               style={{ textDecoration: "none" }}
-                            >
+                            > */}
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -126,11 +126,11 @@ function Joined() {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="warning">
+                              <Button variant="warning" href={`/event/${val.event?._id}`}>
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-                            </NavLink>
+                            {/* </NavLink> */}
                             
                             <OverlayTrigger
                               placement="top"
