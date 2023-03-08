@@ -34,7 +34,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 import Avatar from "react-avatar";
-import DeleteEvent from "./DeleteEvent";
+import DeleteEvent from "./HelpersComponents/DeleteEvent";
 
 const Event = () => {
   const { auth, user, setJoined, setUser, joined, created, allEvents, booked } =

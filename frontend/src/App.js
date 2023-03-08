@@ -24,7 +24,7 @@ import EventEdit from "./components/EventPages/EventEdit";
 import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
 import EventFailed from "./components/EventPages/EventFailed";
 import UpdateSuccess from "./components/EventPages/HelpersComponents/UpdateSuccess"
-import DeleteEvent from "./components/EventPages/DeleteEvent";
+import DeleteEvent from "./components/EventPages/HelpersComponents/DeleteEvent";
 
 function App() {
   return (

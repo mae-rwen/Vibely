@@ -18,7 +18,7 @@ export default function EventSuccess() {
 
   useEffect(() => {
     if (remainingTime === 0) {
-      navigate('/users/profile');
+      navigate('/profile');
     }
   }, [navigate, remainingTime]);
 
