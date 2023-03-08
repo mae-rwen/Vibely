@@ -11,6 +11,7 @@ import { faShareFromSquare, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import placeholder from "./placeholder.png"
 
 
 function Joined() {
@@ -84,7 +85,7 @@ function Joined() {
                       <Figure id="joinedThumbnail">
                         <Figure.Image
                           alt="thumbnail"
-                          src="https://media.tenor.com/htKQgBPrAIEAAAAM/vibing-cat.gif"
+                          src={placeholder}
                           thumbnail
                         />
                       </Figure>
@@ -102,14 +103,14 @@ function Joined() {
                           at{" "}
                           {formattedTime ? formattedTime : `not specified time`}
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        {/* <ListGroup.Item>
                           Created by{" "}
                           <b>
                             {val.event?.author?.name
                               ? val.event?.author?.name
                               : "unknown"}
                           </b>
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                         <ListGroup.Item>
                           <div id="joinedBtns">
                         
