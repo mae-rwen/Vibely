@@ -7,6 +7,8 @@ import { Card, Spinner } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
+
 
 export default function CreateEvent() {
   const navigate = useNavigate();
@@ -60,6 +62,10 @@ export default function CreateEvent() {
     setEventType("");
   };
   return (
+    <>
+    {isClicked ? (
+      <LoadingSpinner />
+    ) : (
     <Card className="createEvent">
       <Card.Body>
         <Card.Title className="my-4 text-center fw-bold">
@@ -181,11 +187,7 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            {isClicked ? (
-              <Button className="w-30 mt-3" variant="secondary">
-                <Spinner animation="border" size="sm" />
-              </Button>
-            ) : (
+         
               <Button
                 disabled={!eventCategory || !eventLocation ? true : false}
                 className="w-30 mt-3"
@@ -194,10 +196,12 @@ export default function CreateEvent() {
               >
                 Create
               </Button>
-            )}
+            
           </div>
         </Form>
       </Card.Body>
     </Card>
+    )}
+    </>
   );
 }
