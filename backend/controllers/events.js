@@ -10,6 +10,7 @@ function isObjEmpty(obj) {
 const getEvents = async (req, res, next) => {
   const { page } = req.query || 1;
   const eventsPerPage = 8;
+  // const createdEventsPerClick = 3;
 
   try {
     // for filters
@@ -66,21 +67,31 @@ const getEvents = async (req, res, next) => {
         allEvents,
       });
     } else {
-      const events = await Event.find(query)
-        .limit(eventsPerPage)
-        .skip(skip)
-        .populate("author")
-        .populate("category")
-        .sort(sortOptions);
-      const count = events.length;
-      const pageCount = Math.ceil(count / eventsPerPage);
-      res.json({
-        pagination: {
-          count,
-          pageCount,
-        },
-        events,
-      });
+      if (req.query.user) {
+        const events = await Event.find(query)
+          // .limit(createdEventsPerClick)
+          .populate("author")
+          .populate("category")
+          .sort(sortOptions);
+        console.log(events);
+        res.json(events);
+      } else {
+        const events = await Event.find(query)
+          .limit(eventsPerPage)
+          .skip(skip)
+          .populate("author")
+          .populate("category")
+          .sort(sortOptions);
+        const count = events.length;
+        const pageCount = Math.ceil(count / eventsPerPage);
+        res.json({
+          pagination: {
+            count,
+            pageCount,
+          },
+          events,
+        });
+      }
     }
   } catch (error) {
     next(error);
@@ -122,7 +133,6 @@ const createEvent = async (req, res, next) => {
     } = req.body;
     const author = req.user.id;
     // const categoryDoc = await Category.findById(category)
-    console.log(author);
     const event = await Event.create({
       title,
       general_location,

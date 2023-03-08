@@ -15,24 +15,18 @@ import Tooltip from "react-bootstrap/Tooltip";
 function Joined() {
   const { joined, allEvents, user, booking } = useContext(AuthContext);
   const [visible, setVisible] = useState(3);
+
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
-  // const [joined, setJoined] = useState({})
- 
-  // console.log(user);
-  // console.log(booking);
+  console.log(joined);
 
-  // console.log(allEvents);
-  // console.log(user._id);
-  
   return (
     <div>
       {joined?.length !== 0 ? (
         <>
           <ListGroup as="ul">
             {joined.slice(0, visible).map((val) => {
-              console.log(val)
               // get the date
               const date = new Date(val.event?.date);
               const year = date.getFullYear();
@@ -113,7 +107,7 @@ function Joined() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                          {/* <NavLink
+                            {/* <NavLink
                               to={`/event/${val.event?._id}`}
                               style={{ textDecoration: "none" }}
                             > */}
@@ -126,12 +120,15 @@ function Joined() {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="warning" href={`/event/${val.event?._id}`}>
+                              <Button
+                                variant="warning"
+                                href={`/event/${val.event?._id}`}
+                              >
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
                             {/* </NavLink> */}
-                            
+
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}

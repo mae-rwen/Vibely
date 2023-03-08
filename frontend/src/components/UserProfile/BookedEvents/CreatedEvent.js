@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import AuthContext from "../../../context/AuthProvider";
 import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
@@ -19,13 +18,10 @@ import axios from "../../../api/axios";
 import { Modal } from "react-bootstrap";
 
 function CreatedEvent({ events, props }) {
-  const { created } = useContext(AuthContext);
-  console.log(events);
   const [visible, setVisible] = useState(3);
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
-
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,7 +29,6 @@ function CreatedEvent({ events, props }) {
   const navigate = useNavigate();
 
   const deleteEvent = async (eventsID) => {
-    // console.log(eventsID);
     const response = await axios.delete(`/events/find/${eventsID}`);
     console.log("deleted successfully!");
     navigate("/event_delete");
@@ -70,6 +65,7 @@ function CreatedEvent({ events, props }) {
 
   return (
     <div>
+      {/* changinf to crrated */}
       {events.length !== 0 ? (
         <>
           <ListGroup as="ul">
@@ -174,9 +170,7 @@ function CreatedEvent({ events, props }) {
                                 placement="top"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={
-                                  <Tooltip id="tooltip-leave">
-                                    Edit
-                                  </Tooltip>
+                                  <Tooltip id="tooltip-leave">Edit</Tooltip>
                                 }
                               >
                                 <Button variant="primary">
@@ -189,15 +183,13 @@ function CreatedEvent({ events, props }) {
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
                               overlay={
-                                <Tooltip id="tooltip-leave">
-                                  Delete
-                                </Tooltip>
+                                <Tooltip id="tooltip-leave">Delete</Tooltip>
                               }
                             >
                               <Button
                                 onClick={() => {
-                                setEventsID(val._id);
-                                setShow(true);
+                                  setEventsID(val._id);
+                                  setShow(true);
                                 }}
                                 variant="outline-warning"
                               >

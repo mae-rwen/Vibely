@@ -11,7 +11,7 @@ import EventsDisplay from "./BookedEvents/EventsDisplay";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
 
 export default function SingleUser() {
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   //to show and hide the modal
   const [show, setShow] = useState(false);
   //logged in user info
@@ -26,41 +26,11 @@ export default function SingleUser() {
 
   //state for events of logged in user
   const [events, setEvents] = useState([]);
-  //for pagination in events
-  const [visible, setVisible] = useState(3);
-  const [isLoaded, setIsLoaded] = useState(false);
-  //funcation for foramtting date time
-  const formatDateTime = (date) => {
-    const year = date.getFullYear();
-    const day = date.getDate();
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const month = months[date.getMonth()];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const weekday = days[date.getDay()];
-    const formattedDate =
-      weekday && day && month && year
-        ? `${weekday}, ${day} ${month} ${year}`
-        : null;
 
-    // get the time
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-    const formattedTime = hour && minutes ? `${hour}:${minutes}` : null;
-    return [formattedDate, formattedTime];
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  //for sorting
+  const [sortBy, setSortBy] = useState("createdAt");
 
   useEffect(() => {
     axios.get(`/users/profile`).then((response) => {
@@ -71,11 +41,11 @@ export default function SingleUser() {
       setUserDescription(response?.data.description);
       setUserLocation(response.data?.location);
       setUserFile(response.data?.profilePic);
-      console.log(response.data);
-      axios.get(`/events?user=${response.data._id}`).then((response) => {
-        setEvents(response.data.events);
-        console.log(response.data);
-      });
+      axios
+        .get(`/events?user=${response.data._id}&sortBy=${sortBy}`)
+        .then((response) => {
+          setEvents(response.data);
+        });
       setIsLoaded(true);
     });
   }, []);
