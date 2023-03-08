@@ -16,13 +16,10 @@ import SingleUser from "./components/UserProfile/SingleUser";
 import AllEventsList from "./components/EventPages/DisplayAllEvents/AllEventsList";
 import CreateEvent from "./components/EventPages/CreateEvent";
 import Event from "./components/EventPages/Event";
-import Joined from "./components/UserProfile/BookedEvents/Joined";
-import EventsDisplay from "./components/UserProfile/BookedEvents/EventsDisplay";
 import EventJoined from "./components/EventPages/HelpersComponents/EventJoined";
 import EventEdit from "./components/EventPages/EventEdit";
 import LoggedOut from "./components/UserProfile/HelpersComponents/LoggedOut";
-import EventFailed from "./components/EventPages/HelpersComponents/EventFailed";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EventDeleted from "./components/EventPages/HelpersComponents/DeleteEvent";
 
@@ -55,27 +52,19 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tc" element={<UnderConstruction />} />
           <Route path="/allevents/" element={<AllEventsList />} />
-          <Route path="/allevents/:category" element={<AllEventsList />} />
-          <Route path="/create_event" element={<CreateEvent />} />
-          <Route path="/profile" element={<SingleUser />} />
-          <Route path="/event_failed" element={<EventFailed />} />
-          <Route path="/profile/joined" element={<Joined />} />
-          <Route path="/profile/events" element={<EventsDisplay />} />
-          <Route path="/event_delete" element={<EventDeleted />} />
-
-          {/* <Route path="/event/:event_id" element={<Event />} /> */}
-          <Route path="/event/edit/:id" element={<EventEdit />} />
-          <Route path="/event_joined" element={<EventJoined />} />
+          <Route path="/allevents/:category" element={<AllEventsList />} />    
           <Route path="/loggedOut" element={<LoggedOut />} />
 
           {/* protected routes */}
           {/* profile, edit events, edit profile, join events, single event page? */}
-
-          <Route element={<RequireAuth />}>
-            {/* <Route path="/users/profile" element={<SingleUser />} /> */}
+         <Route element={<RequireAuth />}>           
             <Route path="/event/:event_id" element={<Event />} />
-            {/* <Route path="/create_event" element={<CreateEvent />} /> */}
-          </Route>
+            <Route path="/create_event" element={<CreateEvent />} />
+            <Route path="/profile" element={<SingleUser />} />
+            <Route path="/event_joined" element={<EventJoined />} />
+            <Route path="/event/edit/:id" element={<EventEdit />} />
+            <Route path="/event_delete" element={<EventDeleted />} />
+         </Route>
           {/* catch all - to create missing element */}
           <Route path="*" element={<WrongPath />} />
         </Route>
