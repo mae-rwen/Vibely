@@ -17,19 +17,21 @@ import placeholder from "./placeholder.png"
 function Joined() {
   const { joined, allEvents, user, booking } = useContext(AuthContext);
   const [visible, setVisible] = useState(3);
+
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
+
   console.log("the joined are:")
   console.log(joined)
   
+
   return (
     <div>
       {joined?.length !== 0 ? (
         <>
           <ListGroup as="ul">
             {joined.slice(0, visible).map((val) => {
-              console.log(val)
               // get the date
               const date = new Date(val.event?.date);
               const year = date.getFullYear();
@@ -113,7 +115,7 @@ function Joined() {
                         </ListGroup.Item> */}
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                        
+
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -123,11 +125,14 @@ function Joined() {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="warning" href={`/event/${val.event?._id}`}>
+                              <Button
+                                variant="warning"
+                                href={`/event/${val.event?._id}`}
+                              >
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-                            {/* </NavLink> */} 
+
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}

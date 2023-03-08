@@ -39,6 +39,7 @@ export default function CreateEvent() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     axios
       .post("/events", event)
       .then((response) => {
@@ -151,9 +152,8 @@ export default function CreateEvent() {
                 setEventCategory(e.target.value);
               }}
               required
-              // defaultValue={"DEFAULT"}
             >
-              <option value=" ">Choose a category</option>
+              <option value="">Choose a category</option>
               {categories.map((category, index) => {
                 return (
                   <option key={index} value={category._id}>
@@ -195,16 +195,27 @@ export default function CreateEvent() {
           required
         />
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+            <Button
+              disabled={
+                !eventCategory ||
+                !eventLocation ||
+                !eventDescription ||
+                !eventDate ||
+                !eventName ||
+                !eventParticipants ||
+                !eventType
+                  ? true
+                  : false
+              }
+              className="w-30 mt-3"
+              variant="secondary"
+              type="submit"
+            >
+              Create
+            </Button>
+
          
-              <Button
-                disabled={!eventCategory || !eventLocation ? true : false}
-                className="w-30 mt-3"
-                variant="secondary"
-                type="submit"
-              >
-                Create
-              </Button>
-            
           </div>
         </Form>
       </Card.Body>
