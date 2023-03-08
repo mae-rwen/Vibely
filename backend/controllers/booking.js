@@ -59,8 +59,8 @@ const deleteBookedEvent = async (req, res, next) => {
     const {event} = req.body;
     const user = req.user.id;
     const book = await Booking.findByIdAndDelete(id);
-    const eventDoc = await Event.findByIdAndUpdate( id, { $inc: { joined: -1 } }, { new : true });
-    // const userDoc = await User.findOneAndUpdate( user, { $pull: {booked: {event} } }, { new : true })
+    const eventDoc = await Event.findByIdAndUpdate( event, { $inc: { joined: -1 }}, { new : true });
+    // const eventDoc = await Event.findByIdAndUpdate( id, { $inc: { joined: -1 }, $pull: {attenders: {user}} }, { new : true });
     res.json(book);
   } catch (error) {
     next(error);
