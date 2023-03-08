@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
-import { ListGroup, ListGroupItem, Row, Col, Card } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Row, Col, Card, Badge } from "react-bootstrap";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
@@ -17,6 +17,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import axios from "../../../api/axios";
 import { Modal } from "react-bootstrap";
+
 
 function CreatedEvent({ events, props }) {
   const { created } = useContext(AuthContext);
@@ -67,6 +68,9 @@ function CreatedEvent({ events, props }) {
       </Modal>
     );
   }
+
+  console.log("the events are:")
+  console.log(events)
 
   return (
     <div>
@@ -121,7 +125,9 @@ function CreatedEvent({ events, props }) {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <h5 className="fw-bold mt-2 mb-3">{val.title}</h5>
+                  <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
+                      Joined: {val.joined}/{val.participants}
+                    </Badge></span>
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">
                       <Figure id="joinedThumbnail">
