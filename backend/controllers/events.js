@@ -1,9 +1,12 @@
 const { Event } = require("../models/events");
 const { ErrorResponse } = require("../utils/ErrorResponse");
 const { Category } = require("../models/categories");
+
+//checking for pagination
 function isObjEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
+
 const getEvents = async (req, res, next) => {
   const { page } = req.query || 1;
   const eventsPerPage = 8;
@@ -44,7 +47,6 @@ const getEvents = async (req, res, next) => {
       sortOptions.author = 1;
     }
 
-    //trying out
     if (isObjEmpty(query)) {
       const count = await Event.estimatedDocumentCount(query); //commenting for a while
       const pageCount = Math.ceil(count / eventsPerPage);
@@ -55,13 +57,6 @@ const getEvents = async (req, res, next) => {
         .populate("category")
         .sort(sortOptions);
       const allEvents = await Event.find(query);
-      console.log(
-        "total events are " +
-          count +
-          " and page count for pagination is " +
-          pageCount
-      );
-
       res.json({
         pagination: {
           count,
@@ -79,15 +74,6 @@ const getEvents = async (req, res, next) => {
         .sort(sortOptions);
       const count = events.length;
       const pageCount = Math.ceil(count / eventsPerPage);
-      console.log(query);
-      console.log(
-        "total events are " +
-          count +
-          " and page count for pagination is " +
-          pageCount
-      );
-      // console.log(events);
-      
       res.json({
         pagination: {
           count,
