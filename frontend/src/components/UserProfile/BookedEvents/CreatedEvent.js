@@ -153,10 +153,7 @@ function CreatedEvent({ events, props }) {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                            <NavLink
-                              to={`/event/${val._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
+                            
                               <OverlayTrigger
                                 placement="top"
                                 delay={{ show: 250, hide: 400 }}
@@ -166,16 +163,13 @@ function CreatedEvent({ events, props }) {
                                   </Tooltip>
                                 }
                               >
-                                <Button variant="warning">
+                                <Button variant="warning" href={`/event/${val._id}`}>
                                   <FontAwesomeIcon icon={faEye} />
                                 </Button>
                               </OverlayTrigger>
-                            </NavLink>
+                           
 
-                            <NavLink
-                              to={`/event/edit/${val._id}`}
-                              style={{ textDecoration: "none" }}
-                            >
+                            
                               <OverlayTrigger
                                 placement="top"
                                 delay={{ show: 250, hide: 400 }}
@@ -185,11 +179,11 @@ function CreatedEvent({ events, props }) {
                                   </Tooltip>
                                 }
                               >
-                                <Button variant="primary">
+                                <Button variant="primary" href={`/event/edit/${val._id}`}>
                                   <FontAwesomeIcon icon={faPenToSquare} />
                                 </Button>
                               </OverlayTrigger>
-                            </NavLink>
+                           
 
                             <OverlayTrigger
                               placement="top"

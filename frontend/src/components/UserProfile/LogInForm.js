@@ -115,7 +115,7 @@ export default function LogInForm() {
               </Form.Text>
             </Card.Text> */}
           {isClicked ? (
-            <Button className="w-50 my-3" variant="secondary" type="submit">
+            <Button className="w-50 my-3" variant="secondary">
               <Spinner animation="border" size="sm" />
             </Button>
           ) : (

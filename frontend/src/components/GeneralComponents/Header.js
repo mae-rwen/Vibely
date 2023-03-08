@@ -38,7 +38,7 @@ export default function Header() {
             <Nav className="ms-auto gap-2">
               <NavDropdown title="All routes" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/">Home</NavDropdown.Item>
-                <NavDropdown.Item href="/categories">
+                <NavDropdown.Item href="/categoriesfe">
                   Categories
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/allevents">
@@ -67,7 +67,7 @@ export default function Header() {
               </NavLink>
               <NavLink
                 style={{ padding: "10px" }}
-                to="/categories"
+                to="/categoriesfe"
                 className={({ isActive }) =>
                   isActive ? "activeClass " : "nonActive"
                 }
@@ -90,7 +90,7 @@ export default function Header() {
                   <Button
                     className="m-auto ms-1"                 
                     href="/profile/"
-                    variant="secondary"
+                    variant="warning"
                   >
                     <FontAwesomeIcon icon={faUser} /> Your profile
                   </Button>
@@ -106,7 +106,7 @@ export default function Header() {
                   <Button
                     className="m-auto ms-1"
                     href="/login"
-                    variant="secondary"
+                    variant="warning"
                   >
                     Vibein
                   </Button>

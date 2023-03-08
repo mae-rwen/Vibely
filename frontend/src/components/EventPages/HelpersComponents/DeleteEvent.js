@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
 
-export default function EventSuccess() {
+export default function EventDeleted() {
   const navigate = useNavigate();
   const [remainingTime, setRemainingTime] = useState(3);
 
@@ -27,14 +27,14 @@ export default function EventSuccess() {
       <h4 className="display-8 fw-bold">
         You have successfully deleted your event!
       </h4>
-      <p>You'll be redirected to the events list in {remainingTime} seconds...</p>
+      <p>You'll be redirected to your user profile {remainingTime} seconds...</p>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button
             variant="secondary"
-            href="/allevents"          
+            href="/profile"          
           >
-            See all events
+            Go to the user profile
           </Button>
           <Button
             variant="outline-secondary"

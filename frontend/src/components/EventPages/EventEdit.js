@@ -240,8 +240,7 @@ export default function EventEdit() {
           {isClicked ? (
             <Button
               className="mb-3 mx-1 my-3"
-              variant="secondary"
-              type="submit"
+              variant="secondary"              
             >
               <Spinner animation="border" size="sm" />
             </Button>

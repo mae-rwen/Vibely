@@ -35,10 +35,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
-import "./event.css";
 import Avatar from "react-avatar";
-import DeleteEvent from "./HelpersComponents/DeleteEvent";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -209,7 +207,7 @@ const Event = () => {
     <>
       <Card>
         <Card.Header id="singeEventCardHeader">
-          <Button variant="primary" href="/allevents">
+          <Button variant="primary" onClick={()=> goBack()}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </Button>
 

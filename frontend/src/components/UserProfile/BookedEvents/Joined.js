@@ -112,10 +112,7 @@ function Joined() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                          {/* <NavLink
-                              to={`/event/${val.event?._id}`}
-                              style={{ textDecoration: "none" }}
-                            > */}
+                        
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -129,8 +126,7 @@ function Joined() {
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-                            {/* </NavLink> */}
-                            
+                            {/* </NavLink> */} 
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
