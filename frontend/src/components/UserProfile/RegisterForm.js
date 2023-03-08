@@ -100,7 +100,7 @@ const RegisterForm = ({ setSetAccount }) => {
       const accessToken = response?.data?.accessToken;
       setUser({ email, name, password, accessToken });
       setAuth({ email, name, password, accessToken });
-      navigate("users/profile/");
+      navigate("/profile");
       // clear input fields
     } catch (err) {
       if (!err?.response) {
