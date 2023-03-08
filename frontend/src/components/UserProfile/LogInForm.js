@@ -1,8 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
-import { Card }from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useRef, useState, useEffect, useContext } from "react";
 
 import axios from "../../api/axios";
@@ -13,7 +13,7 @@ const LOGIN_URL = "/auth/login";
 
 export default function LogInForm() {
   const { setAuth, setUser } = useContext(AuthContext);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -40,8 +40,7 @@ export default function LogInForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        LOGIN_URL,{ email, name, password });
+      const response = await axios.post(LOGIN_URL, { email, name, password });
       setUser(response.data);
       setName(response?.data?.name);
 
@@ -53,8 +52,6 @@ export default function LogInForm() {
         // Perform login logic here and redirect to another page
         navigate(from, { replace: true });
       }, 1000);
-
-      
     } catch (err) {
       if (!err?.response) {
         setError("No Server Response");
@@ -71,70 +68,73 @@ export default function LogInForm() {
     }
   };
 
-  return (    
-      
-      <Card className="signUpCards">
-        <Card.Body>
-          <p
-            ref={errRef}
-            className={error ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {error}
-          </p>
-          <Card.Title className="my-4 text-center fw-bold">
-            Login to your account
-          </Card.Title>
+  return (
+    <Card className="signUpCards">
+      <Card.Body>
+        <p
+          ref={errRef}
+          className={error ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {error}
+        </p>
+        <Card.Title className="my-4 text-center fw-bold">
+          Login to your account
+        </Card.Title>
 
-          <Form className="text-center" onSubmit={handleSubmit}>
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="text"
-                id="email"
-                ref={emailRef}
-                autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-              <label htmlFor="email">Email</label>
-            </Form.Floating>
+        <Form className="text-center" onSubmit={handleSubmit}>
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="text"
+              id="email"
+              ref={emailRef}
+              autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+            <label htmlFor="email">Email</label>
+          </Form.Floating>
 
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="password"
-                id="pwd"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                required
-              />
-              <label htmlFor="pwd">Password</label>
-            </Form.Floating>           
+          <Form.Floating className="mb-3">
+            <Form.Control
+              type="password"
+              id="pwd"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+            <label htmlFor="pwd">Password</label>
+          </Form.Floating>
 
-            {/* <Card.Text className="mt-3 text-end">
+          {/* <Card.Text className="mt-3 text-end">
               <Form.Text className="text-muted">
                 <a href ="/resetpassword" style={{ color: "inherit" }}>
                   Forgot password?
                 </a>
               </Form.Text>
             </Card.Text> */}
-  {isClicked ? (<Button className="w-50 my-3" variant="secondary" type="submit">
-  <Spinner animation="border" size="sm" />
-            </Button>):(<Button className="w-50 my-3" variant="secondary" type="submit">
+          {isClicked ? (
+            <Button className="w-50 my-3" variant="secondary" type="submit">
+              <Spinner animation="border" size="sm" />
+            </Button>
+          ) : (
+            <Button className="w-50 my-3" variant="secondary" type="submit">
               Login
-            </Button>)}
-            
+            </Button>
+          )}
 
-            <Card.Text className="mb-2">
-              <Form.Text className="text-muted">
-                No account yet? Register <Link to="/register" className="signUpHere">here</Link>.
-              </Form.Text>
-            </Card.Text>
-          </Form>
-        </Card.Body>
-      </Card>
-
-      
-    
+          <Card.Text className="mb-2">
+            <Form.Text className="text-muted">
+              No account yet? Register{" "}
+              <Link to="/register" className="signUpHere">
+                here
+              </Link>
+              .
+            </Form.Text>
+          </Card.Text>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
