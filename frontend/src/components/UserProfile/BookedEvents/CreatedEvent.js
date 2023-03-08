@@ -196,8 +196,8 @@ function CreatedEvent({ events, props }) {
                             >
                               <Button
                                 onClick={() => {
-                                  setEventsID(val._id);
-                                  setShow(true);
+                                setEventsID(val._id);
+                                setShow(true);
                                 }}
                                 variant="outline-warning"
                               >
