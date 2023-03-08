@@ -11,7 +11,7 @@ export default function Instructions() {
         </h2>
         <div className="col-lg-8">
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Button variant="secondary" href="/categories">
+            <Button variant="secondary" href="/categoriesfe">
               Browse the events
             </Button>
             <Button variant="outline-secondary" href="/register">
@@ -93,7 +93,7 @@ export default function Instructions() {
         </p>
       </div>
       <div className="d-grid gap-2 d-sm-flex mt-4 justify-content-sm-center">
-        <Button variant="secondary" href="/categories">
+        <Button variant="secondary" href="/categoriesfe">
           Browse the events
         </Button>
         <Button variant="outline-secondary" href="/register">

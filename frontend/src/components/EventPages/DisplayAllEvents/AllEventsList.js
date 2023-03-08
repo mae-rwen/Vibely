@@ -134,7 +134,7 @@ export default function AllEventsList() {
                   disabled={currentPage === 1}
                   onClick={handlePrevious}
                   className="w-30 mt-3"
-                  variant="secondary"
+                  variant="warning"
                   type="submit"
                 >
                   Previous
@@ -143,7 +143,7 @@ export default function AllEventsList() {
                   onClick={handleNext}
                   disabled={currentPage === pageCount}
                   className="w-30 mt-3"
-                  variant="secondary"
+                  variant="warning"
                   type="submit"
                 >
                   Next

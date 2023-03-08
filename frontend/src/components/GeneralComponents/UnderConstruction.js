@@ -11,7 +11,7 @@ export default function UnderConstruction() {
             <div className="col-lg-8 mx-auto">
                 <p className="lead mb-4">Please visit later</p>
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <Button variant="secondary" onClick={()=>{navigate(-1)}}>Go back</Button>
+                    <Button variant="warning" onClick={()=>{navigate(-1)}}>Go back</Button>
                 </div>
             </div>
         </div>

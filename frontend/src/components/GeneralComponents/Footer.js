@@ -12,7 +12,7 @@ export default function Footer() {
         <NavLink to="/instructions" className="text-decoration-none text-dark">
           How does it work
         </NavLink>
-        <NavLink to="/categories" className="text-decoration-none text-dark">
+        <NavLink to="/categoriesfe" className="text-decoration-none text-dark">
           Explore
         </NavLink>
         <NavLink to="/tc" className="text-decoration-none text-dark">
