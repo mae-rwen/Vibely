@@ -8,17 +8,15 @@ export default function EventFailed() {
   return (
     <div id="construction" className="text-center">
       <h4 className="display-8 fw-bold">
-        Event creation failed.Please select the Location and Category properly.{" "}
+        Event creation failed.Please select the Location and Category properly.
       </h4>
       <div className="col-lg-8 mx-auto">
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button
             variant="secondary"
-            onClick={() => {
-              navigate("/create_event");
-            }}
+            href="/create_event"
           >
-            Create an Event{" "}
+            Create an Event
           </Button>
         </div>
       </div>

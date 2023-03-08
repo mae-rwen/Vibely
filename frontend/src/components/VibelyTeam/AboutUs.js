@@ -86,7 +86,7 @@ export default function AboutUs() {
           </div>
       </div>
       <div className="d-grid gap-2 mt-4 d-sm-flex justify-content-sm-center">
-        <Button variant="secondary" href="/categories">
+        <Button variant="secondary" href="/categoriesfe">
           Browse the events
         </Button>
         <Button variant="outline-secondary" href="/login">

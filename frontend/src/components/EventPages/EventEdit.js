@@ -1,6 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
-import { Form, InputGroup, Container, Button, Row, Col, Card } from "react-bootstrap";
+import {
+  Form,
+  InputGroup,
+  Container,
+  Button,
+  Row,
+  Col,
+  Card,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   faBuildingColumns,
@@ -17,7 +26,8 @@ import useAuth from "../hooks/useAuth";
 import "./event.css";
 import { AuthContext } from "../../context/AuthProvider";
 import CitySelector from "./HelpersComponents/CitySelector";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Editor from "../../context/Editor";
 
 export default function EventEdit() {
@@ -36,16 +46,15 @@ export default function EventEdit() {
   const [eventPic, setEventPic] = useState("");
   const [files, setFiles] = useState("");
   const [category, setCategory] = useState("");
-
-
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     axios.get(`/events/find/${id}`).then((response) => {
       console.log(response.data);
       //   setEvent(response.data);
       const data = response.data;
-    //   const dat = new Date(data.date);
-    //   const ISO = dat.toISOString;
+      //   const dat = new Date(data.date);
+      //   const ISO = dat.toISOString;
       setTitle(data.title);
       setLocation(data.general_location);
       setType(data.type);
@@ -69,7 +78,6 @@ export default function EventEdit() {
     type: type,
     participants: Number(participants),
   };
-
 
   async function updateEvent(e) {
     e.preventDefault();
@@ -99,29 +107,44 @@ export default function EventEdit() {
         });
       })
       .catch((error) => console.log(error));
-      navigate("/event_updated");
+    setIsClicked(true);
+    toast(`You've successfully updated the event! `, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+    setTimeout(() => {
+      setIsClicked(false);
+      // Perform login logic here and redirect to another page
+      navigate(`/event/${id}`);
+    }, 2000);
   }
 
   return (
     <Card className="createEvent">
       <Card.Body>
-      <Button className="ms-end my-3" variant="primary" onClick={goBack}>
-        Cancel
-      </Button>
-      <Form onSubmit={updateEvent}>
-        <Form.Group className="mb-3">
-          <Form.Text muted>Title</Form.Text>
-          <Form.Control
-            type="Title"
-            placeholder={title}
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-        </Form.Group>
+        <Button className="ms-end my-3" variant="primary" onClick={goBack}>
+          Cancel
+        </Button>
+        <Form onSubmit={updateEvent}>
+          <Form.Group className="mb-3">
+            <Form.Text muted>Title</Form.Text>
+            <Form.Control
+              type="Title"
+              placeholder={title}
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-        {/* <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
           <Form.Text muted>
             Location: {location}, select from list to change
           </Form.Text>
@@ -133,7 +156,7 @@ export default function EventEdit() {
           />
         </Form.Group> */}
 
-        {/* <Form.Select
+          {/* <Form.Select
               aria-label="category"
               onChange={(e) => {
                 setCategory(e.target.value);
@@ -149,54 +172,58 @@ export default function EventEdit() {
               })}
             </Form.Select> */}
 
-        <Form.Group className="mb-3">
-          <Form.Text muted>Number of Participants: {participants}</Form.Text>
-          <Form.Control
-            type="number"
-            min="1"
-            name="participants"
-            value={participants}
-            onChange={(e) => setParticipants(e.target.value)}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Text muted>Number of Participants: {participants}</Form.Text>
+            <Form.Control
+              type="number"
+              min="1"
+              name="participants"
+              value={participants}
+              onChange={(e) => setParticipants(e.target.value)}
+            />
+          </Form.Group>
 
-        <Row className="mb-3">
-          <Col>
-            <Form className="mb-3">
-            <Form.Text muted>Event: {type.toLocaleUpperCase()}, select to change</Form.Text>
-              <Form.Check
-                label="Private"
-                name="group1"
-                type="radio"
-                value="private"
-                onChange={(e) => setType(e.target.value)}
-              />
-              <Form.Check
-                label="Public"
-                name="group1"
-                type="radio"
-                value="public"
-                onChange={(e) => setType(e.target.value)}
-              />
-            </Form>
-          </Col>
-
-          <Col>
-            <Form.Group>
-              <Form.Text muted>Date & Time: {date} select to change</Form.Text>
-              <div className="form-check">
-                <input
-                  type="datetime-local"
-                  name="event-datetime"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
+          <Row className="mb-3">
+            <Col>
+              <Form className="mb-3">
+                <Form.Text muted>
+                  Event: {type.toLocaleUpperCase()}, select to change
+                </Form.Text>
+                <Form.Check
+                  label="Private"
+                  name="group1"
+                  type="radio"
+                  value="private"
+                  onChange={(e) => setType(e.target.value)}
                 />
-              </div>
-            </Form.Group>
-          </Col>
-        </Row>
+                <Form.Check
+                  label="Public"
+                  name="group1"
+                  type="radio"
+                  value="public"
+                  onChange={(e) => setType(e.target.value)}
+                />
+              </Form>
+            </Col>
 
-        {/* <Form.Group controlId="formFileMultiple" className="mb-3">
+            <Col>
+              <Form.Group>
+                <Form.Text muted>
+                  Date & Time: {date} select to change
+                </Form.Text>
+                <div className="form-check">
+                  <input
+                    type="datetime-local"
+                    name="event-datetime"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  />
+                </div>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          {/* <Form.Group controlId="formFileMultiple" className="mb-3">
         <Form.Label>Multiple files input example</Form.Label>
         <Form.Control
           type="file"
@@ -205,15 +232,29 @@ export default function EventEdit() {
         />
       </Form.Group> */}
 
-        <Editor
-          value={description}
-          onChange={(newValue) => setDescription(newValue)}
-        />
-        <Button className="mb-3 mx-1 my-3" variant="secondary" type="submit">
-          Update
-        </Button>
-      </Form>
+          <Editor
+            value={description}
+            onChange={(newValue) => setDescription(newValue)}
+          />
+
+          {isClicked ? (
+            <Button
+              className="mb-3 mx-1 my-3"
+              variant="secondary"              
+            >
+              <Spinner animation="border" size="sm" />
+            </Button>
+          ) : (
+            <Button
+              className="mb-3 mx-1 my-3"
+              variant="secondary"
+              type="submit"
+            >
+              Update
+            </Button>
+          )}
+        </Form>
       </Card.Body>
-      </Card>
+    </Card>
   );
 }

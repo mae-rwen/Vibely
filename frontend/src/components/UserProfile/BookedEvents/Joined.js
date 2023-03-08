@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import AuthContext from "../../../context/AuthProvider";
-import { ListGroupItem, NavLink } from "react-bootstrap";
+import { Badge, ListGroupItem, NavLink } from "react-bootstrap";
 import axios from "../../../api/axios";
 import "./eventdisplay.css";
 import Button from "react-bootstrap/Button";
@@ -11,6 +11,8 @@ import { faShareFromSquare, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import placeholder from "./placeholder.png"
+
 
 function Joined() {
   const { joined, allEvents, user, booking } = useContext(AuthContext);
@@ -18,13 +20,8 @@ function Joined() {
   const loadMore = () => {
     setVisible((prev) => prev + 3);
   };
-  // const [joined, setJoined] = useState({})
- 
-  // console.log(user);
-  // console.log(booking);
-
-  // console.log(allEvents);
-  // console.log(user._id);
+  console.log("the joined are:")
+  console.log(joined)
   
   return (
     <div>
@@ -79,13 +76,16 @@ function Joined() {
 
               return (
                 <ListGroupItem as="li" key={val._id} id="joinedItem">
-                  <h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5>
+                  <span id="createdEventTitle"><h5 className="fw-bold mt-2 mb-3">{val.event?.title}</h5><Badge bg="secondary" pill id="thumbnailBadge" className="mt-2">
+                      Joined: {val.event?.joined}/{val.event?.participants}
+                    </Badge></span>
+                  
                   <div id="underTheTitle">
                     <span id="titleAndThumbnail">
                       <Figure id="joinedThumbnail">
                         <Figure.Image
                           alt="thumbnail"
-                          src="https://media.tenor.com/htKQgBPrAIEAAAAM/vibing-cat.gif"
+                          src={placeholder}
                           thumbnail
                         />
                       </Figure>
@@ -103,20 +103,17 @@ function Joined() {
                           at{" "}
                           {formattedTime ? formattedTime : `not specified time`}
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        {/* <ListGroup.Item>
                           Created by{" "}
                           <b>
                             {val.event?.author?.name
                               ? val.event?.author?.name
                               : "unknown"}
                           </b>
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                         <ListGroup.Item>
                           <div id="joinedBtns">
-                          {/* <NavLink
-                              to={`/event/${val.event?._id}`}
-                              style={{ textDecoration: "none" }}
-                            > */}
+                        
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}
@@ -130,8 +127,7 @@ function Joined() {
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
-                            {/* </NavLink> */}
-                            
+                            {/* </NavLink> */} 
                             <OverlayTrigger
                               placement="top"
                               delay={{ show: 250, hide: 400 }}

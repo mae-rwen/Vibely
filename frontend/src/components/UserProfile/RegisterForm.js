@@ -99,7 +99,7 @@ const RegisterForm = ({ setSetAccount }) => {
       // console.log(JSON.stringify(response))
       const accessToken = response?.data?.accessToken;
       setUser({ email, name, password, accessToken });
-      setAuth({ email, name, password, accessToken });
+      setAuth({ email, name, password, accessToken });      
       navigate("/profile");
       // clear input fields
     } catch (err) {

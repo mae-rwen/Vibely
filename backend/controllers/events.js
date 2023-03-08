@@ -92,15 +92,12 @@ const getEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
     // const user = req.user.id;
-    // const { attenders } = req.body;
-    // console.log(attenders)
-    // const { user } = await User.findById({ attenders });
     const event = await Event.findById(id)
       .populate("category")
-      .populate("author");
-    // .populate({
-    //   path: "attenders",
-    // populate: {user}});
+      .populate("author")
+      // .populate({
+      //   path: "attenders",
+      // populate: {user}});
     res.json(event);
   } catch (error) {
     next(error);
