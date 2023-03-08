@@ -12,8 +12,8 @@ const eventSchema = new Schema(
     participants: { type: Number },
     author: { type: Types.ObjectId, ref: "User", required: true },
     category: { type: Types.ObjectId, ref: "Category", required: true },
-    joined: { type: String},
-    attenders: { type: Object} 
+    joined: { type: Number},
+    attenders: { type: Object},
   },
   {
     timestamps: true,

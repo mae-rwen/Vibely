@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card, Spinner } from "react-bootstrap";
 import CitySelector from "./HelpersComponents/CitySelector";
+import Editor from "../../context/Editor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../GeneralComponents/LoadingSpinner";
@@ -175,7 +176,8 @@ export default function CreateEvent() {
               onChange={(e) => setEventParticipants(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          {/* <Form.Group className="mb-3">
             <Form.Label className="fw-bold">Description</Form.Label>
             <Form.Control
               as="textarea"
@@ -185,7 +187,13 @@ export default function CreateEvent() {
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
             />
-          </Form.Group>
+          </Form.Group> */}
+
+          <Editor
+          value={eventDescription}
+          onChange={(newValue) => setEventDescription(newValue)}
+          required
+        />
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
          
               <Button

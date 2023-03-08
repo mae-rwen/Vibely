@@ -1,4 +1,5 @@
 const { Event } = require("../models/events");
+const { User } = require("../models/users")
 const { ErrorResponse } = require("../utils/ErrorResponse");
 const { Category } = require("../models/categories");
 
