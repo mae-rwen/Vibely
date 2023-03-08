@@ -32,9 +32,7 @@ export default function EventSuccess() {
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <Button
             variant="secondary"
-            onClick={() => {
-              navigate("/allevents");
-            }}
+            href="/allevents"
           >
             See all events
           </Button>

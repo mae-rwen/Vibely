@@ -8,7 +8,6 @@ import CitySelector from "./HelpersComponents/CitySelector";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -44,24 +43,13 @@ export default function CreateEvent() {
         // console.log(result);
         // setCreated([...created, response.data]);
         setIsClicked(true);
-      toast(`You've successfully created an event! `, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-      setTimeout(() => {
-        setIsClicked(false);
-        // Perform login logic here and redirect to another page
-        navigate(`/event/${response.data._id}`);
-      }, 2000);
+        toast(`You've successfully created an event! `);
+        setTimeout(() => {
+          setIsClicked(false);         
+          navigate(`/event/${response.data._id}`);
+        }, 2000);
       })
       .catch((error) => console.log(error));
-      
 
     setEventCategory("");
     setEventDate("");
@@ -193,27 +181,20 @@ export default function CreateEvent() {
             />
           </Form.Group>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          {isClicked ? (
-            <Button
-              className="mb-3 mx-1 my-3"
-              variant="secondary"
-              type="submit"
-            >
-              <Spinner animation="border" size="sm" />
-            </Button>
-          ) : (
-            <Button
-            disabled={!eventCategory || !eventLocation ? true : false}
-            className="w-30 mt-3"
-            variant="secondary"
-            type="submit"
-          >
-            Create
-          </Button>
-          )}
-           
-           
-            
+            {isClicked ? (
+              <Button className="w-30 mt-3" variant="secondary">
+                <Spinner animation="border" size="sm" />
+              </Button>
+            ) : (
+              <Button
+                disabled={!eventCategory || !eventLocation ? true : false}
+                className="w-30 mt-3"
+                variant="secondary"
+                type="submit"
+              >
+                Create
+              </Button>
+            )}
           </div>
         </Form>
       </Card.Body>

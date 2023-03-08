@@ -11,6 +11,7 @@ import {
   Figure,
   Badge,
   Modal,
+  Spinner,
 } from "react-bootstrap";
 
 import { useNavigate, useParams, Navigate } from "react-router-dom";
@@ -37,6 +38,9 @@ import { AuthContext } from "../../context/AuthProvider";
 import "./event.css";
 import Avatar from "react-avatar";
 import DeleteEvent from "./HelpersComponents/DeleteEvent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Event = () => {
   const { auth, user, setJoined, setUser, joined, created, allEvents, booked } =
@@ -54,6 +58,7 @@ const Event = () => {
 
   const [userData, setUserData] = useState("");
   const [updatedEvent, setUpdatedEvent] = useState({});
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     axios
@@ -156,7 +161,12 @@ const Event = () => {
   const deleteEvent = async () => {
     const response = await axios.delete(`/events/find/${event_id}`);
     console.log("deleted successfully!");
-    navigate("/event_delete");
+    setIsClicked(true);
+    toast(`This event has been deleted. Redirectingto all events.`);
+    setTimeout(() => {
+      setIsClicked(false);    
+      navigate(`/allevents`);
+    }, 2000);
   };
 
   function MyVerticallyCenteredModal(props) {
@@ -180,9 +190,16 @@ const Event = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
-          <Button onClick={() => deleteEvent()} variant="danger">
-            Delete
-          </Button>
+          {isClicked ? (
+              <Button variant="danger">
+                <Spinner animation="border" size="sm" />
+              </Button>
+            ) : (
+              <Button onClick={() => deleteEvent()} variant="danger">
+              Delete
+            </Button>
+            )}
+        
         </Modal.Footer>
       </Modal>
     );
