@@ -29,6 +29,8 @@ import {
   faRightToBracket,
   faPenToSquare,
   faTrash,
+  faShareFromSquare,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthProvider";
@@ -92,10 +94,6 @@ const Event = () => {
       }, []);
   };
 
-  // const renderTooltip = (props) => (
-  //   <Tooltip id="tooltip" {...props}></Tooltip>
-  // );
-
   // get the date
   const date = new Date(event.date);
 
@@ -158,16 +156,6 @@ const Event = () => {
         navigate("/event_delete")
   }
 
-//   useEffect(() => {
-//     // DELETE request using axios with async/await
-//     async function deleteEvent() {
-//         await axios.delete(`/find/${event_id}`)
-//         console.log("deleted successfully!");
-//     }
-
-//     deleteEvent();
-// }, []);
-
   if (show) {
     return (
       <>
@@ -204,11 +192,155 @@ const Event = () => {
 
   return (
     <>
+      <Card>
+        <Card.Header id="singeEventCardHeader">
+          <Button variant="primary" onClick={goBack}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </Button>
+
+          <span id="cardHeader">
+            <span id="eventTitleWBadge">
+              <h4 className="fw-bold">{event.title}</h4>
+              {isJoined?.length > 0 ? (
+                <Badge bg="secondary" pill>
+                  Joined!
+                </Badge>
+              ) : null}
+            </span>
+
+            <Card.Subtitle id="eventDescSubt">
+              <p>
+                <FontAwesomeIcon icon={faCalendarDays} />{" "}
+                {formattedDate ? formattedDate : `not specified date`} at{" "}
+                {formattedTime ? formattedTime : `not specified time`}
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faLocationCrosshairs} /> in{" "}
+                {event.general_location}
+              </p>
+              {event.type === "private" ? (
+                <p>
+                  <FontAwesomeIcon icon={faHouseChimney} /> private event
+                </p>
+              ) : (
+                <p>
+                  <FontAwesomeIcon icon={faBuildingColumns} /> public event
+                </p>
+              )}
+              <p>
+                <FontAwesomeIcon icon={faUsers} />{" "}
+                {event.joined < event.participants
+                  ? event.participants
+                    ? `${event.joined}/${event.participants}`
+                    : null
+                  : `event full (${event.participants})`}
+              </p>
+            </Card.Subtitle>
+          </span>
+          <Figure id="singleEventThumbnail">
+            <Figure.Image
+              alt="category"
+              src={event.category?.picture}
+              thumbnail
+            />
+            <Figure.Caption>
+              Category:{" "}
+              {event.category?.name ? event.category?.name : "undefined"}
+            </Figure.Caption>
+          </Figure>
+        </Card.Header>
+
+        <Card.Body>
+          <Card.Text id="eventDesc">
+            <Avatar
+              size="40"
+              round={true}
+              src={event.author?.picture}
+              name={event.author?.name}
+            />{" "}
+            <h6 className="fw-bold">Hosted by {event.author?.name}</h6>
+          </Card.Text>
+
+         
+            <div dangerouslySetInnerHTML={{ __html: event.description }} />
+          
+        </Card.Body>
+        <Card.Footer id="eventDescBtns">
+          {/* edit button */}
+          {isAuthor === true ? (
+            <>
+              <OverlayTrigger placement="top" overlay={<Tooltip>Edit</Tooltip>}>
+                <Button variant="warning" onClick={goEdit}>
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </Button>
+              </OverlayTrigger>
+            </>
+          ) : null}
+
+          {/* Delete button */}
+          {isAuthor === true ? (
+            <>
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>Delete</Tooltip>}
+              >
+                <Button variant="outline-warning">
+                  <FontAwesomeIcon icon={faXmark} />
+                </Button>
+              </OverlayTrigger>
+            </>
+          ) : null}
+
+          {/* JOIN button */}
+          {isAuthor === true ||
+          isJoined?.length > 0 ||
+          event?.joined >= event.participants ? null : (
+            <>
+              <OverlayTrigger placement="top" overlay={<Tooltip>Join</Tooltip>}>
+                <Button variant="warning" onClick={joinEvent}>
+                  <FontAwesomeIcon icon={faRightToBracket} />
+                </Button>
+              </OverlayTrigger>
+            </>
+          )}
+
+          {/* UNjoin button */}
+          {isAuthor === true ? null : (
+            <>
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>Leave</Tooltip>}
+              >
+                <Button variant="outline-warning">
+                  <FontAwesomeIcon icon={faShareFromSquare} />
+                </Button>
+              </OverlayTrigger>
+              
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={<Tooltip id="tooltip-leave">Delete the event</Tooltip>}
+              >
+                <Button onClick={() => setShow(true)} variant="outline-warning">
+                  <FontAwesomeIcon icon={faTrash} />
+                </Button>
+              </OverlayTrigger>
+              
+            </>
+          )}
+        </Card.Footer>
+      </Card>
+
+      <br />
+      <hr className="featurette-divider" />
+      <br />
+      {/* old version */}
       <Container>
         <div className="btn_event">
           <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
             Go Back
           </Button>
+
           {isAuthor === true ? (
             <Button
               className="ms-end my-3"
@@ -357,131 +489,6 @@ const Event = () => {
           </Card>
         )}
       </Container>
-
-      <br />
-      <br />
-      <hr />
-      <hr />
-      <hr />
-      <br />
-      <br />
-
-      <Card>
-        <Card.Header id="singeEventCardHeader">
-          <Button variant="primary" onClick={goBack}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </Button>
-
-          <span id="cardHeader">
-            <span id="eventTitleWBadge">
-              <h4 className="fw-bold">{event.title}</h4>
-              {isJoined?.length > 0 ? (
-                <Badge bg="secondary" pill>
-                  Joined!
-                </Badge>
-              ) : null}
-            </span>
-
-            <Card.Subtitle id="eventDescSubt">
-              <p>
-                <FontAwesomeIcon icon={faCalendarDays} />{" "}
-                {formattedDate ? formattedDate : `not specified date`} at{" "}
-                {formattedTime ? formattedTime : `not specified time`}
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faLocationCrosshairs} /> in:{" "}
-                {event.general_location}
-              </p>
-              {event.type === "private" ? (
-                <p>
-                  <FontAwesomeIcon icon={faHouseChimney} /> private event
-                </p>
-              ) : (
-                <p>
-                  <FontAwesomeIcon icon={faBuildingColumns} /> public event
-                </p>
-              )}
-              <p>
-                <FontAwesomeIcon icon={faUsers} />{" "}
-                {event.joined < event.participants
-                  ? event.participants
-                    ? `${event.joined}/${event.participants}`
-                    : null
-                  : `event full (${event.participants})`}
-              </p>
-            </Card.Subtitle>
-          </span>
-          <Figure id="singleEventThumbnail">
-            <Figure.Image
-              alt="category"
-              src={event.category?.picture}
-              thumbnail
-            />
-            <Figure.Caption>
-              Category:{" "}
-              {event.category?.name ? event.category?.name : "undefined"}
-            </Figure.Caption>
-          </Figure>
-        </Card.Header>
-
-        <Card.Body>
-          <Card.Text id="eventDesc">
-            <Avatar
-              size="40"
-              round={true}
-              src={event.author?.picture}
-              name={event.author?.name}
-            />{" "}
-            <h6 className="fw-bold">Hosted by {event.author?.name}</h6>
-          </Card.Text>
-
-          <div dangerouslySetInnerHTML={{ __html: event.description }} />
-        </Card.Body>
-        <Card.Footer className="text-muted text-end pe-5">
-          {isAuthor === true ? (
-            <div>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Edit</Tooltip>}>
-                <Button variant="warning" onClick={goEdit}>
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Button>
-              </OverlayTrigger>
-
-              <OverlayTrigger
-                placement="top"
-                delay={{ show: 250, hide: 400 }}
-                overlay={<Tooltip id="tooltip-leave">Delete the event</Tooltip>}
-              >
-                <Button onClick={() => setShow(true)} variant="outline-warning">
-                  <FontAwesomeIcon icon={faTrash} />
-                </Button>
-              </OverlayTrigger>
-            </div>
-          ) : null}
-          {isAuthor === true ||
-          isJoined?.length > 0 ||
-          event?.joined >= event.participants ? null : (
-            <>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Join</Tooltip>}>
-                <Button variant="warning" onClick={joinEvent}>
-                  <FontAwesomeIcon icon={faRightToBracket} />
-                </Button>
-              </OverlayTrigger>
-            </>
-          )}
-          {isJoined?.length > 0 ? (
-            <>
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>Leave</Tooltip>}
-              >
-                <Button variant="outline-warning" onClick={joinEvent}>
-                  <FontAwesomeIcon icon={faRightToBracket} />
-                </Button>
-              </OverlayTrigger>
-            </>
-          ) : null}
-        </Card.Footer>
-      </Card>
     </>
   );
 };

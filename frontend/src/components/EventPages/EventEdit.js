@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
-import { Form, InputGroup, Container, Button, Row, Col } from "react-bootstrap";
+import { Form, InputGroup, Container, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   faBuildingColumns,
@@ -103,8 +103,9 @@ export default function EventEdit() {
   }
 
   return (
-    <Container>
-      <Button className="ms-end my-3" variant="secondary" onClick={goBack}>
+    <Card className="createEvent">
+      <Card.Body>
+      <Button className="ms-end my-3" variant="primary" onClick={goBack}>
         Cancel
       </Button>
       <Form onSubmit={updateEvent}>
@@ -212,6 +213,7 @@ export default function EventEdit() {
           Update
         </Button>
       </Form>
-    </Container>
+      </Card.Body>
+      </Card>
   );
 }

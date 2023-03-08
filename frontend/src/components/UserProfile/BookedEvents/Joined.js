@@ -126,7 +126,7 @@ function Joined() {
                                 </Tooltip>
                               }
                             >
-                              <Button variant="outline-warning">
+                              <Button variant="warning">
                                 <FontAwesomeIcon icon={faEye} />
                               </Button>
                             </OverlayTrigger>
