@@ -10,16 +10,22 @@ export default function MeetTheTeam() {
     pic: Agata,
     name: "Agata",
     desc: "The affirmative one",
+    github: "http://github.com",
+    linkedin: "http://linkedin.com",
   };
   const simran = {
     pic: Simran,
     name: "Simran",
     desc: "With the fresh ideas",
+    github: "http://github.com",
+    linkedin: "http://linkedin.com",
   };
   const ola = {
     pic: Ola,
     name: "Aleksandra",
     desc: "Always smiling",
+    github: "http://github.com",
+    linkedin: "http://linkedin.com",
   };
   return (
     <>      
@@ -29,11 +35,6 @@ export default function MeetTheTeam() {
             <TeamCard member={agata} />
             <TeamCard member={simran} />
             <TeamCard member={ola} />
-          </div>
-          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <Button variant="outline-secondary" href="/categories">
-              Vibe with us!
-            </Button>
           </div>
         </div>   
     </>

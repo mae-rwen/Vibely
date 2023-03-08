@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import MeetTheTeam from "./../HomePage/MeetTheTeam"
 
 export default function AboutUs() {
   return (
@@ -37,6 +38,52 @@ export default function AboutUs() {
           We hope that our website will be a helpful tool for you to make new
           connections, share experiences, and create lasting friendships.
         </p>
+      </div>
+      <MeetTheTeam />      
+      <div className="hpSection">
+        <h5 className=" fw-bold">Stack used</h5>
+        <div className="row p-4 mt-4 text-center justify-content-center teamIntro">
+        <div className="col-lg-3 teamCard">
+        <img
+          src="https://www.bairesdev.com/wp-content/uploads/2021/07/Expressjs.svg"
+          alt="node.js"
+          style={{ height: "100px"}}
+        />
+        <h5 className="fw-bold mt-2">Node.js Express</h5>       
+       </div>
+      <div className="col-lg-3 teamCard">
+        <img
+          src="https://res.cloudinary.com/practicaldev/image/fetch/s--Gv65Fxow--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/t0p5suxwzq90eb2nr2rv.png"
+          alt="Mongoose"
+          style={{ height: "100px"}}
+        />
+        <h5 className="fw-bold mt-2">Mongoose & MongoDB</h5>       
+        </div>
+      <div className="col-lg-3 teamCard">
+        <img
+          src="https://s3.amazonaws.com/awsmp-logos/cloudinary.png"
+          alt="Cloudinary"
+          style={{ height: "100px"}}
+        />
+        <h5 className="fw-bold mt-2">Cloudinary</h5>      
+       </div>
+       <div className="col-lg-3 teamCard">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1200px-Bootstrap_logo.svg.png"
+          alt="Bootstrap"
+          style={{ height: "100px"}}
+        />
+        <h5 className="fw-bold mt-2">Bootstrap</h5>      
+       </div>
+       <div className="col-lg-3 teamCard">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc2Y2gmQB5zuaBd1AfN_AyEgoTgxPF65i7GwlvrbnnP_RUlubieG19WFnonCtS4ZfAox4&usqp=CAU"
+          alt="React.js"
+          style={{ height: "100px"}}
+        />
+        <h5 className="fw-bold mt-2">React.js</h5>      
+       </div>
+          </div>
       </div>
       <div className="d-grid gap-2 mt-4 d-sm-flex justify-content-sm-center">
         <Button variant="secondary" href="/categories">

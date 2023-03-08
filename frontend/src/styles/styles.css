@@ -294,6 +294,19 @@
 .hpSection .card-events-list {
   padding: 0;
 }
+.hpSection .teamCard {
+  margin-bottom: 0.75em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hpSection .teamCard p {
+  margin: 0;
+}
+.hpSection .teamCard a {
+  text-decoration: none;
+  color: #c98f61;
+}
 
 .categoriesCards {
   display: flex;

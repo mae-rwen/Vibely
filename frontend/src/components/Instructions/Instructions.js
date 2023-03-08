@@ -1,3 +1,4 @@
+import { Card } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 export default function Instructions() {
@@ -19,6 +20,7 @@ export default function Instructions() {
           </div>
         </div>
       </div>
+    
       <div>
         <p>
           Welcome to our social networking website! Here's a step-by-step guide
@@ -98,7 +100,7 @@ export default function Instructions() {
           Create your profile
         </Button>
       </div>
-      
+    
     </>
   );
 }

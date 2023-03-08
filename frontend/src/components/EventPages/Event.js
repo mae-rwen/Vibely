@@ -258,7 +258,9 @@ const Event = () => {
             />{" "}
             <h6 className="fw-bold">Hosted by {event.author?.name}</h6>
           </Card.Text>
-          <div dangerouslySetInnerHTML={{ __html: event.description }} />
+          <Card.Text id="actualDesc">
+            <div dangerouslySetInnerHTML={{ __html: event.description }} />
+          </Card.Text>
         </Card.Body>
         <Card.Footer id="eventDescBtns">
           {/* edit button */}

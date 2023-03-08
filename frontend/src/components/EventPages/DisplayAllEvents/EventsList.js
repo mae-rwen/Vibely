@@ -68,9 +68,11 @@ export default function EventsList({ event, getCategories, user }) {
             />
             <h5>
               <Badge bg="secondary" pill id="thumbnailBadge">
-                {event.joined < event.participants ? (event.participants ? `Joined: ${event.joined}/${event.participants}` : null) : (`event full (${event.participants})`)}
-               
-                
+                {event.joined < event.participants
+                  ? event.participants
+                    ? `Joined: ${event.joined}/${event.participants}`
+                    : null
+                  : `event full (${event.participants})`}
               </Badge>
             </h5>
             <Figure.Caption>
@@ -80,40 +82,46 @@ export default function EventsList({ event, getCategories, user }) {
           </Figure>
           <div className="eventDescription">
             <span>
-            {isJoined?.length > 0 ? (
-                  <>
-                    <h6>
-                      <Badge bg="secondary" pill id="thumbnailBadge">
-                        You've joined this event
-                      </Badge>
-                    </h6>
-                  </>
-                ) : null}
+              {isJoined?.length > 0 ? (
+                <>
+                  <h6>
+                    <Badge bg="secondary" pill id="thumbnailBadge">
+                      You've joined this event
+                    </Badge>
+                  </h6>
+                </>
+              ) : null}
               <h5 className="fw-bold">{event.title}</h5>
-              <p>                
-                {event.description.length > 100
-                  ? `${truncatedDescription}...`
-                  : truncatedDescription}
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html:
+                    event.description.length > 100
+                      ? `${truncatedDescription}...`
+                      : truncatedDescription,
+                }}
+              />
             </span>
           </div>
-         
-            <ListGroup variant="flush" id="eventData">
-              <ListGroup.Item>
-                in <b>{event.general_location}</b>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                on {formattedDate ? formattedDate : `not specified date`} at{" "}
-                {formattedTime ? formattedTime : `not specified time`}
-              </ListGroup.Item>
-              <ListGroup.Item>
-                Created by{" "}
-                <b>
-                  {event.author?._id !== user?._id ? (event.author?.name ? event.author?.name : "unknown") : ("you")}
-                 </b>
-              </ListGroup.Item>
-            </ListGroup>
-     
+
+          <ListGroup variant="flush" id="eventData">
+            <ListGroup.Item>
+              in <b>{event.general_location}</b>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              on {formattedDate ? formattedDate : `not specified date`} at{" "}
+              {formattedTime ? formattedTime : `not specified time`}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Created by{" "}
+              <b>
+                {event.author?._id !== user?._id
+                  ? event.author?.name
+                    ? event.author?.name
+                    : "unknown"
+                  : "you"}
+              </b>
+            </ListGroup.Item>
+          </ListGroup>
         </ListGroup.Item>
       </NavLink>
     </>
